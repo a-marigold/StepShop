@@ -1,0 +1,25 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-x-center {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin flex-y-center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin text-wo-margin($fontSize) {
+    margin: 0;
+    font-size: $fontSize;
+}

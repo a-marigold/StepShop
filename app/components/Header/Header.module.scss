@@ -1,0 +1,105 @@
+@use '@styles/mixins.scss' as *;
+
+.header {
+    @include flex-y-center;
+    justify-content: space-between;
+    gap: 1em;
+
+    width: 100%;
+    max-height: 137px;
+
+    padding: 2.75em 4em;
+    box-sizing: border-box;
+
+    background-color: var(--main-bg-color);
+}
+
+.title-block {
+    @include flex-center;
+    gap: 1em;
+}
+.title-text {
+    @include flex-column;
+
+    max-height: 200px;
+
+    & > h1 {
+        @include text-wo-margin(1.5rem);
+        letter-spacing: 0.03rem;
+        font-weight: 900;
+    }
+
+    & > p {
+        @include text-wo-margin(1rem);
+        color: var(--secondary-font-color);
+    }
+}
+
+.input-block {
+    position: relative;
+
+    @include flex-y-center;
+
+    flex: 1;
+
+    max-width: 700px;
+
+    & > img {
+        position: absolute;
+        left: 20px;
+
+        pointer-events: none;
+    }
+    & > input {
+        background-color: var(--foreground-color);
+
+        height: 50px;
+        flex: 1;
+
+        border-radius: 16px;
+        border: 0;
+
+        padding: 0.8em 3em;
+        box-sizing: border-box;
+
+        font-size: 1rem;
+
+        &::placeholder {
+            color: var(--unfocused-input-font-color);
+        }
+    }
+}
+.back-search-button {
+    @include flex-center;
+
+    position: absolute;
+    right: 21px;
+
+    background-color: rgba(0, 0, 0, 0);
+
+    border: 0;
+    padding: 0;
+
+    display: none;
+
+    cursor: pointer;
+
+    & > img {
+        width: 12px;
+        height: 12px;
+    }
+}
+.back-search-button-show {
+    display: block;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    width: 100%;
+    height: 100vh;
+}

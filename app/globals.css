@@ -3,7 +3,7 @@ body {
     padding: 2rem 2rem 0;
     box-sizing: border-box;
 
-    background: var(--background);
+    background: var(--background-color);
     color: var(--font-color);
 
     font-family: 'Nunito';
@@ -21,6 +21,12 @@ body * {
 }
 
 :root {
-    --background: #ffbf9b;
+    --background-color: #ffbf9b;
     --font-color: #000000;
+    --secondary-font-color: #7b7b7b;
+
+    --main-bg-color: #ffffff;
+    --foreground-color: #f9f9f9;
+
+    --unfocused-input-font-color: #c0c0c0;
 }
