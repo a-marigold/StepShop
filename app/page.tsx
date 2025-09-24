@@ -8,6 +8,7 @@ export default function Home() {
     return (
         <div className={homeStyles['home']}>
             <Header />
+            <Navigation />
         </div>
     );
 }
