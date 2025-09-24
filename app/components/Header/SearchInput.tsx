@@ -28,7 +28,10 @@ export default function SearchInput() {
                         headerStyles['back-search-button'],
                         showModal && headerStyles['back-search-button-show']
                     )}
-                    onClick={() => setShowModal(false)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        setShowModal(false);
+                    }}
                 >
                     <img src='/images/cross-icon.svg' alt='Close the search' />
                 </button>

@@ -20,13 +20,23 @@ body * {
     src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
 }
 
+input:focus-visible,
+button:focus-visible {
+    outline: none;
+
+    border: 1px var(--foreground-color);
+}
+
 :root {
     --background-color: #ffbf9b;
     --font-color: #000000;
     --secondary-font-color: #7b7b7b;
+    --accent-color: #fe5f00;
 
     --main-bg-color: #ffffff;
     --foreground-color: #f9f9f9;
 
     --unfocused-input-font-color: #c0c0c0;
+
+    --border-color: #ededed;
 }
