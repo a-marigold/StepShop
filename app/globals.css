@@ -20,11 +20,12 @@ body * {
     src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
 }
 
+a:focus-visible,
 input:focus-visible,
 button:focus-visible {
-    outline: none;
+    outline-color: var(--background-color);
 
-    border: 1px var(--foreground-color);
+    /* border: 1px var(--foreground-color) solid !important; */
 }
 
 :root {

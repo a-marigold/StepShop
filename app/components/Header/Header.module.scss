@@ -79,7 +79,7 @@
         }
     }
 
-    z-index: 1;
+    z-index: 11;
 }
 .back-search-button {
     @include flex-center;
@@ -112,6 +112,8 @@
 
     width: 100%;
     height: 100vh;
+
+    z-index: 10;
 }
 
 .user-buttons-block {
