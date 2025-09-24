@@ -1,0 +1,33 @@
+@use '@styles/mixins.scss' as *;
+
+.checkbox-block {
+    @include flex-y-center;
+    gap: 0.75em;
+
+    cursor: pointer;
+}
+
+.checkbox {
+    margin: 0;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 24px;
+
+    height: 24px;
+
+    border: 0;
+
+    background-color: var(--checkbox-color);
+
+    border-radius: 8px;
+
+    &:checked {
+        background-color: var(--accent-color);
+        background-image: url('/images/checkMark-icon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

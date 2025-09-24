@@ -1,0 +1,23 @@
+@use '@styles/mixins.scss' as *;
+
+.filtration-box {
+    margin-top: 2.25em;
+
+    @include flex-column;
+
+    flex: 1;
+
+    max-width: 240px;
+}
+
+.title {
+    @include text-wo-margin(1.625rem);
+}
+
+.checkboxes-block {
+    @include flex-column;
+    gap: 1em;
+
+    padding: 1.5em 0;
+    box-sizing: border-box;
+}

@@ -6,7 +6,7 @@ import navStyles from './Navigation.module.scss';
 export default function Navigation() {
     return (
         <div className={navStyles['navigaiton-box']}>
-            <h2 className={navStyles['title']}>Все пиццы</h2>
+            <h1 className={navStyles['title']}>Все пиццы</h1>
 
             <div className={navStyles['navigation-group']}>
                 <Categories />

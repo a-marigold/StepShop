@@ -40,4 +40,6 @@ button:focus-visible {
     --unfocused-input-font-color: #c0c0c0;
 
     --border-color: #ededed;
+
+    --checkbox-color: #f1f1f1;
 }
