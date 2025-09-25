@@ -20,7 +20,10 @@ export default function CheckBoxesBlock({
             )}
 
             {propertiesList.map((property, index) => (
-                <CheckBox key={`${title}-${property}-${index}`} />
+                <CheckBox
+                    key={`${title}-${property}-${index}`}
+                    name={property}
+                />
             ))}
         </div>
     );

@@ -1,0 +1,17 @@
+.acces-button {
+    background-color: var(--accent-color);
+
+    height: 50px;
+
+    border: 0;
+    border-radius: 18px;
+
+    padding: 1em 0;
+    box-sizing: border-box;
+
+    color: var(--main-bg-color);
+    font-size: 1rem;
+    text-align: center;
+
+    cursor: pointer;
+}

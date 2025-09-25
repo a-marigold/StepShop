@@ -1,6 +1,6 @@
 import checkboxStyles from './CheckBox.module.scss';
 
-export default function CheckBox() {
+export default function CheckBox({ name }: { name: string }) {
     return (
         <label className={checkboxStyles['checkbox-block']}>
             <input
@@ -8,7 +8,7 @@ export default function CheckBox() {
                 id='checkbox'
                 className={checkboxStyles['checkbox']}
             />
-            Сырный соус
+            {name}
         </label>
     );
 }
