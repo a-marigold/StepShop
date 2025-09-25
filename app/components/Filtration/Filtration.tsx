@@ -17,7 +17,9 @@ export default function Filtration() {
                 <PriceBlock />
             </div>
 
-            <AccesButton title='Применить' />
+            <div className={filterStyles['acces-button-block']}>
+                <AccesButton title='Применить' ariaLabel='Применить фильтры' />
+            </div>
         </aside>
     );
 }

@@ -26,6 +26,7 @@
     padding: 1.5em 0;
     box-sizing: border-box;
 }
+
 .filter-block-title {
     @include text-wo-margin(1rem);
     font-weight: 700;
@@ -40,7 +41,13 @@
     @include flex-column;
     gap: 1em;
 }
+
 .price-inputs-group {
     @include flex-y-center;
     gap: 1em;
+}
+
+.acces-button-block {
+    @include flex-column;
+    margin-top: 1em;
 }
