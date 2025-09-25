@@ -4,9 +4,9 @@
     margin-top: 2.25em;
 
     @include flex-column;
+    gap: 0.5em;
 
     flex: 1;
-
     max-width: 240px;
 }
 
@@ -14,10 +14,33 @@
     @include text-wo-margin(1.625rem);
 }
 
-.checkboxes-block {
+.filters-list {
     @include flex-column;
-    gap: 1em;
+}
+
+.filter-block {
+    width: 100%;
+
+    border-bottom: 1px var(--border-color) solid;
 
     padding: 1.5em 0;
     box-sizing: border-box;
+}
+.filter-block-title {
+    @include text-wo-margin(1rem);
+    font-weight: 700;
+}
+
+.checkboxes-block {
+    @include flex-column;
+    gap: 1em;
+}
+
+.price-block {
+    @include flex-column;
+    gap: 1em;
+}
+.price-inputs-group {
+    @include flex-y-center;
+    gap: 1em;
 }

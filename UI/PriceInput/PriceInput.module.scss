@@ -1,0 +1,44 @@
+@use '@styles/mixins.scss' as *;
+
+.price-input-block {
+    position: relative;
+
+    @include flex-center;
+
+    width: 100%;
+    max-width: 90px;
+}
+.price-input {
+    appearance: none;
+    -moz-appearance: textfield;
+
+    width: 100%;
+    max-width: 90px;
+    height: 40px;
+
+    border: 1px var(--border-color) solid;
+    border-radius: 10px;
+
+    padding: 0.7em 2em 0.7em 1em;
+    box-sizing: border-box;
+
+    font-size: 0.9rem;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+    &::-ms-clear {
+        display: none;
+    }
+}
+.currency-symbol {
+    position: absolute;
+    right: 1em;
+
+    font-size: 0.9rem;
+    color: var(--secondary-font-color);
+    // font-weight: 500;
+
+    pointer-events: none;
+}
