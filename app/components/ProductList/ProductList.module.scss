@@ -1,0 +1,11 @@
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+}
+
+.product-card {
+    flex: 1;
+    max-width: 285px;
+}

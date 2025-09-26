@@ -10,16 +10,16 @@ export default function Filtration() {
             <h2 className={filterStyles['title']}>Фильтрация</h2>
 
             <div className={filterStyles['filters-list']}>
-                <CheckBoxesBlock
-                    propertiesList={['Сырный соус1', 'Сырный соус2']}
-                />
+                <CheckBoxesBlock propertiesList={['option 1', 'option 2']} />
 
                 <PriceBlock />
             </div>
 
-            <div className={filterStyles['acces-button-block']}>
-                <AccesButton title='Применить' ariaLabel='Применить фильтры' />
-            </div>
+            <AccesButton
+                title='Применить'
+                ariaLabel='Применить фильтры'
+                classNames={[filterStyles['acces-button-block']]}
+            />
         </aside>
     );
 }
