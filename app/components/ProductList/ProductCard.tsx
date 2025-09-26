@@ -1,6 +1,13 @@
-import Image from 'next/image';
+'use client';
+
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import type { ProductType } from './ProductType';
+
+import Image from 'next/image';
+
+import ProductModal from '../ProductModal/ProductModal';
 
 import productStyles from './ProductList.module.scss';
 
@@ -11,6 +18,8 @@ export default function ProductCard({
     price,
     currencySymbol,
 }: ProductType) {
+    const [showModal, setShowModal] = useState(false);
+
     return (
         <article className={productStyles['product-card']}>
             <div className={productStyles['image-block']}>
@@ -44,6 +53,8 @@ export default function ProductCard({
                     Добавить
                 </button>
             </div>
+
+            {showModal && createPortal(<ProductModal />, document.body)}
         </article>
     );
 }

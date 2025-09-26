@@ -6,7 +6,7 @@ import AccesButton from '@/UI/AccessButton';
 
 import modalStyles from './ProductModal.module.scss';
 
-export default function ProductCard() {
+export default function ProductModal() {
     return (
         <div>
             <div className={modalStyles['image-block']}>

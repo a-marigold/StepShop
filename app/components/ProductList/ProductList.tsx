@@ -10,8 +10,6 @@ export default async function ProductList() {
 
     return (
         <div className={productStyles['products-list']}>
-            {/* <ProductCard /> */}
-
             {products.map((product, index) => (
                 <ProductCard
                     key={`${product.title}-${product.image}-${index}`}

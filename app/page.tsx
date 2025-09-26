@@ -16,6 +16,8 @@ export default function Home() {
 
             <main className={homeStyles['main-content']}>
                 <Filtration />
+
+                {/* POSITION STICKY TESTING */}
                 <div
                     style={{
                         position: 'sticky',
@@ -45,6 +47,7 @@ export default function Home() {
                     voluptatum maxime cum esse harum hic molestiae, animi
                     accusamus quod debitis. Eum, dolor hic.
                 </div>
+                {/*  */}
 
                 <ProductList />
             </main>
