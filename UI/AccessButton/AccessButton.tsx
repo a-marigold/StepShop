@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import buttonStyles from './AccesButton.module.scss';
+import buttonStyles from './AccessButton.module.scss';
 
-interface AccesButtonProps {
+interface AccessButtonProps {
     title: string;
 
     ariaLabel: string;
@@ -10,18 +10,18 @@ interface AccesButtonProps {
     clickAction?: () => void;
 }
 
-export default function AccesButton({
+export default function AccessButton({
     title,
 
     clickAction,
     classNames,
 
     ariaLabel,
-}: AccesButtonProps) {
+}: AccessButtonProps) {
     return (
         <button
             className={clsx(
-                buttonStyles['acces-button'],
+                buttonStyles['access-button'],
                 classNames && [...classNames]
             )}
             onClick={clickAction}

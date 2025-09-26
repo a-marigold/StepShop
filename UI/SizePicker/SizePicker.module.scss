@@ -1,0 +1,44 @@
+@use '@styles/mixins.scss' as *;
+
+.size-options-block {
+    position: relative;
+
+    @include flex-center;
+
+    background-color: var(--picker-bg-color);
+
+    height: 35px;
+
+    border: 3px var(--picker-bg-color) solid;
+    border-radius: 30px;
+
+    box-sizing: border-box;
+}
+
+.size-option {
+    width: 100%;
+    width: 135px;
+
+    border: 0;
+
+    background-color: transparent;
+
+    font-size: 0.95rem;
+
+    cursor: pointer;
+
+    z-index: 1;
+}
+
+.active-option {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 31px;
+
+    background-color: var(--main-bg-color);
+    border-radius: 30px;
+
+    transition: transform 0.2s ease;
+}

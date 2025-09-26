@@ -1,9 +1,11 @@
 body {
     margin: 0;
+
     padding: 2rem 2rem 0;
     box-sizing: border-box;
 
     background: var(--background-color);
+
     color: var(--font-color);
 
     font-family: 'Nunito';
@@ -17,6 +19,7 @@ body * {
     font-family: 'Nunito';
     font-weight: 400;
     font-style: normal;
+
     src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
 }
 
@@ -45,4 +48,6 @@ button:focus-visible {
 
     --product-bg-color: #fff7ee;
     --add-button-color: #fffaf4;
+
+    --picker-bg-color: #ececec;
 }

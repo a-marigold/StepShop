@@ -4,6 +4,8 @@ import SearchInput from './SearchInput';
 
 import headerStyles from './Header.module.scss';
 
+import SizePicker from '@UI/SizePicker';
+
 export default function Header() {
     return (
         <header className={headerStyles['header']}>
@@ -91,6 +93,14 @@ export default function Header() {
                         />
                     </svg>
                 </button>
+
+                <SizePicker
+                    sizeOptions={[
+                        { title: 1, id: 0 },
+                        { title: 2, id: 1 },
+                        { title: 3, id: 2 },
+                    ]}
+                ></SizePicker>
             </div>
         </header>
     );

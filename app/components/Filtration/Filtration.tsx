@@ -1,6 +1,6 @@
 import CheckBoxesBlock from './CheckBoxesBlock';
 import PriceBlock from './PriceBlock';
-import AccesButton from '@UI/AccesButton';
+import AccesButton from '@/UI/AccessButton';
 
 import filterStyles from './Filtration.module.scss';
 
