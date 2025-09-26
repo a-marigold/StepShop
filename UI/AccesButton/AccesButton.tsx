@@ -3,15 +3,19 @@ import buttonStyles from './AccesButton.module.scss';
 
 interface AccesButtonProps {
     title: string;
+
     ariaLabel: string;
     classNames?: string[];
+
     clickAction?: () => void;
 }
 
 export default function AccesButton({
     title,
+
     clickAction,
     classNames,
+
     ariaLabel,
 }: AccesButtonProps) {
     return (

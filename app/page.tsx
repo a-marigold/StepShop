@@ -16,6 +16,7 @@ export default function Home() {
 
             <main className={homeStyles['main-content']}>
                 <Filtration />
+
                 <ProductList />
             </main>
         </div>

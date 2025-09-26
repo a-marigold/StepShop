@@ -42,4 +42,7 @@ button:focus-visible {
     --border-color: #ededed;
 
     --checkbox-color: #f1f1f1;
+
+    --product-bg-color: #fff7ee;
+    --add-button-color: #fffaf4;
 }

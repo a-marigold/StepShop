@@ -3,11 +3,7 @@
 .navigaiton-box {
     margin-top: 2.5em;
 
-    @include flex-column;
-    gap: 2em;
-
     width: 100%;
-
     padding: 0 4em;
     box-sizing: border-box;
 }
@@ -21,9 +17,24 @@
 }
 
 .navigation-group {
+    position: sticky;
+    top: 0;
+
+    margin-top: 2em;
+
     @include flex-y-center;
     justify-content: space-between;
+
+    background: var(--main-bg-color);
+
+    padding: 1em 4em;
+    box-sizing: border-box;
+
+    border-bottom: 1px var(--border-color) solid;
+
+    z-index: 1;
 }
+
 .categories-block {
     @include flex-center;
     gap: 0.35em;

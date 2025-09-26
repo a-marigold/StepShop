@@ -1,7 +1,9 @@
+import type { CurrencySymbol } from '@/types/ProductTypes';
+
 import inputStyles from './PriceInput.module.scss';
 
 interface PriceInputProps {
-    currencySymbol: '₸' | '₽' | '$';
+    currencySymbol: CurrencySymbol;
     defaultValue: number;
 }
 
