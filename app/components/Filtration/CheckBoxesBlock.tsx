@@ -1,3 +1,10 @@
+'use client';
+
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from './redux';
+
+import { setOptions } from './redux/filtrationSlice';
+
 import CheckBox from '@UI/Checkbox';
 
 import filterStyles from './Filtration.module.scss';
@@ -11,6 +18,8 @@ export default function CheckBoxesBlock({
     title,
     propertiesList,
 }: CheckBoxesBlockProps) {
+    const dispatch = useDispatch<AppDispatch>();
+
     return (
         <div
             className={`${filterStyles['checkboxes-block']} ${filterStyles['filter-block']}`}

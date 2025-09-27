@@ -1,7 +1,7 @@
 'use client';
 
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from './redux';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from './redux';
 
 import PriceInput from '@UI/PriceInput';
 
@@ -9,12 +9,6 @@ import filterStyles from './Filtration.module.scss';
 import { setMinPrice, setMaxPrice } from './redux/filtrationSlice';
 
 export default function PriceBlock() {
-    const minPrice = useSelector(
-        (state: RootState) => state.filtration.minPrice
-    );
-    const maxPrice = useSelector(
-        (state: RootState) => state.filtration.maxPrice
-    );
     const dispatch = useDispatch<AppDispatch>();
 
     return (
