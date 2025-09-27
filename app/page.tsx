@@ -2,7 +2,7 @@ import Header from './components/Header/Header';
 
 import Navigation from './components/Navigation/Navigation';
 
-import Filtration from './components/Filtration/Filtration';
+import FiltrationProvider from './components/Filtration/FiltrationProvider';
 import ProductList from './components/ProductList/ProductList';
 
 import homeStyles from './Home.module.scss';
@@ -15,7 +15,7 @@ export default function Home() {
             <Navigation />
 
             <main className={homeStyles['main-content']}>
-                <Filtration />
+                <FiltrationProvider />
 
                 <ProductList />
             </main>
