@@ -1,5 +1,9 @@
+@use '@styles/mixins.scss' as *;
+
 body {
     margin: 0;
+
+    @include flex-center;
 
     padding: 2rem 2rem 0;
     box-sizing: border-box;
@@ -50,4 +54,6 @@ button:focus-visible {
     --add-button-color: #fffaf4;
 
     --picker-bg-color: #ececec;
+
+    --modal-bg-color: #f4f1ee;
 }

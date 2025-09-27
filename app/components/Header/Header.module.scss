@@ -78,7 +78,7 @@
         }
     }
 
-    z-index: 11;
+    z-index: 6;
 }
 .back-search-button {
     @include flex-center;
@@ -103,7 +103,7 @@
 }
 
 .modal-backdrop {
-    @include modal-backdrop;
+    @include modal-backdrop(5);
 }
 
 .user-buttons-block {

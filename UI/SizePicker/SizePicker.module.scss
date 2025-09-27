@@ -7,9 +7,11 @@
 
     background-color: var(--picker-bg-color);
 
-    height: 35px;
+    width: fit-content;
+    height: 39px;
 
     border: 3px var(--picker-bg-color) solid;
+
     border-radius: 30px;
 
     box-sizing: border-box;
@@ -32,10 +34,9 @@
 
 .active-option {
     position: absolute;
-    top: 0;
     left: 0;
 
-    height: 31px;
+    height: 35px;
 
     background-color: var(--main-bg-color);
     border-radius: 30px;

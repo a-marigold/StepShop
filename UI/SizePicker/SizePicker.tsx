@@ -13,7 +13,7 @@ interface SizePickerProps {
     sizeOptions: SizeOption[];
 }
 
-export default function PriceInput({ sizeOptions }: SizePickerProps) {
+export default function SizePicker({ sizeOptions }: SizePickerProps) {
     const [currentOption, setCurrentOption] = useState<number>(
         sizeOptions[0].id
     );
@@ -46,7 +46,10 @@ export default function PriceInput({ sizeOptions }: SizePickerProps) {
     }, [currentOption]);
 
     return (
-        <div className={pickerStyles['size-options-block']}>
+        <div
+            className={pickerStyles['size-options-block']}
+            aria-label='Pick size of product'
+        >
             {sizeOptions.map((sizeOption) => (
                 <button
                     key={sizeOption.id}
@@ -55,6 +58,7 @@ export default function PriceInput({ sizeOptions }: SizePickerProps) {
                     }}
                     className={pickerStyles['size-option']}
                     onClick={() => setCurrentOption(sizeOption.id)}
+                    aria-label={`Pick ${sizeOption} size`}
                 >
                     {sizeOption.title}
                 </button>

@@ -1,6 +1,6 @@
 import CheckBoxesBlock from './CheckBoxesBlock';
 import PriceBlock from './PriceBlock';
-import AccesButton from '@/UI/AccessButton';
+import AccessButton from '@/UI/AccessButton';
 
 import filterStyles from './Filtration.module.scss';
 
@@ -15,7 +15,7 @@ export default function Filtration() {
                 <PriceBlock />
             </div>
 
-            <AccesButton
+            <AccessButton
                 title='Применить'
                 ariaLabel='Применить фильтры'
                 classNames={[filterStyles['acces-button-block']]}

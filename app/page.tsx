@@ -18,7 +18,7 @@ export default function Home() {
                 <Filtration />
 
                 {/* POSITION STICKY TESTING */}
-                <div
+                {/* <div
                     style={{
                         position: 'sticky',
                         top: 0,
@@ -46,7 +46,7 @@ export default function Home() {
                     repellendus quo aliquam dolore tempore, molestias fugit
                     voluptatum maxime cum esse harum hic molestiae, animi
                     accusamus quod debitis. Eum, dolor hic.
-                </div>
+                </div> */}
                 {/*  */}
 
                 <ProductList />

@@ -1,0 +1,54 @@
+@use '@styles/mixins.scss' as *;
+
+.modal-backdrop {
+    @include modal-backdrop(10);
+    @include flex-center;
+}
+
+.product-modal {
+    display: flex;
+
+    width: 100%;
+    max-width: 950px;
+    height: 100%;
+    max-height: 450px;
+
+    border-radius: 32px;
+    overflow: hidden;
+}
+
+.image-block {
+    @include flex-center;
+
+    width: 50%;
+
+    background-color: var(--main-bg-color);
+}
+
+.access-block {
+    @include flex-column;
+    gap: 1.5em;
+
+    width: 50%;
+
+    background-color: var(--modal-bg-color);
+
+    padding: 2.5em;
+    box-sizing: border-box;
+}
+.text-block {
+    @include flex-column;
+    gap: 0.25em;
+}
+.title {
+    @include text-wo-margin(1.5rem);
+    font-weight: 700;
+}
+.description {
+    @include text-wo-margin(0.95rem);
+    color: var(--secondary-font-color);
+}
+
+.access-button {
+    margin-top: auto;
+}

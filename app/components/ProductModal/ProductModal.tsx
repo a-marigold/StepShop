@@ -1,36 +1,68 @@
+'use-client';
+
 import Image from 'next/image';
 
-// import type { ProductType } from './ProductType';
+import type { ProductType } from '@/types/ProductTypes';
 
-import AccesButton from '@/UI/AccessButton';
+import AccessButton from '@UI/AccessButton';
+import SizePicker from '@UI/SizePicker';
 
 import modalStyles from './ProductModal.module.scss';
 
-export default function ProductModal() {
-    return (
-        <div>
-            <div className={modalStyles['image-block']}>
-                <Image
-                    src={'/images/'}
-                    width={200}
-                    height={200}
-                    alt='Product image'
-                />
-            </div>
+interface ProductModalProps extends ProductType {
+    setShowModal: (showModal: boolean) => void;
+}
 
-            <div className={modalStyles['acces-block']}>
-                <div className={modalStyles['text-block']}>
-                    <p className={modalStyles['title']}></p>
-                    <p className={modalStyles['description']}></p>
+export default function ProductModal({
+    image,
+    title,
+    description,
+    price,
+    currencySymbol,
+    setShowModal,
+}: ProductModalProps) {
+    return (
+        <div
+            className={modalStyles['modal-backdrop']}
+            onClick={() => setShowModal(false)}
+        >
+            <div
+                className={modalStyles['product-modal']}
+                onClick={(event) => event.stopPropagation()}
+            >
+                <div className={modalStyles['image-block']}>
+                    <Image
+                        src={image}
+                        width={200}
+                        height={200}
+                        alt='Product image'
+                    />
                 </div>
 
-                {/* SIZE PICKER COMPONENT */}
+                <div className={modalStyles['access-block']}>
+                    <div className={modalStyles['text-block']}>
+                        <p className={modalStyles['title']}> {title}</p>
+                        {description && (
+                            <p className={modalStyles['description']}>
+                                {description}
+                            </p>
+                        )}
+                    </div>
 
-                <AccesButton
-                    title={'Добавить в корзину за /* ЦЕНА */'}
-                    classNames={[modalStyles['acces-button']]}
-                    ariaLabel={'Добавить товар в корзину за /* ЦЕНА */'}
-                />
+                    <SizePicker
+                        sizeOptions={[
+                            { title: 1, id: 0 },
+                            { title: 2, id: 1 },
+                            { title: 3, id: 2 },
+                        ]}
+                    ></SizePicker>
+
+                    <AccessButton
+                        title={`Добавить в корзину за ${price} ${currencySymbol}`}
+                        classNames={[modalStyles['access-button']]}
+                        ariaLabel={`Добавить товар в корзину за ${price} ${currencySymbol}`}
+                    />
+                </div>
             </div>
         </div>
     );
