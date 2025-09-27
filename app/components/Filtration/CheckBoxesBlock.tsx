@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from './redux';
 
-import { setOptions } from './redux/filtrationSlice';
+import { addOption, deleteOption } from './redux/filtrationSlice';
 
 import CheckBox from '@UI/Checkbox';
 
@@ -32,6 +32,11 @@ export default function CheckBoxesBlock({
                 <CheckBox
                     key={`${title}-${property}-${index}`}
                     name={property}
+                    inputAction={(event) =>
+                        event.target.checked
+                            ? dispatch(addOption(property))
+                            : dispatch(deleteOption(property))
+                    }
                 />
             ))}
         </div>

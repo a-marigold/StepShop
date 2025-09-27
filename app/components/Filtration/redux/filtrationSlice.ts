@@ -20,8 +20,13 @@ export const filtrationSlice = createSlice({
     name: 'filtration',
     initialState,
     reducers: {
-        setOptions: (state, action: PayloadAction<string>) => {
+        addOption: (state, action: PayloadAction<string>) => {
             state.options.push(action.payload);
+        },
+        deleteOption: (state, action: PayloadAction<string>) => {
+            state.options = state.options.filter(
+                (option) => option !== action.payload
+            );
         },
         setMinPrice: (state, action: PayloadAction<number>) => {
             state.minPrice = action.payload;
@@ -32,5 +37,6 @@ export const filtrationSlice = createSlice({
     },
 });
 
-export const { setOptions, setMinPrice, setMaxPrice } = filtrationSlice.actions;
+export const { addOption, deleteOption, setMinPrice, setMaxPrice } =
+    filtrationSlice.actions;
 export default filtrationSlice.reducer;

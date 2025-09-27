@@ -9,6 +9,7 @@ interface PriceInputProps {
     currencySymbol: CurrencySymbol;
 
     defaultValue: number;
+
     minValue?: number;
     maxValue?: number;
 
