@@ -1,4 +1,4 @@
-import { ProductType } from './ProductType';
+import { ProductType } from '@/types/ProductTypes';
 
 import ProductCard from './ProductCard';
 
