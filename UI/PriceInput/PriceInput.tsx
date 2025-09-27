@@ -1,3 +1,5 @@
+'use client';
+
 import type { ChangeEvent } from 'react';
 import type { CurrencySymbol } from '@/types/ProductTypes';
 
@@ -7,7 +9,6 @@ interface PriceInputProps {
     currencySymbol: CurrencySymbol;
 
     defaultValue: number;
-    value?: number;
     minValue?: number;
     maxValue?: number;
 
@@ -17,7 +18,6 @@ interface PriceInputProps {
 export default function PriceInput({
     currencySymbol,
 
-    value,
     defaultValue = 0,
     minValue = 0,
     maxValue = 6000,
@@ -31,7 +31,6 @@ export default function PriceInput({
                 className={inputStyles['price-input']}
                 aria-label='Input price'
                 defaultValue={defaultValue}
-                value={value}
                 min={minValue}
                 max={maxValue}
                 onChange={inputAction}
