@@ -1,3 +1,7 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 import CheckBoxesBlock from './CheckBoxesBlock';
 import PriceBlock from './PriceBlock';
 import AccessButton from '@/UI/AccessButton';
@@ -5,6 +9,12 @@ import AccessButton from '@/UI/AccessButton';
 import filterStyles from './Filtration.module.scss';
 
 export default function Filtration() {
+    const router = useRouter();
+
+    function AccessFilters() {
+        // router.push();
+    }
+
     return (
         <aside className={filterStyles['filtration-box']}>
             <h2 className={filterStyles['title']}>Фильтрация</h2>
@@ -18,7 +28,7 @@ export default function Filtration() {
             <AccessButton
                 title='Применить'
                 ariaLabel='Применить фильтры'
-                classNames={[filterStyles['acces-button-block']]}
+                classNames={[filterStyles['access-button']]}
             />
         </aside>
     );
