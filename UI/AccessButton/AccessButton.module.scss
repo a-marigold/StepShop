@@ -15,4 +15,13 @@
     text-align: center;
 
     cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: var(--hover-bg-color);
+    }
+    &:active {
+        transform: translateY(-1.6px);
+    }
 }
