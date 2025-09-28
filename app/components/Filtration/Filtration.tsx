@@ -23,7 +23,10 @@ export default function Filtration() {
     const router = useRouter();
 
     function AccessFilters() {
-        router.replace(`/?`);
+        router.replace(
+            `/?minPrice=${minPrice}&maxPrice=${maxPrice}&options=${options}`,
+            { scroll: false }
+        );
     }
 
     return (
@@ -33,10 +36,12 @@ export default function Filtration() {
                 <CheckBoxesBlock propertiesList={['option 1', 'option 2']} />
                 <PriceBlock />
             </div>
+
             <AccessButton
                 title='Применить'
                 ariaLabel='Применить фильтры'
                 classNames={[filterStyles['access-button']]}
+                clickAction={AccessFilters}
             />
         </aside>
     );
