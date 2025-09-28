@@ -1,8 +1,7 @@
 import Link from 'next/link';
 
 import SearchInput from './SearchInput';
-
-import EmptyFilledButton from '@UI/EmptyFilledButton';
+import UserButtons from './UserButtons';
 
 import headerStyles from './Header.module.scss';
 
@@ -28,20 +27,7 @@ export default function Header() {
                 <SearchInput />
             </div>
 
-            <div className={headerStyles['user-buttons-block']}>
-                <EmptyFilledButton
-                    title='Войти'
-                    ariaLabel='Войти в аккаунт'
-                    classNames={[headerStyles['profile-button']]}
-                    imageSettings={{ imageUrl: '/images/profile-icon.svg' }}
-                />
-
-                <EmptyFilledButton
-                    ariaLabel='Открыть корзину'
-                    classNames={[headerStyles['cart-button']]}
-                    imageSettings={{ imageUrl: '/images/cart-icon.svg' }}
-                />
-            </div>
+            <UserButtons />
         </header>
     );
 }
