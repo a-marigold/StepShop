@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
 import { createPortal } from 'react-dom';
+
+import { getDocumentScrollbarWidth } from '@/utils/getDocumentScrollbarWidth';
 
 import type { ProductType } from '@/types/ProductTypes';
 
@@ -22,14 +23,9 @@ export default function ProductCard({
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        const scrollbarWidth =
-            window.innerWidth - document.documentElement.clientWidth;
-
         if (showModal) {
+            document.body.style.marginRight = `${getDocumentScrollbarWidth()}px`;
             document.body.style.overflow = 'hidden';
-            document.body.style.marginRight = `${scrollbarWidth}px`;
-
-            console.log(scrollbarWidth);
         }
         return () => {
             document.body.style.overflow = 'auto';
