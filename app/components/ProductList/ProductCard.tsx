@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { getDocumentScrollbarWidth } from '@/utils/getDocumentScrollbarWidth';
+import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock/';
 
 import type { ProductType } from '@/types/ProductTypes';
 
@@ -24,12 +24,10 @@ export default function ProductCard({
 
     useEffect(() => {
         if (showModal) {
-            document.body.style.marginRight = `${getDocumentScrollbarWidth()}px`;
-            document.body.style.overflow = 'hidden';
+            lockBodyScroll();
         }
         return () => {
-            document.body.style.overflow = 'auto';
-            document.body.style.marginRight = `0`;
+            unlockBodyScroll();
         };
     }, [showModal]);
 
