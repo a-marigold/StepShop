@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import buttonStyles from './AccessButton.module.scss';
 
 interface AccessButtonProps {
+    image?: string;
+
     title: string;
 
     ariaLabel: string;
@@ -11,6 +13,8 @@ interface AccessButtonProps {
 }
 
 export default function AccessButton({
+    image,
+
     title,
 
     clickAction,
@@ -28,7 +32,8 @@ export default function AccessButton({
             onClick={clickAction}
             aria-label={ariaLabel}
         >
-            {title}
+            {image && <img src={image} />}
+            <span>{title}</span>
         </button>
     );
 }

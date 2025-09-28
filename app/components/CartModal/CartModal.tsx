@@ -6,7 +6,7 @@ import CartProduct from './CartProduct';
 
 import AccessButton from '@/UI/AccessButton';
 
-import cartStyles from './Cart.module.scss';
+import cartStyles from './CartModal.module.scss';
 
 export default function Cart() {
     return (
@@ -14,7 +14,7 @@ export default function Cart() {
             <div className={cartStyles['cart-modal']}>
                 <div className={cartStyles['cart-head']}>
                     <p className={cartStyles['products-quantity']}>
-                        В коризне&nbsp;
+                        В корзине&nbsp;
                         <span className={cartStyles['highlighted']}>
                             3 товара
                         </span>
@@ -44,11 +44,36 @@ export default function Cart() {
                         options='Размер - M'
                         price={100}
                     ></CartProduct>
+                    <CartProduct
+                        image='/images/white-t-shirt.webp'
+                        name='Чизбургер-пицца'
+                        options='Размер - M'
+                        price={100}
+                    ></CartProduct>
+                    <CartProduct
+                        image='/images/white-t-shirt.webp'
+                        name='Чизбургер-пицца'
+                        options='Размер - M'
+                        price={100}
+                    ></CartProduct>
+                    <CartProduct
+                        image='/images/white-t-shirt.webp'
+                        name='Чизбургер-пицца'
+                        options='Размер - M'
+                        price={100}
+                    ></CartProduct>
+                    <CartProduct
+                        image='/images/white-t-shirt.webp'
+                        name='Чизбургер-пицца'
+                        options='Размер - M'
+                        price={100}
+                    ></CartProduct>
                 </div>
 
                 <div className={cartStyles['order-block']}>
                     <div className={cartStyles['price-block']}>
                         <span className={cartStyles['price-text']}>Итого:</span>
+                        <div className={cartStyles['dashed-divider']} />
                         <span className={cartStyles['price-sum']}>159 ₸</span>
                     </div>
 
@@ -56,9 +81,16 @@ export default function Cart() {
                         <span className={cartStyles['price-text']}>
                             Налог 5%:
                         </span>
+                        <div className={cartStyles['dashed-divider']} />
                         <span className={cartStyles['price-sum']}>112 ₸</span>
                     </div>
-                    {/* <AccesButton title='Оформить заказ' /> */}
+
+                    <AccessButton
+                        title='Оформить заказ'
+                        image='/images/white-arrow-left.svg'
+                        ariaLabel='Оформить заказ'
+                        classNames={[cartStyles['access-button']]}
+                    />
                 </div>
             </div>
         </div>

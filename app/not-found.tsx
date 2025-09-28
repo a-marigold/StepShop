@@ -39,7 +39,7 @@ export default function NotFound() {
                             <EmptyFilledButton
                                 title='На главную'
                                 imageSettings={{
-                                    imageUrl: '/images/arrow-left.svg',
+                                    imageUrl: '/images/orange-arrow-left.svg',
                                 }}
                                 ariaLabel='Вернуться на главную страницу'
                             />
