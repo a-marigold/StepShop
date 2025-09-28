@@ -1,11 +1,13 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
+
 import type { AppDispatch } from './redux';
 
 import PriceInput from '@UI/PriceInput';
 
 import filterStyles from './Filtration.module.scss';
+
 import { setMinPrice, setMaxPrice } from './redux/filtrationSlice';
 
 export default function PriceBlock() {

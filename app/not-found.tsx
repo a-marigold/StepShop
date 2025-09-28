@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 import { Metadata } from 'next';
 
+import EmptyFilledButton from '@UI/EmptyFilledButton';
+
 import notFoundStyles from './NotFound.module.scss';
 
 export const metadata: Metadata = {
@@ -25,9 +27,15 @@ export default function NotFound() {
                         попытку позже
                     </p>
 
-                    <div
-                        className={notFoundStyles['return-buttons-block']}
-                    ></div>
+                    <div className={notFoundStyles['return-buttons-block']}>
+                        <EmptyFilledButton
+                            title='На главную'
+                            imageSettings={{
+                                imageUrl: '/images/arrow-left.svg',
+                            }}
+                            ariaLabel='Вернуться на главную страницу'
+                        />
+                    </div>
                 </div>
 
                 <Image

@@ -14,6 +14,7 @@ export default function AccessButton({
     title,
 
     clickAction,
+
     classNames,
 
     ariaLabel,

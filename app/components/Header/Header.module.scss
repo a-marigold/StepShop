@@ -117,26 +117,8 @@
     gap: 1em;
 }
 
-.user-button {
-    @include flex-center;
-    gap: 0.5em;
-
-    flex: 1;
+.profile-button {
     width: 110px;
-    height: 50px;
-
-    background-color: transparent;
-
-    border-radius: 16px;
-    border: 1px solid var(--accent-color);
-
-    padding: 1em;
-    box-sizing: border-box;
-
-    color: var(--accent-color);
-    font-weight: 600;
-
-    cursor: pointer;
 }
 .cart-button {
     max-width: 50px;
