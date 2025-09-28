@@ -9,6 +9,9 @@
 
     border-radius: 0 0 30px 30px;
 
+    padding: 2em;
+    box-sizing: border-box;
+
     background-color: var(--main-bg-color);
 }
 .not-found-box {
@@ -42,4 +45,13 @@
 
     display: flex;
     gap: 1.25em;
+}
+.return-button {
+    text-decoration: none;
+}
+
+@media (max-width: 750px) {
+    .image {
+        display: none;
+    }
 }

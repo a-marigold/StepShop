@@ -10,7 +10,7 @@ import ProductList from './components/ProductList/ProductList';
 import homeStyles from './Home.module.scss';
 
 export const metadata: Metadata = {
-    title: 'Каталог товаров интернет магазина StepShop',
+    title: 'Каталог товаров | StepShop',
     description:
         'Красота и здоровье. Дом и сад. Мебель. Аксессуары. Строительство и ремонт. Автотовары. Продукты питания. Товары для животных. Детские товары. Спорт и отдых.',
 

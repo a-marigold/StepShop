@@ -9,8 +9,10 @@ import notFoundStyles from './NotFound.module.scss';
 
 export const metadata: Metadata = {
     title: 'Страница не найдена',
+
     openGraph: {
         title: 'Страница не найдена',
+        images: [{ url: '/images/not-found-image.png' }],
     },
 };
 
@@ -28,13 +30,18 @@ export default function NotFound() {
                     </p>
 
                     <div className={notFoundStyles['return-buttons-block']}>
-                        <EmptyFilledButton
-                            title='На главную'
-                            imageSettings={{
-                                imageUrl: '/images/arrow-left.svg',
-                            }}
-                            ariaLabel='Вернуться на главную страницу'
-                        />
+                        <Link
+                            href='/'
+                            className={notFoundStyles['return-button']}
+                        >
+                            <EmptyFilledButton
+                                title='На главную'
+                                imageSettings={{
+                                    imageUrl: '/images/arrow-left.svg',
+                                }}
+                                ariaLabel='Вернуться на главную страницу'
+                            />
+                        </Link>
                     </div>
                 </div>
 
@@ -43,6 +50,7 @@ export default function NotFound() {
                     width={340}
                     height={345}
                     alt='Page is not found. Error message 404'
+                    className={notFoundStyles['image']}
                 />
             </div>
         </main>
