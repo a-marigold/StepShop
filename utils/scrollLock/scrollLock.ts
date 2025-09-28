@@ -1,3 +1,11 @@
+/**
+ * **Returns window`s scrollbar width in pixels**
+ *
+ * @returns {number} Scrollbar width *in pixels*.
+ * ```ts
+ * getDocumentScrollbarWidth(); // 16
+ * ```
+ */
 export function getDocumentScrollbarWidth(): number {
     return window.innerWidth - document.documentElement.clientWidth;
 }
