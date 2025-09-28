@@ -126,6 +126,9 @@
 }
 
 @media (max-width: 920px) {
+    .left-box {
+        gap: 0.5em;
+    }
     .input-block {
         & > input {
             width: 145px;

@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import './globals.scss';
 
 export const metadata: Metadata = {
-    //todo metadataBase: new URL('https://netlify'),  --> PUT PRODUCTION URL
+    metadataBase: new URL('https://step-shop.netlify.app'),
     title: {
         default: 'StepShop',
         template: '%s | StepShop',
