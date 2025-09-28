@@ -8,10 +8,20 @@ import AccessButton from '@/UI/AccessButton';
 
 import cartStyles from './CartModal.module.scss';
 
-export default function Cart() {
+interface CartModalProps {
+    setShowModal: (showModal: boolean) => void;
+}
+
+export default function CartModal({ setShowModal }: CartModalProps) {
     return (
-        <div className={cartStyles['modal-backdrop']}>
-            <div className={cartStyles['cart-modal']}>
+        <div
+            className={cartStyles['modal-backdrop']}
+            onClick={() => setShowModal(false)}
+        >
+            <div
+                className={cartStyles['cart-modal']}
+                onClick={(event) => event.stopPropagation()}
+            >
                 <div className={cartStyles['cart-head']}>
                     <p className={cartStyles['products-quantity']}>
                         В корзине&nbsp;
@@ -20,7 +30,10 @@ export default function Cart() {
                         </span>
                     </p>
 
-                    <button className={cartStyles['close-button']}>
+                    <button
+                        className={cartStyles['close-button']}
+                        onClick={() => setShowModal(false)}
+                    >
                         <svg
                             width='20'
                             height='20'

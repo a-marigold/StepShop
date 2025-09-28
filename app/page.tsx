@@ -7,10 +7,6 @@ import type { SearchParamsProp } from '@/types/SearchParamsProp';
 import FiltrationProvider from './components/Filtration/FiltrationProvider';
 import ProductList from './components/ProductList/ProductList';
 
-// TEST
-import CartModal from './components/CartModal/CartModal';
-//
-
 import homeStyles from './Home.module.scss';
 
 export const metadata: Metadata = {
@@ -33,10 +29,6 @@ export default function Home({ searchParams }: SearchParamsProp) {
 
                 <ProductList searchParams={searchParams} />
             </main>
-
-            {/* TEST */}
-            <CartModal></CartModal>
-            {/*  */}
         </div>
     );
 }
