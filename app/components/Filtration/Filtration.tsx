@@ -23,7 +23,7 @@ export default function Filtration() {
     const router = useRouter();
 
     function AccessFilters() {
-        router.replace('/');
+        router.replace(`/?`);
     }
 
     return (

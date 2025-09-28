@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { createPortal } from 'react-dom';
 
@@ -20,6 +20,22 @@ export default function ProductCard({
     currencySymbol,
 }: ProductType) {
     const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        const scrollbarWidth =
+            window.innerWidth - document.documentElement.clientWidth;
+
+        if (showModal) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.marginRight = `${scrollbarWidth}px`;
+
+            console.log(scrollbarWidth);
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+            document.body.style.marginRight = `0`;
+        };
+    }, [showModal]);
 
     return (
         <>
