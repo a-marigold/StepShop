@@ -12,8 +12,6 @@ import homeStyles from './Home.module.scss';
 export default function Home({ searchParams }: SearchParamsProp) {
     return (
         <div className={homeStyles['home']}>
-            <Header />
-
             <Navigation />
 
             <main className={homeStyles['main-content']}>

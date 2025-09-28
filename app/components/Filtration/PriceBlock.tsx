@@ -23,15 +23,15 @@ export default function PriceBlock() {
                 <PriceInput
                     currencySymbol='₸'
                     defaultValue={0}
-                    maxValue={6000}
+                    maxValue={16000}
                     inputAction={(e) => {
                         dispatch(setMinPrice(Number(e.target.value)));
                     }}
                 />
                 <PriceInput
                     currencySymbol='₸'
-                    defaultValue={6000}
-                    maxValue={6000}
+                    defaultValue={16000}
+                    maxValue={16000}
                     inputAction={(event) =>
                         dispatch(setMaxPrice(Number(event.target.value)))
                     }

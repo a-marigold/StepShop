@@ -15,9 +15,11 @@ export default function Filtration() {
     const minPrice = useSelector(
         (state: RootState) => state.filtration.minPrice
     );
+
     const maxPrice = useSelector(
         (state: RootState) => state.filtration.maxPrice
     );
+
     const options = useSelector((state: RootState) => state.filtration.options);
 
     const router = useRouter();
@@ -32,8 +34,10 @@ export default function Filtration() {
     return (
         <aside className={filterStyles['filtration-box']}>
             <h2 className={filterStyles['title']}>Фильтрация</h2>
+
             <div className={filterStyles['filters-list']}>
                 <CheckBoxesBlock propertiesList={['option 1', 'option 2']} />
+
                 <PriceBlock />
             </div>
 

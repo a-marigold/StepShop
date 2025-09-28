@@ -3,7 +3,8 @@
 body {
     margin: 0;
 
-    @include flex-center;
+    @include flex-column;
+    align-items: center;
 
     padding: 2em 2em 0;
     box-sizing: border-box;
