@@ -13,7 +13,7 @@ const initialState: filtrationState = {
 
     minPrice: 0,
 
-    maxPrice: 6000,
+    maxPrice: 16000,
 };
 
 export const filtrationSlice = createSlice({
