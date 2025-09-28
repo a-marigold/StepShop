@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import Image from 'next/image';
 
 import { Metadata } from 'next';
@@ -9,6 +10,7 @@ import notFoundStyles from './NotFound.module.scss';
 
 export const metadata: Metadata = {
     title: 'Страница не найдена',
+    description: 'Запрошенная страница не найдена',
 
     openGraph: {
         title: 'Страница не найдена',
