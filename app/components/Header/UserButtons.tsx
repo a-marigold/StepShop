@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import { createPortal } from 'react-dom';
+
+import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
 import CartModal from '../CartModal';
 
@@ -11,6 +14,15 @@ import headerStyles from './Header.module.scss';
 
 export default function UserButtons() {
     const [showCartModal, setShowCartModal] = useState(false);
+
+    useEffect(() => {
+        if (showCartModal) {
+            lockBodyScroll();
+        }
+        return () => {
+            unlockBodyScroll();
+        };
+    }, [showCartModal]);
 
     return (
         <>
