@@ -18,6 +18,7 @@ export default function Header() {
                         <Link href='/' className={headerStyles['title']}>
                             NEXT PIZZA
                         </Link>
+
                         <p className={headerStyles['title-slogan']}>
                             вкусней уже некуда
                         </p>

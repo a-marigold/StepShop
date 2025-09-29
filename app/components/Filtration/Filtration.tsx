@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import type { RootState } from './redux';
+import type { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 
 import CheckBoxesBlock from './CheckBoxesBlock';

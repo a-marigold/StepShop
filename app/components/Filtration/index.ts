@@ -1,1 +1,1 @@
-export { default } from './FiltrationProvider';
+export { default } from './Filtration';

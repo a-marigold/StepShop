@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-import type { AppDispatch } from './redux';
+import type { AppDispatch } from '@/redux/store';
 
 import { addOption, deleteOption } from './redux/filtrationSlice';
 
