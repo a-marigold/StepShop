@@ -1,13 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import { createPortal } from 'react-dom';
 
+import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
+
 import clsx from 'clsx';
+
 import headerStyles from './Header.module.scss';
 
 export default function SearchInput() {
     const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        if (showModal) {
+            lockBodyScroll();
+        }
+        return () => {
+            unlockBodyScroll();
+        };
+    }, [showModal]);
 
     return (
         <>

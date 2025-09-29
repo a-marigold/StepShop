@@ -3,7 +3,7 @@
  *
  * @returns {number} Scrollbar width *in pixels*.
  * ```ts
- * getDocumentScrollbarWidth(); // 16
+ * getDocumentScrollbarWidth(); // 16 - Width in pixels
  * ```
  */
 export function getDocumentScrollbarWidth(): number {
