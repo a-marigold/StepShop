@@ -19,6 +19,7 @@ export default function UserButtons() {
         if (showCartModal) {
             lockBodyScroll();
         }
+
         return () => {
             unlockBodyScroll();
         };
@@ -45,6 +46,7 @@ export default function UserButtons() {
             {showCartModal &&
                 createPortal(
                     <CartModal setShowModal={setShowCartModal} />,
+
                     document.body
                 )}
         </>
