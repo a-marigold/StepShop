@@ -2,6 +2,10 @@
 
 import Image from 'next/image';
 
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+import { addProduct } from '@/redux/CartSlice';
+
 import type { ProductType } from '@/types/ProductTypes';
 
 import AccessButton from '@UI/AccessButton';
@@ -21,6 +25,8 @@ export default function ProductModal({
     currencySymbol,
     setShowModal,
 }: ProductModalProps) {
+    const dispatch = useDispatch<AppDispatch>();
+
     return (
         <div
             className={modalStyles['modal-backdrop']}
@@ -61,6 +67,17 @@ export default function ProductModal({
                         title={`Добавить в корзину за ${price} ${currencySymbol}`}
                         classNames={[modalStyles['access-button']]}
                         ariaLabel={`Добавить товар в корзину за ${price} ${currencySymbol}`}
+                        clickAction={() =>
+                            dispatch(
+                                addProduct({
+                                    image: image,
+                                    title: title,
+                                    description: description,
+                                    price: price,
+                                    currencySymbol: currencySymbol,
+                                })
+                            )
+                        }
                     />
                 </div>
             </div>
