@@ -23,26 +23,14 @@ const cartSlice = createSlice({
                 (product) => product.title !== action.payload
             );
         },
-        setProductQuantity: (
-            state,
-            action: PayloadAction<{
-                title: string;
-                newQuantity: number;
-            }>
-        ) => {
-            state.cartProducts = state.cartProducts.filter((product) =>
-                product.title === action.payload.title
-                    ? (product.quantity = action.payload.newQuantity)
-                    : product
-            );
-        },
         increaseProductQuantity: (
             state,
             action: PayloadAction<{ title: string }>
         ) => {
-            state.cartProducts = state.cartProducts.filter((product) =>
+            state.cartProducts = state.cartProducts.map((product) =>
                 product.title === action.payload.title
-                    ? product.quantity && (product.quantity += 1)
+                    ? // TODO: Get escape of non-null assertion
+                      { ...product, quantity: product.quantity! + 1 }
                     : product
             );
         },
@@ -50,9 +38,10 @@ const cartSlice = createSlice({
             state,
             action: PayloadAction<{ title: string }>
         ) => {
-            state.cartProducts = state.cartProducts.filter((product) =>
+            state.cartProducts = state.cartProducts.map((product) =>
                 product.title === action.payload.title
-                    ? product.quantity && (product.quantity -= 1)
+                    ? // TODO: Get escape of non-null assertion
+                      { ...product, quantity: product.quantity! - 1 }
                     : product
             );
         },
