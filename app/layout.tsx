@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import Header from './components/Header';
-import ReduxWrapper from '@/redux/ReduxWrapper';
+import Providers from './providers';
 
 import './globals.scss';
 
@@ -24,10 +24,10 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body>
-                <ReduxWrapper>
+                <Providers>
                     <Header></Header>
                     {children}
-                </ReduxWrapper>
+                </Providers>
             </body>
         </html>
     );

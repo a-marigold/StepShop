@@ -1,7 +1,7 @@
 'use client';
 
 // TODO: Redirect on payment page
-import Link from 'next/link';
+// import Link from 'next/link';
 
 import CartProduct from './CartProduct';
 
