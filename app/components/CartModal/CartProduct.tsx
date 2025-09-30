@@ -1,5 +1,12 @@
 'use client';
 
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+import {
+    increaseProductQuantity,
+    decreaseProductQuantity,
+} from '@/redux/CartSlice';
+
 import Image from 'next/image';
 
 import EmptyFilledButton from '@UI/EmptyFilledButton';
@@ -25,6 +32,8 @@ export default function CartProduct({
     // options,
     price,
 }: CartProductProps) {
+    const dispatch = useDispatch<AppDispatch>();
+
     return (
         <div className={productStyles['cart-product']}>
             <Image src={image} alt={title} width={65} height={65} />
@@ -47,6 +56,11 @@ export default function CartProduct({
                             }}
                             classNames={[productStyles['quantity-button']]}
                             ariaLabel='Убрать один товар'
+                            clickAction={() =>
+                                dispatch(
+                                    decreaseProductQuantity({ title: title })
+                                )
+                            }
                         />
 
                         <span className={productStyles['quantity']}>1</span>
@@ -57,6 +71,11 @@ export default function CartProduct({
                             }}
                             classNames={[productStyles['quantity-button']]}
                             ariaLabel='Добавить 1 товар'
+                            clickAction={() =>
+                                dispatch(
+                                    increaseProductQuantity({ title: title })
+                                )
+                            }
                         />
                     </div>
 

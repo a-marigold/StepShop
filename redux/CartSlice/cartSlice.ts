@@ -36,9 +36,33 @@ const cartSlice = createSlice({
                     : product
             );
         },
+        increaseProductQuantity: (
+            state,
+            action: PayloadAction<{ title: string }>
+        ) => {
+            state.cartProducts = state.cartProducts.filter((product) =>
+                product.title === action.payload.title
+                    ? product.quantity && (product.quantity += 1)
+                    : product
+            );
+        },
+        decreaseProductQuantity: (
+            state,
+            action: PayloadAction<{ title: string }>
+        ) => {
+            state.cartProducts = state.cartProducts.filter((product) =>
+                product.title === action.payload.title
+                    ? product.quantity && (product.quantity -= 1)
+                    : product
+            );
+        },
     },
 });
 
-export const { addProduct, deleteProduct, setProductQuantity } =
-    cartSlice.actions;
+export const {
+    addProduct,
+    deleteProduct,
+    increaseProductQuantity,
+    decreaseProductQuantity,
+} = cartSlice.actions;
 export default cartSlice.reducer;
