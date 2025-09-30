@@ -3,6 +3,9 @@
 // TODO: Redirect on payment page
 // import Link from 'next/link';
 
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/redux/store';
+
 import CartProduct from './CartProduct';
 
 import AccessButton from '@/UI/AccessButton';
@@ -14,6 +17,10 @@ interface CartModalProps {
 }
 
 export default function CartModal({ setShowModal }: CartModalProps) {
+    const cartProducts = useSelector(
+        (state: RootState) => state.cart.cartProducts
+    );
+
     return (
         <div
             className={cartStyles['modal-backdrop']}
@@ -52,36 +59,14 @@ export default function CartModal({ setShowModal }: CartModalProps) {
                 </div>
 
                 <div className={cartStyles['products-box']}>
-                    <CartProduct
-                        image='/images/white-t-shirt.webp'
-                        name='Чизбургер-пицца'
-                        options='Размер - M'
-                        price={100}
-                    ></CartProduct>
-                    <CartProduct
-                        image='/images/white-t-shirt.webp'
-                        name='Чизбургер-пицца'
-                        options='Размер - M'
-                        price={100}
-                    ></CartProduct>
-                    <CartProduct
-                        image='/images/white-t-shirt.webp'
-                        name='Чизбургер-пицца'
-                        options='Размер - M'
-                        price={100}
-                    ></CartProduct>
-                    <CartProduct
-                        image='/images/white-t-shirt.webp'
-                        name='Чизбургер-пицца'
-                        options='Размер - M'
-                        price={100}
-                    ></CartProduct>
-                    <CartProduct
-                        image='/images/white-t-shirt.webp'
-                        name='Чизбургер-пицца'
-                        options='Размер - M'
-                        price={100}
-                    ></CartProduct>
+                    {cartProducts.map((cartProduct) => (
+                        <CartProduct
+                            image={cartProduct.image}
+                            title={cartProduct.title}
+                            // options={cartProduct.options}
+                            price={cartProduct.price}
+                        />
+                    ))}
                 </div>
 
                 <div className={cartStyles['order-block']}>

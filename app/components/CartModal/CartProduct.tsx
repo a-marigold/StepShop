@@ -9,26 +9,32 @@ import productStyles from './CartProduct.module.scss';
 interface CartProductProps {
     image: string;
 
-    name: string;
-    options: string;
+    title: string;
+
+    //
+    //
+    // TODO: Add options for each product. (Need to update products JSON on server )
+    // options: string;
 
     price: number;
 }
 
 export default function CartProduct({
     image,
-    name,
-    options,
+    title,
+    // options,
     price,
 }: CartProductProps) {
     return (
         <div className={productStyles['cart-product']}>
-            <Image src={image} alt={name} width={65} height={65} />
+            <Image src={image} alt={title} width={65} height={65} />
 
             <div className={productStyles['description-block']}>
                 <div className={productStyles['text-block']}>
-                    <p className={productStyles['title']}>{name}</p>
-                    <p className={productStyles['options']}>{options}</p>
+                    <p className={productStyles['title']}>{title}</p>
+                    {/* TO DO HERE */}
+                    {/* <p className={productStyles['options']}>{options}</p> */}
+                    {/*  */}
                 </div>
 
                 <div className={productStyles['horizontal-line']}></div>

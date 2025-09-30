@@ -4,11 +4,11 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { ProductType } from '@/types/ProductTypes';
 
 interface CartSliceState {
-    products: ProductType[];
+    cartProducts: ProductType[];
 }
 
 const initialState: CartSliceState = {
-    products: [],
+    cartProducts: [],
 };
 
 const cartSlice = createSlice({
@@ -16,10 +16,10 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action: PayloadAction<ProductType>) => {
-            state.products.push(action.payload);
+            state.cartProducts.push(action.payload);
         },
         deleteProduct: (state, action: PayloadAction<string>) => {
-            state.products = state.products.filter(
+            state.cartProducts = state.cartProducts.filter(
                 (product) => product.title !== action.payload
             );
         },
@@ -30,7 +30,7 @@ const cartSlice = createSlice({
                 newQuantity: number;
             }>
         ) => {
-            state.products = state.products.filter((product) =>
+            state.cartProducts = state.cartProducts.filter((product) =>
                 product.title === action.payload.title
                     ? (product.quantity = action.payload.newQuantity)
                     : product
