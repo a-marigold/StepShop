@@ -78,7 +78,7 @@ export default function ProductModal({
                                     quantity: 1,
                                 })
                             );
-                            dispatch(increaseTotalAmount({ price: price }));
+                            dispatch(increaseTotalAmount(price));
                         }}
                     />
                 </div>

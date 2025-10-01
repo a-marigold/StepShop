@@ -65,12 +65,7 @@ export default function CartProduct({
                                 dispatch(
                                     decreaseProductQuantity({ title: title })
                                 );
-                                dispatch(
-                                    decreaseTotalAmount({
-                                        quantity: quantity ? quantity : 0,
-                                        price: price,
-                                    })
-                                );
+                                dispatch(decreaseTotalAmount(price));
                             }}
                         />
 
@@ -88,7 +83,7 @@ export default function CartProduct({
                                 dispatch(
                                     increaseProductQuantity({ title: title })
                                 );
-                                dispatch(increaseTotalAmount({ price: price }));
+                                dispatch(increaseTotalAmount(price));
                             }}
                         />
                     </div>
