@@ -88,7 +88,7 @@ export default function CartProduct({
                                 dispatch(
                                     increaseProductQuantity({ title: title })
                                 );
-                                dispatch(increaseTotalAmount(price));
+                                dispatch(increaseTotalAmount({ price: price }));
                             }}
                         />
                     </div>

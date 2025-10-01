@@ -78,8 +78,11 @@ const cartSlice = createSlice({
                 .filter((product) => product.quantity! > 0);
         },
 
-        increaseTotalAmount: (state, action: PayloadAction<number>) => {
-            state.totalAmount += action.payload;
+        increaseTotalAmount: (
+            state,
+            action: PayloadAction<{ price: number }>
+        ) => {
+            state.totalAmount += action.payload.price;
         },
         decreaseTotalAmount: (
             state,

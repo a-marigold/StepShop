@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
-import { addProduct } from '@/redux/CartSlice';
+import { addProduct, increaseTotalAmount } from '@/redux/CartSlice';
 
 import type { ProductType } from '@/types/ProductTypes';
 
@@ -67,7 +67,7 @@ export default function ProductModal({
                         title={`Добавить в корзину за ${price} ${currencySymbol}`}
                         classNames={[modalStyles['access-button']]}
                         ariaLabel={`Добавить товар в корзину за ${price} ${currencySymbol}`}
-                        clickAction={() =>
+                        clickAction={() => {
                             dispatch(
                                 addProduct({
                                     image: image,
@@ -77,8 +77,9 @@ export default function ProductModal({
                                     currencySymbol: currencySymbol,
                                     quantity: 1,
                                 })
-                            )
-                        }
+                            );
+                            dispatch(increaseTotalAmount({ price: price }));
+                        }}
                     />
                 </div>
             </div>
