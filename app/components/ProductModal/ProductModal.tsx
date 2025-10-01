@@ -75,6 +75,7 @@ export default function ProductModal({
                                     description: description,
                                     price: price,
                                     currencySymbol: currencySymbol,
+                                    quantity: 1,
                                 })
                             )
                         }
