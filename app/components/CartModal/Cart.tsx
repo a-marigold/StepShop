@@ -24,7 +24,9 @@ export default function Cart({ setShowModal }: CartProps) {
             <div className={cartStyles['cart-head']}>
                 <p className={cartStyles['products-quantity']}>
                     В корзине&nbsp;
-                    <span className={cartStyles['highlighted']}>3 товара</span>
+                    <span className={cartStyles['highlighted']}>
+                        {cartProducts.length} товара
+                    </span>
                 </p>
 
                 <button
