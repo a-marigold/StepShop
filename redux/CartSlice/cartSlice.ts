@@ -7,6 +7,7 @@ interface CartSliceState {
     cartProducts: ProductType[];
 }
 
+// TODO: Add totalPrice and totalProductPrice
 const initialState: CartSliceState = {
     cartProducts: [],
 };
@@ -22,6 +23,17 @@ const cartSlice = createSlice({
                 )
             ) {
                 state.cartProducts.push(action.payload);
+            } else {
+                state.cartProducts = state.cartProducts.map((product) =>
+                    product.title === action.payload.title
+                        ? {
+                              ...product,
+                              quantity: product.quantity
+                                  ? product.quantity + 1
+                                  : product.quantity,
+                          }
+                        : product
+                );
             }
         },
         deleteProduct: (state, action: PayloadAction<string>) => {
@@ -29,6 +41,7 @@ const cartSlice = createSlice({
                 (product) => product.title !== action.payload
             );
         },
+
         increaseProductQuantity: (
             state,
             action: PayloadAction<{ title: string }>
