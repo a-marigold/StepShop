@@ -48,7 +48,7 @@ export default memo(function CartProduct({
                 <div className={productStyles['text-block']}>
                     <p className={productStyles['title']}>{title}</p>
                     {/* TO DO HERE */}
-                    {/* <p className={productStyles['options']}>options</p> */}
+                    {/* <p className={productStyles['options']}> {options} </p> */}
                     {/*  */}
                 </div>
 

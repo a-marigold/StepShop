@@ -74,7 +74,9 @@ export default function Cart({ setShowModal }: CartProps) {
                 <div className={cartStyles['price-block']}>
                     <span className={cartStyles['price-text']}>Налог 5%:</span>
                     <div className={cartStyles['dashed-divider']} />
-                    <span className={cartStyles['price-sum']}>112 ₸</span>
+                    <span className={cartStyles['price-sum']}>
+                        {0.05 * totalAmount} ₸
+                    </span>
                 </div>
 
                 <AccessButton
