@@ -5,10 +5,10 @@ import ProductCard from './ProductCard';
 
 import productStyles from './ProductList.module.scss';
 
-import EmptyProductCard from './EmptyProductCard';
-
 export default async function ProductList({ searchParams }: SearchParamsProp) {
-    const response = await fetch('https://604781a0efa572c1.mokky.dev/items');
+    const response = await fetch('https://604781a0efa572c1.mokky.dev/items', {
+        cache: 'no-store',
+    });
 
     const products = (await response.json()) as ProductType[];
 
