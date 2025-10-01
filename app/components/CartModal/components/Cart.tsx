@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
-import CartProduct from './components/CartProduct';
+import CartProduct from './CartProduct';
 
 import AccessButton from '@/UI/AccessButton';
 
-import cartStyles from './CartModal.module.scss';
+import cartStyles from '../CartModal.module.scss';
 
 interface CartProps {
     setShowModal: (showModal: boolean) => void;

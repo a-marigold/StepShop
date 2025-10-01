@@ -1,5 +1,7 @@
 'use client';
 
+import { memo } from 'react';
+
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 import {
@@ -29,7 +31,7 @@ interface CartProductProps {
     quantity?: number;
 }
 
-export default function CartProduct({
+export default memo(function CartProduct({
     image,
     title,
     // options,
@@ -46,7 +48,7 @@ export default function CartProduct({
                 <div className={productStyles['text-block']}>
                     <p className={productStyles['title']}>{title}</p>
                     {/* TO DO HERE */}
-                    {/* <p className={productStyles['options']}>{options}</p> */}
+                    {/* <p className={productStyles['options']}>options</p> */}
                     {/*  */}
                 </div>
 
@@ -92,4 +94,4 @@ export default function CartProduct({
             </div>
         </div>
     );
-}
+});

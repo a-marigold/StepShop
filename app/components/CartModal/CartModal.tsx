@@ -9,7 +9,7 @@ import type { RootState } from '@/redux/store';
 import EmptyCart from './components/EmptyCart';
 
 import cartStyles from './CartModal.module.scss';
-import Cart from './Cart';
+import Cart from './components/Cart';
 
 interface CartModalProps {
     setShowModal: (showModal: boolean) => void;
