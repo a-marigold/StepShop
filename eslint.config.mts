@@ -16,12 +16,11 @@ export default defineConfig([
     pluginReact.configs.flat.recommended,
     {
         rules: {
-            // 🚀 отключаем устаревшее правило
             'react/react-in-jsx-scope': 'off',
         },
         settings: {
             react: {
-                version: 'detect', // автоопределение версии React
+                version: 'detect',
             },
         },
         files: ['**/*.css'],
