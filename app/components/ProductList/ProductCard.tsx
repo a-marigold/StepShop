@@ -36,6 +36,7 @@ export default function ProductCard({
             <article
                 className={productStyles['product-card']}
                 onClick={() => setShowModal(true)}
+                aria-label={`Добавить ${title} в корзину`}
             >
                 <div className={productStyles['image-block']}>
                     <Image
@@ -64,7 +65,7 @@ export default function ProductCard({
                         </span>
                     </p>
                     <button className={productStyles['add-button']}>
-                        <img src='/images/plus-icon.svg' alt='' />
+                        <img src='/images/plus-icon.svg' />
                         Добавить
                     </button>
                 </div>

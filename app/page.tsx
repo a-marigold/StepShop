@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import type { Metadata } from 'next';
 
 import Navigation from './components/Navigation/Navigation';
@@ -6,6 +8,7 @@ import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
 import Filtration from './components/Filtration';
 import ProductList from './components/ProductList';
+import { Loading } from './components/ProductList/Loading';
 
 import homeStyles from './Home.module.scss';
 
@@ -27,7 +30,9 @@ export default function Home({ searchParams }: SearchParamsProp) {
             <main className={homeStyles['main-content']}>
                 <Filtration />
 
-                <ProductList searchParams={searchParams} />
+                <Suspense fallback={<Loading />}>
+                    <ProductList searchParams={searchParams} />
+                </Suspense>
             </main>
         </div>
     );

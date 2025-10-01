@@ -1,0 +1,91 @@
+@use '@styles/mixins.scss' as *;
+
+.product-card {
+    @include flex-column;
+    gap: 1em;
+
+    width: 100%;
+    max-width: 285px;
+
+    cursor: pointer;
+}
+
+.image-block {
+    @include flex-center;
+
+    flex: 1;
+
+    min-height: 260px;
+    max-height: 260px;
+
+    border-radius: 16px;
+
+    background-color: var(--loading-card-bg);
+}
+.image {
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background-color: var(--loading-card-img-bg);
+}
+.description-block {
+    @include flex-column;
+    gap: 0.5em;
+
+    & > div:nth-child(1) {
+        width: 83%;
+    }
+    & > div:nth-child(2) {
+        width: 100%;
+    }
+    & > div:nth-child(3) {
+        width: 90%;
+    }
+    & > div:nth-child(4) {
+        width: 35%;
+    }
+}
+.title-fallback {
+    height: 30px;
+
+    border-radius: 10px;
+
+    background-color: var(--loading-card-img-bg);
+}
+.description-fallback {
+    margin-top: 0.25em;
+
+    height: 10px;
+
+    border-radius: 6px;
+
+    background-color: var(--loading-card-img-bg);
+}
+.description {
+    @include text-wo-margin(0.95rem);
+
+    color: var(--secondary-font-color);
+}
+
+.order-block {
+    @include flex-y-center;
+    justify-content: space-between;
+}
+.price-block {
+    width: 85px;
+    height: 30px;
+
+    border-radius: 10px;
+
+    background-color: var(--foreground-color);
+}
+.add-button-block {
+    width: 125px;
+    height: 40px;
+
+    border-radius: 10px;
+
+    background-color: var(--foreground-color);
+}
