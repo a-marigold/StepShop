@@ -11,7 +11,7 @@ export default function EmptyCart({ setShowModal }: EmptyCartProps) {
     return (
         <div className={cartStyles['empty-cart']}>
             <img
-                src='/images/empty-cart.png'
+                src='/images/empty-cart.svg'
                 alt='Корзина пуста'
                 width={120}
                 height={120}

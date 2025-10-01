@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
+import AuthModal from '../AuthModal';
 import CartModal from '../CartModal';
 
 import EmptyFilledButton from '@UI/EmptyFilledButton';
@@ -15,15 +16,17 @@ import headerStyles from './Header.module.scss';
 export default function UserButtons() {
     const [showCartModal, setShowCartModal] = useState(false);
 
+    const [showAuthModal, setShowAuthModal] = useState(false);
+
     useEffect(() => {
-        if (showCartModal) {
+        if (showCartModal || showAuthModal) {
             lockBodyScroll();
         }
 
         return () => {
             unlockBodyScroll();
         };
-    }, [showCartModal]);
+    }, [showCartModal, showAuthModal]);
 
     return (
         <>
@@ -33,6 +36,7 @@ export default function UserButtons() {
                     ariaLabel='Войти в аккаунт'
                     classNames={[headerStyles['profile-button']]}
                     imageSettings={{ imageUrl: '/images/profile-icon.svg' }}
+                    clickAction={() => setShowAuthModal(true)}
                 />
 
                 <EmptyFilledButton
@@ -46,6 +50,12 @@ export default function UserButtons() {
             {showCartModal &&
                 createPortal(
                     <CartModal setShowModal={setShowCartModal} />,
+
+                    document.body
+                )}
+            {showAuthModal &&
+                createPortal(
+                    <AuthModal setShowModal={setShowAuthModal} />,
 
                     document.body
                 )}
