@@ -14,11 +14,13 @@
         "isolatedModules": true,
         "jsx": "preserve",
         "incremental": true,
+
         "plugins": [
             {
                 "name": "next"
             }
         ],
+
         "baseUrl": ".",
         "paths": {
             "@/*": ["./*"],
@@ -26,6 +28,13 @@
             "@UI/*": ["UI/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "app/components/CartModal/EmptyCarttsx"
+    ],
     "exclude": ["node_modules"]
 }

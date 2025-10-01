@@ -22,7 +22,7 @@ interface CartProductProps {
 
     //
     //
-    // TODO: Add options for each product. (Need to update products JSON on server )
+    // TODO: Add options for each product. ( Need to update products JSON on server )
     // options: string;
 
     price: number;
@@ -34,7 +34,6 @@ export default function CartProduct({
     title,
     // options,
     price,
-    // TODO: Fix quantity display
     quantity,
 }: CartProductProps) {
     const dispatch = useDispatch<AppDispatch>();
