@@ -78,19 +78,13 @@ const cartSlice = createSlice({
                 .filter((product) => product.quantity! > 0);
         },
 
-        increaseTotalAmount: (
-            state,
-            action: PayloadAction<{ price: number }>
-        ) => {
-            state.totalAmount += action.payload.price;
+        increaseTotalAmount: (state, action: PayloadAction<number>) => {
+            state.totalAmount += action.payload;
         },
-        decreaseTotalAmount: (
-            state,
-            action: PayloadAction<{ quantity: number; price: number }>
-        ) => {
-            if (action.payload.quantity !== 1) {
-                state.totalAmount -= action.payload.price;
-            }
+        decreaseTotalAmount: (state, action: PayloadAction<number>) => {
+            // if (action.payload.quantity !== 1) {
+            state.totalAmount -= action.payload;
+            // }
         },
     },
 });
