@@ -20,6 +20,9 @@ export default function CartModal({ setShowModal }: CartModalProps) {
     const cartProducts = useSelector(
         (state: RootState) => state.cart.cartProducts
     );
+    const totalAmount = useSelector(
+        (state: RootState) => state.cart.totalAmount
+    );
 
     return (
         <div
@@ -75,7 +78,9 @@ export default function CartModal({ setShowModal }: CartModalProps) {
                     <div className={cartStyles['price-block']}>
                         <span className={cartStyles['price-text']}>Итого:</span>
                         <div className={cartStyles['dashed-divider']} />
-                        <span className={cartStyles['price-sum']}>159 ₸</span>
+                        <span className={cartStyles['price-sum']}>
+                            {totalAmount} ₸
+                        </span>
                     </div>
 
                     <div className={cartStyles['price-block']}>

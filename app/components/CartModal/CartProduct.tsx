@@ -5,6 +5,8 @@ import type { AppDispatch } from '@/redux/store';
 import {
     increaseProductQuantity,
     decreaseProductQuantity,
+    increaseTotalAmount,
+    decreaseTotalAmount,
 } from '@/redux/CartSlice';
 
 import Image from 'next/image';
@@ -59,11 +61,17 @@ export default function CartProduct({
                             }}
                             classNames={[productStyles['quantity-button']]}
                             ariaLabel='Убрать один товар'
-                            clickAction={() =>
+                            clickAction={() => {
                                 dispatch(
                                     decreaseProductQuantity({ title: title })
-                                )
-                            }
+                                );
+                                dispatch(
+                                    decreaseTotalAmount({
+                                        quantity: quantity ? quantity : 0,
+                                        price: price,
+                                    })
+                                );
+                            }}
                         />
 
                         <span className={productStyles['quantity']}>
@@ -76,11 +84,12 @@ export default function CartProduct({
                             }}
                             classNames={[productStyles['quantity-button']]}
                             ariaLabel='Добавить 1 товар'
-                            clickAction={() =>
+                            clickAction={() => {
                                 dispatch(
                                     increaseProductQuantity({ title: title })
-                                )
-                            }
+                                );
+                                dispatch(increaseTotalAmount(price));
+                            }}
                         />
                     </div>
 

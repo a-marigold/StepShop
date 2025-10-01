@@ -5,11 +5,14 @@ import type { ProductType } from '@/types/ProductTypes';
 
 interface CartSliceState {
     cartProducts: ProductType[];
+
+    totalAmount: number;
 }
 
-// TODO: Add totalPrice and totalProductPrice
+// TODO: Add totalAmount and totalProductPrice
 const initialState: CartSliceState = {
     cartProducts: [],
+    totalAmount: 0,
 };
 
 const cartSlice = createSlice({
@@ -74,6 +77,18 @@ const cartSlice = createSlice({
                 )
                 .filter((product) => product.quantity! > 0);
         },
+
+        increaseTotalAmount: (state, action: PayloadAction<number>) => {
+            state.totalAmount += action.payload;
+        },
+        decreaseTotalAmount: (
+            state,
+            action: PayloadAction<{ quantity: number; price: number }>
+        ) => {
+            if (action.payload.quantity !== 1) {
+                state.totalAmount -= action.payload.price;
+            }
+        },
     },
 });
 
@@ -82,5 +97,7 @@ export const {
     deleteProduct,
     increaseProductQuantity,
     decreaseProductQuantity,
+    increaseTotalAmount,
+    decreaseTotalAmount,
 } = cartSlice.actions;
 export default cartSlice.reducer;
