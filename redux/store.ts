@@ -23,7 +23,6 @@ const cartPersistConfig = {
 
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
-// TODO: solve the problem width serializing actions
 export const store = configureStore({
     reducer: {
         filtration: filtrationReducer,

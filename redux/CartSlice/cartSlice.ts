@@ -16,7 +16,13 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action: PayloadAction<ProductType>) => {
-            state.cartProducts.push(action.payload);
+            if (
+                !!!state.cartProducts.find(
+                    (product) => product.title === action.payload.title
+                )
+            ) {
+                state.cartProducts.push(action.payload);
+            }
         },
         deleteProduct: (state, action: PayloadAction<string>) => {
             state.cartProducts = state.cartProducts.filter(
@@ -38,12 +44,14 @@ const cartSlice = createSlice({
             state,
             action: PayloadAction<{ title: string }>
         ) => {
-            state.cartProducts = state.cartProducts.map((product) =>
-                product.title === action.payload.title
-                    ? // TODO: Get escape of non-null assertion
-                      { ...product, quantity: product.quantity! - 1 }
-                    : product
-            );
+            state.cartProducts = state.cartProducts
+                .map((product) =>
+                    product.title === action.payload.title
+                        ? // TODO: Get escape of non-null assertion
+                          { ...product, quantity: product.quantity! - 1 }
+                        : product
+                )
+                .filter((product) => product.quantity! > 0);
         },
     },
 });

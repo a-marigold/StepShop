@@ -66,6 +66,7 @@ export default function CartModal({ setShowModal }: CartModalProps) {
                             title={cartProduct.title}
                             // options={cartProduct.options}
                             price={cartProduct.price}
+                            quantity={cartProduct.quantity}
                         />
                     ))}
                 </div>

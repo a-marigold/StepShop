@@ -24,6 +24,7 @@ interface CartProductProps {
     // options: string;
 
     price: number;
+    quantity?: number;
 }
 
 export default function CartProduct({
@@ -31,6 +32,8 @@ export default function CartProduct({
     title,
     // options,
     price,
+    // TODO: Fix quantity display
+    quantity,
 }: CartProductProps) {
     const dispatch = useDispatch<AppDispatch>();
 
@@ -63,7 +66,9 @@ export default function CartProduct({
                             }
                         />
 
-                        <span className={productStyles['quantity']}>1</span>
+                        <span className={productStyles['quantity']}>
+                            {quantity}
+                        </span>
 
                         <EmptyFilledButton
                             imageSettings={{
