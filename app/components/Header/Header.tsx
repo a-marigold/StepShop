@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import SearchInput from './SearchInput';
-import UserButtons from './UserButtons';
+import SearchInput from './components/SearchInput';
+import UserButtons from './components/UserButtons';
 
 import headerStyles from './Header.module.scss';
 

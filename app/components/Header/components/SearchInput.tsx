@@ -8,7 +8,7 @@ import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
 import clsx from 'clsx';
 
-import headerStyles from './Header.module.scss';
+import headerStyles from '../Header.module.scss';
 
 export default function SearchInput() {
     const [showModal, setShowModal] = useState(false);

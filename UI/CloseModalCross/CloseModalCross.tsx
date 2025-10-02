@@ -13,7 +13,7 @@ export default function CloseModalCross({ clickAction }: CloseModalCrossProps) {
             onClick={clickAction}
             aria-label='Закрыть модальное окно'
         >
-            <img src='/images/bold-cross-icon.svg' />
+            <img src='/images/bold-cross-icon.svg' width={30} height={30} />
         </button>
     );
 }
