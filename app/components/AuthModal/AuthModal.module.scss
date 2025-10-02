@@ -5,6 +5,9 @@
     @include flex-center;
 }
 
+.modal-wrapper {
+    @include modal-wrapper(560px);
+}
 .auth-modal {
     display: flex;
     flex-direction: column;
