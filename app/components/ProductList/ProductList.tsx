@@ -6,10 +6,9 @@ import ProductCard from './ProductCard';
 import productStyles from './ProductList.module.scss';
 
 export default async function ProductList({ searchParams }: SearchParamsProp) {
-    const response = await fetch('https://604781a0efa572c1.mokky.dev/items', {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
         cache: 'no-store',
     });
-
     const products = (await response.json()) as ProductType[];
 
     const minPrice = searchParams.minPrice

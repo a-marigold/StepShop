@@ -1,3 +1,5 @@
+// TODO: Add fallback image for product
+
 'use client';
 
 import { useState, useEffect } from 'react';

@@ -1,5 +1,6 @@
 'use client';
 
+import CloseModalCross from '@/UI/CloseModalCross';
 import AccessButton from '@/UI/AccessButton';
 
 import authStyles from './AuthModal.module.scss';
@@ -17,6 +18,8 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                 className={authStyles['auth-modal']}
                 onClick={(event) => event.stopPropagation()}
             ></div>
+
+            <CloseModalCross clickAction={() => setShowModal(false)} />
         </div>
     );
 }

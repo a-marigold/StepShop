@@ -11,7 +11,7 @@ export interface ProductType {
 
     currencySymbol: CurrencySymbol;
 
-    // TODO: Add require for quantity
+    // TODO: Add required for quantity
 
     quantity?: number;
 }

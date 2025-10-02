@@ -4,3 +4,11 @@
     @include modal-backdrop(10);
     @include flex-center;
 }
+
+.auth-modal {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 350px;
+}
