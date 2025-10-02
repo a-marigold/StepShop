@@ -1,17 +1,20 @@
+import type { ReactNode } from 'react';
+
 import clsx from 'clsx';
 import buttonStyles from './AccessButton.module.scss';
 
 interface AccessButtonProps {
     image?: string;
 
-    title: string;
+    title?: string;
 
     ariaLabel: string;
     classNames?: string[];
 
     clickAction?: () => void;
-}
 
+    children?: ReactNode;
+}
 export default function AccessButton({
     image,
 
@@ -22,6 +25,8 @@ export default function AccessButton({
     classNames,
 
     ariaLabel,
+
+    children,
 }: AccessButtonProps) {
     return (
         <button
@@ -33,7 +38,9 @@ export default function AccessButton({
             aria-label={ariaLabel}
         >
             {image && <img src={image} />}
-            <span>{title}</span>
+            {title && <span>{title}</span>}
+
+            {children}
         </button>
     );
 }
