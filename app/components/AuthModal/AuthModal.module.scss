@@ -25,19 +25,23 @@
 
 .content-block {
     @include flex-y-center;
+
     justify-content: space-between;
 }
 
 .text-block {
     @include flex-column;
+
     gap: 0.25em;
 }
 .title {
     @include text-wo-margin(1.85rem);
+
     font-weight: 600;
 }
 .description {
     @include text-wo-margin(1rem);
+
     color: var(--secondary-font-color);
 
     max-width: 260px;

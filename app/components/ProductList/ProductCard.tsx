@@ -45,7 +45,8 @@ export default function ProductCard({
                         src={image}
                         height={200}
                         width={200}
-                        alt='Product image'
+                        quality={100}
+                        alt={`Картинка товара - ${title}`}
                     />
                 </div>
 
