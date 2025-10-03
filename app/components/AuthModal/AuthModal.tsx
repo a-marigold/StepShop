@@ -29,8 +29,7 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     >
                         <PrimaryInput
                             htmlId='phone-number-input'
-                            isValid={false}
-                            title='Номер телефона'
+                            isValid={true}
                             errorLabelTitle='Введите номер телефона'
                         />
                     </AuthContent>
