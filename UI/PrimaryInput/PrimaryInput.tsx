@@ -11,8 +11,9 @@ interface PrimaryInputProps {
     isValid: boolean;
 
     title?: string;
-
     errorLabelTitle?: string;
+
+    placeholder?: string;
 
     classNames?: string[];
 
@@ -26,6 +27,8 @@ export default function PrimaryInput({
 
     title,
     errorLabelTitle,
+
+    placeholder,
 
     classNames,
 
@@ -50,6 +53,7 @@ export default function PrimaryInput({
                 className={inputStyles['primary-input']}
                 onChange={inputAction}
                 aria-invalid={!isValid}
+                placeholder={placeholder}
             />
 
             {!isValid && errorLabelTitle && (
