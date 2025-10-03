@@ -1,9 +1,8 @@
 'use client';
 
-import AuthContent from './components/AuthContent';
+import PhoneNumberContent from './components/PhoneNumberContent';
 
 import CloseModalCross from '@/UI/CloseModalCross';
-import PrimaryInput from '@UI/PrimaryInput';
 
 import authStyles from './AuthModal.module.scss';
 
@@ -21,19 +20,7 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <AuthContent
-                        title='Вход в аккаунт'
-                        description='Введите номер телефона, чтобы войти или зарегистрироваться'
-                        image='/images/phone-icon.svg'
-                        buttonTitle='Получить код в SMS'
-                    >
-                        <PrimaryInput
-                            htmlId='phone-number-input'
-                            isValid={true}
-                            errorLabelTitle='Введите номер телефона'
-                            placeholder='+X XXX XXX XX-XX'
-                        />
-                    </AuthContent>
+                    <PhoneNumberContent />
                 </div>
 
                 <CloseModalCross clickAction={() => setShowModal(false)} />

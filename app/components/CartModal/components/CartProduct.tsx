@@ -24,7 +24,7 @@ interface CartProductProps {
 
     //
     //
-    // TODO: Add options for each product. ( Need to update products JSON on server )
+    // TODO: Add options for each product.
     // options: string;
 
     price: number;
