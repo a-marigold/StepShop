@@ -1,6 +1,7 @@
 'use client';
 
 import PhoneNumberContent from './components/PhoneNumberContent';
+import PhoneCodeContent from './components/PhoneCodeContent';
 
 import CloseModalCross from '@/UI/CloseModalCross';
 
@@ -21,6 +22,7 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     onClick={(event) => event.stopPropagation()}
                 >
                     <PhoneNumberContent />
+                    {/* <PhoneCodeContent /> */}
                 </div>
 
                 <CloseModalCross clickAction={() => setShowModal(false)} />

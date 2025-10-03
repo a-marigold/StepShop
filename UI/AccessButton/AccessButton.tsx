@@ -9,7 +9,7 @@ interface AccessButtonProps {
     title?: string;
 
     ariaLabel: string;
-    classNames?: string[];
+    className?: string;
 
     clickAction?: () => void;
 
@@ -22,7 +22,7 @@ export default function AccessButton({
 
     clickAction,
 
-    classNames,
+    className,
 
     ariaLabel,
 
@@ -30,10 +30,7 @@ export default function AccessButton({
 }: AccessButtonProps) {
     return (
         <button
-            className={clsx(
-                buttonStyles['access-button'],
-                classNames && [...classNames]
-            )}
+            className={clsx(buttonStyles['access-button'], className)}
             onClick={clickAction}
             aria-label={ariaLabel}
         >

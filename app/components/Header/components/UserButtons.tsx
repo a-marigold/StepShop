@@ -54,7 +54,7 @@ export default function UserButtons() {
                     <AccessButton
                         ariaLabel='Открыть корзину'
                         clickAction={() => setShowCartModal(true)}
-                        classNames={[userStyles['ready-cart-button']]}
+                        className={userStyles['ready-cart-button']}
                     >
                         <p className={userStyles['total-amount']}>
                             {totalAmount} ₸

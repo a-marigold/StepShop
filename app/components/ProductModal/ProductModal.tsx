@@ -64,7 +64,7 @@ export default function ProductModal({
                         ></SizePicker>
                         <AccessButton
                             title={`Добавить в корзину за ${price} ${currencySymbol}`}
-                            classNames={[modalStyles['access-button']]}
+                            className={modalStyles['access-button']}
                             ariaLabel={`Добавить товар в корзину за ${price} ${currencySymbol}`}
                             clickAction={() => {
                                 dispatch(

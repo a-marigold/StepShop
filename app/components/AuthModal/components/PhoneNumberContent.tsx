@@ -34,6 +34,7 @@ export default function PhoneNumberContent() {
             <AccessButton
                 title='Получить код в SMS'
                 ariaLabel='Получить код в SMS'
+                className={authStyles['access-button']}
             />
         </>
     );

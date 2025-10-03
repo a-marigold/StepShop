@@ -44,7 +44,7 @@ export default function Filtration() {
             <AccessButton
                 title='Применить'
                 ariaLabel='Применить фильтры'
-                classNames={[filterStyles['access-button']]}
+                className={filterStyles['access-button']}
                 clickAction={AccessFilters}
             />
         </aside>

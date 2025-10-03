@@ -34,6 +34,7 @@ export default function PhoneCodeContent() {
             <AccessButton
                 title='Запросить код — через {SECONDS} сек.'
                 ariaLabel='Запросить код — через {SECONDS} сек.'
+                className={authStyles['access-button']}
             />
         </>
     );

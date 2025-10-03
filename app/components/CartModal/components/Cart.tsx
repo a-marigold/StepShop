@@ -83,7 +83,7 @@ export default function Cart({ setShowModal }: CartProps) {
                     title='Оформить заказ'
                     image='/images/white-arrow-left.svg'
                     ariaLabel='Оформить заказ'
-                    classNames={[cartStyles['access-button']]}
+                    className={cartStyles['access-button']}
                 />
             </div>
         </>

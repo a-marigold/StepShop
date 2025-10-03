@@ -28,7 +28,7 @@ export default function EmptyCart({ setShowModal }: EmptyCartProps) {
                 title='Вернуться назад'
                 image='/images/white-arrow-left.svg'
                 ariaLabel='Закрыть корзину'
-                classNames={[cartStyles['access-button']]}
+                className={cartStyles['access-button']}
                 clickAction={() => setShowModal(false)}
             />
         </div>
