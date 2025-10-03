@@ -5,10 +5,7 @@ import buttonStyles from './EmptyFilledButton.module.scss';
 
 interface EmptyFilledButtonProps {
     title?: string;
-    imageSettings?: {
-        imageUrl: string;
-        imageAlt?: string;
-    };
+    image: string;
 
     ariaLabel: string;
     classNames?: string[];
@@ -18,7 +15,7 @@ interface EmptyFilledButtonProps {
 
 export default function EmptyFilledButton({
     title,
-    imageSettings,
+    image,
 
     clickAction,
     classNames,
@@ -34,12 +31,7 @@ export default function EmptyFilledButton({
             onClick={clickAction}
             aria-label={ariaLabel}
         >
-            {imageSettings && (
-                <img
-                    src={imageSettings.imageUrl}
-                    alt={imageSettings.imageAlt}
-                />
-            )}
+            {image && <img src={image} alt='' />}
 
             {title && <span>{title}</span>}
         </button>

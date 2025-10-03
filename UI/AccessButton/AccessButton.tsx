@@ -37,7 +37,7 @@ export default function AccessButton({
             onClick={clickAction}
             aria-label={ariaLabel}
         >
-            {image && <img src={image} />}
+            {image && <img src={image} alt='' />}
             {title && <span>{title}</span>}
 
             {children}

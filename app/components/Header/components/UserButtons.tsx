@@ -46,7 +46,7 @@ export default function UserButtons() {
                     title='Войти'
                     ariaLabel='Войти в аккаунт'
                     classNames={[userStyles['profile-button']]}
-                    imageSettings={{ imageUrl: '/images/profile-icon.svg' }}
+                    image='/images/profile-icon.svg'
                     clickAction={() => setShowAuthModal(true)}
                 />
 
@@ -100,7 +100,7 @@ export default function UserButtons() {
                     <EmptyFilledButton
                         ariaLabel='Открыть корзину'
                         classNames={[userStyles['cart-button']]}
-                        imageSettings={{ imageUrl: '/images/cart-icon.svg' }}
+                        image='/images/cart-icon.svg'
                         clickAction={() => setShowCartModal(true)}
                     />
                 )}

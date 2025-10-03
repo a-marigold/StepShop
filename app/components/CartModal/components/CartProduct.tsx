@@ -57,9 +57,7 @@ export default memo(function CartProduct({
                 <div className={productStyles['order-block']}>
                     <div className={productStyles['quantity-block']}>
                         <EmptyFilledButton
-                            imageSettings={{
-                                imageUrl: '/images/minus-icon.svg',
-                            }}
+                            image='/images/minus-icon.svg'
                             classNames={[productStyles['quantity-button']]}
                             ariaLabel='Убрать один товар'
                             clickAction={() => {
@@ -75,9 +73,7 @@ export default memo(function CartProduct({
                         </span>
 
                         <EmptyFilledButton
-                            imageSettings={{
-                                imageUrl: '/images/plus-icon.svg',
-                            }}
+                            image='/images/plus-icon.svg'
                             classNames={[productStyles['quantity-button']]}
                             ariaLabel='Добавить 1 товар'
                             clickAction={() => {

@@ -31,7 +31,7 @@ export default function AuthContent({
                     <p className={authStyles['description']}>{description}</p>
                 </div>
 
-                <img src={image} width={60} height={60} />
+                <img src={image} width={60} height={60} alt='' />
             </div>
 
             {children}

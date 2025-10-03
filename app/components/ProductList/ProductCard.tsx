@@ -66,8 +66,11 @@ export default function ProductCard({
                             {currencySymbol}
                         </span>
                     </p>
-                    <button className={productStyles['add-button']}>
-                        <img src='/images/plus-icon.svg' />
+                    <button
+                        className={productStyles['add-button']}
+                        aria-label='Открыть товар подробнее'
+                    >
+                        <img src='/images/plus-icon.svg' alt='' />
                         Добавить
                     </button>
                 </div>
