@@ -6,7 +6,7 @@
 }
 
 .modal-wrapper {
-    @include modal-wrapper(560px);
+    @include modal-wrapper(100%, 560px);
 }
 .product-modal {
     display: flex;

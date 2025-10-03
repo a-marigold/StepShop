@@ -26,6 +26,7 @@
 
 @mixin modal-backdrop($z-index) {
     position: fixed;
+
     top: 0;
     left: 0;
 
@@ -37,13 +38,16 @@
     z-index: $z-index;
 }
 
-@mixin modal-wrapper($max-height) {
+@mixin modal-wrapper($height, $max-height) {
     @include flex-x-center;
+
     align-items: flex-start;
+
     gap: 2em;
 
     width: 100%;
-    height: 100%;
+
+    height: $height;
     max-height: $max-height;
 
     margin: 0 2em;
