@@ -3,6 +3,7 @@
 import AuthContent from './components/AuthContent';
 
 import CloseModalCross from '@/UI/CloseModalCross';
+import PrimaryInput from '@UI/PrimaryInput';
 
 import authStyles from './AuthModal.module.scss';
 
@@ -26,7 +27,12 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                         image='/images/phone-icon.svg'
                         buttonTitle='Получить код в SMS'
                     >
-                        <input type='text' />
+                        <PrimaryInput
+                            htmlId='phone-number-input'
+                            isValid={false}
+                            title='Номер телефона'
+                            errorLabelTitle='Введите номер телефона'
+                        />
                     </AuthContent>
                 </div>
 
