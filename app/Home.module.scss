@@ -2,6 +2,7 @@
     background-color: var(--main-bg-color);
 
     width: 100%;
+
     max-width: 1580px;
 
     border-radius: 0 0 30px 30px;
@@ -13,12 +14,15 @@
     margin-bottom: 4em;
 
     display: flex;
+
     gap: 3em;
 
     padding: 0 4em;
+
     box-sizing: border-box;
 
     width: 100%;
+
     height: auto;
 }
 

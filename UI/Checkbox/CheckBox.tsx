@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
 import checkboxStyles from './CheckBox.module.scss';
 

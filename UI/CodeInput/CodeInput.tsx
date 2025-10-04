@@ -7,7 +7,7 @@ import type { KeyboardEvent } from 'react';
 import clsx from 'clsx';
 import inputStyles from './CodeInput.module.scss';
 
-interface PrimaryInputProps {
+interface CodeInputProps {
     ariaLabel: string;
 
     className?: string;
@@ -21,7 +21,7 @@ export default function CodeInput({
     className,
 
     inputQuantity,
-}: PrimaryInputProps) {
+}: CodeInputProps) {
     const [inputs, setInputs] = useState<string[]>(
         Array(inputQuantity).fill('')
     );
