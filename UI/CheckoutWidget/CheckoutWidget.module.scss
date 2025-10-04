@@ -11,9 +11,9 @@
     border-bottom: 1px var(--loading-card-img-bg) solid;
 
     padding: 2em;
+
     box-sizing: border-box;
 }
-
 .title {
     @include text-wo-margin(1.5rem);
 
