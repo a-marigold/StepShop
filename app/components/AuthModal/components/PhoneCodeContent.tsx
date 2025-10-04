@@ -1,4 +1,4 @@
-import PrimaryInput from '@UI/PrimaryInput';
+import CodeInput from '@UI/CodeInput';
 import AccessButton from '@/UI/AccessButton';
 
 import authStyles from '../AuthModal.module.scss';
@@ -17,19 +17,14 @@ export default function PhoneCodeContent() {
                 </div>
 
                 <img
-                    src='/images/phone-icon.svg'
+                    src='/images/phone-code-icon.svg'
                     width={60}
                     height={60}
                     alt=''
                 />
             </div>
 
-            <PrimaryInput
-                htmlId='phone-number-input'
-                isValid={true}
-                errorLabelTitle='Введите номер телефона'
-                placeholder='+X XXX XXX XX-XX'
-            />
+            <CodeInput ariaLabel='Введите код из SMS' inputQuantity={4} />
 
             <AccessButton
                 title='Запросить код — через {SECONDS} сек.'

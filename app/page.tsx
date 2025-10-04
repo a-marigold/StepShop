@@ -1,3 +1,5 @@
+// TODO: Set priority for images on this page
+
 import { Suspense } from 'react';
 
 import type { Metadata } from 'next';

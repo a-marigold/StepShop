@@ -21,8 +21,8 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <PhoneNumberContent />
-                    {/* <PhoneCodeContent /> */}
+                    {/* <PhoneNumberContent /> */}
+                    <PhoneCodeContent />
                 </div>
 
                 <CloseModalCross clickAction={() => setShowModal(false)} />

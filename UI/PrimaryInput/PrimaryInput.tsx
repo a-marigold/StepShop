@@ -15,7 +15,7 @@ interface PrimaryInputProps {
 
     placeholder?: string;
 
-    classNames?: string[];
+    className?: string;
 
     inputAction?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -30,17 +30,12 @@ export default function PrimaryInput({
 
     placeholder,
 
-    classNames,
+    className,
 
     inputAction,
 }: PrimaryInputProps) {
     return (
-        <div
-            className={clsx(
-                inputStyles['primary-input-block'],
-                classNames && [...classNames]
-            )}
-        >
+        <div className={clsx(inputStyles['primary-input-block'], className)}>
             {title && (
                 <label htmlFor={htmlId} className={inputStyles['title-label']}>
                     {title}
