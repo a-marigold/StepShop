@@ -1,3 +1,5 @@
+// TODO Importance5: Add increaseProductPrice and decreaseProductPrice
+
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -77,7 +79,7 @@ const cartSlice = createSlice({
                           }
                         : product
                 )
-                .filter((product) => product.quantity! > 0);
+                .filter((product) => product.quantity && product.quantity > 0);
         },
 
         increaseTotalAmount: (state, action: PayloadAction<number>) => {

@@ -1,3 +1,13 @@
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+
+import {
+    increaseProductQuantity,
+    decreaseProductQuantity,
+    increaseTotalAmount,
+    decreaseTotalAmount,
+} from '@/redux/CartSlice';
+
 import type { ProductType } from '@/types/ProductTypes';
 
 import EmptyFilledButton from '@/UI/EmptyFilledButton';
@@ -18,6 +28,8 @@ export default function CartProduct({
 
     quantity,
 }: CartProductProps) {
+    const dispatch = useDispatch<AppDispatch>();
+
     return (
         <div className={cartStyles['cart-product']}>
             <img src={image} alt='Изображение товара' width={65} height={65} />
@@ -40,10 +52,10 @@ export default function CartProduct({
                         image='/images/minus-icon.svg'
                         classNames={[cartStyles['quantity-button']]}
                         ariaLabel='Убрать один товар'
-                        // clickAction={() => {
-                        //     dispatch(decreaseProductQuantity({ title: title }));
-                        //     dispatch(decreaseTotalAmount(price));
-                        // }}
+                        clickAction={() => {
+                            dispatch(decreaseProductQuantity({ title: title }));
+                            dispatch(decreaseTotalAmount(price));
+                        }}
                     />
 
                     <span className={cartStyles['quantity']}>{quantity}</span>
@@ -52,10 +64,10 @@ export default function CartProduct({
                         image='/images/plus-icon.svg'
                         classNames={[cartStyles['quantity-button']]}
                         ariaLabel='Добавить 1 товар'
-                        // clickAction={() => {
-                        //     dispatch(increaseProductQuantity({ title: title }));
-                        //     dispatch(increaseTotalAmount(price));
-                        // }}
+                        clickAction={() => {
+                            dispatch(increaseProductQuantity({ title: title }));
+                            dispatch(increaseTotalAmount(price));
+                        }}
                     />
                 </div>
             </div>

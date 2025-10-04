@@ -10,6 +10,7 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
+
 import storage from 'redux-persist/lib/storage';
 
 import filtrationReducer from '../app/components/Filtration/redux';
@@ -28,11 +29,13 @@ export const store = configureStore({
         filtration: filtrationReducer,
         cart: persistedCartReducer,
     },
+
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [
                     FLUSH,
+
                     REGISTER,
                     PAUSE,
                     REHYDRATE,

@@ -33,7 +33,10 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
                     title={product.title}
                     image={'/images/white-t-shirt.webp'}
                     description='description 1 lorem ipsum dolor'
-                    price={product.price}
+                    // TODO: Change the string below on
+                    // price={prodict.price}
+                    // TEMPORARY SITUATION:
+                    price={+600}
                     currencySymbol='₸'
                 />
             ))}
