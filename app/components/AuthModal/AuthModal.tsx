@@ -1,3 +1,5 @@
+// TODO: Add authorization logic
+
 'use client';
 
 import PhoneNumberContent from './components/PhoneNumberContent';
@@ -10,6 +12,7 @@ import authStyles from './AuthModal.module.scss';
 interface AuthModalProps {
     setShowModal: (showModal: boolean) => void;
 }
+
 export default function AuthModal({ setShowModal }: AuthModalProps) {
     return (
         <div
@@ -21,8 +24,8 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    {/* <PhoneNumberContent /> */}
-                    <PhoneCodeContent />
+                    <PhoneNumberContent />
+                    {/* <PhoneCodeContent /> */}
                 </div>
 
                 <CloseModalCross clickAction={() => setShowModal(false)} />
