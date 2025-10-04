@@ -1,6 +1,6 @@
 'use client';
 
-// TODO: Redirect on payment page
+// TODO: Redirect on checkout page
 // import Link from 'next/link';
 
 import { useSelector } from 'react-redux';
