@@ -1,0 +1,21 @@
+@use '@styles/mixins.scss' as *;
+
+.checkout-widget {
+    @include flex-column;
+
+    background-color: var(--main-bg-color);
+
+    border-radius: 32px;
+}
+.title-block {
+    border-bottom: 1px var(--loading-card-img-bg) solid;
+
+    padding: 2em;
+    box-sizing: border-box;
+}
+
+.title {
+    @include text-wo-margin(1.5rem);
+
+    font-weight: 700;
+}
