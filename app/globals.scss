@@ -68,3 +68,9 @@ button:focus-visible {
 
     --outline-color: #0c8ce9;
 }
+
+@media (max-width: 1024px) {
+    body {
+        padding: 0;
+    }
+}

@@ -112,6 +112,12 @@
     @include modal-backdrop(5);
 }
 
+@media (max-width: 1024px) {
+    .header {
+        border-radius: 0;
+    }
+}
+
 @media (max-width: 920px) {
     .left-box {
         gap: 0.5em;
