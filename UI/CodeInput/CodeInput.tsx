@@ -63,6 +63,7 @@ export default function CodeInput({
         >
             {inputs.map((_, index) => (
                 <input
+                    key={index}
                     type='text'
                     className={inputStyles['code-input']}
                     value={inputs[index]}
