@@ -7,6 +7,7 @@ import clsx from 'clsx';
 
 interface CheckoutWidgetProps {
     title: string;
+    subTitle?: string;
 
     className?: string;
 
@@ -15,6 +16,7 @@ interface CheckoutWidgetProps {
 
 export default function CheckoutWidget({
     title,
+    subTitle,
 
     className,
 
@@ -24,6 +26,9 @@ export default function CheckoutWidget({
         <article className={clsx(widgetStyles['checkout-widget'], className)}>
             <div className={widgetStyles['title-block']}>
                 <h2 className={widgetStyles['title']}>{title}</h2>
+                {subTitle && (
+                    <p className={widgetStyles['subtitle']}>{subTitle}</p>
+                )}
             </div>
 
             {children}

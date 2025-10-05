@@ -1,5 +1,6 @@
 import CartWidget from './components/CartWidget';
 import UserFormWidget from './components/UserFormWidget';
+import TotalAmountWidget from './components/TotalAmountWidget';
 
 import checkoutStyles from './Checkout.module.scss';
 
@@ -29,7 +30,7 @@ export default function Checkout() {
                 </div>
 
                 <div className={checkoutStyles['order-box']}>
-                    <CartWidget />
+                    <TotalAmountWidget />
                 </div>
             </div>
         </main>

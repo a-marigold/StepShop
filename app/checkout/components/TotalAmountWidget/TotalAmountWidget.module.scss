@@ -1,13 +1,48 @@
 @use '@styles/mixins.scss' as *;
 
-.user-form {
-    @include flex-center;
-    flex-wrap: wrap;
-    gap: 1.5em;
-
-    padding: 2em;
+.total-amount-widget h2 {
+    font-weight: 400;
 }
 
-.user-input {
-    max-width: 325px;
+.order-content {
+    @include flex-column;
+}
+
+.amount-block {
+    @include flex-column;
+    gap: 1em;
+
+    width: 100%;
+
+    border-bottom: 1px var(--loading-card-img-bg) solid;
+
+    padding: 2em;
+    box-sizing: border-box;
+}
+.price-block {
+    @include flex-center;
+    gap: 0.5em;
+}
+.horizontal-line {
+    flex: 1;
+    min-height: 10px;
+
+    border-bottom: 1px var(--secondary-border-color) dashed;
+}
+.price-title {
+    @include flex-y-center;
+    gap: 0.5em;
+
+    @include text-wo-margin(1.125rem);
+}
+.price {
+    @include text-wo-margin(1.125rem);
+    font-weight: 700;
+}
+
+.payment-block {
+    @include flex-column;
+
+    padding: 2em;
+    box-sizing: border-box;
 }
