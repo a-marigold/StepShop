@@ -1,7 +1,8 @@
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '@/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState, AppDispatch } from '@/redux/store';
 
 import {
+    deleteProduct,
     increaseProductQuantity,
     decreaseProductQuantity,
     increaseTotalAmount,
@@ -28,7 +29,16 @@ export default function CartProduct({
 
     quantity,
 }: CartProductProps) {
+    const cartProducts = useSelector(
+        (state: RootState) => state.cart.cartProducts
+    );
     const dispatch = useDispatch<AppDispatch>();
+
+    const lastProductCheck = !!(
+        cartProducts.length === 1 &&
+        quantity &&
+        quantity === 1
+    );
 
     return (
         <div className={cartStyles['cart-product']}>
@@ -42,19 +52,31 @@ export default function CartProduct({
                         <p className={cartStyles['options']}>{options}</p>
                     )}
                 </div>
-
                 <p className={cartStyles['price']}>
                     {price} {currencySymbol}
                 </p>
-
                 <div className={cartStyles['quantity-block']}>
                     <EmptyFilledButton
-                        image='/images/minus-icon.svg'
-                        classNames={[cartStyles['quantity-button']]}
+                        image={
+                            lastProductCheck
+                                ? '/images/disabled-minus-icon.svg'
+                                : '/images/minus-icon.svg'
+                        }
+                        className={cartStyles['quantity-button']}
                         ariaLabel='Убрать один товар'
+                        isDisabled={lastProductCheck}
                         clickAction={() => {
-                            dispatch(decreaseProductQuantity({ title: title }));
                             dispatch(decreaseTotalAmount(price));
+
+                            if (quantity && quantity > 1) {
+                                dispatch(
+                                    decreaseProductQuantity({
+                                        title: title,
+                                    })
+                                );
+                            } else {
+                                dispatch(deleteProduct({ title: title }));
+                            }
                         }}
                     />
 
@@ -62,8 +84,8 @@ export default function CartProduct({
 
                     <EmptyFilledButton
                         image='/images/plus-icon.svg'
-                        classNames={[cartStyles['quantity-button']]}
-                        ariaLabel='Добавить 1 товар'
+                        className={cartStyles['quantity-button']}
+                        ariaLabel='Добавить один товар'
                         clickAction={() => {
                             dispatch(increaseProductQuantity({ title: title }));
                             dispatch(increaseTotalAmount(price));

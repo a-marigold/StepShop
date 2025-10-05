@@ -28,6 +28,7 @@
     @include flex-column;
     gap: 0.25em;
 
+    flex: 1;
     max-width: 240px;
 }
 .title {

@@ -5,6 +5,7 @@ import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 import {
+    deleteProduct,
     increaseProductQuantity,
     decreaseProductQuantity,
     increaseTotalAmount,
@@ -58,13 +59,20 @@ export default memo(function CartProduct({
                     <div className={productStyles['quantity-block']}>
                         <EmptyFilledButton
                             image='/images/minus-icon.svg'
-                            classNames={[productStyles['quantity-button']]}
+                            className={productStyles['quantity-button']}
                             ariaLabel='Убрать один товар'
                             clickAction={() => {
-                                dispatch(
-                                    decreaseProductQuantity({ title: title })
-                                );
                                 dispatch(decreaseTotalAmount(price));
+
+                                if (quantity && quantity > 1) {
+                                    dispatch(
+                                        decreaseProductQuantity({
+                                            title: title,
+                                        })
+                                    );
+                                } else {
+                                    dispatch(deleteProduct({ title: title }));
+                                }
                             }}
                         />
 
@@ -74,7 +82,7 @@ export default memo(function CartProduct({
 
                         <EmptyFilledButton
                             image='/images/plus-icon.svg'
-                            classNames={[productStyles['quantity-button']]}
+                            className={productStyles['quantity-button']}
                             ariaLabel='Добавить 1 товар'
                             clickAction={() => {
                                 dispatch(

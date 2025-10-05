@@ -28,5 +28,9 @@
 
     &:disabled {
         border: 1px var(--disabled-color) solid;
+        cursor: default;
+    }
+    & > img {
+        pointer-events: none;
     }
 }

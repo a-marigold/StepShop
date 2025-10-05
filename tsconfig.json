@@ -35,7 +35,8 @@
         "**/*.tsx",
         ".next/types/**/*.ts",
         "app/components/CartModal/EmptyCarttsx",
-        "eslint.config.сjs"
+        "eslint.config.сjs",
+        "app/checkout/components/UserForm/.s"
     ],
     "exclude": ["node_modules"]
 }

@@ -22,7 +22,16 @@ export default function Checkout() {
             <h1 className={checkoutStyles['title']}>Оформление заказа</h1>
 
             <div className={checkoutStyles['widgets-box']}>
-                <Cart />
+                <div className={checkoutStyles['user-data-box']}>
+                    <Cart />
+                    <Cart />
+                    <Cart />
+                    <Cart />
+                </div>
+
+                <div className={checkoutStyles['order-box']}>
+                    <Cart />
+                </div>
             </div>
         </main>
     );

@@ -12,10 +12,24 @@
     box-sizing: border-box;
 
     background-color: var(--modal-bg-color);
+
+    max-width: 1580px;
 }
 
 .title {
     @include text-wo-margin(2.25rem);
 
     font-weight: 800;
+}
+
+.widgets-box {
+    display: flex;
+    gap: 3em;
+}
+.user-data-box {
+    @include flex-column;
+    gap: 3em;
+
+    flex: 1;
+    max-width: 760px;
 }

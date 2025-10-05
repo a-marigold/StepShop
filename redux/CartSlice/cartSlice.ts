@@ -43,9 +43,9 @@ const cartSlice = createSlice({
                 );
             }
         },
-        deleteProduct: (state, action: PayloadAction<string>) => {
+        deleteProduct: (state, action: PayloadAction<{ title: string }>) => {
             state.cartProducts = state.cartProducts.filter(
-                (product) => product.title !== action.payload
+                (product) => product.title !== action.payload.title
             );
         },
 
@@ -68,18 +68,16 @@ const cartSlice = createSlice({
             state,
             action: PayloadAction<{ title: string }>
         ) => {
-            state.cartProducts = state.cartProducts
-                .map((product) =>
-                    product.title === action.payload.title
-                        ? {
-                              ...product,
-                              quantity: product.quantity
-                                  ? product.quantity - 1
-                                  : product.quantity,
-                          }
-                        : product
-                )
-                .filter((product) => product.quantity && product.quantity > 0);
+            state.cartProducts = state.cartProducts.map((product) =>
+                product.title === action.payload.title
+                    ? {
+                          ...product,
+                          quantity: product.quantity
+                              ? product.quantity - 1
+                              : product.quantity,
+                      }
+                    : product
+            );
         },
 
         increaseTotalAmount: (state, action: PayloadAction<number>) => {
