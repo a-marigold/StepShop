@@ -1,3 +1,7 @@
+// TODO: Redirect on checkout page
+// import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
@@ -18,6 +22,8 @@ export default function Cart({ setShowModal }: CartProps) {
     const totalAmount = useSelector(
         (state: RootState) => state.cart.totalAmount
     );
+
+    const router = useRouter();
 
     return (
         <>
@@ -70,7 +76,6 @@ export default function Cart({ setShowModal }: CartProps) {
                         {totalAmount} ₸
                     </span>
                 </div>
-
                 <div className={cartStyles['price-block']}>
                     <span className={cartStyles['price-text']}>Налог 5%:</span>
                     <div className={cartStyles['dashed-divider']} />
@@ -84,6 +89,10 @@ export default function Cart({ setShowModal }: CartProps) {
                     image='/images/white-arrow-left.svg'
                     ariaLabel='Оформить заказ'
                     className={cartStyles['access-button']}
+                    clickAction={() => {
+                        router.push('/checkout');
+                        setShowModal(false);
+                    }}
                 />
             </div>
         </>

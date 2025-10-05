@@ -1,8 +1,5 @@
 'use client';
 
-// TODO: Redirect on checkout page
-// import Link from 'next/link';
-
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
