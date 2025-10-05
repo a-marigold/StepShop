@@ -49,7 +49,7 @@ export default function CartProduct({
                     )}
                 </div>
                 <p className={cartStyles['price']}>
-                    {price} {currencySymbol}
+                    {quantity ? price * quantity : price} {currencySymbol}
                 </p>
                 <div className={cartStyles['quantity-block']}>
                     <EmptyFilledButton
