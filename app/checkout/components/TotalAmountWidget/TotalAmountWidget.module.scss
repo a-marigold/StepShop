@@ -1,0 +1,13 @@
+@use '@styles/mixins.scss' as *;
+
+.user-form {
+    @include flex-center;
+    flex-wrap: wrap;
+    gap: 1.5em;
+
+    padding: 2em;
+}
+
+.user-input {
+    max-width: 325px;
+}

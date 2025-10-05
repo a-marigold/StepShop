@@ -8,9 +8,9 @@ import CartProduct from './CartProduct';
 
 import CheckoutWidget from '@/UI/CheckoutWidget';
 
-import cartStyles from './Cart.module.scss';
+import cartStyles from './CartWidget.module.scss';
 
-export default function Cart() {
+export default function CartWidget() {
     const cartProducts = useSelector(
         (state: RootState) => state.cart.cartProducts
     );

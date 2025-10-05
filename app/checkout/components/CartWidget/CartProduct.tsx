@@ -13,7 +13,7 @@ import type { ProductType } from '@/types/ProductTypes';
 
 import EmptyFilledButton from '@/UI/EmptyFilledButton';
 
-import cartStyles from './Cart.module.scss';
+import cartStyles from './CartWidget.module.scss';
 
 interface CartProductProps extends Omit<ProductType, 'description'> {
     options: string;

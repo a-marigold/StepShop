@@ -1,13 +1,12 @@
 'use client';
 
-import { useSelector } from 'react-redux';
-
-import type { RootState } from '@/redux/store';
+// import { useSelector } from 'react-redux';
+// import type { RootState } from '@/redux/store';
 
 import CheckoutWidget from '@/UI/CheckoutWidget';
 import PrimaryInput from '@/UI/PrimaryInput';
 
-import formStyles from './UserForm.module.scss';
+import formStyles from './UserFormWidget.module.scss';
 
 const userInputs = [
     {
@@ -37,7 +36,7 @@ const userInputs = [
     },
 ];
 
-export default function UserForm() {
+export default function UserFormWidget() {
     return (
         <CheckoutWidget title='2. Персональная информация'>
             <div className={formStyles['user-form']}>
