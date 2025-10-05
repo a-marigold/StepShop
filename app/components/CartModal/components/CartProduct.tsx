@@ -8,6 +8,8 @@ import {
     deleteProduct,
     increaseProductQuantity,
     decreaseProductQuantity,
+    increaseProductPrice,
+    decreaseProductPrice,
     increaseTotalAmount,
     decreaseTotalAmount,
 } from '@/redux/CartSlice';

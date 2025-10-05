@@ -120,6 +120,8 @@ export const {
     deleteProduct,
     increaseProductQuantity,
     decreaseProductQuantity,
+    increaseProductPrice,
+    decreaseProductPrice,
     increaseTotalAmount,
     decreaseTotalAmount,
 } = cartSlice.actions;
