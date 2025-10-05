@@ -1,13 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '@/redux/store';
-
 import {
-    deleteProduct,
-    increaseProductQuantity,
-    decreaseProductQuantity,
-    increaseTotalAmount,
-    decreaseTotalAmount,
-} from '@/redux/CartSlice';
+    handleDecreaseProductQuantity,
+    handleIncreaseProductQuantity,
+} from '@/utils/cartGlobalState';
 
 import type { ProductType } from '@/types/ProductTypes';
 
@@ -65,19 +61,14 @@ export default function CartProduct({
                         className={cartStyles['quantity-button']}
                         ariaLabel='Убрать один товар'
                         isDisabled={lastProductCheck}
-                        clickAction={() => {
-                            dispatch(decreaseTotalAmount(price));
-
-                            if (quantity && quantity > 1) {
-                                dispatch(
-                                    decreaseProductQuantity({
-                                        title: title,
-                                    })
-                                );
-                            } else {
-                                dispatch(deleteProduct({ title: title }));
-                            }
-                        }}
+                        clickAction={() =>
+                            handleDecreaseProductQuantity({
+                                title: title,
+                                price: price,
+                                quantity: quantity,
+                                dispatch: dispatch,
+                            })
+                        }
                     />
 
                     <span className={cartStyles['quantity']}>{quantity}</span>
@@ -86,10 +77,13 @@ export default function CartProduct({
                         image='/images/plus-icon.svg'
                         className={cartStyles['quantity-button']}
                         ariaLabel='Добавить один товар'
-                        clickAction={() => {
-                            dispatch(increaseProductQuantity({ title: title }));
-                            dispatch(increaseTotalAmount(price));
-                        }}
+                        clickAction={() =>
+                            handleIncreaseProductQuantity({
+                                title: title,
+                                price: price,
+                                dispatch: dispatch,
+                            })
+                        }
                     />
                 </div>
             </div>

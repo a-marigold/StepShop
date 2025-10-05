@@ -5,14 +5,9 @@ import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 import {
-    deleteProduct,
-    increaseProductQuantity,
-    decreaseProductQuantity,
-    increaseProductPrice,
-    decreaseProductPrice,
-    increaseTotalAmount,
-    decreaseTotalAmount,
-} from '@/redux/CartSlice';
+    handleDecreaseProductQuantity,
+    handleIncreaseProductQuantity,
+} from '@/utils/cartGlobalState';
 
 import Image from 'next/image';
 
@@ -63,19 +58,14 @@ export default memo(function CartProduct({
                             image='/images/minus-icon.svg'
                             className={productStyles['quantity-button']}
                             ariaLabel='Убрать один товар'
-                            clickAction={() => {
-                                dispatch(decreaseTotalAmount(price));
-
-                                if (quantity && quantity > 1) {
-                                    dispatch(
-                                        decreaseProductQuantity({
-                                            title: title,
-                                        })
-                                    );
-                                } else {
-                                    dispatch(deleteProduct({ title: title }));
-                                }
-                            }}
+                            clickAction={() =>
+                                handleDecreaseProductQuantity({
+                                    title: title,
+                                    price: price,
+                                    quantity: quantity,
+                                    dispatch: dispatch,
+                                })
+                            }
                         />
 
                         <span className={productStyles['quantity']}>
@@ -86,16 +76,19 @@ export default memo(function CartProduct({
                             image='/images/plus-icon.svg'
                             className={productStyles['quantity-button']}
                             ariaLabel='Добавить 1 товар'
-                            clickAction={() => {
-                                dispatch(
-                                    increaseProductQuantity({ title: title })
-                                );
-                                dispatch(increaseTotalAmount(price));
-                            }}
+                            clickAction={() =>
+                                handleIncreaseProductQuantity({
+                                    title: title,
+                                    price: price,
+                                    dispatch: dispatch,
+                                })
+                            }
                         />
                     </div>
 
-                    <span className={productStyles['price']}>{price} ₸</span>
+                    <span className={productStyles['price']}>
+                        {quantity ? price * quantity : price} ₸
+                    </span>
                 </div>
             </div>
         </div>
