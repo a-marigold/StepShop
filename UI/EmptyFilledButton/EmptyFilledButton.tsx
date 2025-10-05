@@ -8,7 +8,9 @@ interface EmptyFilledButtonProps {
     image: string;
 
     ariaLabel: string;
-    classNames?: string[];
+    className?: string;
+
+    isDisabled?: boolean;
 
     clickAction?: () => void;
 }
@@ -18,18 +20,18 @@ export default function EmptyFilledButton({
     image,
 
     clickAction,
-    classNames,
+    className,
+
+    isDisabled,
 
     ariaLabel,
 }: EmptyFilledButtonProps) {
     return (
         <button
-            className={clsx(
-                buttonStyles['empty-filled-button'],
-                classNames && [...classNames]
-            )}
+            className={clsx(buttonStyles['empty-filled-button'], className)}
             onClick={clickAction}
             aria-label={ariaLabel}
+            disabled={isDisabled}
         >
             {image && <img src={image} alt='' />}
 

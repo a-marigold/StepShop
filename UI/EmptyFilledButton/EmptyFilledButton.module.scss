@@ -25,4 +25,8 @@
     &:hover {
         background-color: var(--empty-button-hover-bg);
     }
+
+    &:disabled {
+        border: 1px var(--disabled-color) solid;
+    }
 }
