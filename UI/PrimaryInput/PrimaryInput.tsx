@@ -7,6 +7,7 @@ import inputStyles from './PrimaryInput.module.scss';
 
 interface PrimaryInputProps {
     htmlId: string;
+    inputType?: string;
 
     isValid: boolean;
 
@@ -22,6 +23,7 @@ interface PrimaryInputProps {
 
 export default function PrimaryInput({
     htmlId,
+    inputType = 'text',
 
     isValid,
 
@@ -44,7 +46,7 @@ export default function PrimaryInput({
 
             <input
                 id={htmlId}
-                type='text'
+                type={inputType}
                 className={inputStyles['primary-input']}
                 onChange={inputAction}
                 aria-invalid={!isValid}

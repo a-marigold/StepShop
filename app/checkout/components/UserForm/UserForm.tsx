@@ -9,11 +9,37 @@ import PrimaryInput from '@/UI/PrimaryInput';
 
 import formStyles from './UserForm.module.scss';
 
-const userInputs = [{ title: '', errorLabelTitle: '', htmlId: '' }];
+const userInputs = [
+    {
+        title: 'Имя',
+        errorLabelTitle: 'Введите ваше имя',
+        htmlId: 'name-input',
+        inputType: 'text',
+    },
+    {
+        title: 'Фамилия',
+        errorLabelTitle: 'Введите вашу фамилию',
+        htmlId: 'surname-input',
+        inputType: 'text',
+    },
 
-export default function Cart() {
+    {
+        title: 'E-Mail',
+        errorLabelTitle: 'Введите ваш E-Mail',
+        htmlId: 'e-mail-input',
+        inputType: 'email',
+    },
+    {
+        title: 'Телефон',
+        errorLabelTitle: 'Введите ваш номер телефона',
+        htmlId: 'personal-phone-number-input',
+        inputType: 'text',
+    },
+];
+
+export default function UserForm() {
     return (
-        <CheckoutWidget title='1. Корзина'>
+        <CheckoutWidget title='2. Персональная информация'>
             <div className={formStyles['user-form']}>
                 {userInputs.map((userInput) => (
                     <PrimaryInput
@@ -21,6 +47,7 @@ export default function Cart() {
                         htmlId={userInput.htmlId}
                         errorLabelTitle={userInput.errorLabelTitle}
                         isValid={true}
+                        className={formStyles['user-input']}
                     />
                 ))}
             </div>

@@ -1,4 +1,5 @@
 import Cart from './components/Cart';
+import UserForm from './components/UserForm';
 
 import checkoutStyles from './Checkout.module.scss';
 
@@ -24,9 +25,7 @@ export default function Checkout() {
             <div className={checkoutStyles['widgets-box']}>
                 <div className={checkoutStyles['user-data-box']}>
                     <Cart />
-                    <Cart />
-                    <Cart />
-                    <Cart />
+                    <UserForm />
                 </div>
 
                 <div className={checkoutStyles['order-box']}>

@@ -1,60 +1,13 @@
 @use '@styles/mixins.scss' as *;
 
-.products-box {
-    @include flex-column;
+.user-form {
+    @include flex-center;
+    flex-wrap: wrap;
+    gap: 1.5em;
 
     padding: 2em;
-    box-sizing: border-box;
 }
 
-.cart-product {
-    @include flex-y-center;
-    gap: 1.25em;
-
-    padding: 1.25em;
-    box-sizing: border-box;
-
-    border-bottom: 1px var(--loading-card-img-bg) solid;
-}
-
-.order-block {
-    @include flex-y-center;
-    justify-content: space-between;
-
-    flex: 1;
-}
-
-.title-block {
-    @include flex-column;
-    gap: 0.25em;
-
-    max-width: 240px;
-}
-.title {
-    @include text-wo-margin(1rem);
-    font-weight: 700;
-}
-.options {
-    @include text-wo-margin(0.95rem);
-    color: var(--secondary-font-color);
-}
-
-.price {
-    font-weight: 700;
-}
-
-.quantity-block {
-    @include flex-y-center;
-}
-.quantity {
-    width: 30px;
-
-    font-weight: 700;
-    text-align: center;
-}
-.quantity-button {
-    width: 30px;
-    height: 30px;
-
-    border-radius: 10px;
+.user-input {
+    max-width: 325px;
 }
