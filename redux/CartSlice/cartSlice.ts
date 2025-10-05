@@ -80,6 +80,32 @@ const cartSlice = createSlice({
             );
         },
 
+        increaseProductPrice: (
+            state,
+            action: PayloadAction<{ title: string; price: number }>
+        ) => {
+            state.cartProducts = state.cartProducts.map((product) =>
+                product.title === action.payload.title
+                    ? {
+                          ...product,
+                          price: product.price + action.payload.price,
+                      }
+                    : product
+            );
+        },
+        decreaseProductPrice: (
+            state,
+            action: PayloadAction<{ title: string; price: number }>
+        ) => {
+            state.cartProducts = state.cartProducts.map((product) =>
+                product.title === action.payload.title
+                    ? {
+                          ...product,
+                          price: product.price - action.payload.price,
+                      }
+                    : product
+            );
+        },
         increaseTotalAmount: (state, action: PayloadAction<number>) => {
             state.totalAmount += action.payload;
         },

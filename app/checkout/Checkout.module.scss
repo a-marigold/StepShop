@@ -8,7 +8,7 @@
 
     border-radius: 0 0 32px 32px;
 
-    padding: 3em 6em 5em;
+    padding: 3em 4em 5em;
     box-sizing: border-box;
 
     background-color: var(--modal-bg-color);
@@ -30,8 +30,7 @@
     @include flex-column;
     gap: 3em;
 
-    flex: 1;
-    max-width: 760px;
+    width: 100%;
 }
 .order-box {
     width: 100%;
