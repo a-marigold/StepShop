@@ -3,8 +3,6 @@ import {
     deleteProduct,
     increaseProductQuantity,
     decreaseProductQuantity,
-    increaseProductPrice,
-    decreaseProductPrice,
     increaseTotalAmount,
     decreaseTotalAmount,
 } from '@/redux/CartSlice';
@@ -38,8 +36,6 @@ export function handleDecreaseProductQuantity({
     dispatch,
 }: DecreaseQuantityProps) {
     dispatch(decreaseTotalAmount(price));
-    dispatch(decreaseProductPrice({ title: title, price: price }));
-
     if (quantity && quantity > 1) {
         dispatch(
             decreaseProductQuantity({
@@ -75,6 +71,5 @@ export function handleIncreaseProductQuantity({
     dispatch,
 }: IncreaseQuantityProps) {
     dispatch(increaseProductQuantity({ title: title }));
-    dispatch(increaseProductPrice({ title: title, price: price }));
     dispatch(increaseTotalAmount(price));
 }
