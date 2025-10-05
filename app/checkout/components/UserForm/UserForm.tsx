@@ -43,6 +43,7 @@ export default function UserForm() {
             <div className={formStyles['user-form']}>
                 {userInputs.map((userInput) => (
                     <PrimaryInput
+                        key={userInput.title}
                         title={userInput.title}
                         htmlId={userInput.htmlId}
                         errorLabelTitle={userInput.errorLabelTitle}
