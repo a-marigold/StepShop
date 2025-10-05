@@ -12,7 +12,7 @@ interface EmptyFilledButtonProps {
 
     isDisabled?: boolean;
 
-    clickAction?: (args?: any) => void;
+    clickAction?: () => void;
 }
 
 export default function EmptyFilledButton({
