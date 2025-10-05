@@ -21,7 +21,7 @@
     font-size: 1rem;
     color: var(--secondary-font-color);
 
-    &:focus {
+    &:not(:placeholder-shown) {
         color: var(--font-color);
     }
 

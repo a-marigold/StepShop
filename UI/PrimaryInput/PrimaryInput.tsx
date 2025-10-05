@@ -50,7 +50,7 @@ export default function PrimaryInput({
                 className={inputStyles['primary-input']}
                 onChange={inputAction}
                 aria-invalid={!isValid}
-                placeholder={placeholder}
+                placeholder={placeholder ?? ' '}
             />
 
             {!isValid && errorLabelTitle && (
