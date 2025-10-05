@@ -8,10 +8,6 @@ export default function Navigation() {
         <>
             <div className={navStyles['navigaiton-box']}>
                 <h1 className={navStyles['title']}>Все пиццы</h1>
-                {/* <div className={navStyles['navigation-group']}>
-                    <Categories />
-                    <SortButton />
-                </div> */}
             </div>
             <div className={navStyles['navigation-group']}>
                 <Categories />
