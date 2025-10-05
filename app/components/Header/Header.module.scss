@@ -69,6 +69,7 @@
         background-color: var(--foreground-color);
 
         flex: 1;
+        min-width: 210px;
         height: 50px;
 
         border-radius: 16px;
@@ -124,7 +125,7 @@
     }
     .input-block {
         & > input {
-            width: 145px;
+            width: 160px;
         }
     }
     .title,
