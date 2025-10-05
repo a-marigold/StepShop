@@ -84,6 +84,7 @@ export default function ProductCard({
                         image={image}
                         description={description}
                         price={price}
+                        quantity={1}
                         currencySymbol={currencySymbol}
                         setShowModal={setShowModal}
                     />,

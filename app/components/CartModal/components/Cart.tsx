@@ -1,5 +1,3 @@
-// TODO: Redirect on checkout page
-// import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useSelector } from 'react-redux';

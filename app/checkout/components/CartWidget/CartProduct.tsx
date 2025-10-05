@@ -30,11 +30,7 @@ export default function CartProduct({
     );
     const dispatch = useDispatch<AppDispatch>();
 
-    const lastProductCheck = !!(
-        cartProducts.length === 1 &&
-        quantity &&
-        quantity === 1
-    );
+    const lastProductCheck = !!(cartProducts.length === 1 && quantity === 1);
 
     return (
         <div className={cartStyles['cart-product']}>
@@ -49,7 +45,7 @@ export default function CartProduct({
                     )}
                 </div>
                 <p className={cartStyles['price']}>
-                    {quantity ? price * quantity : price} {currencySymbol}
+                    {price * quantity} {currencySymbol}
                 </p>
                 <div className={cartStyles['quantity-block']}>
                     <EmptyFilledButton

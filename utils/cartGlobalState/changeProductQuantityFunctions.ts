@@ -36,7 +36,7 @@ export function handleDecreaseProductQuantity({
     dispatch,
 }: DecreaseQuantityProps) {
     dispatch(decreaseTotalAmount(price));
-    if (quantity && quantity > 1) {
+    if (quantity > 1) {
         dispatch(
             decreaseProductQuantity({
                 title: title,

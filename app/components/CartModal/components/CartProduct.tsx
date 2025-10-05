@@ -26,7 +26,7 @@ interface CartProductProps {
     // options: string;
 
     price: number;
-    quantity?: number;
+    quantity: number;
 }
 
 export default memo(function CartProduct({
@@ -87,7 +87,7 @@ export default memo(function CartProduct({
                     </div>
 
                     <span className={productStyles['price']}>
-                        {quantity ? price * quantity : price} ₸
+                        {price * quantity} ₸
                     </span>
                 </div>
             </div>

@@ -35,9 +35,7 @@ const cartSlice = createSlice({
                     product.title === action.payload.title
                         ? {
                               ...product,
-                              quantity: product.quantity
-                                  ? product.quantity + 1
-                                  : product.quantity,
+                              quantity: product.quantity + 1,
                           }
                         : product
                 );
@@ -57,9 +55,7 @@ const cartSlice = createSlice({
                 product.title === action.payload.title
                     ? {
                           ...product,
-                          quantity: product.quantity
-                              ? product.quantity + 1
-                              : product.quantity,
+                          quantity: product.quantity + 1,
                       }
                     : product
             );
@@ -72,9 +68,7 @@ const cartSlice = createSlice({
                 product.title === action.payload.title
                     ? {
                           ...product,
-                          quantity: product.quantity
-                              ? product.quantity - 1
-                              : product.quantity,
+                          quantity: product.quantity - 1,
                       }
                     : product
             );
