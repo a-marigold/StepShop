@@ -1,19 +1,18 @@
-// TODO: Set priority for images on this page
+// TODO: Set priority and width={} height={} for images on this page
 
 import { Suspense } from 'react';
 
 import type { Metadata } from 'next';
 
-import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/Navigation';
 
 import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
 import Filtration from './components/Filtration';
 import ProductList from './components/ProductList';
-import { Loading } from './components/ProductList/Loading';
+import { Loading } from './components/ProductList';
 
 import homeStyles from './Home.module.scss';
-
 export const metadata: Metadata = {
     title: 'Каталог товаров | StepShop',
     description:

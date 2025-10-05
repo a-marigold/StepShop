@@ -11,7 +11,12 @@ export default function Header() {
             <div className={headerStyles['left-box']}>
                 <div className={headerStyles['title-block']}>
                     <Link href='/'>
-                        <img src='/images/pizza-icon.svg' alt='Logo' />
+                        <img
+                            src='/images/pizza-icon.svg'
+                            alt='Logo'
+                            width={35}
+                            height={35}
+                        />
                     </Link>
 
                     <div className={headerStyles['title-text']}>
