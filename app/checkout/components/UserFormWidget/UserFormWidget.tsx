@@ -8,7 +8,7 @@ import PrimaryInput from '@/UI/PrimaryInput';
 
 import formStyles from './UserFormWidget.module.scss';
 
-// TODO: Add authorization global state
+// TODO (2): Add authorization global state
 const userInputs = [
     {
         title: 'Имя',

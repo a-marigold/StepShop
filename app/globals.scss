@@ -35,6 +35,7 @@ button:focus-visible {
     outline-width: 2px;
 }
 
+// ! OLD COLORS FROM FIGMA
 :root {
     --background-color: #ffbf9b;
     --font-color: #000000;
@@ -70,6 +71,11 @@ button:focus-visible {
 
     --disabled-color: #cecece;
 }
+//!
+
+//* New production colors
+// ...
+//*
 
 @media (max-width: 1024px) {
     body {

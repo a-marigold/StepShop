@@ -1,3 +1,5 @@
+// TODO (5): Add priority or fallback image for images on this page
+
 import { Suspense } from 'react';
 
 import type { Metadata } from 'next';

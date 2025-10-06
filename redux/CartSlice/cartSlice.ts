@@ -1,5 +1,3 @@
-// TODO Importance5: Add increaseProductPrice and decreaseProductPrice
-
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -15,7 +13,6 @@ interface CartSliceState {
 const initialState: CartSliceState = {
     cartProducts: [],
 
-    // TODO: Change totalAmount logic on simple count all of products prices in components where totalAmount needed
     totalAmount: 0,
 };
 
