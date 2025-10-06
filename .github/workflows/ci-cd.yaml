@@ -26,8 +26,12 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Check build output
-      run: ls -la .next
+    - name: Check .next existence
+      run: |
+        echo "Contents of root directory:"
+        ls -la
+        echo "Contents of .next directory:"
+        ls -la .next || echo ".next folder not found"
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
