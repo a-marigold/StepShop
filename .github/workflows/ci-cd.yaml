@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: build
-        path: .next/
+        path: .next/**
 
   cd:
     name: CD
@@ -46,14 +46,14 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: build
-        path: .next/
+        path: .next
 
 
     - name:  Install Netlify CLI
       run: npm install -g netlify-cli
 
     - name: Deploy to Netlify
-      run: netlify deploy --dir=.next/ --prod
+      run: netlify deploy --dir=.next --prod
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WEBSITE_ID }}
