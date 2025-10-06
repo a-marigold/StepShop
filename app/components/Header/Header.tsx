@@ -12,8 +12,8 @@ export default function Header() {
                 <div className={headerStyles['title-block']}>
                     <Link href='/'>
                         <img
-                            src='/images/pizza-icon.svg'
-                            alt='Logo'
+                            src='/images/website-icon.png'
+                            alt='Логотип Step Shop'
                             width={35}
                             height={35}
                         />
@@ -21,11 +21,11 @@ export default function Header() {
 
                     <div className={headerStyles['title-text']}>
                         <Link href='/' className={headerStyles['title']}>
-                            NEXT PIZZA
+                            STEP SHOP
                         </Link>
 
                         <p className={headerStyles['title-slogan']}>
-                            вкусней уже некуда
+                            товары на любой вкус
                         </p>
                     </div>
                 </div>

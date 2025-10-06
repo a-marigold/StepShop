@@ -7,6 +7,9 @@ import './globals.scss';
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://step-shop.netlify.app'),
+    icons: {
+        icon: '/images/website-icon.png',
+    },
     title: {
         default: 'StepShop',
         template: '%s | StepShop',
