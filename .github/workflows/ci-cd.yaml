@@ -26,18 +26,14 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Check .next existence
-      run: |
-        echo "Contents of root directory:"
-        ls -la
-        echo "Contents of .next directory:"
-        ls -la .next || echo ".next folder not found"
+    - name: Check files
+      run: find .next -type f | head -20
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build
-        path: .next
+        path: ./.next
 
   cd:
     name: CD
