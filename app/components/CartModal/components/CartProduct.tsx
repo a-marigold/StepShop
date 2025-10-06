@@ -10,6 +10,7 @@ import {
 } from '@/utils/cartGlobalState';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
+import type { ProductType } from '@/types/ProductTypes';
 
 import Image from 'next/image';
 
@@ -17,24 +18,14 @@ import EmptyFilledButton from '@UI/EmptyFilledButton';
 
 import productStyles from './CartProduct.module.scss';
 
-interface CartProductProps {
-    image: string;
-
-    title: string;
-
-    //
-    //
-    // TODO: Add options for each product.
-    // options: string;
-
-    price: number;
-    quantity: number;
+interface CartProductProps extends Omit<ProductType, 'description'> {
+    options: string;
 }
 
 export default memo(function CartProduct({
     image,
     title,
-    // options,
+    options,
     price,
     quantity,
 }: CartProductProps) {
@@ -48,7 +39,7 @@ export default memo(function CartProduct({
                 <div className={productStyles['text-block']}>
                     <p className={productStyles['title']}>{title}</p>
                     {/* TO DO HERE */}
-                    {/* <p className={productStyles['options']}> {options} </p> */}
+                    <p className={productStyles['options']}> {options} </p>
                     {/*  */}
                 </div>
 

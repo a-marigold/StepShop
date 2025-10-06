@@ -61,8 +61,9 @@ export default function Cart({ setShowModal }: CartProps) {
                         key={cartProduct.title}
                         image={cartProduct.image}
                         title={cartProduct.title}
-                        // options={cartProduct.options}
+                        options={'Option1, option2, option3'}
                         price={cartProduct.price}
+                        currencySymbol={CURRENCY_SYMBOL}
                         quantity={cartProduct.quantity}
                     />
                 ))}
