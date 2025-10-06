@@ -9,6 +9,8 @@ import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+
 import AuthModal from '@/app/components/AuthModal';
 import CartModal from '@/app/components/CartModal';
 
@@ -57,7 +59,7 @@ export default function UserButtons() {
                         className={userStyles['ready-cart-button']}
                     >
                         <p className={userStyles['total-amount']}>
-                            {totalAmount} ₸
+                            {totalAmount} {CURRENCY_SYMBOL}
                         </p>
 
                         <div className={userStyles['vertical-line']} />

@@ -3,6 +3,8 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+
 import CheckoutWidget from '@/UI/CheckoutWidget';
 import AccessButton from '@/UI/AccessButton';
 
@@ -17,7 +19,7 @@ export default function TotalAmountWidget() {
         <CheckoutWidget
             className={amountStyles['total-amount-widget']}
             title={`Итого:`}
-            subTitle={`${totalAmount} ₸`}
+            subTitle={`${totalAmount} ${CURRENCY_SYMBOL}`}
         >
             <div className={amountStyles['order-content']}>
                 <div className={amountStyles['amount-block']}>
@@ -45,7 +47,9 @@ export default function TotalAmountWidget() {
                             Стоимость товаров:
                         </span>
                         <div className={amountStyles['horizontal-line']} />
-                        <p className={amountStyles['price']}>{totalAmount} ₸</p>
+                        <p className={amountStyles['price']}>
+                            {totalAmount} {CURRENCY_SYMBOL}
+                        </p>
                     </div>
 
                     <div className={amountStyles['price-block']}>
@@ -68,7 +72,7 @@ export default function TotalAmountWidget() {
                         </span>
                         <div className={amountStyles['horizontal-line']} />
                         <p className={amountStyles['price']}>
-                            {totalAmount * 0.05} ₸
+                            {totalAmount * 0.05} {CURRENCY_SYMBOL}
                         </p>
                     </div>
                 </div>

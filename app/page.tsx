@@ -1,5 +1,3 @@
-// TODO: Set priority and width={} height={} for images on this page
-
 import { Suspense } from 'react';
 
 import type { Metadata } from 'next';

@@ -9,6 +9,8 @@ import {
     handleIncreaseProductQuantity,
 } from '@/utils/cartGlobalState';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+
 import Image from 'next/image';
 
 import EmptyFilledButton from '@UI/EmptyFilledButton';
@@ -87,7 +89,7 @@ export default memo(function CartProduct({
                     </div>
 
                     <span className={productStyles['price']}>
-                        {price * quantity} ₸
+                        {price * quantity} {CURRENCY_SYMBOL}
                     </span>
                 </div>
             </div>

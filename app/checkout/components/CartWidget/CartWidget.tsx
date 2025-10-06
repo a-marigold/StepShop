@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 
 import type { RootState } from '@/redux/store';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+
 import CartProduct from './CartProduct';
 
 import CheckoutWidget from '@/UI/CheckoutWidget';
@@ -24,7 +26,7 @@ export default function CartWidget() {
                         title={cartProduct.title}
                         image={cartProduct.image}
                         price={cartProduct.price}
-                        currencySymbol='₸'
+                        currencySymbol={CURRENCY_SYMBOL}
                         quantity={cartProduct.quantity}
                         options={'option1, option2, option3'}
                     ></CartProduct>

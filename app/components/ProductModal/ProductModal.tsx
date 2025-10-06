@@ -44,6 +44,7 @@ export default function ProductModal({
                             width={200}
                             height={200}
                             alt='Product image'
+                            // TODO: ADD PRIORITY OR FALLBACK IMAGE
                         />
                     </div>
                     <div className={modalStyles['access-block']}>

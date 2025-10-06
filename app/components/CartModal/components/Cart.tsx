@@ -3,6 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+
 import CartProduct from './CartProduct';
 
 import AccessButton from '@/UI/AccessButton';
@@ -71,14 +73,14 @@ export default function Cart({ setShowModal }: CartProps) {
                     <span className={cartStyles['price-text']}>Итого:</span>
                     <div className={cartStyles['dashed-divider']} />
                     <span className={cartStyles['price-sum']}>
-                        {totalAmount} ₸
+                        {totalAmount} {CURRENCY_SYMBOL}
                     </span>
                 </div>
                 <div className={cartStyles['price-block']}>
                     <span className={cartStyles['price-text']}>Налог 5%:</span>
                     <div className={cartStyles['dashed-divider']} />
                     <span className={cartStyles['price-sum']}>
-                        {0.05 * totalAmount} ₸
+                        {0.05 * totalAmount} {CURRENCY_SYMBOL}
                     </span>
                 </div>
 

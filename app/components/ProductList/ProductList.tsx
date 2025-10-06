@@ -1,6 +1,8 @@
 import type { ProductType } from '@/types/ProductTypes';
 import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+
 import ProductCard from './ProductCard';
 
 import productStyles from './ProductList.module.scss';
@@ -38,7 +40,7 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
                     price={600}
                     //
                     quantity={1}
-                    currencySymbol='₸'
+                    currencySymbol={CURRENCY_SYMBOL}
                 />
             ))}
         </div>

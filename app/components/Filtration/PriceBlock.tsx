@@ -1,14 +1,14 @@
 'use client';
 
 import { useDispatch } from 'react-redux';
-
 import type { AppDispatch } from '@/redux/store';
+import { setMinPrice, setMaxPrice } from './redux/filtrationSlice';
+
+import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 import PriceInput from '@UI/PriceInput';
 
 import filterStyles from './Filtration.module.scss';
-
-import { setMinPrice, setMaxPrice } from './redux/filtrationSlice';
 
 export default function PriceBlock() {
     const dispatch = useDispatch<AppDispatch>();
@@ -23,7 +23,7 @@ export default function PriceBlock() {
 
             <div className={filterStyles['price-inputs-group']}>
                 <PriceInput
-                    currencySymbol='₸'
+                    currencySymbol={CURRENCY_SYMBOL}
                     defaultValue={0}
                     maxValue={16000}
                     inputAction={(e) => {
@@ -31,7 +31,7 @@ export default function PriceBlock() {
                     }}
                 />
                 <PriceInput
-                    currencySymbol='₸'
+                    currencySymbol={CURRENCY_SYMBOL}
                     defaultValue={16000}
                     maxValue={16000}
                     inputAction={(event) =>
