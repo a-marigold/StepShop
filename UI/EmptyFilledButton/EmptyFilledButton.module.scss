@@ -23,7 +23,7 @@
     transition: background-color 0.2s ease;
 
     &:hover {
-        background-color: var(--empty-button-hover-bg);
+        background-color: var(--empty-filled-btn-hover-bg);
     }
 
     &:disabled {

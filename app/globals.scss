@@ -36,45 +36,85 @@ button:focus-visible {
 }
 
 // ! OLD COLORS FROM FIGMA
-:root {
-    --background-color: #ffbf9b;
-    --font-color: #000000;
-    --secondary-font-color: #7b7b7b;
-    --accent-color: #fe5f00;
+// :root {
+//     --background-color: #ffbf9b;
 
-    --main-bg-color: #ffffff;
-    --foreground-color: #f9f9f9;
+//     --font-color: #000000;
+//     --secondary-font-color: #7b7b7b;
+//     --accent-color: #fe5f00;
 
-    --unfocused-input-font-color: #c0c0c0;
+//     --main-bg-color: #ffffff;
+//     --foreground-color: #f9f9f9;
 
-    --border-color: #ededed;
-    --secondary-border-color: #dfdfdf;
+//     --unfocused-input-font-color: #c0c0c0;
 
-    --checkbox-color: #f1f1f1;
+//     --border-color: #ededed;
+//     --secondary-border-color: #dfdfdf;
 
-    --product-bg-color: #fff7ee;
-    --add-button-color: #fffaf4;
+//     --checkbox-color: #f1f1f1;
 
-    --picker-bg-color: #ececec;
-    --hover-bg-color: #fe5d00d7;
+//     --product-bg-color: #fff7ee;
 
-    --modal-bg-color: #f4f1ee;
+//     --add-button-color: #fffaf4;
 
-    --empty-button-hover-bg: #f1f1f1cc;
+//     --picker-bg-color: #ececec;
 
-    --loading-card-bg: #fdfdfd;
-    --loading-card-img-bg: #f5f5f5;
+//     --hover-bg-color: #fe5d00d7;
 
-    --error-color: #fe0000;
+//     --modal-bg-color: #f4f1ee;
 
-    --outline-color: #0c8ce9;
+//     --empty-button-hover-bg: #f1f1f1cc;
 
-    --disabled-color: #cecece;
-}
+//     --loading-card-bg: #fdfdfd;
+//     --loading-card-img-bg: #f5f5f5;
+
+//     --checkout-page-bg: #f4f1ee;
+
+//     --error-color: #fe0000;
+
+//     --outline-color: #0c8ce9;
+//     --disabled-color: #cecece;
+// }
 //!
 
 //* New production colors
-// ...
+:root {
+    --background-color: #f5f3ff;
+    --font-color: #2d004d;
+    --secondary-font-color: #7b6f91;
+    --accent-color: #a78bfa;
+
+    --main-bg-color: #ffffff;
+    --foreground-color: #f9f8ff;
+
+    --unfocused-input-font-color: #b8a9d9;
+
+    --border-color: #e7e1f9;
+    --secondary-border-color: #d7c9f3;
+
+    --hover-bg-color: #c3b3ff;
+
+    --checkbox-color: #f2effd;
+
+    --product-bg-color: #faf7ff;
+    --product-add-btn-color: #f5f1ff;
+
+    --picker-bg-color: #ede8ff;
+
+    --modal-bg-color: #f4f0ff;
+
+    --empty-filled-btn-hover-bg: #ebe5ff;
+
+    --loading-card-bg: #fbfaff;
+    --loading-card-img-bg: #f0eaff;
+
+    --checkout-page-bg: #eee8ff;
+
+    --outline-color: #8b5cf6;
+
+    --error-color: #fe0000;
+    --disabled-color: #d9cff2;
+}
 //*
 
 @media (max-width: 1024px) {
