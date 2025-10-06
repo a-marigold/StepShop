@@ -64,7 +64,7 @@ export default function TotalAmountWidget() {
                                     fill='#CECECE'
                                 />
                             </svg>
-                            Налоги:
+                            Налог:
                         </span>
                         <div className={amountStyles['horizontal-line']} />
                         <p className={amountStyles['price']}>
