@@ -7,7 +7,7 @@ export default function Navigation() {
     return (
         <>
             <div className={navStyles['navigaiton-box']}>
-                <h1 className={navStyles['title']}>Все пиццы</h1>
+                <h1 className={navStyles['title']}>Все товары</h1>
             </div>
             <div className={navStyles['navigation-group']}>
                 <Categories />

@@ -1,5 +1,7 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import clsx from 'clsx';
 import buttonStyles from './EmptyFilledButton.module.scss';
 
@@ -11,6 +13,8 @@ interface EmptyFilledButtonProps {
     className?: string;
 
     isDisabled?: boolean;
+
+    children?: ReactNode;
 
     clickAction?: () => void;
 }
@@ -24,6 +28,8 @@ export default function EmptyFilledButton({
 
     isDisabled,
 
+    children,
+
     ariaLabel,
 }: EmptyFilledButtonProps) {
     return (
@@ -34,6 +40,8 @@ export default function EmptyFilledButton({
             disabled={isDisabled}
         >
             {image && <img src={image} alt='' />}
+
+            {children}
 
             {title && <span>{title}</span>}
         </button>

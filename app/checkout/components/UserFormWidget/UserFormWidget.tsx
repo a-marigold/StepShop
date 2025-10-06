@@ -33,6 +33,7 @@ const userInputs = [
         title: 'Телефон',
         errorLabelTitle: 'Введите ваш номер телефона',
         htmlId: 'personal-phone-number-input',
+        placeholder: '+X XXX XXX XX-XX',
         inputType: 'text',
     },
 ];
@@ -48,6 +49,7 @@ export default function UserFormWidget() {
                         htmlId={userInput.htmlId}
                         errorLabelTitle={userInput.errorLabelTitle}
                         isValid={true}
+                        placeholder={userInput.placeholder}
                         className={formStyles['user-input']}
                     />
                 ))}
