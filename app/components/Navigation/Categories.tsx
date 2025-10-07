@@ -6,22 +6,23 @@ import clsx from 'clsx';
 import navStyles from './Navigation.module.scss';
 
 const categories = [
-    { name: 'Все' },
+    { name: 'Category1' },
 
-    { name: 'Мясные' },
+    { name: 'Category2' },
 
-    { name: 'Острые' },
+    { name: 'Category3' },
 
-    { name: 'Сладкие' },
+    { name: 'Category4' },
 
-    { name: 'Вегетарианские' },
+    { name: 'Category5' },
 
-    { name: 'С курицей' },
+    { name: 'Category6' },
 ] as const;
 type Category = (typeof categories)[number]['name'];
 
 export default function Categories() {
-    const [currentCategory, setCurrentCategory] = useState<Category>('Все');
+    const [currentCategory, setCurrentCategory] =
+        useState<Category>('Category1');
 
     const categoriesRef = useRef<
         Partial<Record<Category, HTMLButtonElement | null>>

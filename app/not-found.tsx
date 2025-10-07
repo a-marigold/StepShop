@@ -38,9 +38,16 @@ export default function NotFound() {
                         >
                             <EmptyFilledButton
                                 title='На главную'
-                                image='/images/orange-arrow-left.svg'
                                 ariaLabel='Вернуться на главную страницу'
-                            />
+                            >
+                                <svg
+                                    width={16}
+                                    height={15}
+                                    color='var(--accent-color)'
+                                >
+                                    <use href='#arrow-icon' />
+                                </svg>
+                            </EmptyFilledButton>
                         </Link>
                     </div>
                 </div>

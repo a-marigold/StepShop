@@ -70,7 +70,13 @@ export default function ProductCard({
                         className={productStyles['add-button']}
                         aria-label='Открыть товар подробнее'
                     >
-                        <img src='/images/plus-icon.svg' alt='' />
+                        <svg
+                            width={12}
+                            height={12}
+                            color='var(--current-color)'
+                        >
+                            <use href='#plus-icon' />
+                        </svg>
                         Добавить
                     </button>
                 </div>
