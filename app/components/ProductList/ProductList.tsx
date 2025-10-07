@@ -13,12 +13,10 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     });
     const products = (await response.json()) as ProductType[];
 
-    const minPrice = searchParams.minPrice
-        ? Number(searchParams.minPrice)
-        : null;
-    const maxPrice = searchParams.maxPrice
-        ? Number(searchParams.maxPrice)
-        : null;
+    const queryParams = await searchParams;
+
+    const minPrice = queryParams.minPrice ? Number(queryParams.minPrice) : null;
+    const maxPrice = queryParams.maxPrice ? Number(queryParams.maxPrice) : null;
 
     const filteredProducts = products.filter((product) => {
         if (minPrice !== null && product.price < minPrice) return false;
