@@ -66,7 +66,7 @@ export default memo(function CartProduct({
                         </span>
 
                         <EmptyFilledButton
-                            image='/images/plus-icon.svg'
+                            // image='/images/plus-icon.svg'
                             className={productStyles['quantity-button']}
                             ariaLabel='Добавить 1 товар'
                             clickAction={() =>
@@ -76,7 +76,15 @@ export default memo(function CartProduct({
                                     dispatch: dispatch,
                                 })
                             }
-                        />
+                        >
+                            <svg
+                                width={12}
+                                height={12}
+                                color='var(--accent-color)'
+                            >
+                                <use href='#plus-icon' />
+                            </svg>
+                        </EmptyFilledButton>
                     </div>
 
                     <span className={productStyles['price']}>

@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Оформление заказа',
+
     openGraph: {
         title: 'Оформление заказа',
     },

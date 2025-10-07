@@ -48,9 +48,13 @@ export default function UserButtons() {
                     title='Войти'
                     ariaLabel='Войти в аккаунт'
                     className={userStyles['profile-button']}
-                    image='/images/profile-icon.svg'
+                    // image='/images/profile-icon.svg'
                     clickAction={() => setShowAuthModal(true)}
-                />
+                >
+                    <svg width={12} height={16} color='var(--accent-color)'>
+                        <use href='#profile-icon' />
+                    </svg>
+                </EmptyFilledButton>
 
                 {cartProductsLength ? (
                     <AccessButton

@@ -9,6 +9,7 @@ export default function Navigation() {
             <div className={navStyles['navigaiton-box']}>
                 <h1 className={navStyles['title']}>Все товары</h1>
             </div>
+
             <div className={navStyles['navigation-group']}>
                 <Categories />
                 <SortButton />

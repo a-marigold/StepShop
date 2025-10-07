@@ -33,4 +33,7 @@
     & > img {
         pointer-events: none;
     }
+    & > svg {
+        flex-shrink: 0;
+    }
 }

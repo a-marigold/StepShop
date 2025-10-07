@@ -70,7 +70,6 @@ export default function CartProduct({
                     <span className={cartStyles['quantity']}>{quantity}</span>
 
                     <EmptyFilledButton
-                        image='/images/plus-icon.svg'
                         className={cartStyles['quantity-button']}
                         ariaLabel='Добавить один товар'
                         clickAction={() =>
@@ -80,7 +79,11 @@ export default function CartProduct({
                                 dispatch: dispatch,
                             })
                         }
-                    />
+                    >
+                        <svg width={12} height={12} color='var(--accent-color)'>
+                            <use href='#plus-icon'></use>
+                        </svg>
+                    </EmptyFilledButton>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ import buttonStyles from './EmptyFilledButton.module.scss';
 
 interface EmptyFilledButtonProps {
     title?: string;
-    image: string;
+    image?: string;
 
     ariaLabel: string;
     className?: string;
