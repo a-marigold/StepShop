@@ -48,7 +48,6 @@ export default memo(function CartProduct({
                 <div className={productStyles['order-block']}>
                     <div className={productStyles['quantity-block']}>
                         <EmptyFilledButton
-                            image='/images/minus-icon.svg'
                             className={productStyles['quantity-button']}
                             ariaLabel='Убрать один товар'
                             clickAction={() =>
@@ -59,7 +58,15 @@ export default memo(function CartProduct({
                                     dispatch: dispatch,
                                 })
                             }
-                        />
+                        >
+                            <svg
+                                width={11}
+                                height={2}
+                                color='var(--accent-color)'
+                            >
+                                <use href='#minus-icon' />
+                            </svg>
+                        </EmptyFilledButton>
 
                         <span className={productStyles['quantity']}>
                             {quantity}

@@ -49,11 +49,6 @@ export default function CartProduct({
                 </p>
                 <div className={cartStyles['quantity-block']}>
                     <EmptyFilledButton
-                        image={
-                            lastProductCheck
-                                ? '/images/disabled-minus-icon.svg'
-                                : '/images/minus-icon.svg'
-                        }
                         className={cartStyles['quantity-button']}
                         ariaLabel='Убрать один товар'
                         isDisabled={lastProductCheck}
@@ -65,7 +60,25 @@ export default function CartProduct({
                                 dispatch: dispatch,
                             })
                         }
-                    />
+                    >
+                        {lastProductCheck ? (
+                            <svg
+                                width={11}
+                                height={2}
+                                color='var(--disabled-color)'
+                            >
+                                <use href='#minus-icon' />
+                            </svg>
+                        ) : (
+                            <svg
+                                width={11}
+                                height={2}
+                                color='var(--accent-color)'
+                            >
+                                <use href='#minus-icon' />
+                            </svg>
+                        )}
+                    </EmptyFilledButton>
 
                     <span className={cartStyles['quantity']}>{quantity}</span>
 
