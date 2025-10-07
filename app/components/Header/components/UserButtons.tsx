@@ -43,7 +43,11 @@ export default function UserButtons() {
 
     return (
         <>
-            <div className={userStyles['user-buttons-block']}>
+            <div
+                className={`${userStyles['user-buttons-block']} user-buttons-public`}
+            >
+                {/* ^^ user-buttons-public class used for setting display none on them by using class toggle on body ^^*/}
+
                 <EmptyFilledButton
                     title='Войти'
                     ariaLabel='Войти в аккаунт'
@@ -55,7 +59,6 @@ export default function UserButtons() {
                         <use href='#profile-icon' />
                     </svg>
                 </EmptyFilledButton>
-
                 {cartProductsLength ? (
                     <AccessButton
                         ariaLabel='Открыть корзину'

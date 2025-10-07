@@ -56,7 +56,6 @@
     @include flex-y-center;
 
     flex: 1;
-
     max-width: 760px;
 
     & > img {
@@ -69,7 +68,7 @@
         background-color: var(--foreground-color);
 
         flex: 1;
-        min-width: 210px;
+        min-width: 0;
         height: 50px;
 
         border-radius: 16px;
@@ -87,6 +86,7 @@
 
     z-index: 6;
 }
+
 .back-search-button {
     @include flex-center;
 
@@ -109,6 +109,22 @@
     display: block;
 }
 
+.search-button {
+    @include flex-center;
+
+    min-width: 50px;
+    min-height: 50px;
+
+    background-color: var(--foreground-color);
+
+    border: 0;
+    border-radius: 16px;
+
+    display: none;
+
+    cursor: pointer;
+}
+
 .modal-backdrop {
     @include modal-backdrop(5);
 }
@@ -126,13 +142,36 @@
     .left-box {
         gap: 0.5em;
     }
-    .input-block {
-        & > input {
-            width: 160px;
-        }
-    }
     .title,
     .title-slogan {
         display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    :global(body.search-modal-opened .user-buttons-public) {
+        display: none;
+    }
+
+    .header {
+        justify-content: flex-start;
+    }
+    .title-block {
+        display: none;
+    }
+    .left-box {
+        flex: 0;
+    }
+    .search-button {
+        display: flex;
+    }
+    .input-block {
+        display: none;
+
+        width: 100%;
+        max-width: 100%;
+    }
+    .active-input-block {
+        display: flex;
     }
 }

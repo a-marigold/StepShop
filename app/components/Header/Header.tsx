@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import SearchInput from './components/SearchInput';
+import SearchBlock from './components/SearchBlock';
 import UserButtons from './components/UserButtons';
 
 import headerStyles from './Header.module.scss';
@@ -16,6 +16,7 @@ export default function Header() {
                             alt='Логотип Step Shop'
                             width={35}
                             height={35}
+                            className={headerStyles['website-icon']}
                         />
                     </Link>
 
@@ -30,7 +31,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <SearchInput />
+                <SearchBlock />
             </div>
 
             <UserButtons />
