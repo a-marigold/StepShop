@@ -31,3 +31,8 @@
         border-radius: 0;
     }
 }
+@media (max-width: 600px) {
+    .main-content {
+        flex-direction: column;
+    }
+}

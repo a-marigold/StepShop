@@ -18,6 +18,7 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     const minPrice = queryParams.minPrice ? Number(queryParams.minPrice) : null;
     const maxPrice = queryParams.maxPrice ? Number(queryParams.maxPrice) : null;
 
+    // TODO: This function doesn`t work while there is json placeholder instead of mock with product.price or real server
     const filteredProducts = products.filter((product) => {
         if (minPrice !== null && product.price < minPrice) return false;
         if (maxPrice !== null && product.price > maxPrice) return false;
