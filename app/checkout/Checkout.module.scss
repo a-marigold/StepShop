@@ -36,3 +36,12 @@
     width: 100%;
     max-width: 450px;
 }
+
+@media (max-width: 1024px) {
+    .widgets-box {
+        flex-direction: column;
+    }
+    .order-box {
+        max-width: 100%;
+    }
+}
