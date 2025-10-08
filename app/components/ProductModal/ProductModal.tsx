@@ -44,7 +44,7 @@ export default function ProductModal({
                             src={image}
                             width={200}
                             height={200}
-                            alt='Product image'
+                            alt='Изображение товара'
                         />
                     </div>
                     <div className={modalStyles['access-block']}>

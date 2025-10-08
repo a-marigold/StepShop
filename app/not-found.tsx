@@ -56,7 +56,7 @@ export default function NotFound() {
                     src='/images/not-found-image.svg'
                     width={340}
                     height={345}
-                    alt='Page is not found. Error message 404'
+                    alt='Страница не найдена. Код ошибки 404'
                     className={notFoundStyles['image']}
                 />
             </div>

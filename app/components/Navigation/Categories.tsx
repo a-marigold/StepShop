@@ -74,7 +74,7 @@ export default function Categories() {
                         category.name === currentCategory &&
                             navStyles['active-button']
                     )}
-                    aria-label={`Move to ${category.name}`}
+                    aria-label={`Переключиться к ${category.name}`}
                     onClick={() => setCurrentCategory(category.name)}
                 >
                     {category.name}

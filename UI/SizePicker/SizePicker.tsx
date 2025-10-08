@@ -48,7 +48,7 @@ export default function SizePicker({ sizeOptions }: SizePickerProps) {
     return (
         <div
             className={pickerStyles['size-options-block']}
-            aria-label='Pick size of product'
+            aria-label='Выбрать размер товара'
         >
             {sizeOptions.map((sizeOption) => (
                 <button
@@ -58,7 +58,7 @@ export default function SizePicker({ sizeOptions }: SizePickerProps) {
                     }}
                     className={pickerStyles['size-option']}
                     onClick={() => setCurrentOption(sizeOption.id)}
-                    aria-label={`Pick ${sizeOption} size`}
+                    aria-label={`Установить размер ${sizeOption}`}
                 >
                     {sizeOption.title}
                 </button>
