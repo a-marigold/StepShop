@@ -26,7 +26,8 @@
             "@/*": ["./*"],
             "@styles/*": ["styles/*"],
             "@UI/*": ["UI/*"]
-        }
+        },
+        "types": ["jest", "node"]
     },
 
     "include": [
