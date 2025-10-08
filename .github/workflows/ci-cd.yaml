@@ -23,6 +23,9 @@ jobs:
     - name: Run ESLint
       run: npm run lint --if-present
 
+    - name: Run tests
+      run: npm run test
+
     - name: Build project
       run: npm run build
 
