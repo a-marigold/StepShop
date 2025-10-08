@@ -1,9 +1,12 @@
+// TODO: Add responsibility for this component
+
 'use-client';
 
 import Image from 'next/image';
 
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
+
 import { addProduct, increaseTotalAmount } from '@/redux/CartSlice';
 
 import type { ProductType } from '@/types/ProductTypes';
