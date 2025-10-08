@@ -69,3 +69,22 @@
         width: auto;
     }
 }
+
+@media (max-width: 600px) {
+    .modal-wrapper {
+        margin: 0;
+
+        max-height: initial;
+    }
+    .product-modal {
+        max-height: initial;
+
+        border-radius: 0;
+    }
+
+    .close-modal-cross {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}

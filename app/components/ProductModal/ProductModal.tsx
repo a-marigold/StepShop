@@ -86,7 +86,11 @@ export default function ProductModal({
                     </div>
                 </div>
 
-                <CloseModalCross clickAction={() => setShowModal(false)} />
+                <CloseModalCross
+                    className={modalStyles['close-modal-cross']}
+                    crossColor='var(--secondary-font-color)'
+                    clickAction={() => setShowModal(false)}
+                />
             </div>
         </div>
     );
