@@ -28,7 +28,10 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     {/* <PhoneCodeContent /> */}
                 </div>
 
-                <CloseModalCross clickAction={() => setShowModal(false)} />
+                <CloseModalCross
+                    crossColor='white'
+                    clickAction={() => setShowModal(false)}
+                />
             </div>
         </div>
     );

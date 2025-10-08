@@ -58,6 +58,10 @@
     margin-top: auto;
 }
 
+.close-modal-cross {
+    color: white;
+}
+
 @media (max-width: 900px) {
     .product-modal {
         flex-direction: column;
@@ -86,5 +90,7 @@
         position: absolute;
         top: 10px;
         right: 10px;
+
+        color: var(--secondary-font-color);
     }
 }

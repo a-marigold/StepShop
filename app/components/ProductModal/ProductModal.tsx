@@ -1,5 +1,3 @@
-// TODO: Add responsibility for this component
-
 'use-client';
 
 import Image from 'next/image';
@@ -88,7 +86,6 @@ export default function ProductModal({
 
                 <CloseModalCross
                     className={modalStyles['close-modal-cross']}
-                    crossColor='var(--secondary-font-color)'
                     clickAction={() => setShowModal(false)}
                 />
             </div>
