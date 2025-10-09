@@ -1,12 +1,38 @@
-export type CurrencySymbol = '₸' | '₽' | '$';
+import { z } from 'zod';
 
-export interface ProductType {
-    image: string;
+export const CurrencySymbolSchema = z.union([
+    z.literal('₸'),
+    z.literal('₽'),
+    z.literal('$'),
+]);
 
-    title: string;
-    description?: string;
+export const ProductSchema = z
+    .object({
+        image: z.string(),
 
-    price: number;
-    currencySymbol: CurrencySymbol;
-    quantity: number;
-}
+        title: z.string(),
+        description: z.string().optional(),
+
+        currencySymbol: CurrencySymbolSchema,
+
+        price: z.number(),
+        quantity: z.number(),
+    })
+    .strict();
+
+export type CurrencySymbol = z.infer<typeof CurrencySymbolSchema>;
+
+export type ProductType = z.infer<typeof ProductSchema>;
+
+// export type CurrencySymbol = '₸' | '₽' | '$';
+
+// export interface ProductType {
+//     image: string;
+
+//     title: string;
+//     description?: string;
+
+//     price: number;
+//     currencySymbol: CurrencySymbol;
+//     quantity: number;
+// }
