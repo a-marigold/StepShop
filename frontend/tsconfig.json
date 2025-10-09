@@ -39,5 +39,5 @@
         "eslint.config.сjs",
         "app/checkout/components/UserFormWidget/.s"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", ".next"]
 }
