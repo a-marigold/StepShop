@@ -1,7 +1,7 @@
 'use client';
 
 import type { ChangeEvent } from 'react';
-import type { CurrencySymbol } from '@/types/ProductTypes';
+import type { CurrencySymbol } from '@shared/types/ProductTypes';
 
 import inputStyles from './PriceInput.module.scss';
 

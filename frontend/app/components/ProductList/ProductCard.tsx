@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock/';
 
-import type { ProductType } from '@/types/ProductTypes';
+import type { ProductType } from '@shared/types/ProductTypes';
 
 import Image from 'next/image';
 

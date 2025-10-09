@@ -7,7 +7,7 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addProduct, increaseTotalAmount } from '@/redux/CartSlice';
 
-import type { ProductType } from '@/types/ProductTypes';
+import type { ProductType } from '@shared/types/ProductTypes';
 
 import AccessButton from '@UI/AccessButton';
 import SizePicker from '@UI/SizePicker';

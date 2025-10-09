@@ -10,7 +10,7 @@ import {
 } from '@/utils/cartGlobalState';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
-import type { ProductType } from '@/types/ProductTypes';
+import type { ProductType } from '@shared/types/ProductTypes';
 
 import Image from 'next/image';
 

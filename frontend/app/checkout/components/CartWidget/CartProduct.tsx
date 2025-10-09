@@ -5,7 +5,7 @@ import {
     handleIncreaseProductQuantity,
 } from '@/utils/cartGlobalState';
 
-import type { ProductType } from '@/types/ProductTypes';
+import type { ProductType } from '@shared/types/ProductTypes';
 
 import EmptyFilledButton from '@/UI/EmptyFilledButton';
 

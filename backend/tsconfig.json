@@ -6,12 +6,19 @@
         "outDir": "./dist",
         "moduleResolution": "node",
         "sourceMap": true,
+
         "noUncheckedIndexedAccess": true,
-        "verbatimModuleSyntax": true,
+
         "isolatedModules": true,
-        "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
-        "skipLibCheck": true
+
+        "noUncheckedSideEffectImports": true,
+        "skipLibCheck": true,
+
+        "baseUrl": ".",
+        "paths": {
+            "@shared/*": ["../shared/*"]
+        }
     },
     "include": ["./src"],
     "exclude": ["node_modules", "dist"]

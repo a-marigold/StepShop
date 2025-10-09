@@ -1,4 +1,4 @@
-import type { CurrencySymbol } from '@/types/ProductTypes';
+import type { CurrencySymbol } from '@shared/types/ProductTypes';
 
 /**
  * Constant for central control the CurrencySymbol in project.

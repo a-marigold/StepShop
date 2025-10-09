@@ -7,7 +7,7 @@ import {
     decreaseTotalAmount,
 } from '@/redux/CartSlice';
 
-import type { ProductType } from '@/types/ProductTypes';
+import type { ProductType } from '@shared/types/ProductTypes';
 
 interface DecreaseQuantityProps
     extends Pick<ProductType, 'title' | 'price' | 'quantity'> {
