@@ -1,8 +1,18 @@
 import type { FastifyInstance } from 'fastify';
 import { getAllProducts } from './products.controller';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import { ProductListSchema } from '@shared/types/ProductTypes';
 
 export default async function productsRoutes(app: FastifyInstance) {
-    app.get<{ Reply: ProductType[] }>('/products', getAllProducts);
+    app.get(
+        '/products',
+        {
+            schema: {
+                response: {
+                    200: ProductListSchema,
+                },
+            },
+        },
+        getAllProducts
+    );
 }

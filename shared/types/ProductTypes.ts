@@ -20,6 +20,8 @@ export const ProductSchema = z
     })
     .strict();
 
+export const ProductListSchema = z.array(ProductSchema);
+
 export type CurrencySymbol = z.infer<typeof CurrencySymbolSchema>;
 
 export type ProductType = z.infer<typeof ProductSchema>;

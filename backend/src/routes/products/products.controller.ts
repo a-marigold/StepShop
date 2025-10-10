@@ -1,14 +1,11 @@
+import type { FastifyInstance, FastifyRequest } from 'fastify';
+
 import type { ProductType } from '@shared/types/ProductTypes';
 
-export async function getAllProducts(): Promise<ProductType[]> {
-    return [
-        {
-            title: 'Example product',
-            image: '',
-            description: 'This product description',
-            price: 10,
-            currencySymbol: '₸',
-            quantity: 1,
-        },
-    ];
+export async function getAllProducts(
+    request: FastifyRequest
+): Promise<ProductType[]> {
+    const products = await request.server.prisma.product.findMany();
+
+    return products;
 }
