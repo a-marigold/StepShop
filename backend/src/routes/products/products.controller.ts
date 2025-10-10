@@ -9,3 +9,26 @@ export async function getAllProducts(
 
     return products;
 }
+
+export async function createProduct(
+    request: FastifyRequest<{
+        Body: ProductType;
+    }>
+): Promise<Pick<ProductType, 'id'>> {
+    const { image, title, description, price, quantity } = request.body;
+
+    const product = await request.server.prisma.product.create({
+        data: {
+            image: image,
+
+            title: title,
+            description: description,
+
+            // currencySymbol: CurrencySymbolSchema,
+
+            price: price,
+            quantity: quantity,
+        },
+    });
+    return { id: product.id };
+}

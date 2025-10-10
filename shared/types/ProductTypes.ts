@@ -13,10 +13,12 @@ export const ProductSchema = z
         title: z.string(),
         description: z.string().optional(),
 
-        currencySymbol: CurrencySymbolSchema,
+        currencySymbol: CurrencySymbolSchema, // TODO: Get escape from this property. That should exist only on client
 
         price: z.number(),
         quantity: z.number(),
+
+        id: z.number().optional(), // TODO: Delete optional() from this property
     })
     .strict();
 

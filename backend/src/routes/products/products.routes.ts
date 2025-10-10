@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
-import { getAllProducts } from './products.controller';
+import { getAllProducts, createProduct } from './products.controller';
 
-import { ProductListSchema } from '@shared/types/ProductTypes';
+import { ProductListSchema, ProductSchema } from '@shared/types/ProductTypes';
 
 export default async function productsRoutes(app: FastifyInstance) {
     app.get(
@@ -14,5 +14,15 @@ export default async function productsRoutes(app: FastifyInstance) {
             },
         },
         getAllProducts
+    );
+
+    app.post(
+        '/products',
+        {
+            schema: {
+                body: ProductSchema,
+            },
+        },
+        createProduct
     );
 }
