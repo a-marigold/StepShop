@@ -11,7 +11,7 @@ export const ProductSchema = z
         image: z.string(),
 
         title: z.string(),
-        description: z.string().optional(),
+        description: z.string().nullable(),
 
         price: z.number(),
         quantity: z.number(),
