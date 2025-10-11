@@ -1,5 +1,4 @@
 import type { ProvideredAppInstance } from 'src/app';
-import z from 'zod';
 
 import {
     getAllProducts,
@@ -56,6 +55,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         method: 'PATCH',
         url: '/products/:id',
         schema: {
+            params: ProductSchema.pick({ id: true }),
             body: ProductSchema.partial().extend(
                 ProductSchema.pick({ id: true })
             ),

@@ -36,10 +36,10 @@ export async function createProduct(
 
 export async function deleteProduct(
     request: FastifyRequest<{
-        Body: Pick<ProductType, 'id'>;
+        Params: Pick<ProductType, 'id'>;
     }>
 ): Promise<string> {
-    const { id } = request.body;
+    const { id } = request.params;
 
     const deleteUser = await request.server.prisma.product.delete({
         where: {
