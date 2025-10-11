@@ -8,10 +8,7 @@ import ProductCard from './ProductCard';
 import productStyles from './ProductList.module.scss';
 
 export default async function ProductList({ searchParams }: SearchParamsProp) {
-    const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts',
-        {}
-    );
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
     const products = (await response.json()) as ProductType[];
 
     const queryParams = await searchParams;
@@ -34,12 +31,12 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
                     title={product.title}
                     image={'/images/white-t-shirt.webp'}
                     description='description 1 lorem ipsum dolor'
-                    // TODO (3): Change the string below on --- price={product.price}
+                    // TODO (3): Change the string below on ---> price={product.price}
                     // TEMPORARY SITUATION:
                     price={600}
                     //
-                    quantity={1}
                     currencySymbol={CURRENCY_SYMBOL}
+                    quantity={1}
                 />
             ))}
         </div>

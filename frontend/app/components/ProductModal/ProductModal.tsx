@@ -7,7 +7,7 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addProduct, increaseTotalAmount } from '@/redux/CartSlice';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import { ClientProductType } from '@/types/ClientProductType';
 
 import AccessButton from '@UI/AccessButton';
 import SizePicker from '@UI/SizePicker';
@@ -15,7 +15,7 @@ import CloseModalCross from '@/UI/CloseModalCross';
 
 import modalStyles from './ProductModal.module.scss';
 
-interface ProductModalProps extends ProductType {
+interface ProductModalProps extends ClientProductType {
     setShowModal: (showModal: boolean) => void;
 }
 

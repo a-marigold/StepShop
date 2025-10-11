@@ -9,8 +9,7 @@ import {
     handleIncreaseProductQuantity,
 } from '@/utils/cartGlobalState';
 
-import { CURRENCY_SYMBOL } from '@/constants/currency';
-import type { ProductType } from '@shared/types/ProductTypes';
+import { ClientProductType } from '@/types/ClientProductType';
 
 import Image from 'next/image';
 
@@ -18,7 +17,7 @@ import EmptyFilledButton from '@UI/EmptyFilledButton';
 
 import productStyles from './CartProduct.module.scss';
 
-interface CartProductProps extends Omit<ProductType, 'description'> {
+interface CartProductProps extends Omit<ClientProductType, 'description'> {
     options: string;
 }
 
@@ -27,6 +26,7 @@ export default memo(function CartProduct({
     title,
     options,
     price,
+    currencySymbol,
     quantity,
 }: CartProductProps) {
     const dispatch = useDispatch<AppDispatch>();
@@ -95,7 +95,7 @@ export default memo(function CartProduct({
                     </div>
 
                     <span className={productStyles['price']}>
-                        {price * quantity} {CURRENCY_SYMBOL}
+                        {price * quantity} {currencySymbol}
                     </span>
                 </div>
             </div>

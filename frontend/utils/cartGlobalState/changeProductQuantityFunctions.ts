@@ -7,10 +7,10 @@ import {
     decreaseTotalAmount,
 } from '@/redux/CartSlice';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import { ClientProductType } from '@/types/ClientProductType';
 
 interface DecreaseQuantityProps
-    extends Pick<ProductType, 'title' | 'price' | 'quantity'> {
+    extends Pick<ClientProductType, 'title' | 'price' | 'quantity'> {
     dispatch: AppDispatch;
 }
 /**
@@ -47,7 +47,8 @@ export function handleDecreaseProductQuantity({
     }
 }
 
-interface IncreaseQuantityProps extends Pick<ProductType, 'title' | 'price'> {
+interface IncreaseQuantityProps
+    extends Pick<ClientProductType, 'title' | 'price'> {
     dispatch: AppDispatch;
 }
 /**

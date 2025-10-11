@@ -30,6 +30,7 @@ export async function createProduct(
             quantity: quantity,
         },
     });
+
     return `Product has been created: Title - ${createProduct.title}; Id - ${createProduct.id}`;
 }
 
@@ -46,5 +47,5 @@ export async function deleteProduct(
         },
     });
 
-    return `Product has been deleted: Title - ${deleteUser.title}; Id - ${deleteUser.id} `;
+    return `Product has been deleted: Title - ${deleteUser.title}; Id - ${deleteUser.id}`;
 }

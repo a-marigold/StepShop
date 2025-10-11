@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock/';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import { ClientProductType } from '@/types/ClientProductType';
 
 import Image from 'next/image';
 
@@ -19,7 +19,7 @@ export default function ProductCard({
     description,
     price,
     currencySymbol,
-}: ProductType) {
+}: ClientProductType) {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {

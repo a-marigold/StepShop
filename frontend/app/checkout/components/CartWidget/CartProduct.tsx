@@ -7,13 +7,13 @@ import {
     handleIncreaseProductQuantity,
 } from '@/utils/cartGlobalState';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import { ClientProductType } from '@/types/ClientProductType';
 
 import EmptyFilledButton from '@/UI/EmptyFilledButton';
 
 import cartStyles from './CartWidget.module.scss';
 
-interface CartProductProps extends Omit<ProductType, 'description'> {
+interface CartProductProps extends Omit<ClientProductType, 'description'> {
     options: string;
 }
 
