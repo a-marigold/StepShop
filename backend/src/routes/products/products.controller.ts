@@ -37,17 +37,29 @@ export async function createProduct(
 export async function deleteProduct(
     request: FastifyRequest<{
         Params: Pick<ProductType, 'id'>;
-    }>
-): Promise<string> {
-    const { id } = request.params;
+    }>,
 
-    const deleteUser = await request.server.prisma.product.delete({
+    reply: FastifyReply
+): Promise<string> {
+    const id = request.params.id;
+
+    const product = await request.server.prisma.product.findUnique({
+        where: { id: id },
+    });
+
+    if (!product) {
+        throw reply
+            .code(404)
+            .send({ statusCode: 404, message: 'Product is not found' });
+    }
+
+    const deleteProduct = await request.server.prisma.product.delete({
         where: {
             id: id,
         },
     });
 
-    return `Product has been deleted: Title - ${deleteUser.title}; Id - ${deleteUser.id}`;
+    return `Product has been deleted: Title - ${deleteProduct.title}; Id - ${deleteProduct.id}`;
 }
 
 export async function updateProduct(
@@ -90,7 +102,9 @@ export async function updateProduct(
         },
     });
 
-    return `Old product values: ${JSON.stringify(
-        prevProduct
-    )}; New product values: ${JSON.stringify(updateProduct)}`;
+    return `Old product: 
+${JSON.stringify(prevProduct)}; 
+
+New product: 
+${JSON.stringify(updateProduct)}`;
 }

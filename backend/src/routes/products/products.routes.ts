@@ -1,5 +1,7 @@
 import type { ProvideredAppInstance } from 'src/app';
 
+import z from 'zod';
+
 import {
     getAllProducts,
     createProduct,
@@ -28,7 +30,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         url: '/products',
 
         schema: {
-            body: ProductSchema,
+            body: ProductSchema.omit({ id: true }),
             response: {
                 200: { type: 'string' },
             },
@@ -40,9 +42,11 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'DELETE',
         url: '/products/:id',
+
         schema: {
-            params: ProductSchema.pick({ id: true }),
-            body: ProductSchema.pick({ id: true }),
+            params: ProductSchema.pick({ id: true }).extend({
+                id: z.coerce.number(),
+            }),
             response: {
                 200: { type: 'string' },
             },
@@ -55,10 +59,9 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         method: 'PATCH',
         url: '/products/:id',
         schema: {
-            params: ProductSchema.pick({ id: true }),
-            body: ProductSchema.partial().extend(
-                ProductSchema.pick({ id: true })
-            ),
+            params: ProductSchema.pick({ id: true }).extend({
+                id: z.coerce.number(),
+            }),
             response: {
                 200: { type: 'string' },
             },
