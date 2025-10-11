@@ -14,6 +14,7 @@ import ProductModal from '../ProductModal/ProductModal';
 import productStyles from './ProductList.module.scss';
 
 export default function ProductCard({
+    id,
     image,
     title,
     description,
@@ -85,6 +86,7 @@ export default function ProductCard({
             {showModal &&
                 createPortal(
                     <ProductModal
+                        id={id}
                         title={title}
                         image={image}
                         description={description}

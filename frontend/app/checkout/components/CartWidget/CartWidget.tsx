@@ -22,7 +22,8 @@ export default function CartWidget() {
             <div className={cartStyles['products-box']}>
                 {cartProducts.map((cartProduct) => (
                     <CartProduct
-                        key={cartProduct.title}
+                        key={cartProduct.id}
+                        id={cartProduct.id}
                         title={cartProduct.title}
                         image={cartProduct.image}
                         price={cartProduct.price}

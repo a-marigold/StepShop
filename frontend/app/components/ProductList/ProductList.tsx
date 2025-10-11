@@ -27,7 +27,8 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
         <div className={productStyles['products-list']}>
             {filteredProducts.map((product, index) => (
                 <ProductCard
-                    key={`${product.title}-${product.image}-${index}`}
+                    key={product.id}
+                    id={product.id}
                     title={product.title}
                     image={'/images/white-t-shirt.webp'}
                     description='description 1 lorem ipsum dolor'

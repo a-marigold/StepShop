@@ -58,7 +58,8 @@ export default function Cart({ setShowModal }: CartProps) {
             <div className={cartStyles['products-box']}>
                 {cartProducts.map((cartProduct) => (
                     <CartProduct
-                        key={cartProduct.title}
+                        key={cartProduct.id}
+                        id={cartProduct.id}
                         image={cartProduct.image}
                         title={cartProduct.title}
                         options={'Option1, option2, option3'}

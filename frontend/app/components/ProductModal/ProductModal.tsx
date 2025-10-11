@@ -20,6 +20,7 @@ interface ProductModalProps extends ClientProductType {
 }
 
 export default function ProductModal({
+    id,
     image,
     title,
     description,
@@ -70,6 +71,7 @@ export default function ProductModal({
                             clickAction={() => {
                                 dispatch(
                                     addProduct({
+                                        id: id,
                                         image: image,
                                         title: title,
                                         description: description,

@@ -16,7 +16,8 @@ export const ProductSchema = z
         price: z.number(),
         quantity: z.number(),
 
-        id: z.number().optional(), // TODO: Delete optional() from this property
+        // id: z.number().optional(), // TODO: Delete optional() from this property
+        id: z.number(), // TODO: Delete optional() from this property
     })
     .strict();
 
