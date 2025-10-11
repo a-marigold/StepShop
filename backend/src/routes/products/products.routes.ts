@@ -1,11 +1,12 @@
 import type { ProvideredAppInstance } from 'src/app';
+import z from 'zod';
 
 import {
     getAllProducts,
     createProduct,
     deleteProduct,
+    updateProduct,
 } from './products.controller';
-
 import { ProductListSchema, ProductSchema } from '@shared/types/ProductTypes';
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
@@ -19,18 +20,21 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
                 200: ProductListSchema,
             },
         },
+
         handler: getAllProducts,
     });
 
     app.route({
         method: 'POST',
         url: '/products',
+
         schema: {
             body: ProductSchema,
             response: {
                 200: { type: 'string' },
             },
         },
+
         handler: createProduct,
     });
 
@@ -43,6 +47,19 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
                 200: { type: 'string' },
             },
         },
+
         handler: deleteProduct,
+    });
+
+    app.route({
+        method: 'PATCH',
+        url: '/products',
+        schema: {
+            body: ProductSchema.partial().extend({ id: z.number() }),
+            response: {
+                200: { type: 'string' },
+            },
+        },
+        handler: updateProduct,
     });
 }

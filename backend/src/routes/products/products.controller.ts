@@ -1,4 +1,4 @@
-import type { FastifyRequest } from 'fastify';
+import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 
@@ -48,4 +48,48 @@ export async function deleteProduct(
     });
 
     return `Product has been deleted: Title - ${deleteUser.title}; Id - ${deleteUser.id}`;
+}
+
+export async function updateProduct(
+    request: FastifyRequest<{
+        Body: Pick<ProductType, 'id'> &
+            Partial<
+                Pick<ProductType, 'image' | 'title' | 'description' | 'price'>
+            >;
+    }>,
+    reply: FastifyReply
+): Promise<string> {
+    const {
+        id,
+        image: newImage,
+        title: newTitle,
+        description: newDescription,
+        price: newPrice,
+    } = request.body;
+
+    const prevProduct = await request.server.prisma.product.findUnique({
+        where: { id: id },
+    });
+
+    if (!prevProduct) {
+        throw reply
+            .code(404)
+            .send({ message: `Product with {id: ${id}} is not found` });
+    }
+
+    const updateProduct = await request.server.prisma.product.update({
+        where: {
+            id: id,
+        },
+        data: {
+            image: newImage ?? prevProduct.image,
+            title: newTitle ?? prevProduct.title,
+            description: newDescription ?? prevProduct.description,
+            price: newPrice ?? prevProduct.price,
+        },
+    });
+
+    return `Old product values: ${JSON.stringify(
+        prevProduct
+    )}; New product values: ${JSON.stringify(updateProduct)}`;
 }
