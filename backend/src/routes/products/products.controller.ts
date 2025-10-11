@@ -52,15 +52,16 @@ export async function deleteProduct(
 
 export async function updateProduct(
     request: FastifyRequest<{
-        Body: Pick<ProductType, 'id'> &
-            Partial<
-                Pick<ProductType, 'image' | 'title' | 'description' | 'price'>
-            >;
+        Body: Partial<
+            Pick<ProductType, 'image' | 'title' | 'description' | 'price'>
+        >;
+        Params: Pick<ProductType, 'id'>;
     }>,
     reply: FastifyReply
 ): Promise<string> {
+    const id = request.params.id;
+
     const {
-        id,
         image: newImage,
         title: newTitle,
         description: newDescription,

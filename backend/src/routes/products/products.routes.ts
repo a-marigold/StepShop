@@ -40,8 +40,9 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
 
     app.route({
         method: 'DELETE',
-        url: '/products',
+        url: '/products/:id',
         schema: {
+            params: ProductSchema.pick({ id: true }),
             body: ProductSchema.pick({ id: true }),
             response: {
                 200: { type: 'string' },
@@ -53,9 +54,11 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
 
     app.route({
         method: 'PATCH',
-        url: '/products',
+        url: '/products/:id',
         schema: {
-            body: ProductSchema.partial().extend({ id: z.number() }),
+            body: ProductSchema.partial().extend(
+                ProductSchema.pick({ id: true })
+            ),
             response: {
                 200: { type: 'string' },
             },
