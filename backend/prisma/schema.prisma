@@ -17,7 +17,7 @@ model Product {
   id Int @id @default(autoincrement())
   
   title String
-  description String
+  description String?
 
   image String
 

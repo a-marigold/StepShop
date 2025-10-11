@@ -7,6 +7,8 @@ export async function getAllProducts(
 ): Promise<ProductType[]> {
     const products = await request.server.prisma.product.findMany();
 
+    console.log(products);
+
     return products;
 }
 
@@ -23,8 +25,6 @@ export async function createProduct(
 
             title: title,
             description: description,
-
-            // currencySymbol: CurrencySymbolSchema,
 
             price: price,
             quantity: quantity,

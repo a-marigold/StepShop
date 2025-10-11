@@ -1,6 +1,4 @@
-import type { FastifyInstance } from 'fastify';
-
-import zodToJsonSchema from 'zod-to-json-schema';
+import type { ProvideredAppInstance } from 'src/app';
 
 import {
     getAllProducts,
@@ -10,7 +8,7 @@ import {
 
 import { ProductListSchema, ProductSchema } from '@shared/types/ProductTypes';
 
-export default async function productsRoutes(app: FastifyInstance) {
+export default async function productsRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'GET',
 
@@ -18,7 +16,7 @@ export default async function productsRoutes(app: FastifyInstance) {
 
         schema: {
             response: {
-                200: zodToJsonSchema(ProductListSchema),
+                200: ProductListSchema,
             },
         },
         handler: getAllProducts,
@@ -28,7 +26,7 @@ export default async function productsRoutes(app: FastifyInstance) {
         method: 'POST',
         url: '/products',
         schema: {
-            body: zodToJsonSchema(ProductSchema),
+            body: ProductSchema,
             response: {
                 200: { type: 'string' },
             },
@@ -40,7 +38,7 @@ export default async function productsRoutes(app: FastifyInstance) {
         method: 'DELETE',
         url: '/products',
         schema: {
-            body: zodToJsonSchema(ProductSchema.pick({ id: true })),
+            body: ProductSchema.pick({ id: true }),
             response: {
                 200: { type: 'string' },
             },
