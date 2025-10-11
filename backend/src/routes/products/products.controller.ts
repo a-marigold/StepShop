@@ -1,4 +1,4 @@
-import type { FastifyInstance, FastifyRequest } from 'fastify';
+import type { FastifyRequest } from 'fastify';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 
@@ -14,10 +14,10 @@ export async function createProduct(
     request: FastifyRequest<{
         Body: ProductType;
     }>
-): Promise<Pick<ProductType, 'id'>> {
+): Promise<string> {
     const { image, title, description, price, quantity } = request.body;
 
-    const product = await request.server.prisma.product.create({
+    const createProduct = await request.server.prisma.product.create({
         data: {
             image: image,
 
@@ -30,5 +30,21 @@ export async function createProduct(
             quantity: quantity,
         },
     });
-    return { id: product.id };
+    return `Product has been created: Title - ${createProduct.title}; Id - ${createProduct.id}`;
+}
+
+export async function deleteProduct(
+    request: FastifyRequest<{
+        Body: Pick<ProductType, 'id'>;
+    }>
+): Promise<string> {
+    const { id } = request.body;
+
+    const deleteUser = await request.server.prisma.product.delete({
+        where: {
+            id: id,
+        },
+    });
+
+    return `Product has been deleted: Title - ${deleteUser.title}; Id - ${deleteUser.id} `;
 }
