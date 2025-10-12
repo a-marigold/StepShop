@@ -11,7 +11,7 @@ import modalStyles from './ModalBackdrop.module.scss';
 interface ModalBackdropProps {
     setShowModal: (showModal: boolean) => void;
 
-    props: ComponentProps<'div'>;
+    props?: ComponentProps<'div'>;
 
     children: ReactNode;
 }

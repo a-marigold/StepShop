@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-import { createPortal } from 'react-dom';
+import ModalBackdrop from '@UI/ModalBackdrop';
 
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
@@ -33,14 +33,11 @@ export default function SearchBlock() {
 
             {!showModal && <SearchButton setShowModal={setShowModal} />}
 
-            {showModal &&
-                createPortal(
-                    <div
-                        className={headerStyles['modal-backdrop']}
-                        onClick={() => setShowModal(false)}
-                    ></div>,
-                    document.body
-                )}
+            {showModal && (
+                <ModalBackdrop setShowModal={setShowModal}>
+                    <div></div>
+                </ModalBackdrop>
+            )}
         </>
     );
 }

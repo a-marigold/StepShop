@@ -13,7 +13,8 @@ export default function SearchInput({ showModal, setShowModal }: SearchProps) {
                     headerStyles['input-block'],
                     showModal && headerStyles['active-input-block']
                 )}
-                onClick={() => setShowModal(true)}
+                onFocus={() => setShowModal(true)}
+                onBlur={() => setShowModal(false)}
             >
                 <img src='/images/search-icon.svg' alt='' />
 

@@ -1,5 +1,5 @@
 @use '@/styles/mixins.scss' as *;
 
 .modal-backdrop {
-    @include modal-backdrop(10);
+    @include modal-backdrop(5);
 }
