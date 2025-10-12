@@ -17,9 +17,9 @@
 
     min-width: 0;
     width: 100%;
-    // max-width: 160px;
 
-    padding: 1em;
+    padding: 0 1.55em;
+    box-sizing: border-box;
 
     font-weight: 600;
 }
@@ -36,6 +36,12 @@
 }
 
 @media (max-width: 600px) {
+    .user-buttons-block {
+        gap: 0.5em;
+    }
+    .ready-cart-button {
+        padding: 0 1em;
+    }
     .profile-button {
         padding: 0.75em;
     }
