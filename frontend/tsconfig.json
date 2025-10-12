@@ -41,7 +41,8 @@
         ".next/types/**/*.ts",
         "app/components/CartModal/EmptyCarttsx",
         "eslint.config.сjs",
-        "app/checkout/components/UserFormWidget/.s"
+        "app/checkout/components/UserFormWidget/.s",
+        "../shared"
     ],
     "exclude": ["node_modules", ".next"]
 }
