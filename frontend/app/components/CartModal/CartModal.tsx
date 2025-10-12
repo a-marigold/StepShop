@@ -3,10 +3,12 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
+import Cart from './components/Cart';
 import EmptyCart from './components/EmptyCart';
 
+import ModalBackdrop from '@/UI/ModalBackdrop';
+
 import cartStyles from './CartModal.module.scss';
-import Cart from './components/Cart';
 
 interface CartModalProps {
     setShowModal: (showModal: boolean) => void;
@@ -17,9 +19,9 @@ export default function CartModal({ setShowModal }: CartModalProps) {
         (state: RootState) => state.cart.cartProducts
     );
     return (
-        <div
-            className={cartStyles['modal-backdrop']}
-            onClick={() => setShowModal(false)}
+        <ModalBackdrop
+            props={{ className: cartStyles['modal-backdrop'] }}
+            setShowModal={setShowModal}
         >
             <div
                 className={cartStyles['cart-modal']}
@@ -31,6 +33,6 @@ export default function CartModal({ setShowModal }: CartModalProps) {
                     <EmptyCart setShowModal={setShowModal} />
                 )}
             </div>
-        </div>
+        </ModalBackdrop>
     );
 }
