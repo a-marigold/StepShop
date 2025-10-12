@@ -1,10 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-import ModalBackdrop from '@UI/ModalBackdrop';
-
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
+import SearchModal from './SearchModal';
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
 
@@ -27,16 +26,24 @@ export default function SearchBlock() {
         };
     }, [showModal]);
 
+    const [searchQuery, setSearchQuery] = useState('');
+
     return (
         <>
-            <SearchInput showModal={showModal} setShowModal={setShowModal} />
+            <SearchInput
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                showModal={showModal}
+                setShowModal={setShowModal}
+            />
 
             {!showModal && <SearchButton setShowModal={setShowModal} />}
 
             {showModal && (
-                <ModalBackdrop setShowModal={setShowModal}>
-                    <div></div>
-                </ModalBackdrop>
+                <SearchModal
+                    searchQuery={searchQuery}
+                    setShowModal={setShowModal}
+                />
             )}
         </>
     );

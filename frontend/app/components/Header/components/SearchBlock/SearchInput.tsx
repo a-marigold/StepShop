@@ -3,9 +3,21 @@
 import type { SearchProps } from './SearchProps';
 
 import clsx from 'clsx';
+
 import headerStyles from '../../Header.module.scss';
 
-export default function SearchInput({ showModal, setShowModal }: SearchProps) {
+interface SearchInputProps extends SearchProps {
+    searchQuery: string;
+
+    setSearchQuery: (searchQuery: string) => void;
+}
+
+export default function SearchInput({
+    searchQuery,
+    setSearchQuery,
+    showModal,
+    setShowModal,
+}: SearchInputProps) {
     return (
         <>
             <div
@@ -20,6 +32,8 @@ export default function SearchInput({ showModal, setShowModal }: SearchProps) {
 
                 <input
                     type='text'
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
                     placeholder='Поиск товаров...'
                     aria-label='Поиск товаров'
                 />
