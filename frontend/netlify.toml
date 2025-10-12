@@ -1,2 +1,10 @@
 [[plugins]]
-package = "@netlify/plugin-nextjs"
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  base = "frontend"
+  command = "npm run build"
+  public=".next"
+
+[build.enviroment]
+  NODE_VERSION="18"
