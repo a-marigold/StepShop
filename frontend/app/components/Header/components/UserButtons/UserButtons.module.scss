@@ -4,9 +4,6 @@
     @include flex-center;
     gap: 1em;
 }
-.profile-button {
-    width: 110px;
-}
 .cart-button {
     max-width: 50px;
     height: 50px;
@@ -16,7 +13,13 @@
     @include flex-center;
     gap: 0.75em;
 
-    width: 100px;
+    white-space: nowrap;
+
+    min-width: 0;
+    width: 100%;
+    // max-width: 160px;
+
+    padding: 1em;
 
     font-weight: 600;
 }
@@ -30,4 +33,10 @@
 
 .products-quantity-block {
     @include flex-y-center;
+}
+
+@media (max-width: 600px) {
+    .profile-button {
+        padding: 0.75em;
+    }
 }
