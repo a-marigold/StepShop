@@ -16,7 +16,7 @@ const initialState: CartSliceState = {
     totalAmount: 0,
 };
 
-// TODO: Change actions that use title on using id
+// TODO (5): Change actions that use title on using id
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
