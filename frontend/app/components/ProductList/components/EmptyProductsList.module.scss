@@ -21,3 +21,15 @@
     @include text-wo-margin(1rem);
     color: var(--secondary-font-color);
 }
+
+@media (max-width: 1200px) {
+    .image {
+        width: 75%;
+        height: 75%;
+    }
+}
+@media (max-width: 900px) {
+    .empty-list-box {
+        flex-direction: column;
+    }
+}

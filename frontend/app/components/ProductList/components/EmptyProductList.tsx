@@ -9,7 +9,7 @@ export default function EmptyProductList() {
                 <h2 className={emptyStyles['title']}>Товары не найдены</h2>
 
                 <p className={emptyStyles['message']}>
-                    Внутренняя ошибка сервера
+                    Ни один товар не подошёл под фильтры
                 </p>
             </div>
 
@@ -19,6 +19,8 @@ export default function EmptyProductList() {
                 width={340}
                 height={345}
                 priority
+                fetchPriority='high'
+                className={emptyStyles['image']}
             />
         </div>
     );

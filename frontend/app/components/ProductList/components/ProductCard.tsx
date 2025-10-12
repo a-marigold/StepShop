@@ -45,7 +45,6 @@ export default function ProductCard({
                         height={200}
                         width={200}
                         quality={100}
-                        priority
                         alt={`Картинка товара - ${title}`}
                     />
                 </div>
