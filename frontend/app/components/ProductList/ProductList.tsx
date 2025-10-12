@@ -1,4 +1,4 @@
-import type { ProductType } from '@shared/types/ProductTypes';
+import type { ProductType } from '@step-shop/shared/types/ProductTypes';
 import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';

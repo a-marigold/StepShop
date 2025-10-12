@@ -16,7 +16,8 @@
         "eslint": "^9.37.0",
         "prisma": "^6.17.1",
         "tsx": "^4.20.6",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "@step-shop/shared": "file:../shared"
     },
     "dependencies": {
         "@prisma/client": "^6.17.1",

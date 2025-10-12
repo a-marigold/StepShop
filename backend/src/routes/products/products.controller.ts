@@ -1,6 +1,6 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import type { ProductType } from '@step-shop/shared/types/ProductTypes';
 
 export async function getAllProducts(
     request: FastifyRequest

@@ -8,7 +8,10 @@ import {
     deleteProduct,
     updateProduct,
 } from './products.controller';
-import { ProductListSchema, ProductSchema } from '@shared/types/ProductTypes';
+import {
+    ProductListSchema,
+    ProductSchema,
+} from '@step-shop/shared/types/ProductTypes';
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
     app.route({

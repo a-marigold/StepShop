@@ -27,6 +27,9 @@ importers:
         specifier: ^3.24.6
         version: 3.24.6(zod@4.1.12)
     devDependencies:
+      '@step-shop/shared':
+        specifier: file:../shared
+        version: file:../shared
       '@types/node':
         specifier: ^24.7.0
         version: 24.7.0
@@ -308,6 +311,9 @@ packages:
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
+
+  '@step-shop/shared@file:../shared':
+    resolution: {directory: ../shared, type: directory}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -1099,6 +1105,10 @@ snapshots:
       '@prisma/debug': 6.17.1
 
   '@standard-schema/spec@1.0.0': {}
+
+  '@step-shop/shared@file:../shared':
+    dependencies:
+      zod: 4.1.12
 
   '@types/estree@1.0.8': {}
 
