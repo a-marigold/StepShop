@@ -1,0 +1,23 @@
+@use '@styles/mixins.scss' as *;
+
+.empty-list-box {
+    @include flex-center;
+    gap: 2em;
+
+    width: 100%;
+}
+
+.text-block {
+    @include flex-column;
+
+    gap: 0.5em;
+}
+
+.title {
+    @include text-wo-margin(2.5rem);
+    font-weight: 800;
+}
+.message {
+    @include text-wo-margin(1rem);
+    color: var(--secondary-font-color);
+}

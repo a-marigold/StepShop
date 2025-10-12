@@ -9,9 +9,9 @@ import { ClientProductType } from '@/types/ClientProductType';
 
 import Image from 'next/image';
 
-import ProductModal from '../ProductModal/ProductModal';
+import ProductModal from '../../ProductModal/ProductModal';
 
-import productStyles from './ProductList.module.scss';
+import productStyles from '../ProductList.module.scss';
 
 export default function ProductCard({
     id,

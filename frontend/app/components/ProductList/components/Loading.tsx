@@ -1,6 +1,6 @@
 import EmptyProductCard from './EmptyProductCard';
 
-import productStyles from './ProductList.module.scss';
+import productStyles from '../ProductList.module.scss';
 
 const emptyProducts = Array.from({ length: 10 });
 

@@ -1,2 +1,2 @@
 export { default } from './ProductList';
-export { Loading } from './Loading';
+export { Loading } from './components/Loading';

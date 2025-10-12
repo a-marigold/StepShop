@@ -3,7 +3,8 @@ import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
-import ProductCard from './ProductCard';
+import ProductCard from './components/ProductCard';
+import EmptyProductList from './components/EmptyProductList';
 
 import productStyles from './ProductList.module.scss';
 
@@ -27,21 +28,25 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
 
     return (
         <div className={productStyles['products-list']}>
-            {filteredProducts.map((product, index) => (
-                <ProductCard
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    image={'/images/white-t-shirt.webp'}
-                    description='description 1 lorem ipsum dolor'
-                    // TODO (3): Change the string below on ---> price={product.price}
-                    // TEMPORARY SITUATION:
-                    price={600}
-                    //
-                    currencySymbol={CURRENCY_SYMBOL}
-                    quantity={1}
-                />
-            ))}
+            {filteredProducts.length ? (
+                filteredProducts.map((product, index) => (
+                    <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        image={'/images/white-t-shirt.webp'}
+                        description='description 1 lorem ipsum dolor'
+                        // TODO (3): Change the string below on ---> price={product.price}
+                        // TEMPORARY SITUATION:
+                        price={600}
+                        //
+                        currencySymbol={CURRENCY_SYMBOL}
+                        quantity={1}
+                    />
+                ))
+            ) : (
+                <EmptyProductList />
+            )}
         </div>
     );
 }
