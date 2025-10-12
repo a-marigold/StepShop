@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
+
 import {
     validatorCompiler,
     serializerCompiler,

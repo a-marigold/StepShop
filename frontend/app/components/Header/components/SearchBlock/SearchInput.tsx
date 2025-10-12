@@ -14,11 +14,14 @@ export default function SearchInput({ showModal, setShowModal }: SearchProps) {
                     showModal && headerStyles['active-input-block']
                 )}
                 onClick={() => setShowModal(true)}
-                aria-label='Найти продукты'
             >
                 <img src='/images/search-icon.svg' alt='' />
 
-                <input type='text' placeholder='Поиск пиццы...' />
+                <input
+                    type='text'
+                    placeholder='Поиск товаров...'
+                    aria-label='Поиск товаров'
+                />
 
                 <button
                     className={clsx(
@@ -29,7 +32,7 @@ export default function SearchInput({ showModal, setShowModal }: SearchProps) {
                         event.stopPropagation();
                         setShowModal(false);
                     }}
-                    aria-label='Закрыть поиск продуктов'
+                    aria-label='Закрыть поиск товаров'
                 >
                     <img src='/images/cross-icon.svg' alt='' />
                 </button>

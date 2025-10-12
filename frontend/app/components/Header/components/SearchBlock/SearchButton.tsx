@@ -8,6 +8,7 @@ export default function SearchButton({ setShowModal }: SearchProps) {
             <button
                 className={headerStyles['search-button']}
                 onClick={() => setShowModal(true)}
+                aria-label='Поиск товаров'
             >
                 <img src='/images/search-icon.svg' alt='' />
             </button>
