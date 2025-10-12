@@ -37,7 +37,7 @@ export default function SearchModal({
 
     const filteredProducts = useMemo(() => {
         return products.filter((product) =>
-            product.title.includes(searchQuery.toLowerCase())
+            product.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
     }, [searchQuery]);
 
@@ -53,7 +53,7 @@ export default function SearchModal({
                         >
                             <Image
                                 src={product.image}
-                                alt='_PRODUCT__IMAGE_'
+                                alt={`Картинка товара - ${product.title}`}
                                 width={32}
                                 height={32}
                             />
@@ -63,7 +63,6 @@ export default function SearchModal({
                             </p>
 
                             <p className={modalStyles['price']}>
-                                {' '}
                                 {product.price}
                             </p>
                         </a>
