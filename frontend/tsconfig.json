@@ -14,8 +14,9 @@
         "module": "esnext",
 
         "moduleResolution": "node",
-        "resolveJsonModule": true,
         "isolatedModules": true,
+
+        "resolveJsonModule": true,
 
         "jsx": "preserve",
         "incremental": true,
@@ -31,18 +32,20 @@
             "@/*": ["./*"],
             "@styles/*": ["styles/*"],
             "@UI/*": ["UI/*"],
+
             "@shared/*": ["../shared/*"]
         },
         "types": ["jest", "node"]
     },
+
+    "references": [{ "path": "../shared" }],
 
     "include": [
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
         ".next/types/**/*.ts",
-        "eslint.config.сjs",
-        "../shared/**/*.ts"
+        "eslint.config.сjs"
     ],
     "exclude": ["node_modules", ".next"]
 }

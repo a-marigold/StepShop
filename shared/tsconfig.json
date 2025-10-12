@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "declaration": true,
+        "skipLibCheck": true,
+        "outDir": ".dist"
+    },
+    "include": ["types/**/*.ts"]
+}
