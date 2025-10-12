@@ -6,15 +6,11 @@ import {
     handleIncreaseProductQuantity,
 } from '@/utils/cartGlobalState';
 
-import { ClientProductType } from '@/types/ClientProductType';
+import { CartProductProps } from '@/types/CartProductsProps';
 
 import Image from 'next/image';
 import EmptyFilledButton from '@/UI/EmptyFilledButton';
 import cartStyles from './CartWidget.module.scss';
-
-interface CartProductProps extends Omit<ClientProductType, 'description'> {
-    options: string;
-}
 
 export default function CartProduct({
     image,

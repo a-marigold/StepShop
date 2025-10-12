@@ -9,17 +9,13 @@ import {
     handleIncreaseProductQuantity,
 } from '@/utils/cartGlobalState';
 
-import { ClientProductType } from '@/types/ClientProductType';
+import { CartProductProps } from '@/types/CartProductsProps';
 
 import Image from 'next/image';
 
 import EmptyFilledButton from '@UI/EmptyFilledButton';
 
 import productStyles from './CartProduct.module.scss';
-
-interface CartProductProps extends Omit<ClientProductType, 'description'> {
-    options: string;
-}
 
 export default memo(function CartProduct({
     image,
