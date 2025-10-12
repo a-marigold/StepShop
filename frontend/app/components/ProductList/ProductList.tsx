@@ -10,9 +10,15 @@ import productStyles from './ProductList.module.scss';
 
 export default async function ProductList({ searchParams }: SearchParamsProp) {
     // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    const response = await fetch('http://localhost:1000/products');
 
-    const products = (await response.json()) as ProductType[];
+    let products: ProductType[];
+    try {
+        const response = await fetch('http://localhost:1000/products');
+        products = await response.json();
+    } catch {
+        console.log('Server is sleeping');
+        products = [];
+    }
 
     const queryParams = await searchParams;
     const minPrice = queryParams.minPrice ? Number(queryParams.minPrice) : null;
