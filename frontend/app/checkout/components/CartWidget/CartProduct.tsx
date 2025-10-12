@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-
 import type { RootState, AppDispatch } from '@/redux/store';
 
 import {
@@ -9,8 +8,8 @@ import {
 
 import { ClientProductType } from '@/types/ClientProductType';
 
+import Image from 'next/image';
 import EmptyFilledButton from '@/UI/EmptyFilledButton';
-
 import cartStyles from './CartWidget.module.scss';
 
 interface CartProductProps extends Omit<ClientProductType, 'description'> {
@@ -36,7 +35,12 @@ export default function CartProduct({
 
     return (
         <div className={cartStyles['cart-product']}>
-            <img src={image} alt='Изображение товара' width={65} height={65} />
+            <Image
+                src={image}
+                alt='Изображение товара'
+                width={65}
+                height={65}
+            />
 
             <div className={cartStyles['order-block']}>
                 <div className={cartStyles['title-block']}>

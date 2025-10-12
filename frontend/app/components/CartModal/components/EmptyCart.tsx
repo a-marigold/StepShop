@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import AccessButton from '@/UI/AccessButton';
 
 import cartStyles from './EmptyCart.module.scss';
@@ -10,11 +12,12 @@ interface EmptyCartProps {
 export default function EmptyCart({ setShowModal }: EmptyCartProps) {
     return (
         <div className={cartStyles['empty-cart']}>
-            <img
+            <Image
                 src='/images/empty-cart.svg'
                 alt='Корзина пуста'
                 width={120}
                 height={120}
+                priority
             />
 
             <div className={cartStyles['text-block']}>

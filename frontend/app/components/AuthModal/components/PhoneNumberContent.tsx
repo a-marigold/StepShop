@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import PrimaryInput from '@UI/PrimaryInput';
 import AccessButton from '@/UI/AccessButton';
 
@@ -16,11 +18,12 @@ export default function PhoneNumberContent() {
                     </p>
                 </div>
 
-                <img
+                <Image
                     src='/images/phone-icon.svg'
                     width={60}
                     height={60}
                     alt=''
+                    priority
                 />
             </div>
 

@@ -1,6 +1,5 @@
 import type { SearchProps } from './SearchProps';
 
-import clsx from 'clsx';
 import headerStyles from '../../Header.module.scss';
 
 export default function SearchButton({ setShowModal }: SearchProps) {

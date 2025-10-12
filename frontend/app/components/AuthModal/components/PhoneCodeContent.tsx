@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import CodeInput from '@UI/CodeInput';
 import AccessButton from '@/UI/AccessButton';
 
@@ -16,11 +18,12 @@ export default function PhoneCodeContent() {
                     </p>
                 </div>
 
-                <img
+                <Image
                     src='/images/phone-code-icon.svg'
                     width={60}
                     height={60}
                     alt=''
+                    priority
                 />
             </div>
 

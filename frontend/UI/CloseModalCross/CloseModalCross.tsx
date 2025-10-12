@@ -24,13 +24,6 @@ export default function CloseModalCross({
             onClick={clickAction}
             aria-label='Закрыть модальное окно'
         >
-            {/* <img
-                src='/images/bold-cross-icon.svg'
-                width={30}
-                height={30}
-                alt=''
-            /> */}
-
             <svg
                 width='30'
                 height='30'
