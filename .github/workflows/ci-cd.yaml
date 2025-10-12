@@ -34,12 +34,10 @@ jobs:
       working-directory: ./frontend
       run: npm run test
 
-    - name: Debug repo structure
-      run: |
-        pwd
-        ls -R ..
-      working-directory: ./frontend
-
+    - name: Build shared types
+      working-directory: ./shared
+      run: npx tsc
+      
     - name: Build project
       working-directory: ./frontend
       run: npm run build
