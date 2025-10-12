@@ -35,13 +35,13 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     return (
         <div className={productStyles['products-list']}>
             {filteredProducts.length ? (
-                filteredProducts.map((product, index) => (
+                filteredProducts.map((product) => (
                     <ProductCard
                         key={product.id}
                         id={product.id}
                         title={product.title}
-                        image={'/images/white-t-shirt.webp'}
-                        description='description 1 lorem ipsum dolor'
+                        image={product.image}
+                        description={product.description}
                         price={product.price}
                         currencySymbol={CURRENCY_SYMBOL}
                         quantity={1}

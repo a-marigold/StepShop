@@ -1,3 +1,5 @@
+// TODO (8): Add fallback UI if there are no product in filteredProducts
+
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -9,6 +11,7 @@ import Image from 'next/image';
 import ModalBackdrop from '@UI/ModalBackdrop';
 
 import modalStyles from './SearchModal.module.scss';
+import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 type SearchProductType = Pick<ProductType, 'id' | 'image' | 'title' | 'price'>;
 
@@ -43,7 +46,7 @@ export default function SearchModal({
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>
-            {searchQuery.trim() && filteredProducts.length && (
+            {searchQuery.trim() && !!filteredProducts.length && (
                 <div className={modalStyles['search-modal']}>
                     {filteredProducts.map((product) => (
                         <a
@@ -64,6 +67,7 @@ export default function SearchModal({
 
                             <p className={modalStyles['price']}>
                                 {product.price}
+                                {CURRENCY_SYMBOL}
                             </p>
                         </a>
                     ))}

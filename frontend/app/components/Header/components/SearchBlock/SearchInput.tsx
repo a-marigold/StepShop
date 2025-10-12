@@ -25,17 +25,19 @@ export default function SearchInput({
                     headerStyles['input-block'],
                     showModal && headerStyles['active-input-block']
                 )}
-                onFocus={() => setShowModal(true)}
-                onBlur={() => setShowModal(false)}
             >
                 <img src='/images/search-icon.svg' alt='' />
 
                 <input
                     type='text'
                     value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
+                    onChange={(event) => {
+                        setSearchQuery(event.target.value);
+                    }}
                     placeholder='Поиск товаров...'
                     aria-label='Поиск товаров'
+                    onFocus={() => setShowModal(true)}
+                    onBlur={() => setShowModal(false)}
                 />
 
                 <button

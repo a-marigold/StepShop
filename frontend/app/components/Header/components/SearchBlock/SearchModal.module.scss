@@ -25,11 +25,23 @@
 
     width: 100%;
     height: 50px;
+
+    padding: 0 1.25em;
+    box-sizing: border-box;
+
+    text-decoration: none;
+
+    transition: background-color 0.1s ease;
+
+    &:hover {
+        background-color: var(--background-color);
+    }
 }
 
 .title {
     @include text-wo-margin(1rem);
     font-weight: 700;
+    color: var(--font-color);
 }
 .price {
     @include text-wo-margin(1rem);
