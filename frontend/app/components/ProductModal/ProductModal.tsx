@@ -9,6 +9,7 @@ import { addProduct, increaseTotalAmount } from '@/redux/CartSlice';
 
 import { ClientProductType } from '@/types/ClientProductType';
 
+import ModalBackdrop from '@/UI/ModalBackdrop';
 import AccessButton from '@UI/AccessButton';
 import SizePicker from '@UI/SizePicker';
 import CloseModalCross from '@/UI/CloseModalCross';
@@ -31,9 +32,9 @@ export default function ProductModal({
     const dispatch = useDispatch<AppDispatch>();
 
     return (
-        <div
-            className={modalStyles['modal-backdrop']}
-            onClick={() => setShowModal(false)}
+        <ModalBackdrop
+            setShowModal={setShowModal}
+            props={{ className: modalStyles['modal-backdrop'] }}
         >
             <div className={modalStyles['modal-wrapper']}>
                 <div
@@ -91,6 +92,6 @@ export default function ProductModal({
                     clickAction={() => setShowModal(false)}
                 />
             </div>
-        </div>
+        </ModalBackdrop>
     );
 }
