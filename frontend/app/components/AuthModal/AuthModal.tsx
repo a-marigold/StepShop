@@ -5,6 +5,7 @@
 import PhoneNumberContent from './components/PhoneNumberContent';
 import PhoneCodeContent from './components/PhoneCodeContent';
 
+import ModalBackdrop from '@/UI/ModalBackdrop';
 import CloseModalCross from '@/UI/CloseModalCross';
 
 import authStyles from './AuthModal.module.scss';
@@ -15,9 +16,9 @@ interface AuthModalProps {
 
 export default function AuthModal({ setShowModal }: AuthModalProps) {
     return (
-        <div
-            className={authStyles['modal-backdrop']}
-            onClick={() => setShowModal(false)}
+        <ModalBackdrop
+            props={{ className: authStyles['modal-backdrop'] }}
+            setShowModal={setShowModal}
         >
             <div className={authStyles['modal-wrapper']}>
                 <div
@@ -33,6 +34,6 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     clickAction={() => setShowModal(false)}
                 />
             </div>
-        </div>
+        </ModalBackdrop>
     );
 }
