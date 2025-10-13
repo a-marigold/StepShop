@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
+import { calcModalLayout } from '@/utils/calcModalLayout';
 
 import SearchModal from './SearchModal';
 
@@ -29,29 +30,12 @@ export default function SearchBlock() {
 
     const [searchQuery, setSearchQuery] = useState('');
 
-    function calcModalLayout(
-        elementRef: HTMLElement | null,
-        modalRef: HTMLDivElement | null
-    ) {
-        if (!elementRef || !modalRef) return;
-
-        const elementLayout = elementRef.getBoundingClientRect();
-
-        modalRef.style.width = `${elementLayout.width}px`;
-
-        modalRef.style.transform = `translate(${elementLayout.left}px, ${
-            elementLayout.top + elementLayout.height
-        }px)`;
-    }
-
     const searchInputRef = useRef<HTMLInputElement>(null);
-
     const searchModalRef = useRef<HTMLDivElement>(null);
 
     const resizeObserver = new ResizeObserver(() => {
         calcModalLayout(searchInputRef.current, searchModalRef.current);
     });
-
     useEffect(() => {
         if (!searchInputRef.current) return;
         resizeObserver.observe(searchInputRef.current);
