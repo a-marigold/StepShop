@@ -1,1 +1,1 @@
-export { calcModalLayout } from './calcModalLayout';
+export { calculateModalLayout } from './calculateModalLayout';

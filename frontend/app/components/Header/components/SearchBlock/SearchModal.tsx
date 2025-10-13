@@ -1,5 +1,3 @@
-// TODO (8): Add fallback UI if there are no product in filteredProducts
-
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
@@ -34,6 +32,7 @@ export default function SearchModal({
         fetch('http://127.0.0.1:1000/products')
             .then((data) => data.json())
             .then((data) => setProducts(data))
+
             .catch((error) => {
                 console.error(error);
                 setProducts([]);
@@ -50,15 +49,15 @@ export default function SearchModal({
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>
-            {searchQuery.trim() && (
-                <div
-                    ref={ref}
-                    className={modalStyles['search-modal']}
-                    onClick={(event) => {
-                        event.stopPropagation();
-                    }}
-                >
-                    {filteredProducts.map((product) => (
+            <div
+                ref={ref}
+                className={modalStyles['search-modal']}
+                onClick={(event) => {
+                    event.stopPropagation();
+                }}
+            >
+                {searchQuery.trim() && !!filteredProducts.length ? (
+                    filteredProducts.map((product) => (
                         <a
                             key={product.id}
                             href={`#${product.title}`}
@@ -80,9 +79,15 @@ export default function SearchModal({
                                 {CURRENCY_SYMBOL}
                             </p>
                         </a>
-                    ))}
-                </div>
-            )}
+                    ))
+                ) : (
+                    <div className={modalStyles['hint-box']}>
+                        <p className={modalStyles['hint']}>
+                            По вашему запросу ничего не найдено
+                        </p>
+                    </div>
+                )}
+            </div>
         </ModalBackdrop>
     );
 }

@@ -7,7 +7,7 @@
  * @param {HTMLDivElement | null} modalRef - DOM link on modal html element
  */
 
-export function calcModalLayout(
+export function calculateModalLayout(
     elementRef: HTMLElement | null,
     modalRef: HTMLDivElement | null
 ) {
