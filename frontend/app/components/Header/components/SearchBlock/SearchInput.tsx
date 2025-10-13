@@ -34,6 +34,9 @@ export default function SearchInput({ ref, ...props }: SearchInputProps) {
                     type='text'
                     value={searchQuery}
                     onChange={(event) => {
+                        if (!showModal) {
+                            setShowModal(true);
+                        }
                         setSearchQuery(event.target.value);
                     }}
                     placeholder='Поиск товаров...'

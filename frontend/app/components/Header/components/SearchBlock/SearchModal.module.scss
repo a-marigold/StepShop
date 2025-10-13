@@ -53,9 +53,13 @@
 
     width: 100%;
     height: 100%;
+
+    padding: 2em;
+    box-sizing: border-box;
 }
 .hint {
     @include text-wo-margin(1.25rem);
     font-weight: 500;
     color: var(--secondary-font-color);
+    text-align: center;
 }
