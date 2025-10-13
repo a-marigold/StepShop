@@ -3,6 +3,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import type { Ref } from 'react';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 
@@ -16,11 +17,14 @@ import { CURRENCY_SYMBOL } from '@/constants/currency';
 type SearchProductType = Pick<ProductType, 'id' | 'image' | 'title' | 'price'>;
 
 interface SearchModalProps {
+    ref: Ref<HTMLDivElement>;
+
     searchQuery: string;
 
     setShowModal: (showModal: boolean) => void;
 }
 export default function SearchModal({
+    ref,
     searchQuery,
     setShowModal,
 }: SearchModalProps) {
@@ -46,8 +50,14 @@ export default function SearchModal({
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>
-            {searchQuery.trim() && !!filteredProducts.length && (
-                <div className={modalStyles['search-modal']}>
+            {searchQuery.trim() && (
+                <div
+                    ref={ref}
+                    className={modalStyles['search-modal']}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                    }}
+                >
                     {filteredProducts.map((product) => (
                         <a
                             key={product.id}

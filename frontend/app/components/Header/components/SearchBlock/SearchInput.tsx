@@ -1,5 +1,7 @@
 'use client';
 
+import type { Ref } from 'react';
+
 import type { SearchProps } from './SearchProps';
 
 import clsx from 'clsx';
@@ -10,14 +12,13 @@ interface SearchInputProps extends SearchProps {
     searchQuery: string;
 
     setSearchQuery: (searchQuery: string) => void;
+
+    ref: Ref<HTMLInputElement>;
 }
 
-export default function SearchInput({
-    searchQuery,
-    setSearchQuery,
-    showModal,
-    setShowModal,
-}: SearchInputProps) {
+export default function SearchInput({ ref, ...props }: SearchInputProps) {
+    const { showModal, setShowModal, searchQuery, setSearchQuery } = props;
+
     return (
         <>
             <div
@@ -25,6 +26,7 @@ export default function SearchInput({
                     headerStyles['input-block'],
                     showModal && headerStyles['active-input-block']
                 )}
+                ref={ref}
             >
                 <img src='/images/search-icon.svg' alt='' />
 

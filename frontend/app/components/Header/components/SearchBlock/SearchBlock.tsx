@@ -1,13 +1,13 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
 import SearchModal from './SearchModal';
+
 import SearchInput from './SearchInput';
 import SearchButton from './SearchButton';
-
-import headerStyles from '../../Header.module.scss';
 
 export default function SearchBlock() {
     const [showModal, setShowModal] = useState(false);
@@ -17,6 +17,7 @@ export default function SearchBlock() {
             document.body.classList.add('search-modal-opened');
 
             lockBodyScroll();
+            calcModalLayout(searchInputRef.current, searchModalRef.current);
         }
 
         return () => {
@@ -28,9 +29,42 @@ export default function SearchBlock() {
 
     const [searchQuery, setSearchQuery] = useState('');
 
+    function calcModalLayout(
+        elementRef: HTMLElement | null,
+        modalRef: HTMLDivElement | null
+    ) {
+        if (!elementRef || !modalRef) return;
+
+        const elementLayout = elementRef.getBoundingClientRect();
+
+        modalRef.style.width = `${elementLayout.width}px`;
+
+        modalRef.style.transform = `translate(${elementLayout.left}px, ${
+            elementLayout.top + elementLayout.height
+        }px)`;
+    }
+
+    const searchInputRef = useRef<HTMLInputElement>(null);
+
+    const searchModalRef = useRef<HTMLDivElement>(null);
+
+    const resizeObserver = new ResizeObserver(() => {
+        calcModalLayout(searchInputRef.current, searchModalRef.current);
+    });
+
+    useEffect(() => {
+        if (!searchInputRef.current) return;
+        resizeObserver.observe(searchInputRef.current);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
+
     return (
         <>
             <SearchInput
+                ref={searchInputRef}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
                 showModal={showModal}
@@ -41,6 +75,7 @@ export default function SearchBlock() {
 
             {showModal && (
                 <SearchModal
+                    ref={searchModalRef}
                     searchQuery={searchQuery}
                     setShowModal={setShowModal}
                 />

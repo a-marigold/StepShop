@@ -2,9 +2,7 @@
 
 .search-modal {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 0.75em;
 
     @include flex-column;
 
@@ -14,9 +12,11 @@
 
     padding: 0.75em 0;
 
-    width: 60%;
+    height: 400px;
 
     box-sizing: border-box;
+
+    z-index: 6;
 }
 
 .search-product {
