@@ -8,7 +8,7 @@
     max-width: 1580px;
     height: 700px;
 
-    border-radius: 0 0 32px 32px;
+    border-radius: var(--page-border-radius);
 
     padding: 2em;
     box-sizing: border-box;
