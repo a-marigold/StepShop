@@ -7,6 +7,7 @@ import { createPortal } from 'react-dom';
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
 import { useSelector } from 'react-redux';
+
 import type { RootState } from '@/redux/store';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
@@ -19,7 +20,14 @@ import AccessButton from '@/UI/AccessButton';
 
 import userStyles from './UserButtons.module.scss';
 
-export default function UserButtons() {
+interface UserButtonsProps {
+    excludeProfileButton?: boolean;
+    excludeCartButton?: boolean;
+}
+export default function UserButtons({
+    excludeProfileButton = false,
+    excludeCartButton = false,
+}: UserButtonsProps) {
     const [showCartModal, setShowCartModal] = useState(false);
 
     const [showAuthModal, setShowAuthModal] = useState(false);
@@ -47,19 +55,21 @@ export default function UserButtons() {
                 className={`${userStyles['user-buttons-block']} user-buttons-public`}
             >
                 {/* ^^ user-buttons-public class used for setting display none on them by using class toggle on body ^^*/}
+                {!excludeProfileButton && (
+                    <EmptyFilledButton
+                        title='Войти'
+                        ariaLabel='Войти в аккаунт'
+                        className={userStyles['profile-button']}
+                        // image='/images/profile-icon.svg'
+                        clickAction={() => setShowAuthModal(true)}
+                    >
+                        <svg width={12} height={16} color='var(--accent-color)'>
+                            <use href='#profile-icon' />
+                        </svg>
+                    </EmptyFilledButton>
+                )}
 
-                <EmptyFilledButton
-                    title='Войти'
-                    ariaLabel='Войти в аккаунт'
-                    className={userStyles['profile-button']}
-                    // image='/images/profile-icon.svg'
-                    clickAction={() => setShowAuthModal(true)}
-                >
-                    <svg width={12} height={16} color='var(--accent-color)'>
-                        <use href='#profile-icon' />
-                    </svg>
-                </EmptyFilledButton>
-                {cartProductsLength ? (
+                {!excludeCartButton && cartProductsLength ? (
                     <AccessButton
                         ariaLabel='Открыть корзину'
                         clickAction={() => setShowCartModal(true)}
