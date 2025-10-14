@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import type { ReactNode, ComponentProps } from 'react';
 
 import clsx from 'clsx';
 import buttonStyles from './EmptyFilledButton.module.scss';
@@ -17,6 +17,8 @@ interface EmptyFilledButtonProps {
     children?: ReactNode;
 
     clickAction?: () => void;
+
+    props?: ComponentProps<'button'>;
 }
 
 export default function EmptyFilledButton({
@@ -31,6 +33,8 @@ export default function EmptyFilledButton({
     children,
 
     ariaLabel,
+
+    props,
 }: EmptyFilledButtonProps) {
     return (
         <button
@@ -38,6 +42,7 @@ export default function EmptyFilledButton({
             onClick={clickAction}
             aria-label={ariaLabel}
             disabled={isDisabled}
+            {...props}
         >
             {image && <img src={image} alt='' />}
 
