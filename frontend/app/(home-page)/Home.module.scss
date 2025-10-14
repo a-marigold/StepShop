@@ -3,7 +3,7 @@
 
     width: 100%;
 
-    max-width: 1580px;
+    max-width: var(--page-max-width);
 
     border-radius: 0 0 var(--page-border-radius) var(--page-border-radius);
 
@@ -17,7 +17,7 @@
 
     gap: 3em;
 
-    padding: 0 4em;
+    padding: 0 var(--page-content-x-padding);
 
     box-sizing: border-box;
 

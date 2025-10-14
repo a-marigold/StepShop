@@ -5,7 +5,7 @@
 
     width: 100%;
 
-    max-width: 1580px;
+    max-width: var(--page-max-width);
     height: 700px;
 
     border-radius: var(--page-border-radius);

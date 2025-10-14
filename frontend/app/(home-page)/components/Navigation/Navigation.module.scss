@@ -4,7 +4,7 @@
     margin-top: 2.5em;
 
     width: 100%;
-    padding: 0 4em;
+    padding: 0 var(--page-content-x-padding);
     box-sizing: border-box;
 }
 
@@ -29,7 +29,7 @@
 
     background: var(--main-bg-color);
 
-    padding: 1em 4em;
+    padding: 1em var(--page-content-x-padding);
     box-sizing: border-box;
 
     border-bottom: 1px var(--border-color) solid;

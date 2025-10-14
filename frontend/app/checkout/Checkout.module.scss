@@ -8,12 +8,12 @@
 
     border-radius: 0 0 var(--page-border-radius) var(--page-border-radius);
 
-    padding: 3em 4em 5em;
+    padding: 3em var(--page-content-x-padding) 5em;
     box-sizing: border-box;
 
     background-color: var(--checkout-page-bg);
 
-    max-width: 1580px;
+    max-width: var(--page-max-width);
 }
 
 .title {
