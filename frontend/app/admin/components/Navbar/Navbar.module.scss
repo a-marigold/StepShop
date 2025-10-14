@@ -1,0 +1,22 @@
+@use '@styles/mixins.scss' as *;
+
+.navbar {
+    @include flex-column;
+
+    flex: 1;
+    max-width: 260px;
+}
+.controller {
+    width: 100%;
+
+    padding: 1em;
+    box-sizing: border-box;
+
+    color: var(--font-color);
+    text-decoration: none;
+}
+
+.active-controller {
+    color: var(--accent-color);
+    background-color: var(--main-bg-color);
+}
