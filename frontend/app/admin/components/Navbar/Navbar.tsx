@@ -24,7 +24,7 @@ export default function Navbar() {
                     href={controller.path}
                     className={clsx(
                         navStyles['controller'],
-                        controller.title === pathname &&
+                        controller.path === pathname &&
                             navStyles['active-controller']
                     )}
                 >
