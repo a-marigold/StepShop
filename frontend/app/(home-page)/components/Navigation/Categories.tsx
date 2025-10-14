@@ -60,7 +60,7 @@ export default function Categories() {
     }, [currentCategory]);
 
     return (
-        <div className={navStyles['categories-block']}>
+        <nav className={navStyles['categories-block']}>
             <div ref={activeBlockRef} className={navStyles['active-block']} />
 
             {categories.map((category, index) => (
@@ -80,6 +80,6 @@ export default function Categories() {
                     {category.name}
                 </button>
             ))}
-        </div>
+        </nav>
     );
 }

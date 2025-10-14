@@ -39,6 +39,7 @@ export default function NotFound() {
                             <EmptyFilledButton
                                 title='На главную'
                                 ariaLabel='Вернуться на главную страницу'
+                                props={{ tabIndex: -1 }}
                             >
                                 <svg
                                     width={16}
