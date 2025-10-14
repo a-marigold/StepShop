@@ -1,8 +1,17 @@
 .header {
     width: 100%;
+
+    max-width: var(--page-max-width);
+
     padding: 2em var(--page-content-x-padding);
+
+    box-sizing: border-box;
 
     background-color: var(--main-bg-color);
 
     border-radius: var(--page-border-radius) var(--page-border-radius) 0 0;
+}
+
+.back-link {
+    text-decoration: none;
 }
