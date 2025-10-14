@@ -55,12 +55,12 @@ export default function UserButtons({
                 className={`${userStyles['user-buttons-block']} user-buttons-public`}
             >
                 {/* ^^ user-buttons-public class used for setting display none on them by using class toggle on body ^^*/}
-                {!excludeProfileButton && (
+
+                {excludeProfileButton && (
                     <EmptyFilledButton
                         title='Войти'
                         ariaLabel='Войти в аккаунт'
                         className={userStyles['profile-button']}
-                        // image='/images/profile-icon.svg'
                         clickAction={() => setShowAuthModal(true)}
                     >
                         <svg width={12} height={16} color='var(--accent-color)'>
@@ -69,41 +69,50 @@ export default function UserButtons({
                     </EmptyFilledButton>
                 )}
 
-                {!excludeCartButton && cartProductsLength ? (
-                    <AccessButton
-                        ariaLabel='Открыть корзину'
-                        clickAction={() => setShowCartModal(true)}
-                        className={userStyles['ready-cart-button']}
-                    >
-                        <p className={userStyles['total-amount']}>
-                            {totalAmount} {CURRENCY_SYMBOL}
-                        </p>
+                {excludeCartButton &&
+                    (cartProductsLength ? (
+                        <AccessButton
+                            ariaLabel='Открыть корзину'
+                            clickAction={() => setShowCartModal(true)}
+                            className={userStyles['ready-cart-button']}
+                        >
+                            <p className={userStyles['total-amount']}>
+                                {totalAmount} {CURRENCY_SYMBOL}
+                            </p>
 
-                        <div className={userStyles['vertical-line']} />
+                            <div className={userStyles['vertical-line']} />
 
-                        <span className={userStyles['products-quantity-block']}>
+                            <span
+                                className={
+                                    userStyles['products-quantity-block']
+                                }
+                            >
+                                <svg
+                                    width={18}
+                                    height={18}
+                                    color='var(--main-bg-color)'
+                                >
+                                    <use href='#cart-icon' />
+                                </svg>
+                                &nbsp;
+                                {cartProductsLength}
+                            </span>
+                        </AccessButton>
+                    ) : (
+                        <EmptyFilledButton
+                            ariaLabel='Открыть корзину'
+                            className={userStyles['cart-button']}
+                            clickAction={() => setShowCartModal(true)}
+                        >
                             <svg
                                 width={18}
                                 height={18}
-                                color='var(--main-bg-color)'
+                                color='var(--accent-color)'
                             >
                                 <use href='#cart-icon' />
                             </svg>
-                            &nbsp;
-                            {cartProductsLength}
-                        </span>
-                    </AccessButton>
-                ) : (
-                    <EmptyFilledButton
-                        ariaLabel='Открыть корзину'
-                        className={userStyles['cart-button']}
-                        clickAction={() => setShowCartModal(true)}
-                    >
-                        <svg width={18} height={18} color='var(--accent-color)'>
-                            <use href='#cart-icon' />
-                        </svg>
-                    </EmptyFilledButton>
-                )}
+                        </EmptyFilledButton>
+                    ))}
             </div>
 
             {showCartModal &&

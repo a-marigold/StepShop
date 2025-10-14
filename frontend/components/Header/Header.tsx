@@ -1,3 +1,5 @@
+// TODO (2): Add separate function for excludeChildren
+
 import Link from 'next/link';
 
 import type { HeaderChild } from './HeaderChild';
@@ -12,10 +14,14 @@ interface HeaderProps {
 }
 
 export default function Header({ excludeChildren }: HeaderProps) {
+    function checkChildIncluding(childName: HeaderChild) {
+        return !excludeChildren?.includes(childName);
+    }
+
     return (
         <header className={headerStyles['header']}>
             <div className={headerStyles['left-box']}>
-                {!excludeChildren?.includes('title-block') && (
+                {checkChildIncluding('title-block') && (
                     <div className={headerStyles['title-block']}>
                         <Link href='/'>
                             <img
@@ -38,14 +44,12 @@ export default function Header({ excludeChildren }: HeaderProps) {
                         </div>
                     </div>
                 )}
-                {!excludeChildren?.includes('search-block') && <SearchBlock />}
+                {checkChildIncluding('title-block') && <SearchBlock />}
             </div>
 
             <UserButtons
-                excludeProfileButton={
-                    !excludeChildren?.includes('profile-button')
-                }
-                excludeCartButton={!excludeChildren?.includes('cart-button')}
+                excludeProfileButton={checkChildIncluding('profile-button')}
+                excludeCartButton={checkChildIncluding('cart-button')}
             />
         </header>
     );
