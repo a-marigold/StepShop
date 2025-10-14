@@ -13,7 +13,7 @@ import {
 
 import storage from 'redux-persist/lib/storage';
 
-import filtrationReducer from '@/app/(public-pages)/components/Filtration/redux';
+import filtrationReducer from '@/app/(home-page)/components/Filtration/redux';
 import cartReducer from './CartSlice';
 
 const cartPersistConfig = {

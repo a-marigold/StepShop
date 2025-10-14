@@ -44,7 +44,7 @@ export default function Header({ excludeChildren }: HeaderProps) {
                         </div>
                     </div>
                 )}
-                {checkChildIncluding('title-block') && <SearchBlock />}
+                {checkChildIncluding('search-block') && <SearchBlock />}
             </div>
 
             <UserButtons

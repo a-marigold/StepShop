@@ -12,8 +12,8 @@ import type { RootState } from '@/redux/store';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
-import AuthModal from '@/app/(public-pages)/components/AuthModal';
-import CartModal from '@/app/(public-pages)/components/CartModal';
+import AuthModal from '@/app/(home-page)/components/AuthModal';
+import CartModal from '@/app/(home-page)/components/CartModal';
 
 import EmptyFilledButton from '@UI/EmptyFilledButton';
 import AccessButton from '@/UI/AccessButton';
