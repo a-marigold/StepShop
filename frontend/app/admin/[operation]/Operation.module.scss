@@ -1,9 +1,22 @@
-@use '@/styles.mixins.scss' as *;
+@use '@/styles/mixins.scss' as *;
+
+.operation-page {
+    width: 100%;
+}
+
+.operation-form {
+    @include flex-column;
+    gap: 1em;
+
+    width: 100%;
+}
 
 .title {
     @include text-wo-margin(1.25rem);
     font-weight: 700;
+    text-align: center;
 }
 .inputs-box {
     @include flex-column;
+    gap: 0.5em;
 }

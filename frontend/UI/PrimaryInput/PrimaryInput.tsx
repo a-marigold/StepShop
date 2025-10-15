@@ -7,7 +7,7 @@ import inputStyles from './PrimaryInput.module.scss';
 
 interface PrimaryInputProps {
     htmlId: string;
-    inputType?: string;
+    inputType?: 'text' | 'password' | 'email';
 
     isValid: boolean;
 
