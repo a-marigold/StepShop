@@ -10,6 +10,7 @@ import notFoundStyles from './NotFound.module.scss';
 
 export const metadata: Metadata = {
     title: 'Страница не найдена',
+
     description: 'Запрошенная страница не найдена',
 
     openGraph: {

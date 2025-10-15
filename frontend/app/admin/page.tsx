@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import Navbar from './components/Navbar';
+import OperationPage from './[operation]/page';
 
-import ControllerBox from './components/ControllerBox';
+import Navbar from './components/Navbar';
 
 import adminStyles from './Admin.module.scss';
 
@@ -12,9 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
-    return (
-        <div className={adminStyles['admin-page']}>
-            <ControllerBox />
-        </div>
-    );
+    return <div className={adminStyles['admin-page']}></div>;
 }

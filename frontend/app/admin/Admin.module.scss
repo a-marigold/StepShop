@@ -5,19 +5,8 @@
     height: 100vh;
 
     background-color: var(--checkout-page-bg);
-
     padding: 1em var(--page-content-x-padding);
     box-sizing: border-box;
-}
 
-.admin-page {
-    margin-top: 1em;
-
-    width: 100%;
-    max-width: var(--page-max-width);
-
-    padding: 0 var(--page-content-x-padding);
-    box-sizing: border-box;
-
-    border-radius: 0 0 var(--page-border-radius) var(--page-border-radius);
+    border-radius: 0 0 var(--page-border-radius) (--page-border-radius);
 }
