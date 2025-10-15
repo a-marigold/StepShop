@@ -6,6 +6,6 @@ export type OperationInput = {
 
     htmlId: string;
 
-    isRequired?: boolean;
+    isRequired: boolean;
     errorMessage?: string;
 };

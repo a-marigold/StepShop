@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { CreateProductForm } from './components';
+import { CreateProductForm, DeleteProductForm } from './components';
 
 import operationStyles from './Operation.module.scss';
 
@@ -37,7 +37,7 @@ export default async function OperationPage({ params }: OperationPageProps) {
         <main className={operationStyles['operation-page']}>
             {operation === 'create' && <CreateProductForm />}
 
-            {operation === 'delete' && <CreateProductForm />}
+            {operation === 'delete' && <DeleteProductForm />}
 
             {operation === 'update' && <CreateProductForm />}
         </main>
