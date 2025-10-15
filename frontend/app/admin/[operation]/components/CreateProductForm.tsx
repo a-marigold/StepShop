@@ -66,7 +66,7 @@ export function CreateProductForm() {
                 },
                 body: JSON.stringify(newProduct),
             });
-            const sentProduct = await postProduct.json();
+            const sentProduct = await postProduct.text();
             console.log(sentProduct);
         } catch (error) {
             console.error(error);

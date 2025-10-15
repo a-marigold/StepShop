@@ -19,17 +19,17 @@ const deleteInputsList: OperationInput[] = [
 export function DeleteProductForm() {
     async function submit(data: Pick<ProductType, 'id'>) {
         try {
-            const postProduct = await fetch(
+            const deleteProduct = await fetch(
                 `http://127.0.0.1:1000/products/${data.id}`,
                 {
                     method: 'DELETE',
                 }
             );
-            const deletedProduct = await postProduct.json();
+            const deletedProduct = await deleteProduct.text();
 
             console.log(deletedProduct);
         } catch (error) {
-            // console.error(error);
+            console.error(error);
         }
     }
 
