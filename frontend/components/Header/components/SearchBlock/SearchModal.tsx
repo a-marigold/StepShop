@@ -37,15 +37,13 @@ export default function SearchModal({
                 console.error(error);
                 setProducts([]);
             });
-
-        console.log(products);
     }, []);
 
     const filteredProducts = useMemo(() => {
         return products.filter((product) =>
             product.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
-    }, [searchQuery]);
+    }, [searchQuery, products]);
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>

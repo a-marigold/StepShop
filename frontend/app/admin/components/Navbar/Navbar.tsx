@@ -27,6 +27,7 @@ export default function Navbar() {
                         controller.path === pathname &&
                             navStyles['active-controller']
                     )}
+                    prefetch
                 >
                     {controller.title}
                 </Link>

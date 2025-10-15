@@ -1,0 +1,9 @@
+@use '@/styles.mixins.scss' as *;
+
+.title {
+    @include text-wo-margin(1.25rem);
+    font-weight: 700;
+}
+.inputs-box {
+    @include flex-column;
+}

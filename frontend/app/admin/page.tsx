@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 export default function AdminPage() {
     return (
         <div className={adminStyles['admin-page']}>
-            <Navbar />
             <ControllerBox />
         </div>
     );
