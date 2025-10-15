@@ -33,6 +33,7 @@ export default function OperationForm({
             <AccessButton
                 title='Отправить'
                 ariaLabel='Отправить новые данные о товаре на сервер'
+                buttonType='submit'
             />
         </form>
     );

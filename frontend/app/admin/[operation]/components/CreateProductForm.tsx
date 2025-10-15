@@ -17,6 +17,7 @@ export function CreateProductForm() {
                 title='Название товара'
                 isValid={true}
                 inputAction={(event) => console.log(event)}
+                className={operationStyles['operation-input']}
             />
             <PrimaryInput
                 htmlId='create-product-input'

@@ -3,9 +3,7 @@
 .operation-page {
     @include flex-x-center;
 
-    // width: 100%;
     flex: 1;
-    // height: 100%;
 }
 
 .operation-form {
@@ -24,4 +22,13 @@
 .inputs-box {
     @include flex-column;
     gap: 0.5em;
+}
+.operation-input {
+    min-width: 260px;
+}
+
+@media (max-width: 600px) {
+    .operation-input {
+        min-width: initial;
+    }
 }

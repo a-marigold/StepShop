@@ -5,7 +5,8 @@
     gap: 1em;
 
     flex: 1;
-    max-width: 260px;
+    max-width: 220px;
+    max-height: fit-content;
 }
 .controller {
     width: 100%;
@@ -23,4 +24,10 @@
 .active-controller {
     color: var(--accent-color);
     background-color: var(--main-bg-color);
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        max-width: initial;
+    }
 }
