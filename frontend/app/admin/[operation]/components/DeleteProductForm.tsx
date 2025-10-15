@@ -1,7 +1,5 @@
 'use client';
 
-import { Controller, useForm } from 'react-hook-form';
-
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 

@@ -1,13 +1,9 @@
 'use client';
 
-import { Controller, useForm } from 'react-hook-form';
-
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
 import OperationForm from './OperationForm';
-
-import operationStyles from '../Operation.module.scss';
 
 const createInputsList: OperationInput[] = [
     {

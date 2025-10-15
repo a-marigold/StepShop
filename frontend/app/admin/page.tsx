@@ -1,8 +1,6 @@
+// TODO (8): Change page swtiching on this page on conditional CSR
+
 import type { Metadata } from 'next';
-
-import OperationPage from './[operation]/page';
-
-import Navbar from './components/Navbar';
 
 import adminStyles from './Admin.module.scss';
 
