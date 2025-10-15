@@ -3,22 +3,12 @@
 import { Controller, useForm } from 'react-hook-form';
 
 import type { ProductType } from '@shared/types/ProductTypes';
+import type { OperationInput } from './OperationInput';
 
 import OperationForm from './OperationForm';
 
-import PrimaryInput from '@/UI/PrimaryInput';
-
 import operationStyles from '../Operation.module.scss';
 
-type OperationInput = {
-    name: string;
-    propertyName: keyof ProductType;
-
-    htmlId: string;
-
-    isRequired?: boolean;
-    errorMessage?: string;
-};
 const createInputsList: OperationInput[] = [
     {
         name: 'Название товара',
@@ -60,8 +50,6 @@ const createInputsList: OperationInput[] = [
 ];
 
 export function CreateProductForm() {
-    const { control, handleSubmit } = useForm<ProductType>();
-
     async function submit(data: ProductType) {
         const newProduct: ProductType = {
             ...data,
@@ -88,34 +76,8 @@ export function CreateProductForm() {
     return (
         <OperationForm
             title='Создать товар'
-            submitAction={handleSubmit(submit)}
-        >
-            {createInputsList.map((input, index) => (
-                <Controller
-                    key={index}
-                    name={input.propertyName}
-                    control={control}
-                    rules={
-                        input.isRequired
-                            ? {
-                                  required: input.errorMessage
-                                      ? input.errorMessage
-                                      : `${input.name} обязательно`,
-                              }
-                            : undefined
-                    }
-                    render={({ field, fieldState }) => (
-                        <PrimaryInput
-                            htmlId={input.htmlId}
-                            title={input.name}
-                            className={operationStyles['operation-input']}
-                            inputAction={field.onChange}
-                            isValid={!fieldState.error}
-                            errorLabelTitle={fieldState.error?.message}
-                        />
-                    )}
-                />
-            ))}
-        </OperationForm>
+            inputsList={createInputsList}
+            submitAction={submit}
+        ></OperationForm>
     );
 }

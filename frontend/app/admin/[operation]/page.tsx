@@ -12,29 +12,34 @@ interface OperationPageProps {
     };
 }
 
-export function generateMetadata({ params }: OperationPageProps): Metadata {
+export async function generateMetadata({
+    params,
+}: OperationPageProps): Promise<Metadata> {
     const pageTitles: Record<Operation, string> = {
         create: 'Добавление товара',
         delete: 'Удаление товара',
         update: 'Обновление товара',
     };
+    const operation = await params.operation;
 
     return {
-        title: pageTitles[params.operation],
+        title: pageTitles[operation],
         openGraph: {
-            title: pageTitles[params.operation],
+            title: pageTitles[operation],
         },
     };
 }
 
-export default function OperationPage({ params }: OperationPageProps) {
+export default async function OperationPage({ params }: OperationPageProps) {
+    const operation = await params.operation;
+
     return (
         <main className={operationStyles['operation-page']}>
-            {params.operation === 'create' && <CreateProductForm />}
+            {operation === 'create' && <CreateProductForm />}
 
-            {params.operation === 'delete' && <CreateProductForm />}
+            {operation === 'delete' && <CreateProductForm />}
 
-            {params.operation === 'update' && <CreateProductForm />}
+            {operation === 'update' && <CreateProductForm />}
         </main>
     );
 }
