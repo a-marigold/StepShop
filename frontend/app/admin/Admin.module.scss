@@ -3,10 +3,15 @@
     gap: 2em;
 
     width: 100%;
+
     max-width: var(--page-max-width);
+
+    min-height: 100vh;
+
     background-color: var(--checkout-page-bg);
 
     padding: 1em var(--page-content-x-padding) 6em;
+
     box-sizing: border-box;
 
     border-radius: 0 0 var(--page-border-radius) var(--page-border-radius);

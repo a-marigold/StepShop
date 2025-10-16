@@ -31,8 +31,23 @@ const controllersList: {
 export default function Navbar() {
     const pathname = usePathname();
 
-    const [activeController, setActiveController] =
-        useState<Controller>(pathname);
+    function initialContoller(): Controller | never {
+        const pathList = pathname.split('/') as Controller[];
+
+        if (pathList.includes('create')) {
+            return 'create';
+        } else if (pathList.includes('delete')) {
+            return 'delete';
+        } else if (pathList.includes('update')) {
+            return 'update';
+        }
+
+        throw new Error('This controller should not exist');
+    }
+
+    const [activeController, setActiveController] = useState<Controller>(() =>
+        initialContoller()
+    );
 
     const controllersRef = useRef<
         Partial<Record<Controller, HTMLAnchorElement | null>>
@@ -55,6 +70,7 @@ export default function Navbar() {
     }
 
     useEffect(() => {
+        console.log(activeController);
         calculateActiveBlockPosition();
 
         window.addEventListener('resize', calculateActiveBlockPosition);

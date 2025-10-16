@@ -69,6 +69,7 @@
 
     z-index: 1;
 }
+
 .active-button {
     color: var(--accent-color);
 }
@@ -107,11 +108,12 @@
 
     cursor: pointer;
 }
+
 .sort-type {
     color: var(--accent-color);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
     .categories-block {
         display: none;
     }
