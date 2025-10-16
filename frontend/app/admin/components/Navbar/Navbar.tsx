@@ -74,15 +74,16 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        console.log(activeController);
         calculateActiveBlockPosition();
+    }, [activeController]);
 
+    useEffect(() => {
         window.addEventListener('resize', calculateActiveBlockPosition);
 
         return () => {
             window.removeEventListener('resize', calculateActiveBlockPosition);
         };
-    }, [activeController]);
+    }, []);
 
     return (
         <nav className={navStyles['navbar']}>
