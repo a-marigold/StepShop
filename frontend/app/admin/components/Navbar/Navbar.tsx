@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+
 import { usePathname } from 'next/navigation';
 
 import Link from 'next/link';
@@ -12,7 +13,9 @@ type Controller = 'create' | 'delete' | 'update';
 
 const controllersList: {
     title: string;
+
     path: string;
+
     type: Controller;
 }[] = [
     {
@@ -20,7 +23,9 @@ const controllersList: {
         path: '/admin/create',
         type: 'create',
     },
+
     { title: 'Удалить товар', path: '/admin/delete', type: 'delete' },
+
     {
         title: 'Обновить товар',
         path: '/admin/update',
@@ -31,23 +36,22 @@ const controllersList: {
 export default function Navbar() {
     const pathname = usePathname();
 
-    function initialContoller(): Controller | never {
-        const pathList = pathname.split('/') as Controller[];
+    function getInitialController(): Controller | never {
+        const splitPathName = pathname.split('/') as Controller[];
 
-        if (pathList.includes('create')) {
-            return 'create';
-        } else if (pathList.includes('delete')) {
-            return 'delete';
-        } else if (pathList.includes('update')) {
-            return 'update';
-        }
+        const _controllers: Controller[] = ['create', 'delete', 'update'];
+        const initialController = _controllers.find((controller) =>
+            splitPathName.includes(controller)
+        );
 
-        throw new Error('This controller should not exist');
+        if (!initialController)
+            throw new Error('This controller should not exist');
+
+        return initialController;
     }
 
-    const [activeController, setActiveController] = useState<Controller>(() =>
-        initialContoller()
-    );
+    const [activeController, setActiveController] =
+        useState<Controller>(getInitialController);
 
     const controllersRef = useRef<
         Partial<Record<Controller, HTMLAnchorElement | null>>
