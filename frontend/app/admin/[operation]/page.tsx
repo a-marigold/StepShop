@@ -6,6 +6,10 @@ import {
     UpdateProductForm,
 } from './components';
 
+// TEST
+import Notice from '@/UI/Notice';
+//
+
 import operationStyles from './Operation.module.scss';
 
 type Operation = 'create' | 'delete' | 'update' | never;
@@ -44,6 +48,14 @@ export default async function OperationPage({ params }: OperationPageProps) {
             {operation === 'delete' && <DeleteProductForm />}
 
             {operation === 'update' && <UpdateProductForm />}
+
+            {/* _TEST_ */}
+            <Notice
+                title='Title of notice'
+                message='Message lorem ipsum'
+                existenceTime={10}
+            />
+            {/*  */}
         </main>
     );
 }
