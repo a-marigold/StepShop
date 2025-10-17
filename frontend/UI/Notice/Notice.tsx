@@ -43,9 +43,9 @@ export default function Notice({
               <AnimatePresence>
                   <motion.div
                       className={clsx(noticeStyles['notice'], className)}
-                      initial={{ transform: 'translateX(300px)', opacity: 0 }}
-                      animate={{ transform: 'translateX(0)', opacity: 1 }}
-                      exit={{ transform: 'translateX(300px)', opacity: 0 }}
+                      initial={{ transform: 'translateY(10px)', opacity: 0 }}
+                      animate={{ transform: 'translateY(0)', opacity: 1 }}
+                      exit={{ transform: 'translateX(10px)', opacity: 0 }}
                       transition={{ duration: 0.2 }}
                   >
                       <div className={noticeStyles['title-block']}>
