@@ -15,6 +15,7 @@ import storage from 'redux-persist/lib/storage';
 
 import filtrationReducer from '@/app/(home-page)/components/Filtration/redux';
 import cartReducer from './CartSlice';
+import noticesReducer from './NoticeSlice';
 
 const cartPersistConfig = {
     key: 'cart',
@@ -28,6 +29,7 @@ export const store = configureStore({
     reducer: {
         filtration: filtrationReducer,
         cart: persistedCartReducer,
+        notices: noticesReducer,
     },
 
     middleware: (getDefaultMiddleware) => {
