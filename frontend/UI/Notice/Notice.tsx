@@ -14,6 +14,8 @@ import noticeStyles from './Notice.module.scss';
 
 interface NoticeProps extends Omit<NoticeType, 'id'> {
     className?: string;
+    portalRootId: string;
+
     deleteNotice: () => void;
 }
 
@@ -21,8 +23,10 @@ export default function Notice({
     title,
     message,
     existenceTime = 6,
-    deleteNotice,
+
     className,
+    portalRootId,
+    deleteNotice,
 }: NoticeProps) {
     const [showMessage, setShowMessage] = useState(false);
 
@@ -31,6 +35,14 @@ export default function Notice({
             deleteNotice();
         }, existenceTime * 1000);
     }, []);
+
+    const portalRootElement = document.getElementById(portalRootId);
+
+    if (!portalRootElement) {
+        throw new Error(
+            'Prop portalRootId is not valid. There is not any HTMLElement or DocumentFragment with this id.'
+        );
+    }
 
     return createPortal(
         <AnimatePresence>
@@ -108,6 +120,6 @@ export default function Notice({
                 />
             </motion.div>
         </AnimatePresence>,
-        document.body
+        portalRootElement
     );
 }

@@ -25,14 +25,15 @@ export default function NoticesList() {
     }, []);
 
     return (
-        <div className={listStyles['notices-list']}>
+        <div className={listStyles['notices-list']} id='notices-list'>
             {noticesList.map((notice) => (
                 <MemoizedNotice
                     key={notice.id}
                     title={notice.title}
                     message={notice.message}
-                    existenceTime={notice.existenceTime}
+                    existenceTime={notice.existenceTime! + 100}
                     deleteNotice={() => handleDeleteNotice(notice.id)}
+                    portalRootId='notices-list'
                 />
             ))}
         </div>

@@ -9,7 +9,7 @@ interface NoticeSliceState {
 }
 
 const initialState: NoticeSliceState = {
-    noticesList: [],
+    noticesList: [{ id: 'aa-bb-cc', title: 'abcd', existenceTime: 1000 }],
 };
 
 const noticeSlice = createSlice({
