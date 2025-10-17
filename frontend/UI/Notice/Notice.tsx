@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import clsx from 'clsx';
 import noticeStyles from './Notice.module.scss';
 
 interface NoticeProps {
@@ -12,13 +14,14 @@ interface NoticeProps {
 }
 
 export default function Notice({ title, message, existenceTime }: NoticeProps) {
+    const [showMessage, setShowMessage] = useState(false);
+
     return createPortal(
         <div className={noticeStyles['notice']}>
             <div className={noticeStyles['title-block']}>
                 <div className={noticeStyles['title-group']}>
                     <svg
-                        width='23'
-                        height='23'
+                        height='21'
                         viewBox='0 0 256 256'
                         color='var(--positive-notice-color)'
                     >
@@ -29,11 +32,16 @@ export default function Notice({ title, message, existenceTime }: NoticeProps) {
                 </div>
 
                 <div className={noticeStyles['buttons-group']}>
-                    <button>
+                    <button onClick={() => setShowMessage((prev) => !prev)}>
                         <svg
                             width={21}
                             height={21}
                             color='var(--secondary-font-color)'
+                            className={clsx(
+                                noticeStyles['accordion-icon'],
+                                showMessage &&
+                                    noticeStyles['accordion-icon-active']
+                            )}
                         >
                             <use href='#accordion-arrow-icon' />
                         </svg>
@@ -51,7 +59,7 @@ export default function Notice({ title, message, existenceTime }: NoticeProps) {
                 </div>
             </div>
 
-            {message && (
+            {message && showMessage && (
                 <div className={noticeStyles['message-block']}>
                     <p className={noticeStyles['message']}>{message}</p>
 

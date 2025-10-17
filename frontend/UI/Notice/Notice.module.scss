@@ -17,6 +17,7 @@
     border: 1px var(--border-color) solid;
     border-radius: 10px;
 
+    padding-bottom: 1em;
     padding-left: 0.75em;
     padding-right: 1em;
     box-sizing: border-box;
@@ -60,14 +61,22 @@
         cursor: pointer;
     }
 }
+.accordion-icon {
+    transition: transform 0.1s ease;
+}
+
+.accordion-icon-active {
+    transform: rotate(180deg);
+}
 
 .message-block {
     @include flex-column;
     gap: 0.5em;
 
-    padding-bottom: 1em;
     padding-left: 2em;
     box-sizing: border-box;
+
+    animation: appearace 0.2s linear;
 }
 .message {
     @include text-wo-margin(1rem);
