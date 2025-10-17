@@ -4,7 +4,13 @@
     position: fixed;
     bottom: 0;
     right: 0;
+
     @include flex-column;
+
+    gap: 0.5em;
+
+    width: 100%;
+    max-width: 360px;
 
     padding: 1.25em;
     box-sizing: border-box;

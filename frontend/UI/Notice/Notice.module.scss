@@ -2,10 +2,11 @@
 
 .notice {
     @include flex-column;
-    gap: 0.25em;
+    gap: 0.5em;
 
     width: 100%;
-    max-width: 300px;
+
+    max-width: 360px;
 
     background-color: var(--main-bg-color);
 
@@ -27,6 +28,8 @@
 
     display: flex;
     justify-content: space-between;
+
+    width: 100%;
 
     max-height: 55px;
 
@@ -70,6 +73,8 @@
     @include flex-column;
     gap: 0.5em;
 
+    // max-width: 100px;
+
     padding-left: 2em;
 
     box-sizing: border-box;
@@ -79,6 +84,8 @@
 .message {
     @include text-wo-margin(1rem);
     color: var(--secondary-font-color);
+
+    word-break: break-all;
 }
 .accept-button {
     max-width: fit-content;
