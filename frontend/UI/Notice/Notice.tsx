@@ -12,13 +12,18 @@ import clsx from 'clsx';
 
 import noticeStyles from './Notice.module.scss';
 
+interface NoticeProps extends NoticeType {
+    className?: string;
+}
+
 export default function Notice({
     id,
     title,
     message,
     existenceTime,
     deleteNotice,
-}: NoticeType) {
+    className,
+}: NoticeProps) {
     const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
@@ -30,7 +35,7 @@ export default function Notice({
     return createPortal(
         <AnimatePresence>
             <motion.div
-                className={noticeStyles['notice']}
+                className={clsx(noticeStyles['notice'], className)}
                 initial={{ transform: 'translateX(300px)', opacity: 0 }}
                 animate={{ transform: 'translateX(0)', opacity: 1 }}
                 exit={{ transform: 'translateX(300px)', opacity: 0 }}

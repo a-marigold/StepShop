@@ -1,11 +1,6 @@
 @use '@styles/mixins.scss' as *;
 
 .notice {
-    position: fixed;
-
-    bottom: 20px;
-    right: 20px;
-
     @include flex-column;
     gap: 0.25em;
 
