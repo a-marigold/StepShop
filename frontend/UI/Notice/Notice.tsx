@@ -16,7 +16,14 @@ export default function Notice({ title, message, existenceTime }: NoticeProps) {
         <div className={noticeStyles['notice']}>
             <div className={noticeStyles['title-block']}>
                 <div className={noticeStyles['title-group']}>
-                    {/* _ICON_ */}
+                    <svg
+                        width='23'
+                        height='23'
+                        viewBox='0 0 256 256'
+                        color='green'
+                    >
+                        <use href='#check-mark-icon' />
+                    </svg>
 
                     <p className={noticeStyles['title']}>{title}</p>
                 </div>
