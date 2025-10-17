@@ -5,6 +5,5 @@ export interface NoticeType {
 
     message?: string;
     existenceTime: number;
-    showNotice: boolean;
-    setShowNotice: (showNotice: boolean) => void;
+    deleteNotice: <T>(...args: T[]) => void;
 }
