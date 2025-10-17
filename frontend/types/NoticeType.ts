@@ -4,6 +4,5 @@ export interface NoticeType {
     title: string;
 
     message?: string;
-    existenceTime: number;
-    deleteNotice: <T>(...args: T[]) => void;
+    existenceTime?: number;
 }

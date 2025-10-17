@@ -1,7 +1,13 @@
 'use client';
 
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+
+import { addNotice, deleteNotice } from '@/redux/NoticeSlice';
+
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
+import type { NoticeType } from '@/types/NoticeType';
 
 import OperationForm from './OperationForm';
 
@@ -46,6 +52,8 @@ const createInputsList: OperationInput[] = [
 ];
 
 export function CreateProductForm() {
+    const dispatch = useDispatch<AppDispatch>();
+
     async function submit(data: ProductType) {
         const newProduct: ProductType = {
             ...data,
@@ -64,8 +72,27 @@ export function CreateProductForm() {
             });
             const sentProduct = await postProduct.text();
             console.log(sentProduct);
+
+            dispatch(
+                addNotice({
+                    id: crypto.randomUUID(),
+                    title: 'Changes saved',
+                    message: sentProduct,
+                    existenceTime: 6,
+                })
+            );
         } catch (error) {
             console.error(error);
+
+            if (typeof error === 'string')
+                dispatch(
+                    addNotice({
+                        id: crypto.randomUUID(),
+                        title: 'Error with request',
+                        message: error,
+                        existenceTime: 6,
+                    })
+                );
         }
     }
 

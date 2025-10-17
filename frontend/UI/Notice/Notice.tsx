@@ -12,15 +12,15 @@ import clsx from 'clsx';
 
 import noticeStyles from './Notice.module.scss';
 
-interface NoticeProps extends NoticeType {
+interface NoticeProps extends Omit<NoticeType, 'id'> {
     className?: string;
+    deleteNotice: () => void;
 }
 
 export default function Notice({
-    id,
     title,
     message,
-    existenceTime,
+    existenceTime = 6,
     deleteNotice,
     className,
 }: NoticeProps) {
@@ -28,8 +28,8 @@ export default function Notice({
 
     useEffect(() => {
         setTimeout(() => {
-            deleteNotice(id);
-        }, existenceTime);
+            deleteNotice();
+        }, existenceTime * 1000);
     }, []);
 
     return createPortal(
@@ -69,7 +69,7 @@ export default function Notice({
                             </svg>
                         </button>
 
-                        <button onClick={() => deleteNotice(id)}>
+                        <button onClick={deleteNotice}>
                             <svg
                                 width={12}
                                 height={12}
