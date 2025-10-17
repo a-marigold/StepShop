@@ -31,7 +31,7 @@ export default function NoticesList() {
                     key={notice.id}
                     title={notice.title}
                     message={notice.message}
-                    existenceTime={notice.existenceTime! + 100}
+                    existenceTime={notice.existenceTime}
                     deleteNotice={() => handleDeleteNotice(notice.id)}
                     portalRootId='notices-list'
                 />

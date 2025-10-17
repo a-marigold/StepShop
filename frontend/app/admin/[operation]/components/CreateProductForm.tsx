@@ -71,7 +71,10 @@ export function CreateProductForm() {
                 body: JSON.stringify(newProduct),
             });
             const sentProduct = await postProduct.text();
-            console.log(sentProduct);
+
+            if (!postProduct.ok) {
+                throw postProduct.statusText;
+            }
 
             dispatch(
                 addNotice({
