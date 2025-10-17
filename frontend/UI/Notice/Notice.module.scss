@@ -53,6 +53,8 @@
     gap: 0.75em;
 
     & > button {
+        @include flex-center;
+
         background-color: transparent;
 
         border: 0;
