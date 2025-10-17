@@ -20,7 +20,7 @@ export default function Notice({ title, message, existenceTime }: NoticeProps) {
                         width='23'
                         height='23'
                         viewBox='0 0 256 256'
-                        color='green'
+                        color='var(--positive-notice-color)'
                     >
                         <use href='#check-mark-icon' />
                     </svg>
