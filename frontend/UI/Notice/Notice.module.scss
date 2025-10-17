@@ -74,9 +74,10 @@
     gap: 0.5em;
 
     padding-left: 2em;
+
     box-sizing: border-box;
 
-    animation: appearace 0.2s linear;
+    transform-origin: top;
 }
 .message {
     @include text-wo-margin(1rem);
@@ -114,7 +115,7 @@
 
     background-color: var(--positive-notice-color);
 
-    animation: grow-time-line 10s linear;
+    animation: grow-time-line linear;
 }
 
 @keyframes grow-time-line {

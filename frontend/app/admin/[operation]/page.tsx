@@ -53,7 +53,7 @@ export default async function OperationPage({ params }: OperationPageProps) {
             <Notice
                 title='Title of notice'
                 message='Message lorem ipsum'
-                existenceTime={10}
+                existenceTime={100}
             />
             {/*  */}
         </main>
