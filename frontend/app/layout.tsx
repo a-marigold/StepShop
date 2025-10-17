@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import Header from '@/components/Header';
 import Providers from './providers';
+import NoticesList from '@/components/NoticesList';
 
 import SvgSprites from '@UI/SvgSprites';
 
@@ -35,7 +35,10 @@ export default function RootLayout({
                 <SvgSprites /> {/* svg sprites loading */}
                 <Providers>
                     {/* <Header></Header> */}
+
                     {children}
+
+                    <NoticesList />
                 </Providers>
             </body>
         </html>

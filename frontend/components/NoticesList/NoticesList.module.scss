@@ -1,0 +1,11 @@
+@use '@styles/mixins.scss' as *;
+
+.notices-list {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    @include flex-column;
+
+    padding: 1.25em;
+    box-sizing: border-box;
+}
