@@ -40,10 +40,7 @@ export function DeleteProductForm() {
                 console.log(errorResponse);
 
                 if (errorResponse.message) {
-                    throw new ApiError(
-                        JSON.parse(response) +
-                            'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-                    );
+                    throw new ApiError(JSON.parse(response));
                 }
 
                 throw new ApiError(response);
@@ -60,7 +57,7 @@ export function DeleteProductForm() {
                 addErrorNotice(
                     'Error with request',
                     error.message,
-                    100,
+                    10,
                     dispatch
                 );
             }
