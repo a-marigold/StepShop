@@ -31,9 +31,13 @@ export default function Notice({
     const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
+        const deleteNoticeTimeout = setTimeout(() => {
             deleteNotice();
         }, existenceTime * 1000);
+
+        return () => {
+            clearTimeout(deleteNoticeTimeout);
+        };
     }, []);
 
     const portalRootElement = document.getElementById(portalRootId);
