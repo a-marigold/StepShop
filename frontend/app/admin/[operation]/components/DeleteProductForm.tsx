@@ -35,12 +35,15 @@ export function DeleteProductForm() {
             const response = await deleteProduct.text();
 
             if (!deleteProduct.ok) {
-                const errorResponse = await deleteProduct.json();
+                const errorResponse = JSON.parse(response);
 
                 console.log(errorResponse);
 
                 if (errorResponse.message) {
-                    throw new ApiError(errorResponse.message);
+                    throw new ApiError(
+                        JSON.parse(response) +
+                            'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                    );
                 }
 
                 throw new ApiError(response);
@@ -57,7 +60,7 @@ export function DeleteProductForm() {
                 addErrorNotice(
                     'Error with request',
                     error.message,
-                    10,
+                    100,
                     dispatch
                 );
             }

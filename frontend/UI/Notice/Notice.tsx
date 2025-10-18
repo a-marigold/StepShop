@@ -119,6 +119,7 @@ export default function Notice({
                                   </p>
                                   <button
                                       className={noticeStyles['accept-button']}
+                                      onClick={deleteNotice}
                                   >
                                       Принять
                                   </button>
