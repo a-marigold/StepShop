@@ -73,8 +73,6 @@
     @include flex-column;
     gap: 0.5em;
 
-    // max-width: 100px;
-
     padding-left: 2em;
 
     box-sizing: border-box;
@@ -82,10 +80,11 @@
     transform-origin: top;
 }
 .message {
+    max-width: 200px;
+
     @include text-wo-margin(1rem);
     color: var(--secondary-font-color);
-
-    word-break: break-all;
+    text-wrap: balance;
 }
 .accept-button {
     max-width: fit-content;

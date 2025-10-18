@@ -66,26 +66,28 @@ export default function Notice({
                           </div>
 
                           <div className={noticeStyles['buttons-group']}>
-                              <button
-                                  onClick={() =>
-                                      setShowMessage((prev) => !prev)
-                                  }
-                              >
-                                  <svg
-                                      width={21}
-                                      height={21}
-                                      color='var(--secondary-font-color)'
-                                      className={clsx(
-                                          noticeStyles['accordion-icon'],
-                                          showMessage &&
-                                              noticeStyles[
-                                                  'accordion-icon-active'
-                                              ]
-                                      )}
+                              {message && (
+                                  <button
+                                      onClick={() =>
+                                          setShowMessage((prev) => !prev)
+                                      }
                                   >
-                                      <use href='#accordion-arrow-icon' />
-                                  </svg>
-                              </button>
+                                      <svg
+                                          width={21}
+                                          height={21}
+                                          color='var(--secondary-font-color)'
+                                          className={clsx(
+                                              noticeStyles['accordion-icon'],
+                                              showMessage &&
+                                                  noticeStyles[
+                                                      'accordion-icon-active'
+                                                  ]
+                                          )}
+                                      >
+                                          <use href='#accordion-arrow-icon' />
+                                      </svg>
+                                  </button>
+                              )}
 
                               <button onClick={deleteNotice}>
                                   <svg
