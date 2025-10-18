@@ -6,6 +6,8 @@ import type { AppDispatch } from '@/redux/store';
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
 import ApiError from '@/utils/errors/ApiError';
+import type { ApiResponseType } from '@shared/types/ApiResponseType';
+
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
@@ -62,7 +64,6 @@ export function CreateProductForm() {
         };
 
         try {
-            console.log(JSON.stringify(newProduct));
             const postProduct = await fetch('http://127.0.0.1:1000/products', {
                 method: 'POST',
                 headers: {
@@ -70,13 +71,14 @@ export function CreateProductForm() {
                 },
                 body: JSON.stringify(newProduct),
             });
-            const sentProduct = await postProduct.text();
+
+            const response = (await postProduct.json()) as ApiResponseType;
 
             if (!postProduct.ok) {
-                throw new ApiError(postProduct.statusText);
+                throw new ApiError(response.message);
             }
 
-            addSuccessNotice('Changes saved', sentProduct, 10, dispatch);
+            addSuccessNotice('Changes saved', response.message, 10, dispatch);
         } catch (error) {
             if (error instanceof ApiError) {
                 addErrorNotice(

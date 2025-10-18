@@ -15,8 +15,9 @@ export async function getAllProducts(
 export async function createProduct(
     request: FastifyRequest<{
         Body: ProductType;
-    }>
-): Promise<string> {
+    }>,
+    reply: FastifyReply
+) {
     const { image, title, description, price, quantity } = request.body;
 
     const createProduct = await request.server.prisma.product.create({
@@ -31,7 +32,10 @@ export async function createProduct(
         },
     });
 
-    return `Product has been created: Title - ${createProduct.title}; Id - ${createProduct.id}`;
+    reply.code(201).send({
+        statusCode: 201,
+        message: `Product has been created: Title - ${createProduct.title}; Id - ${createProduct.id}`,
+    });
 }
 
 export async function deleteProduct(
@@ -40,7 +44,7 @@ export async function deleteProduct(
     }>,
 
     reply: FastifyReply
-): Promise<string> {
+) {
     const id = request.params.id;
 
     const product = await request.server.prisma.product.findUnique({
@@ -59,7 +63,10 @@ export async function deleteProduct(
         },
     });
 
-    return `Product has been deleted: Title - ${deleteProduct.title}; Id - ${deleteProduct.id}`;
+    reply.code(200).send({
+        statusCode: 200,
+        message: `Product has been deleted: Title - ${deleteProduct.title}; Id - ${deleteProduct.id}`,
+    });
 }
 
 export async function updateProduct(
@@ -70,7 +77,7 @@ export async function updateProduct(
         Params: Pick<ProductType, 'id'>;
     }>,
     reply: FastifyReply
-): Promise<string> {
+) {
     const id = request.params.id;
 
     const {
@@ -102,9 +109,12 @@ export async function updateProduct(
         },
     });
 
-    return `Old product: 
+    reply.code(201).send({
+        statusCode: 201,
+        message: `Old product: 
 ${JSON.stringify(prevProduct)}; 
 
 New product: 
-${JSON.stringify(updateProduct)}`;
+${JSON.stringify(updateProduct)}`,
+    });
 }
