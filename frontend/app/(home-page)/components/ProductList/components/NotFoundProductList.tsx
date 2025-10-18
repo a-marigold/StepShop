@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import emptyStyles from './EmptyProductsList.module.scss';
 
-export default function EmptyProductList() {
+export default function NotFoundProductList() {
     return (
         <div className={emptyStyles['empty-list-box']}>
             <div className={emptyStyles['text-block']}>

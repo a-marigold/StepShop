@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+
 import type { Ref } from 'react';
 
 import type { ProductType } from '@shared/types/ProductTypes';
@@ -10,6 +11,7 @@ import Image from 'next/image';
 import ModalBackdrop from '@UI/ModalBackdrop';
 
 import modalStyles from './SearchModal.module.scss';
+
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 type SearchProductType = Pick<ProductType, 'id' | 'image' | 'title' | 'price'>;
@@ -28,6 +30,8 @@ export default function SearchModal({
 }: SearchModalProps) {
     const [products, setProducts] = useState<SearchProductType[]>([]);
 
+    const [error, setError] = useState('');
+
     useEffect(() => {
         fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/products` ||
@@ -36,9 +40,9 @@ export default function SearchModal({
             .then((data) => data.json())
             .then((data) => setProducts(data))
 
-            .catch((error) => {
-                console.error(error);
+            .catch(() => {
                 setProducts([]);
+                setError('Внутренняя ошибка сервера');
             });
     }, []);
 
@@ -57,7 +61,7 @@ export default function SearchModal({
                     event.stopPropagation();
                 }}
             >
-                {searchQuery.trim() && !!filteredProducts.length ? (
+                {searchQuery.trim() && !!filteredProducts.length && !error ? (
                     filteredProducts.map((product) => (
                         <a
                             key={product.id}
@@ -84,7 +88,9 @@ export default function SearchModal({
                 ) : (
                     <div className={modalStyles['hint-box']}>
                         <p className={modalStyles['hint']}>
-                            По вашему запросу ничего не найдено
+                            {error
+                                ? error
+                                : 'По вашему запросу ничего не найдено'}
                         </p>
                     </div>
                 )}

@@ -1,23 +1,34 @@
+import ApiError from '@/utils/errors/ApiError';
+
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
 import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 import ProductCard from './components/ProductCard';
-import EmptyProductList from './components/EmptyProductList';
+import NotFoundProductList from './components/NotFoundProductList';
 
 import productStyles from './ProductList.module.scss';
 
 export default async function ProductList({ searchParams }: SearchParamsProp) {
     let products: ProductType[];
+
+    let errorMessage: string | undefined;
+
     try {
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/products` ||
                 'http://localhost:3000/products'
         );
         products = await response.json();
-    } catch {
-        console.log('Server is sleeping');
+
+        if (!response.ok) {
+            throw new ApiError('Internal server error');
+        }
+    } catch (error) {
+        if (error instanceof ApiError) {
+            errorMessage = error.message;
+        }
         products = [];
     }
 
@@ -25,13 +36,16 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     const minPrice = queryParams.minPrice ? Number(queryParams.minPrice) : null;
     const maxPrice = queryParams.maxPrice ? Number(queryParams.maxPrice) : null;
 
-    // TODO: This function doesn`t work while there is json placeholder instead of mock with product.price or real server
-    const filteredProducts = products.filter((product) => {
-        if (minPrice !== null && product.price < minPrice) return false;
-        if (maxPrice !== null && product.price > maxPrice) return false;
+    // TODO: __HOT__ - add error handling if  response returns an error
 
-        return true;
-    });
+    const filteredProducts = errorMessage
+        ? []
+        : products.filter((product) => {
+              if (minPrice !== null && product.price < minPrice) return false;
+              if (maxPrice !== null && product.price > maxPrice) return false;
+
+              return true;
+          });
 
     return (
         <div className={productStyles['products-list']}>
@@ -48,8 +62,12 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
                         quantity={1}
                     />
                 ))
+            ) : errorMessage ? (
+                <p className={productStyles['server-error-message']}>
+                    {errorMessage}
+                </p>
             ) : (
-                <EmptyProductList />
+                <NotFoundProductList />
             )}
         </div>
     );

@@ -1,6 +1,7 @@
 @use '@styles/mixins.scss' as *;
 
 .products-list {
+    position: relative;
     margin-top: 4em;
 
     display: grid;
@@ -78,4 +79,15 @@
     font-weight: 600;
 
     cursor: pointer;
+}
+
+.server-error-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    @include text-wo-margin(1.5rem);
+    font-weight: 600;
+    text-wrap: balance;
 }
