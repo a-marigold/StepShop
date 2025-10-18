@@ -4,7 +4,7 @@ import { addNotice, deleteNotice } from '@/redux/NoticeSlice';
 
 import type { NoticeType } from '@/types/NoticeType';
 
-export function addPositiveNotice(
+export function addSuccessNotice(
     title: NoticeType['title'],
     message: NoticeType['message'],
     existenceTime: NoticeType['existenceTime'] = 10,

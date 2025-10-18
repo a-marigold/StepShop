@@ -3,8 +3,9 @@
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
-import { addPositiveNotice, addErrorNotice } from '@/utils/noticeGlobalState';
+import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
+import ApiError from '@/utils/errors/ApiError';
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
@@ -72,13 +73,18 @@ export function CreateProductForm() {
             const sentProduct = await postProduct.text();
 
             if (!postProduct.ok) {
-                throw postProduct.statusText;
+                throw new ApiError(postProduct.statusText);
             }
 
-            addPositiveNotice('Changes saved', sentProduct, 10, dispatch);
+            addSuccessNotice('Changes saved', sentProduct, 10, dispatch);
         } catch (error) {
-            if (typeof error === 'string') {
-                addErrorNotice('Error with request', error, 10, dispatch);
+            if (error instanceof ApiError) {
+                addErrorNotice(
+                    'Error with request',
+                    error.message,
+                    10,
+                    dispatch
+                );
             }
         }
     }

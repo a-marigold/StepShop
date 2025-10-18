@@ -3,9 +3,9 @@
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
-import { addPositiveNotice, addErrorNotice } from '@/utils/noticeGlobalState';
+import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { ApiError } from '@/utils/errors/ApiError';
+import ApiError from '@/utils/errors/ApiError';
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
@@ -32,15 +32,23 @@ export function DeleteProductForm() {
                 }
             );
 
-            const deletedProduct = await deleteProduct.text();
+            const response = await deleteProduct.text();
 
             if (!deleteProduct.ok) {
-                throw new ApiError('e');
+                const errorResponse = await deleteProduct.json();
+
+                console.log(errorResponse);
+
+                if (errorResponse.message) {
+                    throw new ApiError(errorResponse.message);
+                }
+
+                throw new ApiError(response);
             }
 
-            addPositiveNotice(
+            addSuccessNotice(
                 'Product has been deleted',
-                deletedProduct,
+                response,
                 10,
                 dispatch
             );

@@ -3,8 +3,9 @@
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
-import { addPositiveNotice, addErrorNotice } from '@/utils/noticeGlobalState';
+import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
+import ApiError from '@/utils/errors/ApiError';
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
@@ -51,6 +52,8 @@ const updateInputsList: OperationInput[] = [
 ];
 
 export function UpdateProductForm() {
+    const dispatch = useDispatch<AppDispatch>();
+
     async function submit(data: ProductType) {
         const newProduct: ProductType = {
             ...data,
@@ -70,11 +73,22 @@ export function UpdateProductForm() {
                     body: JSON.stringify(newProduct),
                 }
             );
-            const updatedProduct = await updateProduct.text();
+            const response = await updateProduct.text();
 
-            console.log(updatedProduct);
+            if (!updateProduct.ok) {
+                throw new ApiError(response);
+            }
+
+            addSuccessNotice('Changes saved', response, 10, dispatch);
         } catch (error) {
-            console.error(error);
+            if (error instanceof ApiError) {
+                addErrorNotice(
+                    'Error with request',
+                    error.message,
+                    10,
+                    dispatch
+                );
+            }
         }
     }
 
