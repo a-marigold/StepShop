@@ -3,11 +3,10 @@
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
-import { addNotice, deleteNotice } from '@/redux/NoticeSlice';
+import { addPositiveNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
-import type { NoticeType } from '@/types/NoticeType';
 
 import OperationForm from './OperationForm';
 
@@ -76,26 +75,11 @@ export function CreateProductForm() {
                 throw postProduct.statusText;
             }
 
-            dispatch(
-                addNotice({
-                    id: crypto.randomUUID(),
-                    title: 'Changes saved',
-                    message: sentProduct,
-                    existenceTime: 6,
-                })
-            );
+            addPositiveNotice('Changes saved', sentProduct, 10, dispatch);
         } catch (error) {
-            console.error(error);
-
-            if (typeof error === 'string')
-                dispatch(
-                    addNotice({
-                        id: crypto.randomUUID(),
-                        title: 'Error with request',
-                        message: error,
-                        existenceTime: 6,
-                    })
-                );
+            if (typeof error === 'string') {
+                addErrorNotice('Error with request', error, 10, dispatch);
+            }
         }
     }
 

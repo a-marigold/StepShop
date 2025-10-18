@@ -1,4 +1,1 @@
-export {
-    handleDecreaseProductQuantity,
-    handleIncreaseProductQuantity,
-} from './changeProductQuantityFunctions';
+export * from './changeProductQuantityFunctions';
