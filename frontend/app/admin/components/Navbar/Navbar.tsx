@@ -36,7 +36,7 @@ const controllersList: {
 export default function Navbar() {
     const pathname = usePathname();
 
-    function getInitialController(): Controller | never {
+    function getInitialController(): Controller | undefined {
         const splitPathName = pathname.split('/') as Controller[];
 
         const _controllers: Controller[] = ['create', 'delete', 'update'];
@@ -44,14 +44,12 @@ export default function Navbar() {
             splitPathName.includes(controller)
         );
 
-        if (!initialController)
-            throw new Error('This controller should not exist');
-
         return initialController;
     }
 
-    const [activeController, setActiveController] =
-        useState<Controller>(getInitialController);
+    const [activeController, setActiveController] = useState<
+        Controller | undefined
+    >(getInitialController);
 
     const controllersRef = useRef<
         Partial<Record<Controller, HTMLAnchorElement | null>>
@@ -60,7 +58,7 @@ export default function Navbar() {
     const activeBlockRef = useRef<HTMLDivElement>(null);
 
     function calculateActiveBlockPosition() {
-        if (!controllersRef.current) return;
+        if (!controllersRef.current || !activeController) return;
         const currentControllerRef = controllersRef.current[activeController];
 
         if (!activeBlockRef.current || !currentControllerRef) return;
