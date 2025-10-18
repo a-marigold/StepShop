@@ -27,22 +27,23 @@ export function DeleteProductForm() {
 
     async function submit(data: Pick<ProductType, 'id'>) {
         try {
-            const deleteProduct = await fetch(
-                `http://127.0.0.1:1000/products/${data.id}`,
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/products/${data.id}` ||
+                    `http://localhost:1000/products/${data.id}`,
                 {
                     method: 'DELETE',
                 }
             );
 
-            const response = (await deleteProduct.json()) as ApiResponseType;
+            const deleteProduct = (await response.json()) as ApiResponseType;
 
-            if (!deleteProduct.ok) {
-                throw new ApiError(response.message);
+            if (!response.ok) {
+                throw new ApiError(deleteProduct.message);
             }
 
             addSuccessNotice(
                 'Product has been deleted',
-                response.message,
+                deleteProduct.message,
                 10,
                 dispatch
             );

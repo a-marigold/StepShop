@@ -9,11 +9,12 @@ import EmptyProductList from './components/EmptyProductList';
 import productStyles from './ProductList.module.scss';
 
 export default async function ProductList({ searchParams }: SearchParamsProp) {
-    // const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-
     let products: ProductType[];
     try {
-        const response = await fetch('http://localhost:1000/products');
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/products` ||
+                'http://localhost:3000/products'
+        );
         products = await response.json();
     } catch {
         console.log('Server is sleeping');

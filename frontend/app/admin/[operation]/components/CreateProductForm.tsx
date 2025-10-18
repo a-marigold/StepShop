@@ -64,21 +64,30 @@ export function CreateProductForm() {
         };
 
         try {
-            const postProduct = await fetch('http://127.0.0.1:1000/products', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newProduct),
-            });
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/products` ||
+                    'http://localhost:1000/products',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newProduct),
+                }
+            );
 
-            const response = (await postProduct.json()) as ApiResponseType;
+            const postProduct = (await response.json()) as ApiResponseType;
 
-            if (!postProduct.ok) {
-                throw new ApiError(response.message);
+            if (!response.ok) {
+                throw new ApiError(postProduct.message);
             }
 
-            addSuccessNotice('Changes saved', response.message, 10, dispatch);
+            addSuccessNotice(
+                'Changes saved',
+                postProduct.message,
+                10,
+                dispatch
+            );
         } catch (error) {
             if (error instanceof ApiError) {
                 addErrorNotice(

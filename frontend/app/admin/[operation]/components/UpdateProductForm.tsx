@@ -66,7 +66,8 @@ export function UpdateProductForm() {
             console.log(JSON.stringify(newProduct));
 
             const updateProduct = await fetch(
-                `http://127.0.0.1:1000/products/${newProduct.id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/products/${newProduct.id}` ||
+                    `http://localhost:1000/products/${newProduct.id}`,
                 {
                     method: 'PATCH',
                     headers: {

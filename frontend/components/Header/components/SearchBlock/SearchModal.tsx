@@ -29,7 +29,10 @@ export default function SearchModal({
     const [products, setProducts] = useState<SearchProductType[]>([]);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:1000/products')
+        fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/products` ||
+                `http://localhost:1000/products`
+        )
             .then((data) => data.json())
             .then((data) => setProducts(data))
 
