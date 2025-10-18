@@ -117,9 +117,13 @@
 
     height: 5px;
 
-    background-color: var(--positive-notice-color);
-
     animation: grow-time-line linear;
+}
+.time-line.success {
+    background-color: var(--success-color);
+}
+.time-line.error {
+    background-color: var(--error-color);
 }
 
 @keyframes grow-time-line {

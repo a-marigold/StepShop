@@ -22,6 +22,7 @@ interface NoticeProps extends Omit<NoticeType, 'id'> {
 export default function Notice({
     title,
     message,
+    type,
     existenceTime = 6,
 
     className,
@@ -46,7 +47,7 @@ export default function Notice({
         ? createPortal(
               <AnimatePresence>
                   <motion.div
-                      className={clsx(noticeStyles['notice'], className)}
+                      className={clsx(noticeStyles['notice'], className, type)}
                       initial={{ transform: 'translateY(10px)', opacity: 0 }}
                       animate={{ transform: 'translateY(0)', opacity: 1 }}
                       exit={{ transform: 'translateX(10px)', opacity: 0 }}
@@ -57,9 +58,9 @@ export default function Notice({
                               <svg
                                   height='21'
                                   viewBox='0 0 256 256'
-                                  color='var(--positive-notice-color)'
+                                  color={`var(--${type}-color)`}
                               >
-                                  <use href='#check-mark-icon' />
+                                  <use href={`#${type}-notice-icon`} />
                               </svg>
                               <p className={noticeStyles['title']}>{title}</p>
                           </div>
@@ -124,7 +125,10 @@ export default function Notice({
                       </AnimatePresence>
 
                       <div
-                          className={noticeStyles['time-line']}
+                          className={clsx(
+                              noticeStyles['time-line'],
+                              noticeStyles[type]
+                          )}
                           style={{ animationDuration: `${existenceTime}s` }}
                       />
                   </motion.div>

@@ -3,6 +3,7 @@
 import { memo, useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
+
 import type { RootState, AppDispatch } from '@/redux/store';
 
 import { deleteNotice } from '@/redux/NoticeSlice';
@@ -31,6 +32,7 @@ export default function NoticesList() {
                     key={notice.id}
                     title={notice.title}
                     message={notice.message}
+                    type={notice.type}
                     existenceTime={notice.existenceTime}
                     deleteNotice={() => handleDeleteNotice(notice.id)}
                     portalRootId='notices-list'

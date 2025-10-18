@@ -15,6 +15,7 @@ export function addPositiveNotice(
             id: crypto.randomUUID(),
             title: title,
             message: message,
+            type: 'success',
             existenceTime: existenceTime,
         })
     );
@@ -31,6 +32,7 @@ export function addErrorNotice(
             id: crypto.randomUUID(),
             title: title,
             message: message,
+            type: 'error',
             existenceTime: existenceTime,
         })
     );
