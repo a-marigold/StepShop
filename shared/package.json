@@ -5,6 +5,10 @@
     "scripts": {
         "build": "tsc --outDir dist"
     },
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
     "dependencies": {
         "zod": "^4.1.12"
     },
