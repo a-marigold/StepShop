@@ -1,8 +1,10 @@
 {
     "name": "@step-shop/shared",
     "version": "1.0.0",
-    "main": "index.ts",
     "packageManager": "pnpm@10.18.1",
+    "scripts": {
+        "build": "tsc --outDir dist"
+    },
     "dependencies": {
         "zod": "^4.1.12"
     },

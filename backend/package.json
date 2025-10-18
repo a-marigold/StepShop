@@ -24,6 +24,6 @@
         "fastify-plugin": "^5.1.0",
         "fastify-type-provider-zod": "^6.0.0",
         "zod": "^4.1.12",
-        "@step-shop/shared": "file:../shared"
+        "@step-shop/shared": "file:../shared/dist"
     }
 }
