@@ -1,6 +1,6 @@
 import z from 'zod';
 
-const ApiResponseSchema = z.object({
+export const ApiResponseSchema = z.object({
     statusCode: z.number(),
     message: z.string(),
 });

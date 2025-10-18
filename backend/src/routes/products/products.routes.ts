@@ -8,10 +8,12 @@ import {
     deleteProduct,
     updateProduct,
 } from './products.controller';
+
 import {
     ProductListSchema,
     ProductSchema,
 } from '@step-shop/shared/types/ProductTypes';
+import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
     app.route({
@@ -35,7 +37,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         schema: {
             body: ProductSchema.omit({ id: true }),
             response: {
-                200: { type: 'string' },
+                201: ApiResponseSchema,
             },
         },
 
@@ -51,7 +53,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
                 id: z.coerce.number(),
             }),
             response: {
-                200: { type: 'string' },
+                200: ApiResponseSchema,
             },
         },
 
@@ -66,7 +68,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
                 id: z.coerce.number(),
             }),
             response: {
-                200: { type: 'string' },
+                201: ApiResponseSchema,
             },
         },
         handler: updateProduct,

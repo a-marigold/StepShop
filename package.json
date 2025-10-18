@@ -1,6 +1,6 @@
 {
     "private": true,
     "scripts": {
-        "dev": "pnpm -r dev"
+        "dev": "pnpm -r --filter ./frontend --filter ./backend dev"
     }
 }
