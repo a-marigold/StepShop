@@ -1,5 +1,10 @@
 'use client';
 
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+
+import { addPositiveNotice, addErrorNotice } from '@/utils/noticeGlobalState';
+
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 

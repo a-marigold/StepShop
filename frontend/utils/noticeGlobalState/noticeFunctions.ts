@@ -7,7 +7,7 @@ import type { NoticeType } from '@/types/NoticeType';
 export function addPositiveNotice(
     title: NoticeType['title'],
     message: NoticeType['message'],
-    existenceTime: NoticeType['existenceTime'],
+    existenceTime: NoticeType['existenceTime'] = 10,
     dispatch: AppDispatch
 ) {
     dispatch(
@@ -24,7 +24,7 @@ export function addPositiveNotice(
 export function addErrorNotice(
     title: NoticeType['title'],
     message: NoticeType['message'],
-    existenceTime: NoticeType['existenceTime'],
+    existenceTime: NoticeType['existenceTime'] = 10,
     dispatch: AppDispatch
 ) {
     dispatch(

@@ -1,5 +1,11 @@
 'use client';
 
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+
+import { addPositiveNotice, addErrorNotice } from '@/utils/noticeGlobalState';
+
+import { ApiError } from '@/utils/errors/ApiError';
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
@@ -15,6 +21,8 @@ const deleteInputsList: OperationInput[] = [
 ];
 
 export function DeleteProductForm() {
+    const dispatch = useDispatch<AppDispatch>();
+
     async function submit(data: Pick<ProductType, 'id'>) {
         try {
             const deleteProduct = await fetch(
@@ -23,11 +31,28 @@ export function DeleteProductForm() {
                     method: 'DELETE',
                 }
             );
+
             const deletedProduct = await deleteProduct.text();
 
-            console.log(deletedProduct);
+            if (!deleteProduct.ok) {
+                throw new ApiError('e');
+            }
+
+            addPositiveNotice(
+                'Product has been deleted',
+                deletedProduct,
+                10,
+                dispatch
+            );
         } catch (error) {
-            console.error(error);
+            if (error instanceof ApiError) {
+                addErrorNotice(
+                    'Error with request',
+                    error.message,
+                    10,
+                    dispatch
+                );
+            }
         }
     }
 

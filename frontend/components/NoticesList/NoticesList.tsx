@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import type { RootState, AppDispatch } from '@/redux/store';
 
-import { deleteNotice } from '@/redux/NoticeSlice';
+import { deleteNoticeById } from '@/utils/noticeGlobalState';
 
 import Notice from '@/UI/Notice';
 
@@ -22,7 +22,7 @@ export default function NoticesList() {
     const dispatch = useDispatch<AppDispatch>();
 
     const handleDeleteNotice = useCallback((id: string) => {
-        dispatch(deleteNotice(id));
+        deleteNoticeById(id, dispatch);
     }, []);
 
     return (
