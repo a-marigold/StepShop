@@ -13,11 +13,12 @@ import productStyles from './ProductList.module.scss';
 
 export default async function ProductList({ searchParams }: SearchParamsProp) {
     let products: ProductType[];
-
     let errorMessage: string | undefined;
 
     try {
-        const response = await fetch(`${apiOrigin}/products`);
+        const response = await fetch(`${apiOrigin}/products`, {
+            cache: 'no-store',
+        });
         products = await response.json();
 
         if (!response.ok) {
