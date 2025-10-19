@@ -36,8 +36,6 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     const minPrice = queryParams.minPrice ? Number(queryParams.minPrice) : null;
     const maxPrice = queryParams.maxPrice ? Number(queryParams.maxPrice) : null;
 
-    // TODO: __HOT__ - add error handling if  response returns an error
-
     const filteredProducts = errorMessage
         ? []
         : products.filter((product) => {

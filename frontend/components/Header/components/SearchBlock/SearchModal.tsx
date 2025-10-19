@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo } from 'react';
 
 import type { Ref } from 'react';
 
+import ApiError from '@/utils/errors/ApiError';
+
 import type { ProductType } from '@shared/types/ProductTypes';
 
 import Image from 'next/image';
@@ -11,7 +13,6 @@ import Image from 'next/image';
 import ModalBackdrop from '@UI/ModalBackdrop';
 
 import modalStyles from './SearchModal.module.scss';
-
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 type SearchProductType = Pick<ProductType, 'id' | 'image' | 'title' | 'price'>;
@@ -30,20 +31,36 @@ export default function SearchModal({
 }: SearchModalProps) {
     const [products, setProducts] = useState<SearchProductType[]>([]);
 
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    // TODO: __HOT__ - add error handling if response returns an error
+    // TODO: Add util "getApiUrl"
 
     useEffect(() => {
-        fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/products` ||
-                `http://localhost:1000/products`
-        )
-            .then((data) => data.json())
-            .then((data) => setProducts(data))
+        const getProducts = async () => {
+            try {
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/products` ||
+                        `http://localhost:1000/products`
+                );
 
-            .catch(() => {
+                if (!response.ok) {
+                    throw new ApiError('Internal server error');
+                }
+
+                const data = await response.json();
+
+                setProducts(data);
+            } catch (error) {
+                if (error instanceof ApiError) {
+                    setErrorMessage(error.message);
+                }
+
                 setProducts([]);
-                setError('Внутренняя ошибка сервера');
-            });
+            }
+        };
+
+        getProducts();
     }, []);
 
     const filteredProducts = useMemo(() => {
@@ -61,7 +78,7 @@ export default function SearchModal({
                     event.stopPropagation();
                 }}
             >
-                {searchQuery.trim() && !!filteredProducts.length && !error ? (
+                {searchQuery.trim() && !!filteredProducts.length ? (
                     filteredProducts.map((product) => (
                         <a
                             key={product.id}
@@ -88,8 +105,8 @@ export default function SearchModal({
                 ) : (
                     <div className={modalStyles['hint-box']}>
                         <p className={modalStyles['hint']}>
-                            {error
-                                ? error
+                            {errorMessage
+                                ? errorMessage
                                 : 'По вашему запросу ничего не найдено'}
                         </p>
                     </div>
