@@ -38,8 +38,14 @@ export function DeleteProductForm() {
                 throw new ApiError(deleteProduct.message);
             }
 
+            const revalidateProductsResponse = await fetch(`api/revalidate`, {
+                body: JSON.stringify({ tag: 'products' }),
+            });
+            const revalidateProductsData =
+                (await revalidateProductsResponse.json()) as ApiResponseType;
+
             addSuccessNotice(
-                'Product has been deleted',
+                `Product has been deleted. ${revalidateProductsData.message}`,
                 deleteProduct.message,
                 10,
                 dispatch

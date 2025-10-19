@@ -79,8 +79,14 @@ export function CreateProductForm() {
                 throw new ApiError(postProduct.message);
             }
 
+            const revalidateProductsResponse = await fetch(`api/revalidate`, {
+                body: JSON.stringify({ tag: 'products' }),
+            });
+            const revalidateProductsData =
+                (await revalidateProductsResponse.json()) as ApiResponseType;
+
             addSuccessNotice(
-                'Changes saved',
+                `Changes saved. ${revalidateProductsData.message}`,
                 postProduct.message,
                 10,
                 dispatch

@@ -18,6 +18,9 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     try {
         const response = await fetch(`${apiOrigin}/products`, {
             cache: 'force-cache',
+            next: {
+                tags: ['products'],
+            },
         });
         products = await response.json();
 
