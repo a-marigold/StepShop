@@ -1,3 +1,4 @@
+import { apiOrigin } from '@/utils/getApiOrigin';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
@@ -16,10 +17,7 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     let errorMessage: string | undefined;
 
     try {
-        const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/products` ||
-                'http://localhost:3000/products'
-        );
+        const response = await fetch(`${apiOrigin}/products`);
         products = await response.json();
 
         if (!response.ok) {

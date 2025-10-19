@@ -5,6 +5,7 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
+import { apiOrigin } from '@/utils/getApiOrigin';
 import ApiError from '@/utils/errors/ApiError';
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
@@ -27,13 +28,9 @@ export function DeleteProductForm() {
 
     async function submit(data: Pick<ProductType, 'id'>) {
         try {
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/products/${data.id}` ||
-                    `http://localhost:1000/products/${data.id}`,
-                {
-                    method: 'DELETE',
-                }
-            );
+            const response = await fetch(`${apiOrigin}/products/${data.id}`, {
+                method: 'DELETE',
+            });
 
             const deleteProduct = (await response.json()) as ApiResponseType;
 

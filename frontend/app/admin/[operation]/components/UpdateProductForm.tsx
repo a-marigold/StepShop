@@ -5,6 +5,7 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
+import { apiOrigin } from '@/utils/getApiOrigin';
 import ApiError from '@/utils/errors/ApiError';
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
@@ -66,8 +67,7 @@ export function UpdateProductForm() {
             console.log(JSON.stringify(newProduct));
 
             const updateProduct = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/products/${newProduct.id}` ||
-                    `http://localhost:1000/products/${newProduct.id}`,
+                `${apiOrigin}/products/${newProduct.id}`,
                 {
                     method: 'PATCH',
                     headers: {

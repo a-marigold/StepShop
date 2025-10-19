@@ -5,6 +5,7 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
+import { apiOrigin } from '@/utils/getApiOrigin';
 import ApiError from '@/utils/errors/ApiError';
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
@@ -64,17 +65,13 @@ export function CreateProductForm() {
         };
 
         try {
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/products` ||
-                    'http://localhost:1000/products',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(newProduct),
-                }
-            );
+            const response = await fetch(`${apiOrigin}/products`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
+            });
 
             const postProduct = (await response.json()) as ApiResponseType;
 

@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 
 import type { Ref } from 'react';
 
+import { apiOrigin } from '@/utils/getApiOrigin';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@shared/types/ProductTypes';
@@ -36,10 +37,7 @@ export default function SearchModal({
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const response = await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/products` ||
-                        `http://localhost:1000/products`
-                );
+                const response = await fetch(`${apiOrigin}/products`);
 
                 if (!response.ok) {
                     throw new ApiError('Internal server error');
