@@ -37,7 +37,7 @@
     max-width: 450px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: var(--tablet-max-width)) {
     .widgets-box {
         flex-direction: column;
     }
