@@ -33,9 +33,6 @@ export default function SearchModal({
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    // TODO: __HOT__ - add error handling if response returns an error
-    // TODO: Add util "getApiUrl"
-
     useEffect(() => {
         const getProducts = async () => {
             try {
