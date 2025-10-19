@@ -83,6 +83,7 @@ export function UpdateProductForm() {
             }
 
             const revalidateProductsResponse = await fetch(`api/revalidate`, {
+                method: 'POST',
                 body: JSON.stringify({ tag: 'products' }),
             });
             const revalidateProductsData =
