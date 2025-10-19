@@ -35,7 +35,7 @@
     @include flex-y-center;
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     .user-buttons-block {
         gap: 0.5em;
     }

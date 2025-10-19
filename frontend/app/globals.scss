@@ -122,15 +122,10 @@ button:focus-visible {
     --page-border-radius: 32px;
     --page-content-x-padding: 4em;
     --page-max-width: 1580px;
-
-    // Media queries with width:
-    --tablet-max-width: 1024px;
-    --small-tablets-max-width: 900px;
-    --mobile-max-width: 600px;
 }
 //*
 
-@media (max-width: var(--tablet-max-width)) {
+@media (max-width: 1024px) {
     body {
         padding: 0;
     }

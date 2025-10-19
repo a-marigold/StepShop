@@ -62,7 +62,7 @@
     color: white;
 }
 
-@media (max-width: var(--small-tablets-max-width)) {
+@media (max-width: 900px) {
     .product-modal {
         flex-direction: column;
     }
@@ -74,7 +74,7 @@
     }
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     .modal-wrapper {
         margin: 0;
 

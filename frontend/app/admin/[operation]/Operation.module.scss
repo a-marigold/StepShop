@@ -27,7 +27,7 @@
     min-width: 260px;
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     .operation-input {
         min-width: initial;
     }

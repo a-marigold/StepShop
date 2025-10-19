@@ -28,7 +28,7 @@
         height: 75%;
     }
 }
-@media (max-width: var(--small-tablets-max-width)) {
+@media (max-width: 900px) {
     .empty-list-box {
         flex-direction: column;
     }

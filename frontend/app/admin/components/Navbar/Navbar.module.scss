@@ -40,7 +40,7 @@
     transition: transform 0.16s ease, width 0.16s ease;
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     .navbar {
         max-width: initial;
     }

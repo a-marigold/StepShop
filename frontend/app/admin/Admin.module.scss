@@ -17,7 +17,7 @@
     border-radius: 0 0 var(--page-border-radius) var(--page-border-radius);
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     .main-content {
         flex-direction: column;
     }

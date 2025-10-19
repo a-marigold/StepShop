@@ -128,7 +128,7 @@
     @include modal-backdrop(5);
 }
 
-@media (max-width: var(--tablet-max-width)) {
+@media (max-width: 1024px) {
     .header {
         border-radius: 0;
     }
@@ -137,7 +137,7 @@
     }
 }
 
-@media (max-width: var(--small-tablets-max-width)) {
+@media (max-width: 900px) {
     .left-box {
         gap: 0.5em;
     }
@@ -147,7 +147,7 @@
     }
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     :global(body.search-modal-opened .user-buttons-public) {
         display: none;
     }

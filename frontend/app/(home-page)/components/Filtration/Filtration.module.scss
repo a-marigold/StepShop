@@ -52,7 +52,7 @@
     margin-top: 1em;
 }
 
-@media (max-width: var(--mobile-max-width)) {
+@media (max-width: 600px) {
     .filtration-box {
         max-width: 100%;
     }
