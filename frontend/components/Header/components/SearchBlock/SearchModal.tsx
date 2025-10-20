@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 
 import type { Ref } from 'react';
 
-import { apiOrigin } from '@/utils/getApiOrigin';
+import { clientGetProducts } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@shared/types/ProductTypes';
@@ -35,17 +35,11 @@ export default function SearchModal({
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        const getProducts = async () => {
+        const loadProducts = async () => {
             try {
-                const response = await fetch(`${apiOrigin}/products`);
+                const products = await clientGetProducts();
 
-                if (!response.ok) {
-                    throw new ApiError('Internal server error');
-                }
-
-                const data = await response.json();
-
-                setProducts(data);
+                setProducts(products);
             } catch (error) {
                 if (error instanceof ApiError) {
                     setErrorMessage(error.message);
@@ -55,7 +49,7 @@ export default function SearchModal({
             }
         };
 
-        getProducts();
+        loadProducts();
     }, []);
 
     const filteredProducts = useMemo(() => {
