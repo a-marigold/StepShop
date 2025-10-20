@@ -88,14 +88,17 @@ export function CreateProductForm() {
                 (await revalidateProductsResponse.json()) as ApiResponseType;
 
             if (!response.ok || !revalidateProductsResponse.ok) {
+                if (!postProduct.message || !revalidateProductsData.message)
+                    throw new Error('Unknown error');
+
                 throw new ApiError(
                     `${postProduct.message}. ${revalidateProductsData.message}`
                 );
             }
 
             addSuccessNotice(
-                `Changes saved. ${revalidateProductsData.message}`,
-                postProduct.message,
+                `Changes saved`,
+                `${postProduct.message}. ${revalidateProductsData.message}`,
                 10,
                 dispatch
             );

@@ -20,6 +20,7 @@ const deleteInputsList: OperationInput[] = [
         name: 'ID товара',
         propertyName: 'id',
         htmlId: 'product-id-input',
+
         isRequired: true,
     },
 ];
@@ -47,14 +48,17 @@ export function DeleteProductForm() {
                 (await revalidateProductsResponse.json()) as ApiResponseType;
 
             if (!response.ok || !revalidateProductsResponse.ok) {
+                if (!deleteProduct.message || !revalidateProductsData.message)
+                    throw new Error('Unknown error');
+
                 throw new ApiError(
                     `${deleteProduct.message}. ${revalidateProductsData.message}`
                 );
             }
 
             addSuccessNotice(
-                `Product has been deleted. ${revalidateProductsData.message}`,
-                deleteProduct.message,
+                `Product has been deleted`,
+                `${deleteProduct.message}. ${revalidateProductsData.message}`,
                 10,
                 dispatch
             );

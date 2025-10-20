@@ -77,7 +77,7 @@ export function UpdateProductForm() {
                     body: JSON.stringify(newProduct),
                 }
             );
-            const updatedProduct = (await response.json()) as ApiResponseType;
+            const updateProduct = (await response.json()) as ApiResponseType;
 
             const revalidateProductsResponse = await fetch(
                 `${websiteOrigin}api/revalidate`,
@@ -91,14 +91,17 @@ export function UpdateProductForm() {
                 (await revalidateProductsResponse.json()) as ApiResponseType;
 
             if (!response.ok || !revalidateProductsResponse.ok) {
+                if (!updateProduct.message || !revalidateProductsData.message)
+                    throw new Error('Unknown error');
+
                 throw new ApiError(
-                    `${updatedProduct.message}. ${revalidateProductsData.message}`
+                    `${updateProduct.message}. ${revalidateProductsData.message}`
                 );
             }
 
             addSuccessNotice(
                 `Changes saved. ${revalidateProductsData.message}`,
-                updatedProduct.message,
+                `${updateProduct.message}. ${revalidateProductsData.message}`,
                 10,
                 dispatch
             );

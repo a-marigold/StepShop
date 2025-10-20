@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 import ApiError from '@/utils/errors/ApiError';
 
-export default async function POST(request: NextRequest) {
+export async function POST(request: NextRequest) {
     const body = await request.json();
 
     try {
@@ -16,16 +16,23 @@ export default async function POST(request: NextRequest) {
 
         revalidateTag(body.tag);
 
-        Response.json(
-            { message: `The tag ${body.tag} was successful revalidated` },
+        return Response.json(
+            { message: `The tag ${body.tag} was successfully revalidated` },
             { status: 200 }
         );
     } catch (error) {
         if (error instanceof ApiError) {
-            Response.json(
+            return Response.json(
                 { error: error.message },
                 { status: Number(error.statusCode) }
             );
+        }
+
+        if (error instanceof ApiError) {
+            return Response.json({
+                error: 'Internal Server Error',
+                status: 500,
+            });
         }
     }
 }
