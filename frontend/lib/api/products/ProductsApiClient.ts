@@ -58,6 +58,28 @@ export async function postProduct(newProduct: ProductType) {
     return postProduct;
 }
 
+export async function deleteProduct(id: Pick<ProductType, 'id'>['id']) {
+    const response = await fetch(`${apiOrigin}/products/${id}`, {
+        method: 'DELETE',
+    });
+
+    const deleteProduct = (await response.json()) as ApiResponseType;
+
+    const revalidateProductsTag = await clientRevalidateTag('products');
+
+    if (!response.ok) {
+        if (!deleteProduct.message) throw new Error('Unknown error');
+
+        throw new ApiError(
+            `${deleteProduct.message}. ${revalidateProductsTag.message}`
+        );
+    }
+
+    return deleteProduct;
+}
+
+export async function updateProduct(newProduct: ProductType) {}
+
 export async function clientRevalidateTag(tag: string) {
     const revalidateProductsResponse = await fetch(
         `${websiteOrigin}/api/revalidate`,

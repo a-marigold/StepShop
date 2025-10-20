@@ -5,10 +5,8 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { apiOrigin } from '@/utils/getApiOrigin';
-import { websiteOrigin } from '@/utils/getWebsiteOrigin';
+import { deleteProduct } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
-import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
@@ -30,35 +28,11 @@ export function DeleteProductForm() {
 
     async function submit(data: Pick<ProductType, 'id'>) {
         try {
-            const response = await fetch(`${apiOrigin}/products/${data.id}`, {
-                method: 'DELETE',
-            });
-
-            const deleteProduct = (await response.json()) as ApiResponseType;
-
-            const revalidateProductsResponse = await fetch(
-                `${websiteOrigin}/api/revalidate`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify({ tag: 'products' }),
-                }
-            );
-
-            const revalidateProductsData =
-                (await revalidateProductsResponse.json()) as ApiResponseType;
-
-            if (!response.ok || !revalidateProductsResponse.ok) {
-                if (!deleteProduct.message || !revalidateProductsData.message)
-                    throw new Error('Unknown error');
-
-                throw new ApiError(
-                    `${deleteProduct.message}. ${revalidateProductsData.message}`
-                );
-            }
+            const deleteProductData = await deleteProduct(data.id);
 
             addSuccessNotice(
                 `Product has been deleted`,
-                `${deleteProduct.message}. ${revalidateProductsData.message}`,
+                deleteProductData.message,
                 10,
                 dispatch
             );

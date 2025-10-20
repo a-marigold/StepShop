@@ -64,11 +64,11 @@ export function CreateProductForm() {
         };
 
         try {
-            const postNewProduct = await postProduct(newProduct);
+            const postProductData = await postProduct(newProduct);
 
             addSuccessNotice(
                 `Changes saved`,
-                postNewProduct.message,
+                postProductData.message,
                 10,
                 dispatch
             );
