@@ -23,14 +23,14 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         if (error instanceof ApiError) {
             return Response.json(
-                { error: error.message },
+                { message: error.message },
                 { status: Number(error.statusCode) }
             );
         }
 
         if (error instanceof ApiError) {
             return Response.json({
-                error: 'Internal Server Error',
+                message: 'Internal Server Error',
                 status: 500,
             });
         }
