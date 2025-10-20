@@ -24,7 +24,11 @@ export async function serverGetProducts() {
 }
 
 export async function clientGetProducts() {
-    const response = await fetch(`${apiOrigin}/products`);
+    const response = await fetch(`${apiOrigin}/products`, {
+        headers: {
+            'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
+        },
+    });
 
     if (!response.ok) {
         throw new ApiError('Internal server error');
