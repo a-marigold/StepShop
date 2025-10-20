@@ -8,6 +8,7 @@ import {
     deleteProduct,
     updateProduct,
 } from './products.controller';
+import { checkProductsApiKey } from './products.middlewares';
 
 import {
     ProductListSchema,
@@ -16,6 +17,8 @@ import {
 import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
+    app.addHook('preHandler', checkProductsApiKey);
+
     app.route({
         method: 'GET',
 
