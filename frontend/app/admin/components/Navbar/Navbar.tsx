@@ -19,7 +19,7 @@ const controllersList: {
     type: Controller;
 }[] = [
     {
-        title: 'Добавить товар',
+        title: 'Создать товар',
         path: '/admin/create',
         type: 'create',
     },

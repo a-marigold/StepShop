@@ -5,10 +5,8 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { apiOrigin } from '@/utils/getApiOrigin';
-import { websiteOrigin } from '@/utils/getWebsiteOrigin';
+import { patchProduct } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
-import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
@@ -65,41 +63,11 @@ export function UpdateProductForm() {
         };
 
         try {
-            const response = await fetch(
-                `${apiOrigin}/products/${newProduct.id}`,
-                {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(newProduct),
-                }
-            );
-            const updateProduct = (await response.json()) as ApiResponseType;
-
-            const revalidateProductsResponse = await fetch(
-                `${websiteOrigin}api/revalidate`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify({ tag: 'products' }),
-                }
-            );
-
-            const revalidateProductsData =
-                (await revalidateProductsResponse.json()) as ApiResponseType;
-
-            if (!response.ok || !revalidateProductsResponse.ok) {
-                if (!updateProduct.message || !revalidateProductsData.message)
-                    throw new Error('Unknown error');
-
-                throw new ApiError(
-                    `${updateProduct.message}. ${revalidateProductsData.message}`
-                );
-            }
+            const updateProductData = await patchProduct(newProduct);
 
             addSuccessNotice(
-                `Changes saved. ${revalidateProductsData.message}`,
-                `${updateProduct.message}. ${revalidateProductsData.message}`,
+                'Changes saved',
+                updateProductData.message,
                 10,
                 dispatch
             );
@@ -117,7 +85,7 @@ export function UpdateProductForm() {
 
     return (
         <OperationForm
-            title='Удалить товар'
+            title='Обновить товар'
             inputsList={updateInputsList}
             submitAction={submit}
         ></OperationForm>

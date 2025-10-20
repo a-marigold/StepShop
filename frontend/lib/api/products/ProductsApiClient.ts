@@ -41,13 +41,13 @@ export async function postProduct(newProduct: ProductType) {
         body: JSON.stringify(newProduct),
     });
 
-    const postProduct = (await response.json()) as ApiResponseType;
+    const postProduct: ApiResponseType = await response.json();
 
     const revalidateProductsTag = await clientRevalidateTag('products');
 
     if (!response.ok) {
         if (!postProduct.message) {
-            throw new Error('Unknown error');
+            throw new ApiError('Unknown error');
         }
 
         throw new ApiError(
@@ -63,12 +63,14 @@ export async function deleteProduct(id: Pick<ProductType, 'id'>['id']) {
         method: 'DELETE',
     });
 
-    const deleteProduct = (await response.json()) as ApiResponseType;
+    const deleteProduct: ApiResponseType = await response.json();
 
     const revalidateProductsTag = await clientRevalidateTag('products');
 
     if (!response.ok) {
-        if (!deleteProduct.message) throw new Error('Unknown error');
+        if (!deleteProduct.message) {
+            throw new ApiError('Unknown error');
+        }
 
         throw new ApiError(
             `${deleteProduct.message}. ${revalidateProductsTag.message}`
@@ -78,7 +80,30 @@ export async function deleteProduct(id: Pick<ProductType, 'id'>['id']) {
     return deleteProduct;
 }
 
-export async function updateProduct(newProduct: ProductType) {}
+export async function patchProduct(newProduct: ProductType) {
+    const response = await fetch(`${apiOrigin}/products/${newProduct.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newProduct),
+    });
+    const updateProduct: ApiResponseType = await response.json();
+
+    const revalidateProductsTag = await clientRevalidateTag('products');
+
+    if (!response.ok) {
+        if (!updateProduct.message) {
+            throw new ApiError(
+                `${updateProduct.message}. ${revalidateProductsTag.message}`
+            );
+        }
+
+        throw new ApiError(updateProduct.message);
+    }
+
+    return updateProduct;
+}
 
 export async function clientRevalidateTag(tag: string) {
     const revalidateProductsResponse = await fetch(
