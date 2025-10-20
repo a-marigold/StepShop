@@ -1,4 +1,4 @@
-import { apiOrigin } from '@/utils/getApiOrigin';
+import { serverGetProducts } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
@@ -16,17 +16,9 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
     let errorMessage: string | undefined;
 
     try {
-        const response = await fetch(`${apiOrigin}/products`, {
-            cache: 'force-cache',
-            next: {
-                tags: ['products'],
-            },
-        });
-        products = await response.json();
+        const getProducts = await serverGetProducts();
 
-        if (!response.ok) {
-            throw new ApiError('Internal server error');
-        }
+        products = getProducts;
     } catch (error) {
         if (error instanceof ApiError) {
             errorMessage = error.message;

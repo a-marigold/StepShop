@@ -5,10 +5,8 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { apiOrigin } from '@/utils/getApiOrigin';
-import { websiteOrigin } from '@/utils/getWebsiteOrigin';
+import { postProduct } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
-import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
@@ -66,39 +64,11 @@ export function CreateProductForm() {
         };
 
         try {
-            const response = await fetch(`${apiOrigin}/products`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newProduct),
-            });
-
-            const postProduct = (await response.json()) as ApiResponseType;
-
-            const revalidateProductsResponse = await fetch(
-                `${websiteOrigin}/api/revalidate`,
-                {
-                    method: 'POST',
-                    body: JSON.stringify({ tag: 'products' }),
-                }
-            );
-
-            const revalidateProductsData =
-                (await revalidateProductsResponse.json()) as ApiResponseType;
-
-            if (!response.ok || !revalidateProductsResponse.ok) {
-                if (!postProduct.message || !revalidateProductsData.message)
-                    throw new Error('Unknown error');
-
-                throw new ApiError(
-                    `${postProduct.message}. ${revalidateProductsData.message}`
-                );
-            }
+            const postNewProduct = await postProduct(newProduct);
 
             addSuccessNotice(
                 `Changes saved`,
-                `${postProduct.message}. ${revalidateProductsData.message}`,
+                postNewProduct.message,
                 10,
                 dispatch
             );

@@ -65,8 +65,6 @@ export function UpdateProductForm() {
         };
 
         try {
-            console.log(JSON.stringify(newProduct));
-
             const response = await fetch(
                 `${apiOrigin}/products/${newProduct.id}`,
                 {
