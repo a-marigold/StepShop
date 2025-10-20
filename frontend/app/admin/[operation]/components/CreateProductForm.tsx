@@ -6,6 +6,7 @@ import type { AppDispatch } from '@/redux/store';
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
 import { apiOrigin } from '@/utils/getApiOrigin';
+import { websiteOrigin } from '@/utils/getWebsiteOrigin';
 import ApiError from '@/utils/errors/ApiError';
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
@@ -75,16 +76,22 @@ export function CreateProductForm() {
 
             const postProduct = (await response.json()) as ApiResponseType;
 
-            if (!response.ok) {
-                throw new ApiError(postProduct.message);
-            }
+            const revalidateProductsResponse = await fetch(
+                `${websiteOrigin}/api/revalidate`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify({ tag: 'products' }),
+                }
+            );
 
-            const revalidateProductsResponse = await fetch(`api/revalidate`, {
-                method: 'POST',
-                body: JSON.stringify({ tag: 'products' }),
-            });
             const revalidateProductsData =
                 (await revalidateProductsResponse.json()) as ApiResponseType;
+
+            if (!response.ok || !revalidateProductsResponse.ok) {
+                throw new ApiError(
+                    `${postProduct.message}. ${revalidateProductsData.message}`
+                );
+            }
 
             addSuccessNotice(
                 `Changes saved. ${revalidateProductsData.message}`,
