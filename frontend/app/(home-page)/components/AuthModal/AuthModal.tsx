@@ -2,8 +2,8 @@
 
 'use client';
 
-import PhoneNumberContent from './components/PhoneNumberContent';
-import PhoneCodeContent from './components/PhoneCodeContent';
+import PhoneNumberForm from './components/PhoneNumberForm';
+import PhoneCodeForm from './components/PhoneCodeForm';
 
 import ModalBackdrop from '@/UI/ModalBackdrop';
 import CloseModalCross from '@/UI/CloseModalCross';
@@ -25,7 +25,7 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    <PhoneNumberContent />
+                    <PhoneNumberForm />
                     {/* <PhoneCodeContent /> */}
                 </div>
 

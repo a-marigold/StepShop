@@ -5,9 +5,9 @@ import AccessButton from '@/UI/AccessButton';
 
 import authStyles from '../AuthModal.module.scss';
 
-export default function PhoneCodeContent() {
+export default function PhoneCodeForm() {
     return (
-        <>
+        <form className={authStyles['user-form']}>
             <div className={authStyles['content-block']}>
                 <div className={authStyles['text-block']}>
                     <p className={authStyles['title']}>Введите код</p>
@@ -34,6 +34,6 @@ export default function PhoneCodeContent() {
                 ariaLabel='Запросить код — через {SECONDS} сек.'
                 className={authStyles['access-button']}
             />
-        </>
+        </form>
     );
 }

@@ -9,14 +9,10 @@
     @include modal-wrapper(auto, auto);
 }
 .auth-modal {
-    @include flex-column;
-    gap: 1.25em;
-
     width: 100%;
     max-width: 450px;
 
     background-color: var(--main-bg-color);
-
     border-radius: 18px;
 
     padding: 3em;
@@ -49,4 +45,9 @@
 
 .access-button {
     height: 55px;
+}
+
+.user-form {
+    @include flex-column;
+    gap: 1.25em;
 }
