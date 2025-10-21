@@ -26,7 +26,7 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     onClick={(event) => event.stopPropagation()}
                 >
                     <PhoneNumberForm />
-                    {/* <PhoneCodeContent /> */}
+                    {/* <PhoneCodeForm /> */}
                 </div>
 
                 <CloseModalCross

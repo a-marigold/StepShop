@@ -2,17 +2,12 @@
 
 import { Controller, useForm } from 'react-hook-form';
 
-import type { UserFormType } from './UserFormType';
-
 import { apiOrigin } from '@/utils/getApiOrigin';
 
-import Image from 'next/image';
+import type { UserFormType } from './UserFormType';
 
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
-import AccessButton from '@/UI/AccessButton';
-
-import authStyles from '../AuthModal.module.scss';
 
 export default function PhoneNumberForm() {
     const { control, handleSubmit } = useForm<UserFormType['phoneNumber']>();
