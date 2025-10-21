@@ -3,7 +3,7 @@ export type UserFormType = {
         phoneNumber: string;
     };
     phoneCode: {
-        phoneCode: string | number;
+        phoneCode: string;
     };
     userData: {
         userName: string;

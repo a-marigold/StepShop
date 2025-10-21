@@ -13,6 +13,7 @@ interface CodeInputProps {
     className?: string;
 
     inputQuantity: number;
+    changeAction: (...args: any) => void;
 }
 
 export default function CodeInput({
@@ -21,6 +22,7 @@ export default function CodeInput({
     className,
 
     inputQuantity,
+    changeAction,
 }: CodeInputProps) {
     const [inputs, setInputs] = useState<string[]>(
         Array(inputQuantity).fill('')
@@ -34,6 +36,9 @@ export default function CodeInput({
             setInputs((prev) => {
                 const newInputs = [...prev];
                 newInputs[index] = value;
+
+                changeAction(newInputs.join(''));
+
                 return newInputs;
             });
         }
@@ -50,6 +55,9 @@ export default function CodeInput({
             setInputs((prev) => {
                 const newInputs = [...prev];
                 newInputs[index] = '';
+
+                changeAction(newInputs.join(''));
+
                 return newInputs;
             });
             inputsRef.current[index - 1]?.focus();
@@ -71,7 +79,9 @@ export default function CodeInput({
                         handleChange(index, event.target.value);
                     }}
                     onKeyDown={(event) => {
-                        handleClear(index, event);
+                        if (!!inputs.join('')) {
+                            handleClear(index, event);
+                        }
                     }}
                     ref={(element) => {
                         inputsRef.current[index] = element;
