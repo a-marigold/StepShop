@@ -8,6 +8,7 @@ import { apiOrigin } from '@/utils/getApiOrigin';
 
 import Image from 'next/image';
 
+import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 import AccessButton from '@/UI/AccessButton';
 
@@ -17,34 +18,18 @@ export default function PhoneNumberForm() {
     const { control, handleSubmit } = useForm<UserFormType['phoneNumber']>();
 
     async function submit(data: UserFormType['phoneNumber']) {
-        // fetch
         const response = await fetch(`${apiOrigin}/AUTH_ENDPOINT    `);
     }
 
     return (
-        <form
-            onSubmit={handleSubmit(submit)}
-            className={authStyles['user-form']}
+        <UserForm
+            submitAction={handleSubmit(submit)}
+            title='Вход в аккаунт'
+            description='Введите номер телефона, чтобы войти или зарегистрироваться'
+            image='/images/phone-icon.svg'
+            buttonTitle='Получить код в SMS'
+            buttonAriaLabel='Получить код в SMS'
         >
-            <div className={authStyles['content-block']}>
-                <div className={authStyles['text-block']}>
-                    <p className={authStyles['title']}>Вход в аккаунт</p>
-
-                    <p className={authStyles['description']}>
-                        Введите номер телефона, чтобы войти или
-                        зарегистрироваться
-                    </p>
-                </div>
-
-                <Image
-                    src='/images/phone-icon.svg'
-                    width={60}
-                    height={60}
-                    alt=''
-                    priority
-                />
-            </div>
-
             <Controller
                 name='phoneNumber'
                 control={control}
@@ -59,13 +44,6 @@ export default function PhoneNumberForm() {
                     />
                 )}
             />
-
-            <AccessButton
-                title='Получить код в SMS'
-                ariaLabel='Получить код в SMS'
-                buttonType='submit'
-                className={authStyles['access-button']}
-            />
-        </form>
+        </UserForm>
     );
 }
