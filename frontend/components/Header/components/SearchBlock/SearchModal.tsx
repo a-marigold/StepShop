@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo } from 'react';
 
 import type { Ref } from 'react';
 
+import { useDebounce } from '@/hooks/useDebounce';
+
 import { clientGetProducts } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
@@ -52,11 +54,15 @@ export default function SearchModal({
         loadProducts();
     }, []);
 
+    const debouncedQuery = useDebounce(searchQuery, 500);
+
     const filteredProducts = useMemo(() => {
         return products.filter((product) =>
-            product.title.toLowerCase().includes(searchQuery.toLowerCase())
+            product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
         );
-    }, [searchQuery, products]);
+    }, [debouncedQuery, products]);
+
+    console.log(searchQuery, debouncedQuery, filteredProducts);
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>
@@ -67,7 +73,7 @@ export default function SearchModal({
                     event.stopPropagation();
                 }}
             >
-                {searchQuery.trim() && !!filteredProducts.length ? (
+                {debouncedQuery.trim() && !!filteredProducts.length ? (
                     filteredProducts.map((product) => (
                         <a
                             key={product.id}
