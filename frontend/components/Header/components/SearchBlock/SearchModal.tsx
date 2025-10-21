@@ -54,15 +54,13 @@ export default function SearchModal({
         loadProducts();
     }, []);
 
-    const debouncedQuery = useDebounce(searchQuery, 500);
+    const debouncedQuery = useDebounce(searchQuery, 100);
 
     const filteredProducts = useMemo(() => {
         return products.filter((product) =>
             product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
         );
     }, [debouncedQuery, products]);
-
-    console.log(searchQuery, debouncedQuery, filteredProducts);
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>
