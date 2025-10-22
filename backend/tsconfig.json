@@ -4,6 +4,7 @@
         "target": "esnext",
         "outDir": "./dist",
         "moduleResolution": "node",
+
         "sourceMap": true,
 
         "noUncheckedIndexedAccess": true,
@@ -17,7 +18,9 @@
         "baseUrl": ".",
         "paths": {
             "@shared/*": ["../shared/*"]
-        }
+        },
+
+        "jsx": "react-jsx"
     },
     "include": ["./src"],
     "exclude": ["node_modules", "dist"]

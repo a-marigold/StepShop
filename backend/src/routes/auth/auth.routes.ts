@@ -2,19 +2,20 @@ import type { ProvideredAppInstance } from 'src/app';
 
 import z from 'zod';
 import { userSchema } from '@step-shop/shared/types/UserTypes';
+import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
-import { sendCode } from './email.controller';
+import { send } from './email.controller';
 
 export default function authRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'POST',
         url: '/auth/email/send',
         schema: {
-            body: userSchema.pick({ phoneNumber: true }),
+            body: userSchema.pick({ email: true }),
             response: {
-                // 200: z.,
+                200: ApiResponseSchema,
             },
         },
-        handler: sendCode,
+        handler: send,
     });
 }
