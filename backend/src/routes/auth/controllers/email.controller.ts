@@ -2,7 +2,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import type { UserType } from '@step-shop/shared/types/UserTypes';
 
-import { sendEmailCode } from './services/email.service';
+import { sendEmailCode } from '../services/email.service';
 
 export async function send(
     request: FastifyRequest<{ Body: Pick<UserType, 'email'> }>,

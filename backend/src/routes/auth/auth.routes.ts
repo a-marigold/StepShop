@@ -4,7 +4,7 @@ import z from 'zod';
 import { userSchema } from '@step-shop/shared/types/UserTypes';
 import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
-import { send } from './email.controller';
+import { send } from './controllers/email.controller';
 
 export default function authRoutes(app: ProvideredAppInstance) {
     app.route({
@@ -12,9 +12,6 @@ export default function authRoutes(app: ProvideredAppInstance) {
         url: '/auth/email/send',
         schema: {
             body: userSchema.pick({ email: true }),
-            response: {
-                200: ApiResponseSchema,
-            },
         },
         handler: send,
     });
