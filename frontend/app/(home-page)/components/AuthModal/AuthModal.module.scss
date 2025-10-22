@@ -21,6 +21,7 @@
 
 .content-block {
     @include flex-y-center;
+    gap: 2em;
 
     justify-content: space-between;
 }
@@ -38,9 +39,11 @@
 .description {
     @include text-wo-margin(1rem);
 
+    width: 100%;
+
     color: var(--secondary-font-color);
 
-    max-width: 260px;
+    // max-width: 260px;
 }
 
 .access-button {

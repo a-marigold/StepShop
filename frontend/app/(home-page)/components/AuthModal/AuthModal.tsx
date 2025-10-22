@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 
-import { PhoneNumberForm, PhoneCodeForm, UserDataForm } from './components';
+import { EmailForm, EmailCodeForm, UserDataForm } from './components';
 
 import ModalBackdrop from '@/UI/ModalBackdrop';
 import CloseModalCross from '@/UI/CloseModalCross';
@@ -28,11 +28,9 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    {authStep === 1 && (
-                        <PhoneNumberForm setAuthStep={setAuthStep} />
-                    )}
+                    {authStep === 1 && <EmailForm setAuthStep={setAuthStep} />}
                     {authStep === 2 && (
-                        <PhoneCodeForm setAuthStep={setAuthStep} />
+                        <EmailCodeForm setAuthStep={setAuthStep} />
                     )}
                     {authStep === 3 && <UserDataForm />}
                 </div>

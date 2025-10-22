@@ -9,12 +9,11 @@ import type { UserFormType, UserFormProps } from './UserFormType';
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 
-export default function PhoneNumberForm({ setAuthStep }: UserFormProps) {
-    const { control, handleSubmit } = useForm<UserFormType['phoneNumber']>();
+export function EmailForm({ setAuthStep }: UserFormProps) {
+    const { control, handleSubmit } = useForm<UserFormType['email']>();
 
-    async function submit(data: UserFormType['phoneNumber']) {
+    async function submit(data: UserFormType['email']) {
         const response = await fetch(`${apiOrigin}/AUTH_ENDPOINT    `);
-        1;
 
         setAuthStep((authStep) => authStep + 1);
     }
@@ -23,21 +22,21 @@ export default function PhoneNumberForm({ setAuthStep }: UserFormProps) {
         <UserForm
             submitAction={handleSubmit(submit)}
             title='Вход в аккаунт'
-            description='Введите номер телефона, чтобы войти или зарегистрироваться'
+            description='Введите адрес электронной почты, чтобы войти или зарегистрироваться'
             image='/images/phone-icon.svg'
             buttonTitle='Получить код в SMS'
             buttonAriaLabel='Получить код в SMS'
         >
             <Controller
-                name='phoneNumber'
+                name='email'
                 control={control}
                 rules={{ required: true }}
                 render={({ field, fieldState }) => (
                     <PrimaryInput
-                        htmlId='phone-number-input'
+                        htmlId='email-input'
                         isValid={!fieldState.error}
-                        errorLabelTitle='Введите номер телефона'
-                        placeholder='+X XXX XXX XX-XX'
+                        errorLabelTitle='Введите адрес электронной почты'
+                        placeholder='example@gmail.com'
                         inputAction={field.onChange}
                     />
                 )}

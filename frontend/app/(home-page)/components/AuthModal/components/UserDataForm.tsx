@@ -9,7 +9,7 @@ import type { UserFormType } from './UserFormType';
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 
-export default function PhoneNumberForm() {
+export function UserDataForm() {
     const { control, handleSubmit } = useForm<UserFormType['userData']>();
 
     async function submit(data: UserFormType['userData']) {

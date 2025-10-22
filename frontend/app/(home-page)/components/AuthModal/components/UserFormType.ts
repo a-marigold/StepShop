@@ -1,12 +1,12 @@
 import type { Dispatch, SetStateAction } from 'react';
 
 export type UserFormType = {
-    phoneNumber: {
-        phoneNumber: string;
+    email: {
+        email: string;
     };
 
-    phoneCode: {
-        phoneCode: string;
+    emailCode: {
+        emailCode: string;
     };
 
     userData: {

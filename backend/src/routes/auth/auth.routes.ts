@@ -8,7 +8,7 @@ import { sendCode } from './email.controller';
 export default function authRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'POST',
-        url: '/auth/phone/send',
+        url: '/auth/email/send',
         schema: {
             body: userSchema.pick({ phoneNumber: true }),
             response: {

@@ -9,18 +9,15 @@ import type { UserFormProps, UserFormType } from './UserFormType';
 import UserForm from './UserForm';
 import CodeInput from '@UI/CodeInput';
 
-export default function PhoneCodeForm({ setAuthStep }: UserFormProps) {
+export function EmailCodeForm({ setAuthStep }: UserFormProps) {
     const { control, handleSubmit, watch } =
-        useForm<UserFormType['phoneCode']>();
+        useForm<UserFormType['emailCode']>();
 
-    async function submit(data: UserFormType['phoneCode']) {
+    async function submit(data: UserFormType['emailCode']) {
         const response = await fetch(`${apiOrigin}/AUTH_ENDPOINT    `);
 
         setAuthStep((authStep) => authStep + 1);
     }
-
-    const _test = watch('phoneCode');
-    console.log(_test);
 
     return (
         <UserForm
@@ -32,7 +29,7 @@ export default function PhoneCodeForm({ setAuthStep }: UserFormProps) {
             buttonAriaLabel='Запросить код — через {SECONDS} сек.'
         >
             <Controller
-                name='phoneCode'
+                name='emailCode'
                 control={control}
                 rules={{ required: true, minLength: 4 }}
                 render={({ field, fieldState }) => (
