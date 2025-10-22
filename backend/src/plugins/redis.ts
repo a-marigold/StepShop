@@ -8,7 +8,7 @@ export default fp(async function (app: FastifyInstance) {
 
     app.decorate('redis', redis);
 
-    app.addHook('onClose', () => {
-        redis.disconnect();
+    app.addHook('onClose', async () => {
+        await app.redis.quit();
     });
 });
