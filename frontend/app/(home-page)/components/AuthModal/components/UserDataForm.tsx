@@ -31,6 +31,7 @@ export default function PhoneNumberForm() {
                 render={({ field, fieldState }) => (
                     <PrimaryInput
                         htmlId='user-name-input'
+                        title='Имя пользователя'
                         isValid={!fieldState.error}
                         errorLabelTitle='Введите имя пользователя'
                         inputAction={field.onChange}
@@ -44,6 +45,7 @@ export default function PhoneNumberForm() {
                 rules={{ required: true }}
                 render={({ field, fieldState }) => (
                     <PrimaryInput
+                        title='Пароль'
                         htmlId='user-password-input'
                         isValid={!fieldState.error}
                         errorLabelTitle='Введите пароль'
