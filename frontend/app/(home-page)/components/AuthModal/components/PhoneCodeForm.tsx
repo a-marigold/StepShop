@@ -19,6 +19,9 @@ export default function PhoneCodeForm({ setAuthStep }: UserFormProps) {
         setAuthStep((authStep) => authStep + 1);
     }
 
+    const _test = watch('phoneCode');
+    console.log(_test);
+
     return (
         <UserForm
             submitAction={handleSubmit(submit)}
@@ -31,9 +34,12 @@ export default function PhoneCodeForm({ setAuthStep }: UserFormProps) {
             <Controller
                 name='phoneCode'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, minLength: 4 }}
                 render={({ field, fieldState }) => (
                     <CodeInput
+                        htmlId='code-input'
+                        isValid={!fieldState.invalid}
+                        errorLabelTitle='Введите код из SMS'
                         changeAction={field.onChange}
                         ariaLabel='Введите код из SMS'
                         inputQuantity={4}

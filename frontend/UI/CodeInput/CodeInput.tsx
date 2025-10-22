@@ -5,10 +5,15 @@ import { useState, useEffect, useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 
 import clsx from 'clsx';
+
 import inputStyles from './CodeInput.module.scss';
 
 interface CodeInputProps {
     ariaLabel: string;
+
+    htmlId: string;
+    errorLabelTitle: string;
+    isValid: boolean;
 
     className?: string;
 
@@ -18,8 +23,11 @@ interface CodeInputProps {
 
 export default function CodeInput({
     ariaLabel,
+    errorLabelTitle,
 
+    htmlId,
     className,
+    isValid,
 
     inputQuantity,
     changeAction,
@@ -64,33 +72,48 @@ export default function CodeInput({
         changeAction(inputs.join(''));
     }, [inputs]);
 
+    console.log(isValid);
+
     return (
-        <div
-            className={clsx(inputStyles['code-inputs-block'], className)}
-            aria-label={ariaLabel}
-        >
-            {inputs.map((_, index) => (
-                <input
-                    key={index}
-                    type='text'
-                    className={inputStyles['code-input']}
-                    value={inputs[index]}
-                    onChange={(event) => {
-                        handleChange(index, event.target.value);
-                    }}
-                    onKeyDown={(event) => {
-                        if (!!inputs.join('')) {
-                            handleClear(index, event);
-                        }
-                    }}
-                    ref={(element) => {
-                        inputsRef.current[index] = element;
-                    }}
-                    placeholder='•'
-                    maxLength={1}
-                    data-filled={!!inputs[index]}
-                />
-            ))}
+        <div className={inputStyles['input-box']}>
+            <div
+                id={htmlId}
+                className={clsx(inputStyles['code-inputs-block'], className)}
+                aria-label={ariaLabel}
+                aria-invalid={!isValid}
+            >
+                {inputs.map((_, index) => (
+                    <input
+                        key={index}
+                        type='text'
+                        className={inputStyles['code-input']}
+                        value={inputs[index]}
+                        onChange={(event) => {
+                            handleChange(index, event.target.value);
+                        }}
+                        onKeyDown={(event) => {
+                            if (!!inputs.join('')) {
+                                handleClear(index, event);
+                            }
+                        }}
+                        ref={(element) => {
+                            inputsRef.current[index] = element;
+                        }}
+                        placeholder='•'
+                        maxLength={1}
+                        data-filled={!!inputs[index]}
+                    />
+                ))}
+            </div>
+
+            {errorLabelTitle && !isValid && (
+                <label
+                    htmlFor={htmlId}
+                    className={inputStyles['error-label-title']}
+                >
+                    {errorLabelTitle}
+                </label>
+            )}
         </div>
     );
 }
