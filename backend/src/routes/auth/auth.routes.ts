@@ -1,8 +1,6 @@
 import type { ProvideredAppInstance } from 'src/app';
 
-import z from 'zod';
 import { userSchema } from '@step-shop/shared/types/UserTypes';
-import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
 import { send } from './controllers/email.controller';
 

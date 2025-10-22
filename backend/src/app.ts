@@ -10,8 +10,9 @@ import cors from '@fastify/cors';
 
 import prismaPlugin from './plugins/prisma';
 
-import { routes } from './routes';
+import redisPlugin from './plugins/redis';
 
+import { routes } from './routes';
 const app = Fastify({
     logger: true,
 }).withTypeProvider<ZodTypeProvider>();
@@ -27,6 +28,7 @@ export async function buildApp() {
         credentials: true,
     });
 
+    app.register(redisPlugin);
     app.register(prismaPlugin);
 
     app.register(routes);
