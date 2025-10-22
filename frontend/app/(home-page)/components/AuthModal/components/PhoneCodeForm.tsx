@@ -4,22 +4,20 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { apiOrigin } from '@/utils/getApiOrigin';
 
-import type { UserFormType } from './UserFormType';
+import type { UserFormProps, UserFormType } from './UserFormType';
 
 import UserForm from './UserForm';
 import CodeInput from '@UI/CodeInput';
 
-export default function PhoneCodeForm() {
+export default function PhoneCodeForm({ setAuthStep }: UserFormProps) {
     const { control, handleSubmit, watch } =
         useForm<UserFormType['phoneCode']>();
 
     async function submit(data: UserFormType['phoneCode']) {
         const response = await fetch(`${apiOrigin}/AUTH_ENDPOINT    `);
+
+        setAuthStep((authStep) => authStep + 1);
     }
-
-    const code = watch('phoneCode');
-
-    console.log('code: ', code);
 
     return (
         <UserForm

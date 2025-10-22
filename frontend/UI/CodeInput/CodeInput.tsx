@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import type { KeyboardEvent } from 'react';
 
@@ -37,8 +37,6 @@ export default function CodeInput({
                 const newInputs = [...prev];
                 newInputs[index] = value;
 
-                changeAction(newInputs.join(''));
-
                 return newInputs;
             });
         }
@@ -56,13 +54,15 @@ export default function CodeInput({
                 const newInputs = [...prev];
                 newInputs[index] = '';
 
-                changeAction(newInputs.join(''));
-
                 return newInputs;
             });
             inputsRef.current[index - 1]?.focus();
         }
     }
+
+    useEffect(() => {
+        changeAction(inputs.join(''));
+    }, [inputs]);
 
     return (
         <div

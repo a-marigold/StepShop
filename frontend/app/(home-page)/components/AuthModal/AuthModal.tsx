@@ -2,8 +2,9 @@
 
 'use client';
 
-import PhoneNumberForm from './components/PhoneNumberForm';
-import PhoneCodeForm from './components/PhoneCodeForm';
+import { useState } from 'react';
+
+import { PhoneNumberForm, PhoneCodeForm, UserDataForm } from './components';
 
 import ModalBackdrop from '@/UI/ModalBackdrop';
 import CloseModalCross from '@/UI/CloseModalCross';
@@ -15,6 +16,8 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ setShowModal }: AuthModalProps) {
+    const [authStep, setAuthStep] = useState(1);
+
     return (
         <ModalBackdrop
             props={{ className: authStyles['modal-backdrop'] }}
@@ -25,8 +28,13 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    {/* <PhoneNumberForm /> */}
-                    <PhoneCodeForm />
+                    {authStep === 1 && (
+                        <PhoneNumberForm setAuthStep={setAuthStep} />
+                    )}
+                    {authStep === 2 && (
+                        <PhoneCodeForm setAuthStep={setAuthStep} />
+                    )}
+                    {authStep === 3 && <UserDataForm />}
                 </div>
 
                 <CloseModalCross
