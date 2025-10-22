@@ -10,7 +10,7 @@ export async function send(
 ) {
     const { email } = request.body;
 
-    const findEmail = request.server.prisma.user.findUnique({
+    const findEmail = await request.server.prisma.user.findUnique({
         where: { email: email },
     });
 
@@ -19,4 +19,6 @@ export async function send(
     }
 
     sendEmailCode(email);
+
+    reply.code(200).send({ message: 'Code was sent successfully' });
 }

@@ -1,10 +1,20 @@
+// TODO (5): Enable JSON scheme for this form
+
 'use client';
 
 import { Controller, useForm } from 'react-hook-form';
 
 import { apiOrigin } from '@/utils/getApiOrigin';
+import ApiError from '@/utils/errors/ApiError';
+import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
 import type { UserFormType, UserFormProps } from './UserFormType';
+
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/redux/store';
+import { addErrorNotice, addSuccessNotice } from '@/utils/noticeGlobalState';
+
+import type { UserType } from '@shared/types/UserTypes';
 
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
@@ -12,10 +22,31 @@ import PrimaryInput from '@UI/PrimaryInput';
 export function EmailForm({ setAuthStep }: UserFormProps) {
     const { control, handleSubmit } = useForm<UserFormType['email']>();
 
-    async function submit(data: UserFormType['email']) {
-        const response = await fetch(`${apiOrigin}/AUTH_ENDPOINT    `);
+    const dispatch = useDispatch<AppDispatch>();
 
-        setAuthStep((authStep) => authStep + 1);
+    async function submit(data: { email: string }) {
+        try {
+            const response = await fetch(`${apiOrigin}/auth/email/send`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            const sendEmail: ApiResponseType = await response.json();
+
+            if (!response.ok) {
+                throw new ApiError(sendEmail.message);
+            }
+
+            addSuccessNotice('Email was sent', sendEmail.message, 10, dispatch);
+
+            setAuthStep((authStep) => authStep + 1);
+        } catch (error) {
+            if (error instanceof ApiError) {
+                addErrorNotice('ERROR', error.message, 10, dispatch);
+            }
+        }
     }
 
     return (

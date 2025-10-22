@@ -1,5 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 
+import type { UserType } from '@shared/types/UserTypes';
+
 export type UserFormType = {
     email: {
         email: string;
