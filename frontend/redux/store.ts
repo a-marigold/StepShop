@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 
 import {
     persistReducer,
@@ -16,6 +17,7 @@ import storage from 'redux-persist/lib/storage';
 import filtrationReducer from '@/app/(home-page)/components/Filtration/redux';
 import cartReducer from './CartSlice';
 import noticesReducer from './NoticeSlice';
+import userReducer from '@/app/(home-page)/components/AuthModal/redux';
 
 const cartPersistConfig = {
     key: 'cart',
@@ -30,6 +32,7 @@ export const store = configureStore({
         filtration: filtrationReducer,
         cart: persistedCartReducer,
         notices: noticesReducer,
+        user: userReducer,
     },
 
     middleware: (getDefaultMiddleware) => {
@@ -52,3 +55,4 @@ export const store = configureStore({
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export const dispatch = useDispatch<AppDispatch>();

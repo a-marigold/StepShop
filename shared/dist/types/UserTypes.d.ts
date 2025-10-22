@@ -1,14 +1,14 @@
 import z from 'zod';
 export declare const userSchema: z.ZodObject<{
-    id: z.ZodCUID;
+    id: z.ZodOptional<z.ZodCUID>;
     email: z.ZodEmail;
-    username: z.ZodString;
+    userName: z.ZodString;
     password: z.ZodString;
-    role: z.ZodEnum<{
+    role: z.ZodOptional<z.ZodEnum<{
         user: "user";
         admin: "admin";
         creator: "creator";
-    }>;
-    creationDate: z.ZodDate;
+    }>>;
+    creationDate: z.ZodOptional<z.ZodDate>;
 }, z.core.$strip>;
 export type UserType = z.infer<typeof userSchema>;
