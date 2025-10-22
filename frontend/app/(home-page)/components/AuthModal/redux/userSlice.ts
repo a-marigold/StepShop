@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { UserType } from '@shared/types/UserTypes';
@@ -6,9 +7,11 @@ import type { UserType } from '@shared/types/UserTypes';
 interface UserSliceState {
     user: Omit<UserType, 'password'>;
 }
+
 const initialState: UserSliceState = {
     user: {
         email: '',
+
         userName: '',
     },
 };
