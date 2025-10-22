@@ -25,13 +25,17 @@ export function EmailForm({ setAuthStep }: UserFormProps) {
     const dispatch = useDispatch<AppDispatch>();
 
     async function submit(data: { email: string }) {
+        const { email } = data;
+
+        const prepareData = { email: email.trim() };
+
         try {
             const response = await fetch(`${apiOrigin}/auth/email/send`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(prepareData),
             });
             const sendEmail: ApiResponseType = await response.json();
 
