@@ -75,3 +75,16 @@
         color: var(--secondary-font-color) !important;
     }
 }
+
+@media (max-width: 510px) {
+    .modal-wrapper {
+        height: 100%;
+    }
+    .auth-modal {
+        @include flex-center;
+
+        height: 100%;
+
+        border-radius: 0;
+    }
+}
