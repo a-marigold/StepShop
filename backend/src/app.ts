@@ -6,11 +6,10 @@ import {
     serializerCompiler,
 } from 'fastify-type-provider-zod';
 
+import fjwt from '@fastify/jwt';
 import cors from '@fastify/cors';
 
-import prismaPlugin from './plugins/prisma';
-
-import redisPlugin from './plugins/redis';
+import plugins from './plugins';
 
 import { routes } from './routes';
 const app = Fastify({
@@ -28,8 +27,9 @@ export async function buildApp() {
         credentials: true,
     });
 
-    app.register(redisPlugin);
-    app.register(prismaPlugin);
+    app.register(fjwt, { secret: process.env.JWT_SECRET });
+
+    app.register(plugins);
 
     app.register(routes);
 

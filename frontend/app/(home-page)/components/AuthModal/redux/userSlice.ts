@@ -1,3 +1,5 @@
+// TODO (5): Add authStep state here
+
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
