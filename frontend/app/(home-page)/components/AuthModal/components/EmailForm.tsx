@@ -12,7 +12,8 @@ import type { UserFormType, UserFormProps } from './UserFormType';
 
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
-import { addErrorNotice, addSuccessNotice } from '@/utils/noticeGlobalState';
+
+import { setUser } from '../redux';
 
 import type { UserType } from '@shared/types/UserTypes';
 
@@ -20,7 +21,8 @@ import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 
 export function EmailForm({ setAuthStep }: UserFormProps) {
-    const { control, handleSubmit } = useForm<UserFormType['email']>();
+    const { control, handleSubmit, setError } =
+        useForm<UserFormType['email']>();
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -43,34 +45,38 @@ export function EmailForm({ setAuthStep }: UserFormProps) {
                 throw new ApiError(sendEmail.message);
             }
 
-            addSuccessNotice('Email was sent', sendEmail.message, 10, dispatch);
+            dispatch(setUser({ email: email }));
 
             setAuthStep((authStep) => authStep + 1);
         } catch (error) {
             if (error instanceof ApiError) {
-                addErrorNotice('ERROR', error.message, 10, dispatch);
+                setError('email', { type: 'server', message: error.message });
             }
         }
     }
 
+    // TODO (5): Add zod scheme
     return (
         <UserForm
             submitAction={handleSubmit(submit)}
             title='Вход в аккаунт'
             description='Введите адрес электронной почты, чтобы войти или зарегистрироваться'
             image='/images/phone-icon.svg'
-            buttonTitle='Получить код в SMS'
-            buttonAriaLabel='Получить код в SMS'
+            buttonTitle='Получить код на email'
+            buttonAriaLabel='Получить код на email'
         >
             <Controller
                 name='email'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: 'Введите адрес электронной почты' }}
                 render={({ field, fieldState }) => (
                     <PrimaryInput
                         htmlId='email-input'
                         isValid={!fieldState.error}
-                        errorLabelTitle='Введите адрес электронной почты'
+                        errorLabelTitle={
+                            fieldState.error?.message ??
+                            `Введите адрес электронной почты`
+                        }
                         placeholder='example@gmail.com'
                         inputAction={field.onChange}
                     />
