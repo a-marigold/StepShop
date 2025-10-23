@@ -36,8 +36,8 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                 </div>
 
                 <CloseModalCross
-                    crossColor='white'
                     clickAction={() => setShowModal(false)}
+                    className={authStyles['close-modal-button']}
                 />
             </div>
         </ModalBackdrop>

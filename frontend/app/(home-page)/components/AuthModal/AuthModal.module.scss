@@ -7,6 +7,7 @@
 
 .modal-wrapper {
     @include modal-wrapper(auto, auto);
+    position: relative;
 }
 .auth-modal {
     width: 100%;
@@ -42,8 +43,6 @@
     width: 100%;
 
     color: var(--secondary-font-color);
-
-    // max-width: 260px;
 }
 
 .access-button {
@@ -53,4 +52,26 @@
 .user-form {
     @include flex-column;
     gap: 1.25em;
+}
+
+.close-modal-button {
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .modal-wrapper {
+        margin: 0;
+    }
+    .auth-modal {
+        max-width: initial;
+        min-height: 350px;
+    }
+
+    .close-modal-button {
+        position: absolute;
+        top: 1.25em;
+        right: 1.25em;
+
+        color: var(--secondary-font-color) !important;
+    }
 }
