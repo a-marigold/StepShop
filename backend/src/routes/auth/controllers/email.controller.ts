@@ -15,7 +15,37 @@ export async function send(
     const code = String(generateRandomFourDigitNumber());
     sendEmailCode(email, code);
 
-    request.server.redis.set(`opt:${email}`, code, 'EX', 120);
+    await request.server.redis.set(`email:verify:${email}`, code, 'EX', 60 * 3);
 
-    reply.code(200).send({ message: 'Code was sent successfully' });
+    return reply.code(200).send({ message: 'Code was sent successfully' });
+}
+
+export async function verify(
+    request: FastifyRequest<{
+        Body: Pick<UserType, 'email'> & { code: string };
+    }>,
+    reply: FastifyReply
+) {
+    const { email, code } = request.body;
+
+    if (!code || !email) {
+        return reply.code(400).send({ message: 'Code is required' });
+    }
+
+    const trustCode = await request.server.redis.get(`email:verify:${email}`);
+
+    if (code !== trustCode) {
+        return reply.code(401).send({ message: 'Incorrect code' });
+    }
+
+    await request.server.redis.del(`opt:verify:${email}`);
+
+    await request.server.redis.set(
+        `email:verified:${email}`,
+        'true',
+        'EX',
+        60 * 5
+    );
+
+    return reply.code(200).send({ message: 'Success. Code is trust' });
 }
