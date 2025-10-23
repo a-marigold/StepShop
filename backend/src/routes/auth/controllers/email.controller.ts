@@ -15,5 +15,7 @@ export async function send(
     const code = String(generateRandomFourDigitNumber());
     sendEmailCode(email, code);
 
+    request.server.redis.set(`opt:${email}`, code, 'EX', 120);
+
     reply.code(200).send({ message: 'Code was sent successfully' });
 }

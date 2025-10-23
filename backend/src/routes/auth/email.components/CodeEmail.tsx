@@ -11,8 +11,9 @@ export function CodeEmail({ title, code }: CodeEmailProps) {
                 style={{
                     color: '#a78bfa',
                     fontSize: 24,
-                    lineHeight: '32px',
+
                     fontWeight: 600,
+                    lineHeight: '32px',
                 }}
             >
                 {title}
