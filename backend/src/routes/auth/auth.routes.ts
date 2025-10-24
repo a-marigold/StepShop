@@ -1,6 +1,6 @@
 import type { ProvideredAppInstance } from 'src/app';
 
-import { string } from 'zod';
+import { string, jwt } from 'zod';
 import { userSchema } from '@step-shop/shared/types/UserTypes';
 
 import { send, verify } from './controllers/email.controller';
@@ -30,7 +30,7 @@ export default function authRoutes(app: ProvideredAppInstance) {
         url: '/auth/register',
         schema: {
             headers: {
-                token: { type: 'string' },
+                token: jwt(),
             },
             body: userSchema.pick({
                 email: true,

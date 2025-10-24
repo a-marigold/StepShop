@@ -16,8 +16,6 @@ import { increaseAuthStep } from '../redux';
 
 import { setUser } from '../redux';
 
-import type { UserType } from '@shared/types/UserTypes';
-
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 

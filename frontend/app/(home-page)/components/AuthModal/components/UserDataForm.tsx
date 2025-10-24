@@ -2,7 +2,13 @@
 
 import { Controller, useForm } from 'react-hook-form';
 
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '@/redux/store';
+import { setUser } from '../redux';
+
+import ApiError from '@/utils/errors/ApiError';
 import { apiOrigin } from '@/utils/getApiOrigin';
+import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
 import type { UserFormType, UserFormProps } from './UserFormTypes';
 
@@ -15,10 +21,45 @@ export function UserDataForm({
     isLoading,
     setIsLoading,
 }: UserFormProps) {
-    const { control, handleSubmit } = useForm<UserFormType['userData']>();
+    const { control, handleSubmit, setError } =
+        useForm<UserFormType['userData']>();
+
+    const email = useSelector((state: RootState) => state.user.user.email);
+
+    const dispatch = useDispatch<AppDispatch>();
 
     async function submit(data: UserFormType['userData']) {
-        const response = await fetch(`${apiOrigin}/AUTH_ENDPOINT    `);
+        setIsLoading(true);
+
+        const { userName, userPassword: password } = data;
+
+        try {
+            const response = await fetch(`${apiOrigin}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ email, userName, password }),
+            });
+            const registerUser: ApiResponseType = await response.json();
+
+            if (!response.ok) {
+                throw new ApiError(registerUser.message);
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+
+            if (error instanceof ApiError) {
+                setError('userName', {
+                    type: 'server',
+                    message: error.message,
+                });
+                setError('userPassword', {
+                    type: 'server',
+                    message: error.message,
+                });
+            }
+        }
     }
 
     return (
@@ -33,13 +74,13 @@ export function UserDataForm({
             <Controller
                 name='userName'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: 'Введите имя пользователя' }}
                 render={({ field, fieldState }) => (
                     <PrimaryInput
                         htmlId='user-name-input'
                         title='Имя пользователя'
                         isValid={!fieldState.error}
-                        errorLabelTitle='Введите имя пользователя'
+                        errorLabelTitle={fieldState.error?.message}
                         inputAction={field.onChange}
                     />
                 )}
@@ -48,13 +89,13 @@ export function UserDataForm({
             <Controller
                 name='userPassword'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: 'Введите пароль' }}
                 render={({ field, fieldState }) => (
                     <PrimaryInput
                         title='Пароль'
                         htmlId='user-password-input'
                         isValid={!fieldState.error}
-                        errorLabelTitle='Введите пароль'
+                        errorLabelTitle={fieldState.error?.message}
                         inputAction={field.onChange}
                     />
                 )}
