@@ -16,6 +16,7 @@ interface UserFormProps {
 
     buttonTitle: string;
     buttonAriaLabel: string;
+    buttonDisabled?: boolean;
 
     submitAction: (...args: any) => void;
     isLoading: boolean;
@@ -30,6 +31,7 @@ export default function UserForm({
 
     buttonTitle,
     buttonAriaLabel,
+    buttonDisabled,
 
     submitAction,
     isLoading,
@@ -63,6 +65,7 @@ export default function UserForm({
                 ariaLabel={buttonAriaLabel}
                 buttonType='submit'
                 className={authStyles['access-button']}
+                disabled={buttonDisabled}
             />
         </form>
     );

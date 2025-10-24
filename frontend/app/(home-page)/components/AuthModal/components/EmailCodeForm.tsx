@@ -3,27 +3,26 @@
 import { useState, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '@/redux/store';
+import { increaseAuthStep, decreaseCodeTime, resetCodeTime } from '../redux';
+
 import ApiError from '@/utils/errors/ApiError';
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
 import { apiOrigin } from '@/utils/getApiOrigin';
-
-import { useSelector } from 'react-redux';
-import type { RootState } from '@/redux/store';
 
 import type { UserFormProps, UserFormType } from './UserFormTypes';
 
 import UserForm from './UserForm';
 import CodeInput from '@UI/CodeInput';
 
-export function EmailCodeForm({
-    setAuthStep,
-    isLoading,
-    setIsLoading,
-}: UserFormProps) {
+export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
     const { control, setError, getValues } =
         useForm<UserFormType['emailCode']>();
 
     const { email } = useSelector((state: RootState) => state.user.user);
+    const codeTime = useSelector((state: RootState) => state.user.codeTime);
+    const dispatch = useDispatch<AppDispatch>();
 
     async function verifyCode() {
         const emailCode = getValues('emailCode');
@@ -47,10 +46,9 @@ export function EmailCodeForm({
                 throw new ApiError(verifyData.message);
             }
 
-            if (setAuthStep) {
-                setAuthStep((authStep) => authStep + 1);
-                setIsLoading(false);
-            }
+            dispatch(increaseAuthStep());
+
+            setIsLoading(false);
         } catch (error) {
             if (error instanceof ApiError) {
                 setIsLoading(false);
@@ -65,6 +63,8 @@ export function EmailCodeForm({
     }
 
     async function sendEmail(event: Event) {
+        if (codeTime !== 0) return;
+
         event.preventDefault();
 
         try {
@@ -88,13 +88,13 @@ export function EmailCodeForm({
                 });
             }
         }
-    }
 
-    const [codeTime, setCodeTime] = useState(32);
+        dispatch(resetCodeTime());
+    }
 
     useEffect(() => {
         const countDown = setInterval(() => {
-            setCodeTime((prev) => prev - 1);
+            dispatch(decreaseCodeTime());
         }, 1000);
 
         if (codeTime < 1) {
@@ -123,6 +123,7 @@ export function EmailCodeForm({
                     : 'Запросить код'
             }
             isLoading={isLoading}
+            buttonDisabled={!!(codeTime > 0)}
         >
             <Controller
                 name='emailCode'

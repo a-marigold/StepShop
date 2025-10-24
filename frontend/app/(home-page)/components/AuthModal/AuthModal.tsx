@@ -4,21 +4,29 @@
 
 import { useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '@/redux/store';
+
 import { EmailForm, EmailCodeForm, UserDataForm } from './components';
 
 import ModalBackdrop from '@/UI/ModalBackdrop';
 import CloseModalCross from '@/UI/CloseModalCross';
 
 import authStyles from './AuthModal.module.scss';
+import { increaseAuthStep } from './redux';
 
 interface AuthModalProps {
     setShowModal: (showModal: boolean) => void;
 }
 
 export default function AuthModal({ setShowModal }: AuthModalProps) {
-    const [authStep, setAuthStep] = useState(1);
-
     const [isLoading, setIsLoading] = useState(false);
+
+    const authStep = useSelector((state: RootState) => state.user.authStep);
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    type a = typeof dispatch;
 
     return (
         <ModalBackdrop
@@ -37,7 +45,6 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     )}
                     {authStep === 1 && (
                         <EmailForm
-                            setAuthStep={setAuthStep}
                             isLoading={isLoading}
                             setIsLoading={setIsLoading}
                         />
@@ -45,7 +52,6 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
 
                     {authStep === 2 && (
                         <EmailCodeForm
-                            setAuthStep={setAuthStep}
                             isLoading={isLoading}
                             setIsLoading={setIsLoading}
                         />

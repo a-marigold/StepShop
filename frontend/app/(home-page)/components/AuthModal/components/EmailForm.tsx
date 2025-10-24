@@ -12,6 +12,7 @@ import type { UserFormType, UserFormProps } from './UserFormTypes';
 
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
+import { increaseAuthStep } from '../redux';
 
 import { setUser } from '../redux';
 
@@ -20,11 +21,7 @@ import type { UserType } from '@shared/types/UserTypes';
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 
-export function EmailForm({
-    setAuthStep,
-    isLoading,
-    setIsLoading,
-}: UserFormProps) {
+export function EmailForm({ isLoading, setIsLoading }: UserFormProps) {
     const { control, handleSubmit, setError } =
         useForm<UserFormType['email']>();
 
@@ -53,10 +50,8 @@ export function EmailForm({
 
             dispatch(setUser({ email: prepareData.email }));
 
-            if (setAuthStep) {
-                setAuthStep((authStep) => authStep + 1);
-                setIsLoading(false);
-            }
+            dispatch(increaseAuthStep());
+            setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
 

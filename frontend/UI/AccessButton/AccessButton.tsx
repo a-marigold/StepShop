@@ -10,7 +10,10 @@ interface AccessButtonProps {
     ariaLabel: string;
 
     className?: string;
+
     buttonType?: 'button' | 'submit';
+
+    disabled?: boolean;
 
     clickAction?: () => void;
 
@@ -22,6 +25,7 @@ export default function AccessButton({
 
     ariaLabel,
     className,
+    disabled,
     buttonType = 'submit',
 
     clickAction,
@@ -34,6 +38,7 @@ export default function AccessButton({
             onClick={clickAction}
             aria-label={ariaLabel}
             type={buttonType}
+            disabled={disabled}
         >
             {image && <img src={image} alt='' />}
             {title && <span>{title}</span>}

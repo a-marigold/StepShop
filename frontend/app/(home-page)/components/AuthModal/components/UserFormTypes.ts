@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react';
 
-import type { UserType } from '@shared/types/UserTypes';
+import type { AppDispatch } from '@/redux/store';
 
 export type UserFormType = {
     email: {
@@ -17,18 +17,9 @@ export type UserFormType = {
     };
 };
 
-export type UserFormProps =
-    | {
-          setAuthStep: Dispatch<SetStateAction<number>>;
-          setShowModal?: (showModal: boolean) => void;
+export type UserFormProps = {
+    setShowModal?: (showModal: boolean) => void;
 
-          isLoading: boolean;
-          setIsLoading: Dispatch<SetStateAction<boolean>>;
-      }
-    | {
-          setAuthStep?: Dispatch<SetStateAction<number>>;
-          setShowModal: (showModal: boolean) => void;
-
-          isLoading: boolean;
-          setIsLoading: Dispatch<SetStateAction<boolean>>;
-      };
+    isLoading: boolean;
+    setIsLoading: Dispatch<SetStateAction<boolean>>;
+};

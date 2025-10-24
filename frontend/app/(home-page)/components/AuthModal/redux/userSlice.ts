@@ -8,6 +8,8 @@ import type { UserType } from '@shared/types/UserTypes';
 
 interface UserSliceState {
     user: Omit<UserType, 'password'>;
+    authStep: number;
+    codeTime: number;
 }
 
 const initialState: UserSliceState = {
@@ -16,6 +18,8 @@ const initialState: UserSliceState = {
 
         userName: '',
     },
+    authStep: 1,
+    codeTime: 32,
 };
 
 type setUserType = PayloadAction<
@@ -32,8 +36,20 @@ const userSlice = createSlice({
                 ...action.payload,
             };
         },
+        increaseAuthStep: (state) => {
+            state.authStep = state.authStep + 1;
+        },
+        resetCodeTime: (state) => {
+            state.codeTime = 32;
+        },
+        decreaseCodeTime: (state) => {
+            if (state.codeTime > 0) {
+                state.codeTime = state.codeTime - 1;
+            }
+        },
     },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, increaseAuthStep, decreaseCodeTime, resetCodeTime } =
+    userSlice.actions;
 export default userSlice.reducer;

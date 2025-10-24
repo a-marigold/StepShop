@@ -20,6 +20,15 @@
 
     transition: background-color 0.2s ease, transform 0.2s ease;
 
+    &:disabled {
+        background-color: var(--disabled-color);
+
+        cursor: default;
+
+        &:hover {
+            background-color: var(--disabled-color);
+        }
+    }
     &:hover {
         background-color: var(--hover-bg-color);
     }
