@@ -4,15 +4,17 @@
 
 import { Controller, useForm } from 'react-hook-form';
 
-import { apiOrigin } from '@/utils/getApiOrigin';
-import ApiError from '@/utils/errors/ApiError';
-import type { ApiResponseType } from '@shared/types/ApiResponseType';
-
-import type { UserFormType, UserFormProps } from './UserFormTypes';
-
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 import { increaseAuthStep } from '../redux';
+
+import ApiError from '@/utils/errors/ApiError';
+// import { apiOrigin } from '@/utils/getApiOrigin';
+// import type { ApiResponseType } from '@shared/types/ApiResponseType';
+
+import { sendEmail } from '@/lib/api/auth';
+
+import type { UserFormType, UserFormProps } from './UserFormTypes';
 
 import { setUser } from '../redux';
 
@@ -30,23 +32,10 @@ export function EmailForm({ isLoading, setIsLoading }: UserFormProps) {
 
         const { email } = data;
 
-        const prepareData = { email: email.trim() };
-
         try {
-            const response = await fetch(`${apiOrigin}/auth/email/send`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(prepareData),
-            });
-            const sendEmail: ApiResponseType = await response.json();
+            const data = await sendEmail(email);
 
-            if (!response.ok) {
-                throw new ApiError(sendEmail.message);
-            }
-
-            dispatch(setUser({ email: prepareData.email }));
+            dispatch(setUser({ email: email.trim() }));
 
             dispatch(increaseAuthStep());
             setIsLoading(false);

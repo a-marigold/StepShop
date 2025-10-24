@@ -2,9 +2,8 @@
 
 import { Controller, useForm } from 'react-hook-form';
 
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@/redux/store';
-import { setUser } from '../redux';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/redux/store';
 
 import ApiError from '@/utils/errors/ApiError';
 import { apiOrigin } from '@/utils/getApiOrigin';
@@ -26,8 +25,6 @@ export function UserDataForm({
 
     const email = useSelector((state: RootState) => state.user.user.email);
 
-    const dispatch = useDispatch<AppDispatch>();
-
     async function submit(data: UserFormType['userData']) {
         setIsLoading(true);
 
@@ -39,6 +36,7 @@ export function UserDataForm({
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, userName, password }),
             });
+
             const registerUser: ApiResponseType = await response.json();
 
             if (!response.ok) {
@@ -47,7 +45,9 @@ export function UserDataForm({
 
             setIsLoading(false);
 
-            setShowModal?.(false);
+            if (setShowModal) {
+                setShowModal(false);
+            }
         } catch (error) {
             setIsLoading(false);
 
