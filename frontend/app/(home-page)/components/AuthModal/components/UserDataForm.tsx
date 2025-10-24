@@ -96,6 +96,7 @@ export function UserDataForm({
                         htmlId='user-password-input'
                         isValid={!fieldState.error}
                         errorLabelTitle={fieldState.error?.message}
+                        inputType='password'
                         inputAction={field.onChange}
                     />
                 )}
