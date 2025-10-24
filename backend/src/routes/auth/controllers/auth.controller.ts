@@ -13,9 +13,17 @@ export async function register(
     const checkEmail = await request.server.redis.get(
         `email:verified:${email}`
     );
-
     if (checkEmail !== 'true') {
         return reply.code(401).send({ message: 'Email is not verified!' });
+    }
+
+    const findUser = await request.server.prisma.user.findUnique({
+        where: { email: email },
+    });
+    if (!!findUser) {
+        return reply
+            .code(409)
+            .send({ message: 'User with this email already exists' });
     }
 
     const createUser = await request.server.prisma.user.create({

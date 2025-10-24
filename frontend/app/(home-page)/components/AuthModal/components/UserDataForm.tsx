@@ -46,6 +46,8 @@ export function UserDataForm({
             }
 
             setIsLoading(false);
+
+            setShowModal?.(false);
         } catch (error) {
             setIsLoading(false);
 
