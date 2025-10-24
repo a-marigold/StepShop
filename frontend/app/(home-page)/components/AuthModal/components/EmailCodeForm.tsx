@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@/redux/store';
 import { increaseAuthStep, decreaseCodeTime, resetCodeTime } from '../redux';
+
+import { useCountDown } from '@/hooks';
 
 import ApiError from '@/utils/errors/ApiError';
 import { sendEmail, verifyEmailCode } from '@/lib/api/auth';
@@ -68,20 +69,9 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
         dispatch(resetCodeTime());
     }
 
-    // TODO: Take it out in a separate util:
-    useEffect(() => {
-        const countDown = setInterval(() => {
-            dispatch(decreaseCodeTime());
-        }, 1000);
-
-        if (codeTime < 1) {
-            clearInterval(countDown);
-        }
-
-        return () => {
-            clearInterval(countDown);
-        };
-    }, [codeTime]);
+    const countedTime = useCountDown(codeTime, () =>
+        dispatch(decreaseCodeTime())
+    );
 
     return (
         <UserForm
@@ -90,17 +80,17 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
             description={`SMS-код был отправлен на адрес ${email}`}
             image='/images/phone-code-icon.svg'
             buttonTitle={
-                codeTime !== 0
-                    ? `Запросить код — через ${codeTime} сек.`
+                countedTime !== 0
+                    ? `Запросить код — через ${countedTime} сек.`
                     : 'Запросить код'
             }
             buttonAriaLabel={
-                codeTime !== 0
-                    ? `Запросить код — через ${codeTime} сек.`
+                countedTime !== 0
+                    ? `Запросить код — через ${countedTime} сек.`
                     : 'Запросить код'
             }
             isLoading={isLoading}
-            buttonDisabled={!!(codeTime > 0)}
+            buttonDisabled={!!(countedTime > 0)}
         >
             <Controller
                 name='emailCode'
