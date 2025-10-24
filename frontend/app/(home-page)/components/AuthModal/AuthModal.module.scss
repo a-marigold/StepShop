@@ -10,6 +10,8 @@
     position: relative;
 }
 .auth-modal {
+    position: relative;
+
     width: 100%;
     max-width: 450px;
 
@@ -53,9 +55,38 @@
     @include flex-column;
     gap: 1.25em;
 }
+.user-form.hidden {
+    visibility: hidden;
+}
 
 .close-modal-button {
     color: white;
+}
+
+.loading-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loading-spinner {
+    width: 52px;
+    height: 52px;
+    border: 5px var(--accent-color) solid;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 600px) {

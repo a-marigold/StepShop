@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import AccessButton from '@/UI/AccessButton';
 
+import clsx from 'clsx';
 import authStyles from '../AuthModal.module.scss';
 
 interface UserFormProps {
@@ -17,6 +18,7 @@ interface UserFormProps {
     buttonAriaLabel: string;
 
     submitAction: (...args: any) => void;
+    isLoading: boolean;
 
     children: ReactNode;
 }
@@ -30,11 +32,18 @@ export default function UserForm({
     buttonAriaLabel,
 
     submitAction,
+    isLoading,
 
     children,
 }: UserFormProps) {
     return (
-        <form onSubmit={submitAction} className={authStyles['user-form']}>
+        <form
+            onSubmit={submitAction}
+            className={clsx(
+                authStyles['user-form'],
+                isLoading && authStyles['hidden']
+            )}
+        >
             <div className={authStyles['content-block']}>
                 <div className={authStyles['text-block']}>
                     <p className={authStyles['title']}>{title}</p>

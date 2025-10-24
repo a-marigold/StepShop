@@ -8,7 +8,7 @@ import { apiOrigin } from '@/utils/getApiOrigin';
 import ApiError from '@/utils/errors/ApiError';
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
 
-import type { UserFormType, UserFormProps } from './UserFormType';
+import type { UserFormType, UserFormProps } from './UserFormTypes';
 
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
@@ -20,13 +20,19 @@ import type { UserType } from '@shared/types/UserTypes';
 import UserForm from './UserForm';
 import PrimaryInput from '@UI/PrimaryInput';
 
-export function EmailForm({ setAuthStep }: UserFormProps) {
+export function EmailForm({
+    setAuthStep,
+    isLoading,
+    setIsLoading,
+}: UserFormProps) {
     const { control, handleSubmit, setError } =
         useForm<UserFormType['email']>();
 
     const dispatch = useDispatch<AppDispatch>();
 
     async function submit(data: { email: string }) {
+        setIsLoading(true);
+
         const { email } = data;
 
         const prepareData = { email: email.trim() };
@@ -47,8 +53,13 @@ export function EmailForm({ setAuthStep }: UserFormProps) {
 
             dispatch(setUser({ email: email }));
 
-            setAuthStep((authStep) => authStep + 1);
+            if (setAuthStep) {
+                setAuthStep((authStep) => authStep + 1);
+                setIsLoading(false);
+            }
         } catch (error) {
+            setIsLoading(false);
+
             if (error instanceof ApiError) {
                 setError('email', { type: 'server', message: error.message });
             }
@@ -64,6 +75,7 @@ export function EmailForm({ setAuthStep }: UserFormProps) {
             image='/images/phone-icon.svg'
             buttonTitle='Получить код на email'
             buttonAriaLabel='Получить код на email'
+            isLoading={isLoading}
         >
             <Controller
                 name='email'

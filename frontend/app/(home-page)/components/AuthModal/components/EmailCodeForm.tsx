@@ -9,18 +9,24 @@ import { apiOrigin } from '@/utils/getApiOrigin';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
-import type { UserFormProps, UserFormType } from './UserFormType';
+import type { UserFormProps, UserFormType } from './UserFormTypes';
 
 import UserForm from './UserForm';
 import CodeInput from '@UI/CodeInput';
 
-export function EmailCodeForm({ setAuthStep }: UserFormProps) {
+export function EmailCodeForm({
+    setAuthStep,
+    isLoading,
+    setIsLoading,
+}: UserFormProps) {
     const { control, handleSubmit, setError } =
         useForm<UserFormType['emailCode']>();
 
     const { email } = useSelector((state: RootState) => state.user.user);
 
     async function submit(data: UserFormType['emailCode']) {
+        setIsLoading(true);
+
         try {
             const response = await fetch(`${apiOrigin}/auth/email/verify`, {
                 method: 'POST',
@@ -36,9 +42,14 @@ export function EmailCodeForm({ setAuthStep }: UserFormProps) {
                 throw new ApiError(verifyData.message);
             }
 
-            setAuthStep((authStep) => authStep + 1);
+            if (setAuthStep) {
+                setAuthStep((authStep) => authStep + 1);
+                setIsLoading(false);
+            }
         } catch (error) {
             if (error instanceof ApiError) {
+                setIsLoading(false);
+
                 setError('emailCode', {
                     type: 'server',
 
@@ -56,6 +67,7 @@ export function EmailCodeForm({ setAuthStep }: UserFormProps) {
             image='/images/phone-code-icon.svg'
             buttonTitle='Запросить код — через {SECONDS} сек.'
             buttonAriaLabel='Запросить код — через {SECONDS} сек.'
+            isLoading={isLoading}
         >
             <Controller
                 name='emailCode'

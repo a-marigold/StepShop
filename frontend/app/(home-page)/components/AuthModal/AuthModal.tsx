@@ -18,6 +18,8 @@ interface AuthModalProps {
 export default function AuthModal({ setShowModal }: AuthModalProps) {
     const [authStep, setAuthStep] = useState(1);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     return (
         <ModalBackdrop
             props={{ className: authStyles['modal-backdrop'] }}
@@ -28,11 +30,34 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
                     className={authStyles['auth-modal']}
                     onClick={(event) => event.stopPropagation()}
                 >
-                    {authStep === 1 && <EmailForm setAuthStep={setAuthStep} />}
-                    {authStep === 2 && (
-                        <EmailCodeForm setAuthStep={setAuthStep} />
+                    {isLoading && (
+                        <div className={authStyles['loading-wrapper']}>
+                            <div className={authStyles['loading-spinner']} />
+                        </div>
                     )}
-                    {authStep === 3 && <UserDataForm />}
+                    {authStep === 1 && (
+                        <EmailForm
+                            setAuthStep={setAuthStep}
+                            isLoading={isLoading}
+                            setIsLoading={setIsLoading}
+                        />
+                    )}
+
+                    {authStep === 2 && (
+                        <EmailCodeForm
+                            setAuthStep={setAuthStep}
+                            isLoading={isLoading}
+                            setIsLoading={setIsLoading}
+                        />
+                    )}
+
+                    {authStep === 3 && (
+                        <UserDataForm
+                            setShowModal={setShowModal}
+                            isLoading={isLoading}
+                            setIsLoading={setIsLoading}
+                        />
+                    )}
                 </div>
 
                 <CloseModalCross

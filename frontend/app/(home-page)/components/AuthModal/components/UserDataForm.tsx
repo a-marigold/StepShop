@@ -4,13 +4,17 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { apiOrigin } from '@/utils/getApiOrigin';
 
-import type { UserFormType } from './UserFormType';
+import type { UserFormType, UserFormProps } from './UserFormTypes';
 
 import UserForm from './UserForm';
 
 import PrimaryInput from '@UI/PrimaryInput';
 
-export function UserDataForm() {
+export function UserDataForm({
+    setShowModal,
+    isLoading,
+    setIsLoading,
+}: UserFormProps) {
     const { control, handleSubmit } = useForm<UserFormType['userData']>();
 
     async function submit(data: UserFormType['userData']) {
@@ -24,6 +28,7 @@ export function UserDataForm() {
             description='Введите имя пользователя и пароль'
             buttonTitle='Отправить'
             buttonAriaLabel='Отправить'
+            isLoading={isLoading}
         >
             <Controller
                 name='userName'
