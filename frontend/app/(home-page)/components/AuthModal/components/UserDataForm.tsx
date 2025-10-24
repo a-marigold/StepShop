@@ -36,7 +36,7 @@ export function UserDataForm({
         try {
             const response = await fetch(`${apiOrigin}/auth/register`, {
                 method: 'POST',
-                headers: { 'Content-type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, userName, password }),
             });
             const registerUser: ApiResponseType = await response.json();

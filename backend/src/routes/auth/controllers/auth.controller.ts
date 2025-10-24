@@ -47,3 +47,20 @@ export async function register(
         .status(204)
         .send();
 }
+
+export async function me(
+    request: FastifyRequest<{ Headers: { token: string } }>,
+    reply: FastifyReply
+) {
+    const id = request.user.id;
+
+    const user = await request.server.prisma.user.findUnique({
+        where: { id: id },
+    });
+
+    if (!user) {
+        return reply.code(404).send({ message: 'User was not found' });
+    }
+
+    return reply.code(200).send(user);
+}
