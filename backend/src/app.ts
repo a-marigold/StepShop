@@ -8,9 +8,11 @@ import {
 
 import fjwt from '@fastify/jwt';
 import cors from '@fastify/cors';
-import cookie, { fastifyCookie } from '@fastify/cookie';
+import { fastifyCookie } from '@fastify/cookie';
 
-import plugins from './plugins';
+import prisma from './plugins/prisma';
+import redis from './plugins/redis';
+import auth from './plugins/auth';
 
 import { routes } from './routes';
 const app = Fastify({
@@ -36,7 +38,9 @@ export async function buildApp() {
         cookie: { cookieName: 'token', signed: false },
     });
 
-    app.register(plugins);
+    app.register(prisma);
+    app.register(redis);
+    app.register(auth);
 
     app.register(routes);
 

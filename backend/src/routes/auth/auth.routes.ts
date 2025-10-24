@@ -3,7 +3,8 @@ import type { ProvideredAppInstance } from 'src/app';
 import { string } from 'zod';
 import { userSchema } from '@step-shop/shared/types/UserTypes';
 
-import { send, verify, register } from './controllers/email.controller';
+import { send, verify } from './controllers/email.controller';
+import { register } from './controllers/auth.controller';
 
 export default function authRoutes(app: ProvideredAppInstance) {
     app.route({
