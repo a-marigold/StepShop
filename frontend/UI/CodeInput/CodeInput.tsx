@@ -70,8 +70,6 @@ export default function CodeInput({
 
     useEffect(() => {
         changeAction(inputs.join(''));
-
-        console.log(inputs);
     }, [inputs]);
 
     return (

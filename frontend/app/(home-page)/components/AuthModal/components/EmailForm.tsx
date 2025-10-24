@@ -9,9 +9,6 @@ import type { AppDispatch } from '@/redux/store';
 import { increaseAuthStep } from '../redux';
 
 import ApiError from '@/utils/errors/ApiError';
-// import { apiOrigin } from '@/utils/getApiOrigin';
-// import type { ApiResponseType } from '@shared/types/ApiResponseType';
-
 import { sendEmail } from '@/lib/api/auth';
 
 import type { UserFormType, UserFormProps } from './UserFormTypes';

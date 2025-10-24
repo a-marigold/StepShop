@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 
 import ApiError from '@/utils/errors/ApiError';
-import { apiOrigin } from '@/utils/getApiOrigin';
-import type { ApiResponseType } from '@shared/types/ApiResponseType';
+import { register } from '@/lib/api/auth';
 
 import type { UserFormType, UserFormProps } from './UserFormTypes';
 
@@ -30,18 +29,10 @@ export function UserDataForm({
 
         const { userName, userPassword: password } = data;
 
+        const prepareData = { email: email, userName, password };
+
         try {
-            const response = await fetch(`${apiOrigin}/auth/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, userName, password }),
-            });
-
-            const registerUser: ApiResponseType = await response.json();
-
-            if (!response.ok) {
-                throw new ApiError(registerUser.message);
-            }
+            const registerUserData = await register(prepareData);
 
             setIsLoading(false);
 

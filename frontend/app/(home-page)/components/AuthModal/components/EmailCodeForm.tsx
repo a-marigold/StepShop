@@ -9,7 +9,7 @@ import { increaseAuthStep, decreaseCodeTime, resetCodeTime } from '../redux';
 import { useCountDown } from '@/hooks';
 
 import ApiError from '@/utils/errors/ApiError';
-import { sendEmail, verifyEmailCode } from '@/lib/api/auth';
+import { sendEmail, verifyCode } from '@/lib/api/auth';
 
 import type { UserFormProps, UserFormType } from './UserFormTypes';
 
@@ -24,7 +24,7 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
     const codeTime = useSelector((state: RootState) => state.user.codeTime);
     const dispatch = useDispatch<AppDispatch>();
 
-    async function verifyCode() {
+    async function verifyCodeSubmit() {
         const emailCode = getValues('emailCode');
 
         if (emailCode?.length < 4) return;
@@ -32,7 +32,7 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
         setIsLoading(true);
 
         try {
-            const verifyCodeData = await verifyEmailCode(email, emailCode);
+            const verifyCodeData = await verifyCode(email, emailCode);
 
             dispatch(increaseAuthStep());
 
@@ -110,10 +110,8 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
                         changeAction={(value) => {
                             field.onChange(value);
 
-                            console.log(value);
-
                             if (field?.value?.length === 3) {
-                                verifyCode();
+                                verifyCodeSubmit();
                             }
                         }}
                         ariaLabel={`Введите код по адресу ${email}`}

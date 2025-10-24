@@ -51,6 +51,7 @@ export default function PrimaryInput({
                 onChange={inputAction}
                 aria-invalid={!isValid}
                 placeholder={placeholder ?? ' '}
+                autoComplete='new-password'
             />
 
             {!isValid && errorLabelTitle && (
