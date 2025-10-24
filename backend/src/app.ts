@@ -8,6 +8,7 @@ import {
 
 import fjwt from '@fastify/jwt';
 import cors from '@fastify/cors';
+import cookie, { fastifyCookie } from '@fastify/cookie';
 
 import plugins from './plugins';
 
@@ -27,8 +28,11 @@ export async function buildApp() {
         credentials: true,
     });
 
+    app.register(fastifyCookie);
+
     app.register(fjwt, {
         secret: process.env.JWT_SECRET,
+        sign: { expiresIn: '1h' },
         cookie: { cookieName: 'token', signed: false },
     });
 

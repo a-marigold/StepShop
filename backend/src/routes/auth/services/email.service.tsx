@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { CodeEmail } from '../email.components/CodeEmail';
+import { CodeEmail } from './components/CodeEmail';
 
 import type { UserType } from '@step-shop/shared/types/UserTypes';
 

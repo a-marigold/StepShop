@@ -50,7 +50,7 @@ export async function verify(
     return reply.code(200).send({ message: 'Success. Code is trust' });
 }
 
-export async function createUser(
+export async function register(
     request: FastifyRequest<{
         Body: Pick<UserType, 'email' | 'userName' | 'password'>;
     }>,
@@ -73,5 +73,13 @@ export async function createUser(
             password: password,
             role: 'user',
         },
+    });
+
+    const token = request.server.jwt.sign({ id: createUser.id });
+
+    return reply.code(200).setCookie('token', token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'none',
     });
 }

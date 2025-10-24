@@ -3,7 +3,7 @@ import type { ProvideredAppInstance } from 'src/app';
 import { string } from 'zod';
 import { userSchema } from '@step-shop/shared/types/UserTypes';
 
-import { send, verify } from './controllers/email.controller';
+import { send, verify, register } from './controllers/email.controller';
 
 export default function authRoutes(app: ProvideredAppInstance) {
     app.route({
@@ -22,5 +22,21 @@ export default function authRoutes(app: ProvideredAppInstance) {
             body: userSchema.pick({ email: true }).extend({ code: string() }),
         },
         handler: verify,
+    });
+
+    app.route({
+        method: 'POST',
+        url: '/auth/register',
+        schema: {
+            headers: {
+                token: { type: 'string' },
+            },
+            body: userSchema.pick({
+                email: true,
+                userName: true,
+                password: true,
+            }),
+        },
+        handler: register,
     });
 }
