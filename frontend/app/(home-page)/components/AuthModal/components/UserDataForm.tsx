@@ -34,14 +34,10 @@ export function UserDataForm({
         try {
             const registerUserData = await register(prepareData);
 
-            setIsLoading(false);
-
             if (setShowModal) {
                 setShowModal(false);
             }
         } catch (error) {
-            setIsLoading(false);
-
             if (error instanceof ApiError) {
                 setError('userName', {
                     type: 'server',
@@ -52,6 +48,8 @@ export function UserDataForm({
                     message: error.message,
                 });
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 

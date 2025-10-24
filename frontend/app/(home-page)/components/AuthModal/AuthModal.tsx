@@ -1,5 +1,7 @@
 // TODO (8): Add authorization logic
 
+// TODO (5): Add zod scheme
+
 'use client';
 
 import { useState } from 'react';
@@ -13,7 +15,6 @@ import ModalBackdrop from '@/UI/ModalBackdrop';
 import CloseModalCross from '@/UI/CloseModalCross';
 
 import authStyles from './AuthModal.module.scss';
-import { increaseAuthStep } from './redux';
 
 interface AuthModalProps {
     setShowModal: (showModal: boolean) => void;
@@ -25,8 +26,6 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
     const authStep = useSelector((state: RootState) => state.user.authStep);
 
     const dispatch = useDispatch<AppDispatch>();
-
-    type a = typeof dispatch;
 
     return (
         <ModalBackdrop

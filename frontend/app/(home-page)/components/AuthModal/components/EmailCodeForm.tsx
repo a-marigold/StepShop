@@ -35,18 +35,16 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
             const verifyCodeData = await verifyCode(email, emailCode);
 
             dispatch(increaseAuthStep());
-
-            setIsLoading(false);
         } catch (error) {
             if (error instanceof ApiError) {
-                setIsLoading(false);
-
                 setError('emailCode', {
                     type: 'server',
 
                     message: error.message,
                 });
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 

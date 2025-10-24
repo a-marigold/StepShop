@@ -39,10 +39,9 @@ export default function authRoutes(app: ProvideredAppInstance) {
         },
         handler: register,
     });
-
     app.route({
         method: 'GET',
-        url: 'auth/me',
+        url: '/auth/me',
         schema: {
             headers: object({ token: string() }),
         },

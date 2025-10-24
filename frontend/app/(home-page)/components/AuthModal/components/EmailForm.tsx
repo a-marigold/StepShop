@@ -1,5 +1,3 @@
-// TODO (5): Enable JSON scheme for this form
-
 'use client';
 
 import { Controller, useForm } from 'react-hook-form';
@@ -35,17 +33,15 @@ export function EmailForm({ isLoading, setIsLoading }: UserFormProps) {
             dispatch(setUser({ email: email.trim() }));
 
             dispatch(increaseAuthStep());
-            setIsLoading(false);
         } catch (error) {
-            setIsLoading(false);
-
             if (error instanceof ApiError) {
                 setError('email', { type: 'server', message: error.message });
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 
-    // TODO (5): Add zod scheme
     return (
         <UserForm
             submitAction={handleSubmit(submit)}
