@@ -29,7 +29,6 @@ export default function authRoutes(app: ProvideredAppInstance) {
         method: 'POST',
         url: '/auth/register',
         schema: {
-            headers: object({ token: string() }),
             body: userSchema.pick({
                 email: true,
                 userName: true,
