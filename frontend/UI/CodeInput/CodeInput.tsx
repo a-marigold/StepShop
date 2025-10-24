@@ -70,9 +70,9 @@ export default function CodeInput({
 
     useEffect(() => {
         changeAction(inputs.join(''));
-    }, [inputs]);
 
-    console.log(isValid);
+        console.log(inputs);
+    }, [inputs]);
 
     return (
         <div className={inputStyles['input-box']}>

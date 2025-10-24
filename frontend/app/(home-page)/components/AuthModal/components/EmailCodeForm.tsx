@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import ApiError from '@/utils/errors/ApiError';
@@ -19,12 +20,16 @@ export function EmailCodeForm({
     isLoading,
     setIsLoading,
 }: UserFormProps) {
-    const { control, handleSubmit, setError } =
+    const { control, setError, getValues } =
         useForm<UserFormType['emailCode']>();
 
     const { email } = useSelector((state: RootState) => state.user.user);
 
-    async function submit(data: UserFormType['emailCode']) {
+    async function verifyCode() {
+        const emailCode = getValues('emailCode');
+
+        if (emailCode?.length < 4) return;
+
         setIsLoading(true);
 
         try {
@@ -33,7 +38,7 @@ export function EmailCodeForm({
                 headers: {
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify({ email: email, code: data.emailCode }),
+                body: JSON.stringify({ email: email, code: emailCode }),
             });
 
             const verifyData: ApiResponseType = await response.json();
@@ -59,14 +64,64 @@ export function EmailCodeForm({
         }
     }
 
+    async function sendEmail(event: Event) {
+        event.preventDefault();
+
+        try {
+            const response = await fetch(`${apiOrigin}/auth/email/send`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email }),
+            });
+            const sendEmail: ApiResponseType = await response.json();
+
+            if (!response.ok) {
+                throw new ApiError(sendEmail.message);
+            }
+        } catch (error) {
+            if (error instanceof ApiError) {
+                setError('emailCode', {
+                    type: 'server',
+                    message: error.message,
+                });
+            }
+        }
+    }
+
+    const [codeTime, setCodeTime] = useState(32);
+
+    useEffect(() => {
+        const countDown = setInterval(() => {
+            setCodeTime((prev) => prev - 1);
+        }, 1000);
+
+        if (codeTime < 1) {
+            clearInterval(countDown);
+        }
+
+        return () => {
+            clearInterval(countDown);
+        };
+    }, [codeTime]);
+
     return (
         <UserForm
-            submitAction={handleSubmit(submit)}
+            submitAction={sendEmail}
             title='Введите код'
             description={`SMS-код был отправлен на адрес ${email}`}
             image='/images/phone-code-icon.svg'
-            buttonTitle='Запросить код — через {SECONDS} сек.'
-            buttonAriaLabel='Запросить код — через {SECONDS} сек.'
+            buttonTitle={
+                codeTime !== 0
+                    ? `Запросить код — через ${codeTime} сек.`
+                    : 'Запросить код'
+            }
+            buttonAriaLabel={
+                codeTime !== 0
+                    ? `Запросить код — через ${codeTime} сек.`
+                    : 'Запросить код'
+            }
             isLoading={isLoading}
         >
             <Controller
@@ -84,7 +139,15 @@ export function EmailCodeForm({
                             fieldState.error?.message ??
                             `Введите код по адресу${email}`
                         }
-                        changeAction={field.onChange}
+                        changeAction={(value) => {
+                            field.onChange(value);
+
+                            console.log(value);
+
+                            if (field?.value?.length === 3) {
+                                verifyCode();
+                            }
+                        }}
                         ariaLabel={`Введите код по адресу ${email}`}
                         inputQuantity={4}
                     />

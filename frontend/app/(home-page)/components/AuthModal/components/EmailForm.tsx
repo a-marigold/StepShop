@@ -51,7 +51,7 @@ export function EmailForm({
                 throw new ApiError(sendEmail.message);
             }
 
-            dispatch(setUser({ email: email }));
+            dispatch(setUser({ email: prepareData.email }));
 
             if (setAuthStep) {
                 setAuthStep((authStep) => authStep + 1);
