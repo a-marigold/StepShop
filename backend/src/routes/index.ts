@@ -5,5 +5,6 @@ import authRoutes from './auth';
 
 export async function routes(app: FastifyInstance) {
     app.register(productsRoutes);
+
     app.register(authRoutes);
 }

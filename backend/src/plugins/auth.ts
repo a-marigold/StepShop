@@ -7,7 +7,7 @@ export default fp(async (app: FastifyInstance) => {
         'auth',
         async (request: FastifyRequest, reply: FastifyReply) => {
             try {
-                await request.jwtVerify();
+                await request.jwtVerify({ onlyCookie: true });
             } catch (error) {
                 reply.code(401).send({ message: 'Unauthorized' });
             }

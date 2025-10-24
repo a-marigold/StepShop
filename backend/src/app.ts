@@ -27,7 +27,10 @@ export async function buildApp() {
         credentials: true,
     });
 
-    app.register(fjwt, { secret: process.env.JWT_SECRET });
+    app.register(fjwt, {
+        secret: process.env.JWT_SECRET,
+        cookie: { cookieName: 'token', signed: false },
+    });
 
     app.register(plugins);
 
