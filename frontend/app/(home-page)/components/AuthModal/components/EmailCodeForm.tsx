@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,8 +8,7 @@ import type { RootState, AppDispatch } from '@/redux/store';
 import { increaseAuthStep, decreaseCodeTime, resetCodeTime } from '../redux';
 
 import ApiError from '@/utils/errors/ApiError';
-import type { ApiResponseType } from '@shared/types/ApiResponseType';
-import { apiOrigin } from '@/utils/getApiOrigin';
+import { sendEmail, verifyEmailCode } from '@/lib/api/auth';
 
 import type { UserFormProps, UserFormType } from './UserFormTypes';
 
@@ -32,19 +31,7 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`${apiOrigin}/auth/email/verify`, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, code: emailCode }),
-            });
-
-            const verifyData: ApiResponseType = await response.json();
-
-            if (!response.ok) {
-                throw new ApiError(verifyData.message);
-            }
+            const verifyCodeData = await verifyEmailCode(email, emailCode);
 
             dispatch(increaseAuthStep());
 
@@ -62,24 +49,13 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
         }
     }
 
-    async function sendEmail(event: Event) {
+    async function sendEmailSubmit(event: Event) {
         if (codeTime !== 0) return;
 
         event.preventDefault();
 
         try {
-            const response = await fetch(`${apiOrigin}/auth/email/send`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email }),
-            });
-            const sendEmail: ApiResponseType = await response.json();
-
-            if (!response.ok) {
-                throw new ApiError(sendEmail.message);
-            }
+            const sendEmailData = await sendEmail(email);
         } catch (error) {
             if (error instanceof ApiError) {
                 setError('emailCode', {
@@ -92,6 +68,7 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
         dispatch(resetCodeTime());
     }
 
+    // TODO: Take it out in a separate util:
     useEffect(() => {
         const countDown = setInterval(() => {
             dispatch(decreaseCodeTime());
@@ -108,7 +85,7 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
 
     return (
         <UserForm
-            submitAction={sendEmail}
+            submitAction={sendEmailSubmit}
             title='Введите код'
             description={`SMS-код был отправлен на адрес ${email}`}
             image='/images/phone-code-icon.svg'

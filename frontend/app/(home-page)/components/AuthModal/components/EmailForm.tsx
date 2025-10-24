@@ -33,7 +33,7 @@ export function EmailForm({ isLoading, setIsLoading }: UserFormProps) {
         const { email } = data;
 
         try {
-            const data = await sendEmail(email);
+            const sendEmailData = await sendEmail(email);
 
             dispatch(setUser({ email: email.trim() }));
 
