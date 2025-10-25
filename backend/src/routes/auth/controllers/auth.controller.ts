@@ -38,7 +38,7 @@ export async function register(
     const token = request.server.jwt.sign({ id: createUser.id });
 
     return reply
-        .code(204)
+        .code(200)
 
         .setCookie('token', token, {
             httpOnly: true,

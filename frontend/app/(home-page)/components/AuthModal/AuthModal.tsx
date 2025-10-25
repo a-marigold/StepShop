@@ -6,8 +6,8 @@
 
 import { useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/redux/store';
 
 import { EmailForm, EmailCodeForm, UserDataForm } from './components';
 
@@ -24,8 +24,6 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
     const [isLoading, setIsLoading] = useState(false);
 
     const authStep = useSelector((state: RootState) => state.user.authStep);
-
-    const dispatch = useDispatch<AppDispatch>();
 
     return (
         <ModalBackdrop
