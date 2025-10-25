@@ -23,14 +23,14 @@ export async function buildApp() {
     app.setValidatorCompiler(validatorCompiler);
     app.setSerializerCompiler(serializerCompiler);
 
+    app.register(fastifyCookie, { hook: 'onRequest' });
+
     app.register(cors, {
         origin: ['https://step-shop.vercel.app', 'http://localhost:3000'],
 
         methods: ['GET', 'POST', 'PATCH', 'DELETE'],
         credentials: true,
     });
-
-    app.register(fastifyCookie);
 
     app.register(fjwt, {
         secret: process.env.JWT_SECRET,
