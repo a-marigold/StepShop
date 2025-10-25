@@ -52,7 +52,7 @@ export async function verify(
             .setCookie('token', token, {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'lax', // TODO: Temporary for testing
+                sameSite: 'none',
                 maxAge: 3600,
             })
             .send({ message: 'Token here', token: token });

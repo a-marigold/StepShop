@@ -43,7 +43,7 @@ export async function register(
         .setCookie('token', token, {
             httpOnly: true,
             secure: true,
-            sameSite: 'lax', // TODO: Temporary for testing
+            sameSite: 'none',
             maxAge: 3600,
         })
 
