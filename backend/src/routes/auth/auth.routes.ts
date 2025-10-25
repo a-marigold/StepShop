@@ -42,11 +42,7 @@ export default function authRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'GET',
         url: '/auth/me',
-        schema: {
-            headers: object({ token: string() }),
-        },
         onRequest: [app.auth],
-
         handler: me,
     });
 }
