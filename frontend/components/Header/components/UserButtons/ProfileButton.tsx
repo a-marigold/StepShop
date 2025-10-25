@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
 
 import ApiError from '@/utils/errors/ApiError';
-import { getUserData } from '@/lib/api/auth';
+import { clientGetUserData } from '@/lib/api/auth';
 
 import type { UserType } from '@shared/types/UserTypes';
 
@@ -32,7 +32,7 @@ export default function ProfileButton() {
     useEffect(() => {
         async function loadUser() {
             try {
-                const userData = await getUserData();
+                const userData = await clientGetUserData();
 
                 setUser(userData);
             } catch (error) {

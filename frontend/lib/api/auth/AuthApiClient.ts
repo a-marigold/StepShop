@@ -68,7 +68,7 @@ export async function register(userData: {
     }
 }
 
-export async function getUserData() {
+export async function clientGetUserData() {
     const response = await fetch(`${apiOrigin}/auth/me`, {
         method: 'GET',
         credentials: 'include',
@@ -77,6 +77,24 @@ export async function getUserData() {
     if (!response.ok) {
         const responseError: ApiResponseType = await response.json();
         throw new ApiError(responseError.message);
+    }
+
+    // TODO: Add general type with server for user without password
+    const userData: UserType = await response.json();
+
+    return userData;
+}
+
+export async function serverGetUserData(token: string, error: Error) {
+    const response = await fetch(`${apiOrigin}/auth/me`, {
+        method: 'GET',
+        headers: {
+            Cookie: `token=${token}`,
+        },
+    });
+
+    if (!response.ok) {
+        throw error;
     }
 
     const userData: UserType = await response.json();
