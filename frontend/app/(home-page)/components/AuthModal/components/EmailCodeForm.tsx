@@ -38,7 +38,7 @@ export function EmailCodeForm({
         try {
             const verifyCodeData = await verifyCode(email, emailCode);
 
-            if (verifyCodeData.statusCode === 200 && setShowModal) {
+            if (verifyCodeData.statusCode === 201 && setShowModal) {
                 setShowModal(false);
             }
 

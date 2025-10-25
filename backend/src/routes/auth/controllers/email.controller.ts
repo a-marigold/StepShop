@@ -48,14 +48,14 @@ export async function verify(
         const token = request.server.jwt.sign({ id: user.id });
 
         return reply
-            .code(200)
+            .code(201)
             .setCookie('token', token, {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'none',
                 maxAge: 3600,
             })
-            .send({ message: 'Token here', token: token });
+            .send({ statusCode: 201 });
     }
 
     await request.server.redis.set(
