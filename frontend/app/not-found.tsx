@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 import EmptyFilledButton from '@UI/EmptyFilledButton';
 
-import notFoundStyles from './NotFound.module.scss';
+import notFoundStyles from './styles/NotFound.module.scss';
 
 export const metadata: Metadata = {
     title: 'Страница не найдена',

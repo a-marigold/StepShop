@@ -6,6 +6,10 @@ import Navbar from './components/Navbar';
 import adminStyles from './Admin.module.scss';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
+    if (0 === 0) {
+        throw new Error('Доступ запрещён');
+    }
+
     return (
         <>
             <Header />
