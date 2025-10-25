@@ -10,17 +10,29 @@ import Header from './components/Header';
 
 import Navbar from './components/Navbar';
 
+import clsx from 'clsx';
 import adminStyles from './Admin.module.scss';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-    const [error, setError] = useState<Error | null | undefined>(undefined);
+    const [isLoading, setIsLoading] = useState<boolean>();
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         async function loadUser() {
-            const userData = await clientGetUserData();
+            setIsLoading(true);
 
-            if (userData.role !== 'creator' && userData.role !== 'admin') {
-                setError(new Error('Доступ запрещён'));
+            try {
+                const userData = await clientGetUserData();
+
+                if (userData.role !== 'creator' && userData.role !== 'admin') {
+                    setError(new Error('Доступ запрещён'));
+                }
+            } catch (error) {
+                if (error instanceof Error) {
+                    setError(error);
+                }
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -31,17 +43,22 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         throw error;
     }
 
-    return (
-        error !== undefined && (
-            <>
-                <Header />
+    return isLoading ? (
+        <div
+            className={clsx(
+                adminStyles['loading-modal'],
+                !isLoading && adminStyles['hidden']
+            )}
+        >
+            <div className={adminStyles['spinner']} />
+        </div>
+    ) : (
+        <>
+            <Header />
 
-                <div className={adminStyles['main-content']}>
-                    <Navbar />
-
-                    {children}
-                </div>
-            </>
-        )
+            <div className={adminStyles['main-content']}>
+                <Navbar /> {children}
+            </div>
+        </>
     );
 }
