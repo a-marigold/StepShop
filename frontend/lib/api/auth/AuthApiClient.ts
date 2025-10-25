@@ -65,3 +65,19 @@ export async function register(userData: {
         throw new ApiError(registerUser.message);
     }
 }
+
+export async function getUserData() {
+    const response = await fetch(`${apiOrigin}/auth/me`, {
+        method: 'GET',
+        credentials: 'include',
+    });
+
+    if (!response.ok) {
+        const responseError: ApiResponseType = await response.json();
+        throw new ApiError(responseError.message);
+    }
+
+    const userData: UserType = await response.json();
+
+    return userData;
+}
