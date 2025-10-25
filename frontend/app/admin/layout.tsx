@@ -1,42 +1,47 @@
-import type { ReactNode } from 'react';
-import { cookies } from 'next/headers';
+'use client';
 
-import { serverGetUserData } from '@/lib/api/auth';
+import { useState, useEffect } from 'react';
+
+import type { ReactNode } from 'react';
+
+import { clientGetUserData } from '@/lib/api/auth';
 
 import Header from './components/Header';
+
 import Navbar from './components/Navbar';
 
 import adminStyles from './Admin.module.scss';
 
-export default async function AdminLayout({
-    children,
-}: {
-    children: ReactNode;
-}) {
-    const cookieStore = await cookies();
+export default function AdminLayout({ children }: { children: ReactNode }) {
+    const [error, setError] = useState<Error | null | undefined>(undefined);
 
-    const token = cookieStore.get('token')?.value;
+    useEffect(() => {
+        async function loadUser() {
+            const userData = await clientGetUserData();
 
-    // if (!token) {
-    //     throw new Error('Доступ запрещён');
-    // }
+            if (userData.role !== 'creator' && userData.role !== 'admin') {
+                setError(new Error('Доступ запрещён'));
+            }
+        }
 
-    // const userData = await serverGetUserData(
-    //     token,
-    //     new Error('Доступ запрещён')
-    // );
-    // if (userData.role !== 'creator' && userData.role !== 'admin') {
-    //     throw new Error('Доступ запрещён');
-    // }
+        loadUser();
+    }, []);
+
+    if (error) {
+        throw error;
+    }
 
     return (
-        <>
-            <Header />
+        error !== undefined && (
+            <>
+                <Header />
 
-            <div className={adminStyles['main-content']}>
-                <Navbar />
-                {children}
-            </div>
-        </>
+                <div className={adminStyles['main-content']}>
+                    <Navbar />
+
+                    {children}
+                </div>
+            </>
+        )
     );
 }
