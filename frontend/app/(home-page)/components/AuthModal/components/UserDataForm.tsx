@@ -34,7 +34,7 @@ export function UserDataForm({
         try {
             const registerUserData = await register(prepareData);
 
-            if (setShowModal) {
+            if (registerUserData.statusCode === 200 && setShowModal) {
                 setShowModal(false);
             }
         } catch (error) {

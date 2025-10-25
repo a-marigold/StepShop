@@ -67,6 +67,8 @@ export async function register(userData: {
     if (!response.ok) {
         throw new ApiError(registerUser.message);
     }
+
+    return registerUser;
 }
 
 export async function clientGetUserData() {

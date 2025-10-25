@@ -47,8 +47,7 @@ export async function register(
             path: '/',
             maxAge: 3600,
         })
-
-        .send();
+        .send({ statusCode: 200 });
 }
 
 export async function me(
