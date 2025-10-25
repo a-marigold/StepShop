@@ -43,6 +43,7 @@ export async function register(
             httpOnly: true,
             secure: false,
             sameSite: 'none',
+            maxAge: 3600,
         })
         .status(204)
         .send();
