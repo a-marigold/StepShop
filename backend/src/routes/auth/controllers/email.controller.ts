@@ -54,7 +54,7 @@ export async function verify(
                 secure: true,
                 sameSite: 'none',
                 path: '/',
-                domain: 'step-shop.onrender.com',
+                domain: '.onrender.com',
                 maxAge: 3600,
             })
             .send({ statusCode: 201 });
