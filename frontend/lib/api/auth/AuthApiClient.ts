@@ -13,6 +13,7 @@ export async function sendEmail(email: Email) {
 
     const response = await fetch(`${apiOrigin}/auth/email/send`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },

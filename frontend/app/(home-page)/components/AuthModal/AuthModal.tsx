@@ -49,6 +49,7 @@ export default function AuthModal({ setShowModal }: AuthModalProps) {
 
                     {authStep === 2 && (
                         <EmailCodeForm
+                            setShowModal={setShowModal}
                             isLoading={isLoading}
                             setIsLoading={setIsLoading}
                         />

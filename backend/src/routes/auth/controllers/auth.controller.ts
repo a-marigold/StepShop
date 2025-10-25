@@ -44,6 +44,8 @@ export async function register(
             httpOnly: true,
             secure: true,
             sameSite: 'none',
+            path: '/',
+            domain: 'step-shop.onrender.com',
             maxAge: 3600,
         })
 
