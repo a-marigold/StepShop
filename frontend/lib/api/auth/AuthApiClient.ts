@@ -91,6 +91,7 @@ export async function serverGetUserData(token: string, error: Error) {
         headers: {
             Cookie: `token=${token}`,
         },
+        cache: 'no-store',
     });
 
     if (!response.ok) {

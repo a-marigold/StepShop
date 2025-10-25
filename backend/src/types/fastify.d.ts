@@ -1,10 +1,14 @@
 import 'fastify';
+import '@fastify/jwt';
 
 import type { FastifyRequest, FastifyReply } from 'fastify';
+import type { VerifyPayloadType } from '@fastify/jwt';
 
 import type { PrismaClient } from '@prisma/client';
 
 import type Redis from 'ioredis';
+
+export {};
 
 declare module 'fastify' {
     interface FastifyInstance {
@@ -14,10 +18,9 @@ declare module 'fastify' {
 
         auth(request: FastifyRequest, reply: FastifyReply): Promise<void>;
     }
-
     interface FastifyRequest {
-        user: {
-            id: string;
+        cookies: {
+            token?: string;
         };
     }
 }

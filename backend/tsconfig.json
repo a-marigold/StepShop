@@ -14,13 +14,17 @@
 
         "noUncheckedSideEffectImports": true,
         "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowJs": true,
 
         "baseUrl": ".",
         "paths": {
             "@shared/*": ["../shared/*"]
         },
 
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+
+        "typeRoots": ["./src/types", "./node_modules/@types"]
     },
     "include": ["./src", "./src/types"],
     "exclude": ["node_modules", "dist"]

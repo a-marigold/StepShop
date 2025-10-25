@@ -35,7 +35,7 @@ export async function register(
         },
     });
 
-    const token = request.server.jwt.sign({ id: createUser.id });
+    const token = await reply.jwtSign({ id: createUser.id });
 
     return reply
         .code(200)
@@ -45,7 +45,6 @@ export async function register(
             secure: true,
             sameSite: 'none',
             path: '/',
-            // domain: '.onrender.com',
             maxAge: 3600,
         })
 
@@ -53,7 +52,8 @@ export async function register(
 }
 
 export async function me(
-    request: FastifyRequest<{ Headers: { token: string } }>,
+    request: FastifyRequest,
+
     reply: FastifyReply
 ) {
     const userId = request.user.id;

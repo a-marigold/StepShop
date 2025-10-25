@@ -54,7 +54,6 @@ export async function verify(
                 secure: true,
                 sameSite: 'none',
                 path: '/',
-                // domain: '.onrender.com',
                 maxAge: 3600,
             })
             .send({ statusCode: 201 });

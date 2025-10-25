@@ -35,7 +35,6 @@ export async function buildApp() {
     app.register(fjwt, {
         secret: process.env.JWT_SECRET,
         sign: { expiresIn: '1h' },
-        cookie: { cookieName: 'token', signed: false },
     });
 
     app.register(prisma);
