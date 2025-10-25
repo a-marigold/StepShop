@@ -45,7 +45,7 @@ export async function register(
             secure: true,
             sameSite: 'none',
             path: '/',
-            domain: '.onrender.com',
+            // domain: '.onrender.com',
             maxAge: 3600,
         })
 
