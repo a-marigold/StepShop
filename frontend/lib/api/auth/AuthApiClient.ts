@@ -57,6 +57,7 @@ export async function register(userData: {
 }) {
     const response = await fetch(`${apiOrigin}/auth/register`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
     });
@@ -91,6 +92,7 @@ export async function serverGetUserData(token: string, error: Error) {
         headers: {
             Cookie: `token=${token}`,
         },
+        credentials: 'include',
         cache: 'no-store',
     });
 

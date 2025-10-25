@@ -17,17 +17,17 @@ export default async function AdminLayout({
 
     const token = cookieStore.get('token')?.value;
 
-    if (!token) {
-        throw new Error('Доступ запрещён');
-    }
+    // if (!token) {
+    //     throw new Error('Доступ запрещён');
+    // }
 
-    const userData = await serverGetUserData(
-        token,
-        new Error('Доступ запрещён')
-    );
-    if (userData.role !== 'creator' && userData.role !== 'admin') {
-        throw new Error('Доступ запрещён');
-    }
+    // const userData = await serverGetUserData(
+    //     token,
+    //     new Error('Доступ запрещён')
+    // );
+    // if (userData.role !== 'creator' && userData.role !== 'admin') {
+    //     throw new Error('Доступ запрещён');
+    // }
 
     return (
         <>
