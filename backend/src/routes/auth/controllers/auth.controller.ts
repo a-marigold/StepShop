@@ -38,14 +38,15 @@ export async function register(
     const token = request.server.jwt.sign({ id: createUser.id });
 
     return reply
-        .code(200)
+        .code(204)
+
         .setCookie('token', token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'none',
+            secure: true,
+            sameSite: 'lax', // TODO: Temporary for testing
             maxAge: 3600,
         })
-        .status(204)
+
         .send();
 }
 
@@ -53,10 +54,10 @@ export async function me(
     request: FastifyRequest<{ Headers: { token: string } }>,
     reply: FastifyReply
 ) {
-    const id = request.user.id;
+    const userId = request.user.id;
 
     const user = await request.server.prisma.user.findUnique({
-        where: { id: id },
+        where: { id: userId },
     });
 
     if (!user) {

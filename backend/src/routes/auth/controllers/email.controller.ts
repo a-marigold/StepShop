@@ -27,18 +27,36 @@ export async function verify(
     reply: FastifyReply
 ) {
     const { email, code } = request.body;
-
     if (!code || !email) {
         return reply.code(400).send({ message: 'Code is required' });
     }
 
     const trustCode = await request.server.redis.get(`email:verify:${email}`);
-
     if (code !== trustCode) {
         return reply.code(401).send({ message: 'Incorrect code' });
     }
 
     await request.server.redis.del(`email:verify:${email}`);
+
+    const user = await request.server.prisma.user.findUnique({
+        where: { email: email },
+        select: {
+            id: true,
+        },
+    });
+    if (!!user) {
+        const token = request.server.jwt.sign({ id: user.id });
+
+        return reply
+            .code(204)
+            .setCookie('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'lax', // TODO: Temporary for testing
+                maxAge: 3600,
+            })
+            .send();
+    }
 
     await request.server.redis.set(
         `email:verified:${email}`,
@@ -48,4 +66,44 @@ export async function verify(
     );
 
     return reply.code(200).send({ message: 'Success. Code is trust' });
+}
+
+export async function login(
+    request: FastifyRequest<{ Body: Pick<UserType, 'email'> }>,
+    reply: FastifyReply
+) {
+    const email = request.body.email;
+
+    const verifyEmail = await request.server.redis.get(
+        `email:verified${email}`
+    );
+
+    if (!(verifyEmail === 'true')) {
+        return reply.code(401).send({ message: 'Email is not verified!' });
+    }
+
+    const user = await request.server.prisma.user.findUnique({
+        where: { email: email },
+        select: {
+            id: true,
+        },
+    });
+
+    if (!user) {
+        return reply
+            .code(404)
+            .send({ message: 'User with this email does not exist' });
+    }
+
+    const token = request.server.jwt.sign({ id: user.id });
+
+    return reply
+        .code(204)
+        .setCookie('token', token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'none',
+            maxAge: 3600,
+        })
+        .send();
 }
