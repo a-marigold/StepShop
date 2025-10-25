@@ -1,22 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-import { createPortal } from 'react-dom';
-
-import { lockBodyScroll, unlockBodyScroll } from '@/utils/scrollLock';
-
-import { useSelector } from 'react-redux';
-
-import type { RootState } from '@/redux/store';
-
-import { CURRENCY_SYMBOL } from '@/constants/currency';
-
-import AuthModal from '@/app/(home-page)/components/AuthModal';
-import CartModal from '@/app/(home-page)/components/CartModal';
-
-import EmptyFilledButton from '@UI/EmptyFilledButton';
-import AccessButton from '@/UI/AccessButton';
+import CartButton from './CartButton';
+import ProfileButton from './ProfileButton';
 
 import userStyles from './UserButtons.module.scss';
 
@@ -28,27 +13,6 @@ export default function UserButtons({
     excludeProfileButton = false,
     excludeCartButton = false,
 }: UserButtonsProps) {
-    const [showCartModal, setShowCartModal] = useState(false);
-
-    const [showAuthModal, setShowAuthModal] = useState(false);
-
-    useEffect(() => {
-        if (showCartModal || showAuthModal) {
-            lockBodyScroll();
-        }
-
-        return () => {
-            unlockBodyScroll();
-        };
-    }, [showCartModal, showAuthModal]);
-
-    const cartProductsLength = useSelector(
-        (state: RootState) => state.cart.cartProducts
-    ).length;
-    const totalAmount = useSelector(
-        (state: RootState) => state.cart.totalAmount
-    );
-
     return (
         <>
             <div
@@ -56,78 +20,10 @@ export default function UserButtons({
             >
                 {/* ^^ user-buttons-public class used for setting display none on them by using class toggle on body ^^*/}
 
-                {excludeProfileButton && (
-                    <EmptyFilledButton
-                        title='Войти'
-                        ariaLabel='Войти в аккаунт'
-                        className={userStyles['profile-button']}
-                        clickAction={() => setShowAuthModal(true)}
-                    >
-                        <svg width={12} height={16} color='var(--accent-color)'>
-                            <use href='#profile-icon' />
-                        </svg>
-                    </EmptyFilledButton>
-                )}
+                {excludeProfileButton && <ProfileButton />}
 
-                {excludeCartButton &&
-                    (cartProductsLength ? (
-                        <AccessButton
-                            ariaLabel='Открыть корзину'
-                            clickAction={() => setShowCartModal(true)}
-                            className={userStyles['ready-cart-button']}
-                        >
-                            <p className={userStyles['total-amount']}>
-                                {totalAmount} {CURRENCY_SYMBOL}
-                            </p>
-
-                            <div className={userStyles['vertical-line']} />
-
-                            <span
-                                className={
-                                    userStyles['products-quantity-block']
-                                }
-                            >
-                                <svg
-                                    width={18}
-                                    height={18}
-                                    color='var(--main-bg-color)'
-                                >
-                                    <use href='#cart-icon' />
-                                </svg>
-                                &nbsp;
-                                {cartProductsLength}
-                            </span>
-                        </AccessButton>
-                    ) : (
-                        <EmptyFilledButton
-                            ariaLabel='Открыть корзину'
-                            className={userStyles['cart-button']}
-                            clickAction={() => setShowCartModal(true)}
-                        >
-                            <svg
-                                width={18}
-                                height={18}
-                                color='var(--accent-color)'
-                            >
-                                <use href='#cart-icon' />
-                            </svg>
-                        </EmptyFilledButton>
-                    ))}
+                {excludeCartButton && <CartButton />}
             </div>
-
-            {showCartModal &&
-                createPortal(
-                    <CartModal setShowModal={setShowCartModal} />,
-
-                    document.body
-                )}
-
-            {showAuthModal &&
-                createPortal(
-                    <AuthModal setShowModal={setShowAuthModal} />,
-
-                    document.body
-                )}
         </>
     );
 }

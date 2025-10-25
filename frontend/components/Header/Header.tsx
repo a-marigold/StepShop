@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import type { HeaderChild } from './HeaderChild';
+import type { HeaderChild } from './HeaderChildType';
 
 import SearchBlock from './components/SearchBlock';
 import UserButtons from './components/UserButtons';

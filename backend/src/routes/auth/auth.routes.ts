@@ -46,6 +46,7 @@ export default function authRoutes(app: ProvideredAppInstance) {
             headers: object({ token: string() }),
         },
         onRequest: [app.auth],
+
         handler: me,
     });
 }
