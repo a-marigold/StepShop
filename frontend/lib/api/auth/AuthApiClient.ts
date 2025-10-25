@@ -32,6 +32,7 @@ export async function sendEmail(email: Email) {
 export async function verifyCode(email: Email, emailCode: string) {
     const response = await fetch(`${apiOrigin}/auth/email/verify`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-type': 'application/json',
         },

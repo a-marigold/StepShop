@@ -16,7 +16,11 @@ import type { UserFormProps, UserFormType } from './UserFormTypes';
 import UserForm from './UserForm';
 import CodeInput from '@UI/CodeInput';
 
-export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
+export function EmailCodeForm({
+    isLoading,
+    setShowModal,
+    setIsLoading,
+}: UserFormProps) {
     const { control, setError, getValues } =
         useForm<UserFormType['emailCode']>();
 
@@ -34,7 +38,9 @@ export function EmailCodeForm({ isLoading, setIsLoading }: UserFormProps) {
         try {
             const verifyCodeData = await verifyCode(email, emailCode);
 
-            console.log(verifyCodeData);
+            if (verifyCodeData.statusCode === 200 && setShowModal) {
+                setShowModal(false);
+            }
 
             dispatch(increaseAuthStep());
         } catch (error) {

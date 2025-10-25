@@ -24,7 +24,7 @@ export async function buildApp() {
     app.setSerializerCompiler(serializerCompiler);
 
     app.register(cors, {
-        origin: ['https://step-shop.vercel.app', 'http://localhost:3000', '*'],
+        origin: ['https://step-shop.vercel.app', 'http://localhost:3000'],
 
         methods: ['GET', 'POST', 'PATCH', 'DELETE'],
         credentials: true,
