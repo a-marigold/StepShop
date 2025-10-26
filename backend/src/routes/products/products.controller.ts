@@ -1,9 +1,9 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import fs from 'fs';
-import path from 'path';
 import pump from 'pump';
 
+import { getFileExtension } from 'src/utils/getFileExtension';
 import { publicDirPath } from 'src/utils/getPublicDirPath';
 import { apiOrigin } from 'src/utils/getApiOrigin';
 
@@ -29,12 +29,15 @@ export async function createProduct(
 
     const file = await request.file();
 
-    const fileExtension = path.extname(file.filename);
-    if (fileExtension !== '.png' && fileExtension !== '.webp') {
-        return reply
-            .code(400)
-            .send({ message: "Only '.png' and '.webp' images supported" });
+    let fileExtension: string;
+    try {
+        fileExtension = getFileExtension(file.filename);
+    } catch (error) {
+        if (error instanceof Error) {
+            return reply.code(400).send({ message: error.message });
+        }
     }
+
     const imagePath = `${publicDirPath}/${title + price}${fileExtension}`;
 
     await pump(file.file, fs.createWriteStream(imagePath));
@@ -83,7 +86,6 @@ export async function deleteProduct(
     });
 
     const imagePath = new URL(deleteProduct.image).pathname;
-
     await fs.promises.unlink(imagePath);
 
     reply.code(200).send({
@@ -103,6 +105,17 @@ export async function updateProduct(
 ) {
     const id = request.params.id;
 
+    const file = await request.file();
+
+    let fileExtension: string;
+    try {
+        fileExtension = getFileExtension(file.filename);
+    } catch (error) {
+        if (error instanceof Error) {
+            return reply.code(400).send({ message: error.message });
+        }
+    }
+
     const {
         image: newImage,
         title: newTitle,
@@ -115,10 +128,16 @@ export async function updateProduct(
     });
 
     if (!prevProduct) {
-        throw reply
+        return reply
             .code(404)
             .send({ message: `Product with {id: ${id}} is not found` });
     }
+
+    const newImagePath = `${publicDirPath}/${
+        newTitle + newPrice
+    }${fileExtension}`;
+
+    await pump(file.file, fs.createWriteStream(newImagePath));
 
     const updateProduct = await request.server.prisma.product.update({
         where: {
@@ -132,7 +151,7 @@ export async function updateProduct(
         },
     });
 
-    reply.code(201).send({
+    return reply.code(201).send({
         statusCode: 201,
         message: `Old product: 
 ${JSON.stringify(prevProduct)}; 
