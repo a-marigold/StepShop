@@ -3,7 +3,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 import fs from 'fs';
 import path from 'path';
 
-import { uploadImage } from './services/cloudinary.service';
+import { uploadImage } from '../services/cloudinary.service';
 
 import { getFileExtension } from 'src/utils/getFileExtension';
 import { publicDirPath } from 'src/utils/getPublicDirPath';
@@ -16,8 +16,6 @@ export async function getAllProducts(
     request: FastifyRequest
 ): Promise<ProductType[]> {
     const products = await request.server.prisma.product.findMany();
-
-    console.log(products);
 
     return products;
 }

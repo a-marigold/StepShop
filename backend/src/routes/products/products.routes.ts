@@ -1,13 +1,15 @@
 import type { ProvideredAppInstance } from 'src/app';
 
-import { coerce, file } from 'zod';
+import { coerce, array, string } from 'zod';
 
 import {
     getAllProducts,
     createProduct,
     deleteProduct,
     updateProduct,
-} from './products.controller';
+} from './controllers/products.controller';
+import { getAllCategories } from './controllers/categories.controller';
+
 import { checkProductsApiKey } from './products.middlewares';
 
 import {
@@ -15,6 +17,8 @@ import {
     ProductSchema,
 } from '@step-shop/shared/types/ProductTypes';
 import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
+
+const categoryListSchema = array(string());
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
     app.addHook('preHandler', checkProductsApiKey);
@@ -87,5 +91,12 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
             },
         },
         handler: updateProduct,
+    });
+
+    app.route({
+        method: 'GET',
+        url: '/categories',
+        schema: { body: categoryListSchema },
+        handler: getAllCategories,
     });
 }
