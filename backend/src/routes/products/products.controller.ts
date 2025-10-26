@@ -103,9 +103,6 @@ export async function deleteProduct(
 
 export async function updateProduct(
     request: FastifyRequest<{
-        Body: Partial<
-            Pick<ProductType, 'image' | 'title' | 'description' | 'price'>
-        >;
         Params: Pick<ProductType, 'id'>;
     }>,
     reply: FastifyReply
@@ -123,12 +120,20 @@ export async function updateProduct(
         }
     }
 
+    let productData: Record<keyof ProductType, string>;
+
+    for await (const part of request.parts()) {
+        if (part.type === 'field') {
+            productData[part.fieldname] = part.value;
+        }
+    }
+
     const {
         image: newImage,
         title: newTitle,
         description: newDescription,
         price: newPrice,
-    } = request.body;
+    } = productData;
 
     const prevProduct = await request.server.prisma.product.findUnique({
         where: { id: id },
@@ -154,7 +159,7 @@ export async function updateProduct(
             image: newImage ?? prevProduct.image,
             title: newTitle ?? prevProduct.title,
             description: newDescription ?? prevProduct.description,
-            price: newPrice ?? prevProduct.price,
+            price: Number(newPrice) ?? prevProduct.price,
         },
     });
 

@@ -125,7 +125,13 @@ export function CreateProductForm() {
                 control={control}
                 rules={{ required: 'Изображение товара обязательно' }}
                 render={({ field, fieldState }) => (
-                    <input type='file' onInput={field.onChange} />
+                    <input
+                        type='file'
+                        accept='.png, .webp'
+                        onChange={(event) =>
+                            field.onChange(event.target.files?.[0])
+                        }
+                    />
                 )}
             />
         </OperationForm>
