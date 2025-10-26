@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useLayoutEffect, useCallback } from 'react';
 
 import { usePathname } from 'next/navigation';
+
+import { useThrottle } from '@/hooks/useThrottle';
 
 import Link from 'next/link';
 
@@ -71,17 +73,24 @@ export default function Navbar() {
         }px, ${controllerRect.top + window.scrollY}px)`;
     }
 
-    useEffect(() => {
-        calculateActiveBlockPosition();
-    }, [activeController]);
+    const trottledCalculateBlock = useThrottle(
+        calculateActiveBlockPosition,
+        100
+    );
 
-    useEffect(() => {
-        window.addEventListener('resize', calculateActiveBlockPosition);
+    useLayoutEffect(() => {
+        trottledCalculateBlock();
+    }, [activeController, trottledCalculateBlock]);
+
+    useLayoutEffect(() => {
+        window.addEventListener('resize', trottledCalculateBlock);
+        window.addEventListener('scroll', trottledCalculateBlock);
 
         return () => {
-            window.removeEventListener('resize', calculateActiveBlockPosition);
+            window.removeEventListener('resize', trottledCalculateBlock);
+            window.removeEventListener('scroll', trottledCalculateBlock);
         };
-    }, []);
+    }, [trottledCalculateBlock]);
 
     return (
         <nav className={navStyles['navbar']}>
