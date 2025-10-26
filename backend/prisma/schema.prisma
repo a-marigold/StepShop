@@ -25,6 +25,12 @@ model Product {
   quantity Int 
 }
 
+model Image {
+  url String @unique
+  id String @unique
+}
+
+
 model User {
   id String @id @unique @default(cuid())
   

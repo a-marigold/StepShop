@@ -2,15 +2,14 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import fs from 'fs';
 import path from 'path';
-import pump from 'pump';
 
 import { uploadImage } from './services/cloudinary.service';
 
 import { getFileExtension } from 'src/utils/getFileExtension';
 import { publicDirPath } from 'src/utils/getPublicDirPath';
-
 import { apiOrigin } from 'src/utils/getApiOrigin';
 
+import type { MultipartFile } from '@fastify/multipart';
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
 
 export async function getAllProducts(
@@ -25,9 +24,27 @@ export async function getAllProducts(
 
 export async function createProduct(
     request: FastifyRequest,
+
     reply: FastifyReply
 ) {
-    const file = await request.file();
+    let file: MultipartFile;
+
+    let productData: Record<keyof ProductType, string>;
+
+    for await (const part of request.parts()) {
+        if (part.type === 'field') {
+            if (
+                part.fieldname === 'product' &&
+                typeof part.value === 'string'
+            ) {
+                productData = JSON.parse(part.value);
+            } else {
+                return reply.code(400).send();
+            }
+        } else {
+            file = part;
+        }
+    }
 
     if (!file) {
         return reply.code(400).send({ message: 'Image is required' });
@@ -42,21 +59,6 @@ export async function createProduct(
         }
     }
 
-    let productData: Record<keyof ProductType, string>;
-
-    for await (const part of request.parts()) {
-        if (part.type === 'field') {
-            if (
-                part.fieldname === 'product' &&
-                typeof part.value === 'string'
-            ) {
-                productData = JSON.parse(part.value);
-            } else {
-                return reply.code(400).send();
-            }
-        }
-    }
-
     const { title, price, quantity, description } = productData;
     if (!title || !price || !quantity || !description) {
         return reply
@@ -65,6 +67,13 @@ export async function createProduct(
     }
 
     const uploadResult = await uploadImage(file);
+
+    await request.server.prisma.image.create({
+        data: {
+            url: uploadResult.secure_url,
+            id: uploadResult.public_id,
+        },
+    });
 
     const createProduct = await request.server.prisma.product.create({
         data: {

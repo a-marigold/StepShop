@@ -16,6 +16,9 @@ export async function uploadImage(
                 else resolve(result);
             }
         );
+        file.file.on('error', (error) => {
+            reject(error);
+        });
 
         file.file.pipe(stream);
     });
