@@ -38,6 +38,7 @@ export async function createProduct(
     }
 
     let productData: Record<keyof ProductType, string>;
+
     for await (const part of request.parts()) {
         if (part.type === 'field') {
             if (
@@ -58,7 +59,7 @@ export async function createProduct(
 
     const createProduct = await request.server.prisma.product.create({
         data: {
-            image: `${apiOrigin}/${imagePath}`,
+            image: `${apiOrigin}/public/${title + price}${fileExtension}`,
 
             title: title,
             description: description,
@@ -136,7 +137,6 @@ export async function updateProduct(
     }
 
     const {
-        image: newImage,
         title: newTitle,
         description: newDescription,
         price: newPrice,
@@ -163,7 +163,9 @@ export async function updateProduct(
             id: id,
         },
         data: {
-            image: newImage ?? prevProduct.image,
+            image: file.file
+                ? `${apiOrigin}/public/${newTitle + newPrice}${fileExtension}`
+                : prevProduct.image,
             title: newTitle ?? prevProduct.title,
             description: newDescription ?? prevProduct.description,
             price: Number(newPrice) ?? prevProduct.price,
