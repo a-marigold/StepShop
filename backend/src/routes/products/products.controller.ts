@@ -3,8 +3,11 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 import fs from 'fs';
 import pump from 'pump';
 
+import type { MultipartFile } from '@fastify/multipart';
+
 import { getFileExtension } from 'src/utils/getFileExtension';
 import { publicDirPath } from 'src/utils/getPublicDirPath';
+
 import { apiOrigin } from 'src/utils/getApiOrigin';
 
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
@@ -20,13 +23,9 @@ export async function getAllProducts(
 }
 
 export async function createProduct(
-    request: FastifyRequest<{
-        Body: ProductType;
-    }>,
+    request: FastifyRequest,
     reply: FastifyReply
 ) {
-    const { image, title, description, price, quantity } = request.body;
-
     const file = await request.file();
 
     let fileExtension: string;
@@ -37,6 +36,14 @@ export async function createProduct(
             return reply.code(400).send({ message: error.message });
         }
     }
+
+    let productData: Record<keyof ProductType, string>;
+    for await (const part of request.parts()) {
+        if (part.type === 'field') {
+            productData[part.fieldname] = part.value;
+        }
+    }
+    const { title, price, quantity, description } = productData;
 
     const imagePath = `${publicDirPath}/${title + price}${fileExtension}`;
 
@@ -49,8 +56,8 @@ export async function createProduct(
             title: title,
             description: description,
 
-            price: price,
-            quantity: quantity,
+            price: Number(price),
+            quantity: Number(quantity),
         },
     });
 

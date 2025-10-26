@@ -38,9 +38,10 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         url: '/products',
 
         schema: {
-            body: ProductSchema.omit({ id: true }).extend({
-                imageFile: file(),
-            }),
+            consumes: ['multipart/form-data'],
+            // body: ProductSchema.omit({ id: true }).extend({
+            //     imageFile: file(),
+            // }),
             response: {
                 201: ApiResponseSchema,
             },
@@ -69,17 +70,18 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         method: 'PATCH',
         url: '/products/:id',
         schema: {
+            consumes: ['multipart/form-data'],
             params: ProductSchema.pick({ id: true }).extend({
                 id: coerce.number(),
             }),
-            body: ProductSchema.pick({
-                title: true,
-                description: true,
-                price: true,
-                quantity: true,
-            })
-                .extend({ imageFile: file() })
-                .partial(),
+            // body: ProductSchema.pick({
+            //     title: true,
+            //     description: true,
+            //     price: true,
+            //     quantity: true,
+            // })
+            //     .extend({ imageFile: file() })
+            //     .partial(),
             response: {
                 201: ApiResponseSchema,
             },
