@@ -30,6 +30,11 @@ export async function createProduct(
     const file = await request.file();
 
     const fileExtension = path.extname(file.filename);
+    if (fileExtension !== '.png' && fileExtension !== '.webp') {
+        return reply
+            .code(400)
+            .send({ message: "Only '.png' and '.webp' images supported" });
+    }
     const imagePath = `${publicDirPath}/${title + price}${fileExtension}`;
 
     await pump(file.file, fs.createWriteStream(imagePath));
@@ -46,7 +51,7 @@ export async function createProduct(
         },
     });
 
-    reply.code(201).send({
+    return reply.code(201).send({
         statusCode: 201,
         message: `Product has been created: Title - ${createProduct.title}; Id - ${createProduct.id}`,
     });
@@ -76,6 +81,10 @@ export async function deleteProduct(
             id: id,
         },
     });
+
+    const imagePath = new URL(deleteProduct.image).pathname;
+
+    await fs.promises.unlink(imagePath);
 
     reply.code(200).send({
         statusCode: 200,
