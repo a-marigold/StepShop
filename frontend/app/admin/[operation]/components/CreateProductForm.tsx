@@ -63,8 +63,8 @@ export function CreateProductForm() {
 
         const newProduct: ProductType = {
             ...productData,
-            price: Number(data.price),
-            quantity: Number(data.quantity),
+            price: Number(productData.price),
+            quantity: Number(productData.quantity),
         };
 
         try {

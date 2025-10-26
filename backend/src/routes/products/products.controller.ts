@@ -40,7 +40,14 @@ export async function createProduct(
     let productData: Record<keyof ProductType, string>;
     for await (const part of request.parts()) {
         if (part.type === 'field') {
-            productData[part.fieldname] = part.value;
+            if (
+                part.fieldname === 'product' &&
+                typeof part.value === 'string'
+            ) {
+                productData = JSON.parse(part.value);
+            } else {
+                return reply.code(400).send();
+            }
         }
     }
     const { title, price, quantity, description } = productData;

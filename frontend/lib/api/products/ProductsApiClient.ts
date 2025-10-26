@@ -1,5 +1,7 @@
 import ApiError from '@/utils/errors/ApiError';
+
 import type { ApiResponseType } from '@shared/types/ApiResponseType';
+
 import { apiOrigin } from '@/utils/getApiOrigin';
 import { websiteOrigin } from '@/utils/getWebsiteOrigin';
 
@@ -11,6 +13,7 @@ export async function serverGetProducts() {
             'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
         cache: 'force-cache',
+
         next: {
             tags: ['products'],
         },
@@ -45,6 +48,10 @@ export async function postProduct(newProduct: ProductType, imageFile: File) {
     formData.append('imageFile', imageFile);
 
     formData.append('product', JSON.stringify(newProduct));
+
+    for (const [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
 
     const response = await fetch(`${apiOrigin}/products`, {
         method: 'POST',
