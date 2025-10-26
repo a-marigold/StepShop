@@ -1,6 +1,7 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import fs from 'fs';
+import path from 'path';
 import pump from 'pump';
 
 import type { MultipartFile } from '@fastify/multipart';
@@ -53,6 +54,10 @@ export async function createProduct(
     }
     const { title, price, quantity, description } = productData;
 
+    console.log(productData);
+
+    // const
+
     const imagePath = `${publicDirPath}/${title + price}${fileExtension}`;
 
     await pump(file.file, fs.createWriteStream(imagePath));
@@ -100,7 +105,9 @@ export async function deleteProduct(
         },
     });
 
-    const imagePath = new URL(deleteProduct.image).pathname;
+    // ENOENT: no such file or directory, unlink '//opt/render/project/src/backend/public/title100.webp'
+
+    const imagePath = path.join(process.cwd(), deleteProduct.image);
     await fs.promises.unlink(imagePath);
 
     reply.code(200).send({
