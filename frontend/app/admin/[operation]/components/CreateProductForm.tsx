@@ -34,13 +34,6 @@ const createInputsList: OperationInput[] = [
     },
 
     {
-        name: 'Изображение товара',
-        htmlId: 'image',
-        propertyName: 'image',
-        isRequired: true,
-    },
-
-    {
         name: 'Цена товара',
         htmlId: 'price',
 

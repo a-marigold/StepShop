@@ -1,5 +1,7 @@
 'use client';
 
+import { Controller, useForm } from 'react-hook-form';
+
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
@@ -12,6 +14,9 @@ import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
 import OperationForm from './OperationForm';
+
+import PrimaryInput from '@/UI/PrimaryInput';
+import operationStyles from '../Operation.module.scss';
 
 const updateInputsList: OperationInput[] = [
     {
@@ -36,13 +41,6 @@ const updateInputsList: OperationInput[] = [
     },
 
     {
-        name: 'Новое изображение товара',
-        htmlId: 'new-product-image-input',
-        propertyName: 'image',
-        isRequired: true,
-    },
-
-    {
         name: 'Новая цена товара',
         htmlId: 'new-product-price-input',
 
@@ -54,6 +52,8 @@ const updateInputsList: OperationInput[] = [
 ];
 
 export function UpdateProductForm() {
+    const { control, handleSubmit } = useForm<ProductType>();
+
     const dispatch = useDispatch<AppDispatch>();
 
     async function submit(data: ProductType) {
@@ -84,10 +84,33 @@ export function UpdateProductForm() {
     }
 
     return (
-        <OperationForm
-            title='Обновить товар'
-            inputsList={updateInputsList}
-            submitAction={submit}
-        ></OperationForm>
+        <OperationForm title='Обновить товар' submitAction={submit}>
+            {updateInputsList.map((input, index) => (
+                <Controller
+                    key={index}
+                    name={input.propertyName}
+                    control={control}
+                    rules={
+                        input.isRequired
+                            ? {
+                                  required: input.errorMessage
+                                      ? input.errorMessage
+                                      : `${input.name} обязательно`,
+                              }
+                            : undefined
+                    }
+                    render={({ field, fieldState }) => (
+                        <PrimaryInput
+                            htmlId={input.htmlId}
+                            title={input.name}
+                            className={operationStyles['operation-input']}
+                            inputAction={field.onChange}
+                            isValid={!fieldState.error}
+                            errorLabelTitle={fieldState.error?.message}
+                        />
+                    )}
+                />
+            ))}
+        </OperationForm>
     );
 }

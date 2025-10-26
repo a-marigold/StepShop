@@ -76,7 +76,7 @@ export async function deleteProduct(
     if (!product) {
         throw reply
             .code(404)
-            .send({ statusCode: 404, message: 'Product is not found' });
+            .send({ statusCode: 404, message: 'Product was not found' });
     }
 
     const deleteProduct = await request.server.prisma.product.delete({
