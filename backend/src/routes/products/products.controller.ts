@@ -107,7 +107,8 @@ export async function deleteProduct(
 
     // ENOENT: no such file or directory, unlink '//opt/render/project/src/backend/public/title100.webp'
 
-    const imagePath = path.join(process.cwd(), deleteProduct.image);
+    const imageUrl = new URL(deleteProduct.image);
+    const imagePath = path.join(process.cwd(), imageUrl.pathname);
     await fs.promises.unlink(imagePath);
 
     reply.code(200).send({
@@ -138,8 +139,10 @@ export async function updateProduct(
     let productData: Record<keyof ProductType, string>;
 
     for await (const part of request.parts()) {
-        if (part.type === 'field') {
-            productData[part.fieldname] = part.value;
+        if (part.type === 'field' && typeof part.value === 'string') {
+            productData = JSON.parse(part.value);
+        } else {
+            return reply.code(400).send();
         }
     }
 
