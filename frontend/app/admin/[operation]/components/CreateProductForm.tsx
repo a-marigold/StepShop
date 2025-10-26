@@ -1,5 +1,7 @@
 'use client';
 
+import { Controller, useForm } from 'react-hook-form';
+
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
@@ -12,6 +14,9 @@ import type { ProductType } from '@shared/types/ProductTypes';
 import type { OperationInput } from './OperationInput';
 
 import OperationForm from './OperationForm';
+
+import operationStyles from '../Operation.module.scss';
+import PrimaryInput from '@/UI/PrimaryInput';
 
 const createInputsList: OperationInput[] = [
     {
@@ -54,6 +59,8 @@ const createInputsList: OperationInput[] = [
 ];
 
 export function CreateProductForm() {
+    const { control, handleSubmit } = useForm<ProductType>();
+
     const dispatch = useDispatch<AppDispatch>();
 
     async function submit(data: ProductType) {
@@ -87,8 +94,41 @@ export function CreateProductForm() {
     return (
         <OperationForm
             title='Создать товар'
-            inputsList={createInputsList}
-            submitAction={submit}
-        ></OperationForm>
+            submitAction={handleSubmit(submit)}
+        >
+            {createInputsList.map((input, index) => (
+                <Controller
+                    key={index}
+                    name={input.propertyName}
+                    control={control}
+                    rules={
+                        input.isRequired
+                            ? {
+                                  required: input.errorMessage
+                                      ? input.errorMessage
+                                      : `${input.name} обязательно`,
+                              }
+                            : undefined
+                    }
+                    render={({ field, fieldState }) => (
+                        <PrimaryInput
+                            htmlId={input.htmlId}
+                            title={input.name}
+                            className={operationStyles['operation-input']}
+                            inputAction={field.onChange}
+                            isValid={!fieldState.error}
+                            errorLabelTitle={fieldState.error?.message}
+                        />
+                    )}
+                />
+            ))}
+
+            <Controller
+                name='image'
+                control={control}
+                rules={{ required: 'Изображение товара обязательно' }}
+                render={({ field, fieldState }) => <input type='file' />}
+            />
+        </OperationForm>
     );
 }
