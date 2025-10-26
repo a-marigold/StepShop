@@ -1,6 +1,6 @@
 import type { ProvideredAppInstance } from 'src/app';
 
-import { coerce, array, string } from 'zod';
+import { object, string, array, coerce } from 'zod';
 
 import {
     getAllProducts,
@@ -8,7 +8,10 @@ import {
     deleteProduct,
     updateProduct,
 } from './controllers/products.controller';
-import { getAllCategories } from './controllers/categories.controller';
+import {
+    getAllCategories,
+    createCategory,
+} from './controllers/categories.controller';
 
 import { checkProductsApiKey } from './products.middlewares';
 
@@ -18,7 +21,8 @@ import {
 } from '@step-shop/shared/types/ProductTypes';
 import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
-const categoryListSchema = array(string());
+const categorySchema = object({ id: string(), name: string() });
+const categoryListSchema = array(categorySchema); // TODO: Add external schema
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
     app.addHook('preHandler', checkProductsApiKey);
@@ -96,7 +100,16 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'GET',
         url: '/categories',
-        schema: { body: categoryListSchema },
+        schema: { response: { 200: categoryListSchema } },
         handler: getAllCategories,
+    });
+
+    app.route({
+        method: 'POST',
+        url: '/categories',
+        schema: {
+            body: categorySchema,
+        },
+        handler: createCategory,
     });
 }
