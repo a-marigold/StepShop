@@ -39,14 +39,19 @@ export async function clientGetProducts() {
     return data;
 }
 
-export async function postProduct(newProduct: ProductType) {
+export async function postProduct(newProduct: ProductType, imageFile: File) {
+    const formData = new FormData();
+
+    formData.append('imageFile', imageFile);
+
+    formData.append('product', JSON.stringify(newProduct));
+
     const response = await fetch(`${apiOrigin}/products`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
-        body: JSON.stringify(newProduct),
+        body: formData,
     });
 
     const postProduct: ApiResponseType = await response.json();
@@ -87,14 +92,18 @@ export async function deleteProduct(id: Pick<ProductType, 'id'>['id']) {
     return deleteProduct;
 }
 
-export async function patchProduct(newProduct: ProductType) {
+export async function patchProduct(newProduct: ProductType, imageFile: File) {
+    const formData = new FormData();
+
+    formData.append('imageFile', imageFile);
+    formData.append('product', JSON.stringify(newProduct));
+
     const response = await fetch(`${apiOrigin}/products/${newProduct.id}`, {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json',
             'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
-        body: JSON.stringify(newProduct),
+        body: formData,
     });
     const updateProduct: ApiResponseType = await response.json();
 

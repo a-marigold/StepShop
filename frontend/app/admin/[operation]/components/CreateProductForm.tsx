@@ -52,19 +52,23 @@ const createInputsList: OperationInput[] = [
 ];
 
 export function CreateProductForm() {
-    const { control, handleSubmit } = useForm<ProductType>();
+    const { control, handleSubmit } = useForm<
+        ProductType & { imageFile: File }
+    >();
 
     const dispatch = useDispatch<AppDispatch>();
 
-    async function submit(data: ProductType) {
+    async function submit(data: ProductType & { imageFile: File }) {
+        const { imageFile, ...productData } = data;
+
         const newProduct: ProductType = {
-            ...data,
+            ...productData,
             price: Number(data.price),
             quantity: Number(data.quantity),
         };
 
         try {
-            const postProductData = await postProduct(newProduct);
+            const postProductData = await postProduct(newProduct, imageFile);
 
             addSuccessNotice(
                 `Changes saved`,
@@ -117,10 +121,12 @@ export function CreateProductForm() {
             ))}
 
             <Controller
-                name='image'
+                name='imageFile'
                 control={control}
                 rules={{ required: 'Изображение товара обязательно' }}
-                render={({ field, fieldState }) => <input type='file' />}
+                render={({ field, fieldState }) => (
+                    <input type='file' onInput={field.onChange} />
+                )}
             />
         </OperationForm>
     );

@@ -52,18 +52,22 @@ const updateInputsList: OperationInput[] = [
 ];
 
 export function UpdateProductForm() {
-    const { control, handleSubmit } = useForm<ProductType>();
+    const { control, handleSubmit } = useForm<
+        ProductType & { imageFile: File }
+    >();
 
     const dispatch = useDispatch<AppDispatch>();
 
-    async function submit(data: ProductType) {
+    async function submit(data: ProductType & { imageFile: File }) {
+        const { imageFile, ...productData } = data;
+
         const newProduct: ProductType = {
-            ...data,
+            ...productData,
             price: Number(data.price),
         };
 
         try {
-            const updateProductData = await patchProduct(newProduct);
+            const updateProductData = await patchProduct(newProduct, imageFile);
 
             addSuccessNotice(
                 'Changes saved',

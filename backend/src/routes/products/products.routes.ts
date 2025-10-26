@@ -39,7 +39,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
 
         schema: {
             body: ProductSchema.omit({ id: true }).extend({
-                image: file(),
+                imageFile: file(),
             }),
             response: {
                 201: ApiResponseSchema,
@@ -78,7 +78,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
                 price: true,
                 quantity: true,
             })
-                .extend({ image: file() })
+                .extend({ imageFile: file() })
                 .partial(),
             response: {
                 201: ApiResponseSchema,
