@@ -1,6 +1,6 @@
 import type { ProvideredAppInstance } from 'src/app';
 
-import z from 'zod';
+import { coerce, file } from 'zod';
 
 import {
     getAllProducts,
@@ -38,7 +38,9 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         url: '/products',
 
         schema: {
-            body: ProductSchema.omit({ id: true }),
+            body: ProductSchema.omit({ id: true }).extend({
+                file: file(),
+            }),
             response: {
                 201: ApiResponseSchema,
             },
@@ -53,7 +55,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
 
         schema: {
             params: ProductSchema.pick({ id: true }).extend({
-                id: z.coerce.number(),
+                id: coerce.number(),
             }),
             response: {
                 200: ApiResponseSchema,
@@ -68,7 +70,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         url: '/products/:id',
         schema: {
             params: ProductSchema.pick({ id: true }).extend({
-                id: z.coerce.number(),
+                id: coerce.number(),
             }),
             response: {
                 201: ApiResponseSchema,

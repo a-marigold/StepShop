@@ -1,5 +1,12 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
+import fs from 'fs';
+import path from 'path';
+import pump from 'pump';
+
+import { publicDirPath } from 'src/utils/getPublicDirPath';
+import { apiOrigin } from 'src/utils/getApiOrigin';
+
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
 
 export async function getAllProducts(
@@ -20,9 +27,16 @@ export async function createProduct(
 ) {
     const { image, title, description, price, quantity } = request.body;
 
+    const file = await request.file();
+
+    const fileExtension = path.extname(file.filename);
+    const imagePath = `${publicDirPath}/${title + price}${fileExtension}`;
+
+    await pump(file.file, fs.createWriteStream(imagePath));
+
     const createProduct = await request.server.prisma.product.create({
         data: {
-            image: image,
+            image: `${apiOrigin}/${imagePath}`,
 
             title: title,
             description: description,
