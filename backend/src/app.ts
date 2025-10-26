@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { fastify } from 'fastify';
 
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import {
@@ -7,12 +7,19 @@ import {
 } from 'fastify-type-provider-zod';
 
 import fjwt from '@fastify/jwt';
+
 import cors from '@fastify/cors';
 import { fastifyCookie } from '@fastify/cookie';
+
+import fastifyStatic from '@fastify/static';
+
+import fastifyMultipart from '@fastify/multipart';
 
 import prisma from './plugins/prisma';
 import redis from './plugins/redis';
 import auth from './plugins/auth';
+
+import { publicDirPath } from './utils/getPublicDirPath';
 
 import { routes } from './routes';
 const app = Fastify({
@@ -38,10 +45,15 @@ export async function buildApp() {
         cookie: { cookieName: 'token', signed: false },
     });
 
+    app.register(fastifyStatic, {
+        root: publicDirPath,
+        prefix: '/public/',
+    });
+    app.register(fastifyMultipart);
+
     app.register(prisma);
     app.register(redis);
     app.register(auth);
-
     app.register(routes);
 
     return app;
