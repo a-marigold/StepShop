@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import pump from 'pump';
 
-import type { MultipartFile } from '@fastify/multipart';
+import { uploadImage } from './services/cloudinary.service';
 
 import { getFileExtension } from 'src/utils/getFileExtension';
 import { publicDirPath } from 'src/utils/getPublicDirPath';
@@ -29,6 +29,10 @@ export async function createProduct(
 ) {
     const file = await request.file();
 
+    if (!file) {
+        return reply.code(400).send({ message: 'Image is required' });
+    }
+
     let fileExtension: string;
     try {
         fileExtension = getFileExtension(file.filename);
@@ -52,24 +56,25 @@ export async function createProduct(
             }
         }
     }
+
     const { title, price, quantity, description } = productData;
+    if (!title || !price || !quantity || !description) {
+        return reply
+            .code(400)
+            .send({ message: 'All product`s properties are required' });
+    }
 
-    console.log(productData);
-
-    // const
-
-    const imagePath = `${publicDirPath}/${title + price}${fileExtension}`;
-
-    await pump(file.file, fs.createWriteStream(imagePath));
+    const uploadResult = await uploadImage(file);
 
     const createProduct = await request.server.prisma.product.create({
         data: {
-            image: `${apiOrigin}/public/${title + price}${fileExtension}`,
+            image: uploadResult.secure_url,
 
             title: title,
             description: description,
 
             price: Number(price),
+
             quantity: Number(quantity),
         },
     });
@@ -104,8 +109,6 @@ export async function deleteProduct(
             id: id,
         },
     });
-
-    // ENOENT: no such file or directory, unlink '//opt/render/project/src/backend/public/title100.webp'
 
     const imageUrl = new URL(deleteProduct.image);
     const imagePath = path.join(process.cwd(), imageUrl.pathname);
@@ -165,8 +168,6 @@ export async function updateProduct(
     const newImagePath = `${publicDirPath}/${
         newTitle + newPrice
     }${fileExtension}`;
-
-    await pump(file.file, fs.createWriteStream(newImagePath));
 
     const updateProduct = await request.server.prisma.product.update({
         where: {
