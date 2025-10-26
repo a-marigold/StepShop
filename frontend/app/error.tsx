@@ -17,7 +17,9 @@ export default function Error({ error }: { error: Error }) {
                 <div className={errorStyles['description-box']}>
                     <div className={errorStyles['text-block']}>
                         <h1 className={errorStyles['title']}>
-                            {error.message}
+                            {error.message === 'Unauthorized'
+                                ? 'Доступ запрещён'
+                                : error.message}
                         </h1>
 
                         <p className={errorStyles['hint']}>
