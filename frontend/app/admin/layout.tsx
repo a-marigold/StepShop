@@ -12,7 +12,6 @@ import Navbar from './components/Navbar';
 
 import clsx from 'clsx';
 import adminStyles from './Admin.module.scss';
-import { m } from 'framer-motion';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState<boolean>();

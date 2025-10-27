@@ -1,29 +1,38 @@
 import type { Metadata } from 'next';
 
+import type { ReactNode } from 'react';
+
 import {
     CreateProductForm,
     DeleteProductForm,
     UpdateProductForm,
+    //
+    CreateCategoryForm,
+    DeleteCategoryForm,
 } from './components';
+
+import type { OperationType } from '../adminOperations';
 
 import operationStyles from './Operation.module.scss';
 
-type Operation = 'create' | 'delete' | 'update' | never;
-
 interface OperationPageProps {
     params: {
-        operation: Operation;
+        operation: OperationType;
     };
 }
 
 export async function generateMetadata({
     params,
 }: OperationPageProps): Promise<Metadata> {
-    const pageTitles: Record<Operation, string> = {
-        create: 'Добавление товара',
-        delete: 'Удаление товара',
-        update: 'Обновление товара',
+    const pageTitles: Record<OperationType, string> = {
+        createProduct: 'Создание товара',
+        deleteProduct: 'Удаление товара',
+        updateProduct: 'Обновление товара',
+
+        createCategory: 'Создание категории',
+        deleteCategory: 'Удаление категории',
     };
+
     const operation = await params.operation;
 
     return {
@@ -34,16 +43,22 @@ export async function generateMetadata({
     };
 }
 
+const operationComponentList: Record<OperationType, ReactNode> = {
+    createProduct: <CreateProductForm />,
+    deleteProduct: <DeleteProductForm />,
+
+    updateProduct: <UpdateProductForm />,
+
+    createCategory: <CreateCategoryForm />,
+    deleteCategory: <DeleteCategoryForm />,
+};
+
 export default async function OperationPage({ params }: OperationPageProps) {
     const operation = await params.operation;
 
     return (
         <main className={operationStyles['operation-page']}>
-            {operation === 'create' && <CreateProductForm />}
-
-            {operation === 'delete' && <DeleteProductForm />}
-
-            {operation === 'update' && <UpdateProductForm />}
+            {operationComponentList[operation]}
         </main>
     );
 }

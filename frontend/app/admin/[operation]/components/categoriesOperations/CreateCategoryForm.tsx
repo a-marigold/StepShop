@@ -11,11 +11,11 @@ import { postProduct } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@shared/types/ProductTypes';
-import type { OperationInput } from './OperationInput';
+import type { OperationInput } from '../OperationInput';
 
-import OperationForm from './OperationForm';
+import OperationForm from '../OperationForm';
 
-import operationStyles from '../Operation.module.scss';
+import operationStyles from '../../Operation.module.scss';
 import PrimaryInput from '@/UI/PrimaryInput';
 
 const createInputsList: OperationInput[] = [
@@ -51,7 +51,7 @@ const createInputsList: OperationInput[] = [
     },
 ];
 
-export function CreateProductForm() {
+export function CreateCategoryForm() {
     const { control, handleSubmit } = useForm<
         ProductType & { imageFile: File }
     >();

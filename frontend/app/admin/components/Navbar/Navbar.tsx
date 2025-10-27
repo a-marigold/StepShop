@@ -6,71 +6,56 @@ import { usePathname } from 'next/navigation';
 
 import { useThrottle } from '@/hooks/useThrottle';
 
+import { operationsList } from '../../adminOperations';
+import type { OperationType } from '../../adminOperations';
+
 import Link from 'next/link';
 
 import clsx from 'clsx';
 import navStyles from './Navbar.module.scss';
 
-type Controller = 'create' | 'delete' | 'update';
-
-const controllersList: {
-    title: string;
-
-    path: string;
-
-    type: Controller;
-}[] = [
-    {
-        title: 'Создать товар',
-        path: '/admin/create',
-        type: 'create',
-    },
-
-    { title: 'Удалить товар', path: '/admin/delete', type: 'delete' },
-
-    {
-        title: 'Обновить товар',
-        path: '/admin/update',
-        type: 'update',
-    },
-];
-
 export default function Navbar() {
     const pathname = usePathname();
 
-    function getInitialController(): Controller | undefined {
-        const splitPathName = pathname.split('/') as Controller[];
+    function getInitialOperation(): OperationType | undefined {
+        const splitPathName = pathname.split('/') as OperationType[];
 
-        const _controllers: Controller[] = ['create', 'delete', 'update'];
-        const initialController = _controllers.find((controller) =>
+        const _operations: OperationType[] = [
+            'createProduct',
+            'deleteProduct',
+            'updateProduct',
+            'createCategory',
+            'deleteCategory',
+        ];
+        const initialOperation = _operations.find((controller) =>
             splitPathName.includes(controller)
         );
 
-        return initialController;
+        return initialOperation;
     }
 
-    const [activeController, setActiveController] = useState<
-        Controller | undefined
-    >(getInitialController);
+    const [activeOperation, setActiveOperation] = useState<
+        OperationType | undefined
+    >(getInitialOperation);
 
     const controllersRef = useRef<
-        Partial<Record<Controller, HTMLAnchorElement | null>>
+        Partial<Record<OperationType, HTMLAnchorElement | null>>
     >({});
 
     const activeBlockRef = useRef<HTMLDivElement>(null);
 
     function calculateActiveBlockPosition() {
-        if (!controllersRef.current || !activeController) return;
-        const currentControllerRef = controllersRef.current[activeController];
+        if (!controllersRef.current || !activeOperation) return;
+        const currentOperationRef = controllersRef.current[activeOperation];
 
-        if (!activeBlockRef.current || !currentControllerRef) return;
-        const controllerRect = currentControllerRef.getBoundingClientRect();
+        if (!activeBlockRef.current || !currentOperationRef) return;
+        const operationRect = currentOperationRef.getBoundingClientRect();
 
-        activeBlockRef.current.style.width = `${controllerRect.width}px`;
-        activeBlockRef.current.style.height = `${controllerRect.height}px`;
+        activeBlockRef.current.style.width = `${operationRect.width}px`;
+        activeBlockRef.current.style.height = `${operationRect.height}px`;
         activeBlockRef.current.style.transform = `translate(${
-            controllerRect.left
-        }px, ${controllerRect.top + window.scrollY}px)`;
+            operationRect.left
+        }px, ${operationRect.top + window.scrollY}px)`;
     }
 
     const trottledCalculateBlock = useThrottle(
@@ -80,7 +65,7 @@ export default function Navbar() {
 
     useLayoutEffect(() => {
         trottledCalculateBlock();
-    }, [activeController, trottledCalculateBlock]);
+    }, [activeOperation, trottledCalculateBlock]);
 
     useLayoutEffect(() => {
         window.addEventListener('resize', trottledCalculateBlock);
@@ -94,22 +79,22 @@ export default function Navbar() {
 
     return (
         <nav className={navStyles['navbar']}>
-            {controllersList.map((controller, index) => (
+            {operationsList.map((operation, index) => (
                 <Link
                     key={index}
-                    href={controller.path}
+                    href={operation.path}
                     className={clsx(
-                        navStyles['controller'],
-                        controller.path === pathname &&
-                            navStyles['active-controller']
+                        navStyles['operation'],
+                        operation.path === pathname &&
+                            navStyles['active-operation']
                     )}
                     ref={(element) => {
-                        controllersRef.current[controller.type] = element;
+                        controllersRef.current[operation.type] = element;
                     }}
                     prefetch
-                    onClick={() => setActiveController(controller.type)}
+                    onClick={() => setActiveOperation(operation.type)}
                 >
-                    {controller.title}
+                    {operation.title}
                 </Link>
             ))}
             <div ref={activeBlockRef} className={navStyles['active-block']} />

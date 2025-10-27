@@ -7,39 +7,39 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { deleteProduct } from '@/lib/api/products';
+import { deleteCategory } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
-import type { ProductType } from '@shared/types/ProductTypes';
-import type { OperationInput } from './OperationInput';
+import type { CategoryType } from '@shared/types/ProductTypes';
+import type { CategoryOperationInput } from '../OperationInput';
 
-import OperationForm from './OperationForm';
+import OperationForm from '../OperationForm';
 
 import PrimaryInput from '@/UI/PrimaryInput';
-import operationStyles from '../Operation.module.scss';
+import operationStyles from '../../Operation.module.scss';
 
-const deleteInputsList: OperationInput[] = [
+const deleteInputsList: CategoryOperationInput[] = [
     {
-        name: 'ID товара',
+        name: 'ID категории',
         propertyName: 'id',
-        htmlId: 'product-id-input',
+        htmlId: 'category-id-input',
 
         isRequired: true,
     },
 ];
 
-export function DeleteProductForm() {
-    const { control, handleSubmit } = useForm<ProductType>();
+export function DeleteCategoryForm() {
+    const { control, handleSubmit } = useForm<CategoryType>();
 
     const dispatch = useDispatch<AppDispatch>();
 
-    async function submit(data: Pick<ProductType, 'id'>) {
+    async function submit(data: Pick<CategoryType, 'id'>) {
         try {
-            const deleteProductData = await deleteProduct(data.id);
+            const deleteProductData = await deleteCategory(data.id);
 
             addSuccessNotice(
                 `Product has been deleted`,
-                deleteProductData.message,
+                `Category '${deleteProductData.name}' was deleted`,
                 10,
                 dispatch
             );
@@ -63,7 +63,7 @@ export function DeleteProductForm() {
             {deleteInputsList.map((input, index) => (
                 <Controller
                     key={index}
-                    name={input.propertyName}
+                    name='id'
                     control={control}
                     rules={
                         input.isRequired

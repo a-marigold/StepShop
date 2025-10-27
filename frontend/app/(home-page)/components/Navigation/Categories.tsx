@@ -101,7 +101,7 @@ export default function Categories() {
                 ))
             ) : (
                 <div className={navStyles['loading-block']}>
-                    <LoadingSpinner size='20px' borderWidth='2px' />
+                    <LoadingSpinner size='20px' borderWidth='3px' />
                 </div>
             )}
         </nav>

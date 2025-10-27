@@ -7,71 +7,39 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { patchProduct } from '@/lib/api/products';
+import { deleteProduct } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@shared/types/ProductTypes';
-import type { OperationInput } from './OperationInput';
+import type { OperationInput } from '../OperationInput';
 
-import OperationForm from './OperationForm';
+import OperationForm from '../OperationForm';
 
 import PrimaryInput from '@/UI/PrimaryInput';
-import operationStyles from '../Operation.module.scss';
+import operationStyles from '../../Operation.module.scss';
 
-const updateInputsList: OperationInput[] = [
+const deleteInputsList: OperationInput[] = [
     {
         name: 'ID товара',
         propertyName: 'id',
-        htmlId: 'new-product-id-input',
-        isRequired: true,
-    },
+        htmlId: 'product-id-input',
 
-    {
-        name: 'Новое название товара',
-        htmlId: 'new-product-title-input',
-        propertyName: 'title',
-        isRequired: true,
-    },
-
-    {
-        name: 'Новое описание товара',
-        htmlId: 'new-product-description-input',
-        propertyName: 'description',
-        isRequired: false,
-    },
-
-    {
-        name: 'Новая цена товара',
-        htmlId: 'new-product-price-input',
-
-        propertyName: 'price',
-
-        errorMessage: 'Цена товара обязательна',
         isRequired: true,
     },
 ];
 
-export function UpdateProductForm() {
-    const { control, handleSubmit } = useForm<
-        ProductType & { imageFile: File }
-    >();
+export function DeleteProductForm() {
+    const { control, handleSubmit } = useForm<ProductType>();
 
     const dispatch = useDispatch<AppDispatch>();
 
-    async function submit(data: ProductType & { imageFile: File }) {
-        const { imageFile, ...productData } = data;
-
-        const newProduct: ProductType = {
-            ...productData,
-            price: Number(data.price),
-        };
-
+    async function submit(data: Pick<ProductType, 'id'>) {
         try {
-            const updateProductData = await patchProduct(newProduct, imageFile);
+            const deleteProductData = await deleteProduct(data.id);
 
             addSuccessNotice(
-                'Changes saved',
-                updateProductData.message,
+                `Product has been deleted`,
+                deleteProductData.message,
                 10,
                 dispatch
             );
@@ -88,8 +56,11 @@ export function UpdateProductForm() {
     }
 
     return (
-        <OperationForm title='Обновить товар' submitAction={submit}>
-            {updateInputsList.map((input, index) => (
+        <OperationForm
+            title='Удалить товар'
+            submitAction={handleSubmit(submit)}
+        >
+            {deleteInputsList.map((input, index) => (
                 <Controller
                     key={index}
                     name={input.propertyName}

@@ -1,5 +1,6 @@
-export { CreateProductForm } from './CreateProductForm';
+export { CreateProductForm } from './productOperations/CreateProductForm';
+export { DeleteProductForm } from './productOperations/DeleteProductForm';
+export { UpdateProductForm } from './productOperations/UpdateProductForm';
 
-export { DeleteProductForm } from './DeleteProductForm';
-
-export { UpdateProductForm } from './UpdateProductForm';
+export { CreateCategoryForm } from './categoriesOperations/CreateCategoryForm';
+export { DeleteCategoryForm } from './categoriesOperations/DeleteCategoryForm';
