@@ -1,9 +1,12 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
-import { uploadImage, destroyImage } from '../services/cloudinary.service';
+import {
+    uploadImage,
+    destroyImage,
+    updateImage,
+} from '../services/cloudinary.service';
 
 import { getFileExtension } from 'src/utils/getFileExtension';
-import { publicDirPath } from 'src/utils/getPublicDirPath';
 import { apiOrigin } from 'src/utils/getApiOrigin';
 
 import type { MultipartFile } from '@fastify/multipart';
@@ -120,7 +123,7 @@ export async function deleteProduct(
         where: { url: productImage },
     });
 
-    destroyImage(deleteImage.id);
+    await destroyImage(deleteImage.id);
 
     reply.code(200).send({
         statusCode: 200,
@@ -170,21 +173,29 @@ export async function updateProduct(
     if (!prevProduct) {
         return reply
             .code(404)
+
             .send({ message: `Product with {id: ${id}} is not found` });
     }
+    const { id: prevImageId } = await request.server.prisma.image.findUnique({
+        where: { url: prevProduct.image },
+    });
 
-    const newImagePath = `${publicDirPath}/${
-        newTitle + newPrice
-    }${fileExtension}`;
+    const uploadNewImage = await updateImage(prevImageId, file);
+
+    const updateImageRecord = await request.server.prisma.image.update({
+        where: { url: prevProduct.image },
+        data: {
+            url: uploadNewImage.secure_url,
+            id: uploadNewImage.public_id,
+        },
+    });
 
     const updateProduct = await request.server.prisma.product.update({
         where: {
             id: id,
         },
         data: {
-            image: file.file
-                ? `${apiOrigin}/public/${newTitle + newPrice}${fileExtension}`
-                : prevProduct.image,
+            image: updateImageRecord.url,
             title: newTitle ?? prevProduct.title,
             description: newDescription ?? prevProduct.description,
             price: Number(newPrice) ?? prevProduct.price,
