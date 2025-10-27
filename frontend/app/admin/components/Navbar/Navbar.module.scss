@@ -13,8 +13,10 @@
     background-color: var(--foreground-color);
     border-right: 1px var(--border-color) solid;
     border-bottom-left-radius: var(--page-border-radius);
+    padding: var(--navbar-padding);
+    box-sizing: border-box;
 
-    padding: 1.25em;
+    --navbar-padding: 1.25em;
 }
 .resizer {
     position: absolute;
@@ -59,6 +61,8 @@
 
     background-color: var(--main-bg-color);
     border-radius: 10px;
+
+    width: calc(100% - (var(--navbar-padding) * 2));
 
     transition: transform 0.16s ease, width 0.1s ease;
 }

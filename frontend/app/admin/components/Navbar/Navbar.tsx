@@ -57,7 +57,7 @@ export default function Navbar() {
         const operationRect = currentOperationRef.getBoundingClientRect();
         const navbarRect = navbarRef.current.getBoundingClientRect();
 
-        activeBlockRef.current.style.width = `${operationRect.width}px`;
+        // activeBlockRef.current.style.width = `${operationRect.width}px`;
         activeBlockRef.current.style.height = `${operationRect.height}px`;
         activeBlockRef.current.style.transform = `translate(${
             operationRect.left - navbarRect.left
