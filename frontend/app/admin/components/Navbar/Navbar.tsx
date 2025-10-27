@@ -48,14 +48,20 @@ export default function Navbar() {
         if (!controllersRef.current || !activeOperation) return;
         const currentOperationRef = controllersRef.current[activeOperation];
 
-        if (!activeBlockRef.current || !currentOperationRef) return;
+        if (
+            !activeBlockRef.current ||
+            !currentOperationRef ||
+            !navbarRef.current
+        )
+            return;
         const operationRect = currentOperationRef.getBoundingClientRect();
+        const navbarRect = navbarRef.current.getBoundingClientRect();
 
         activeBlockRef.current.style.width = `${operationRect.width}px`;
         activeBlockRef.current.style.height = `${operationRect.height}px`;
         activeBlockRef.current.style.transform = `translate(${
-            operationRect.left
-        }px, ${operationRect.top + window.scrollY}px)`;
+            operationRect.left - navbarRect.left
+        }px, ${operationRect.top - navbarRect.top}px)`;
     }
 
     const trottledCalculateBlock = useThrottle(
@@ -67,13 +73,20 @@ export default function Navbar() {
         trottledCalculateBlock();
     }, [activeOperation, trottledCalculateBlock]);
 
+    const navbarResizeObserver = new ResizeObserver(trottledCalculateBlock);
+
     useEffect(() => {
         window.addEventListener('resize', trottledCalculateBlock);
         window.addEventListener('scroll', trottledCalculateBlock);
 
+        if (navbarRef.current) {
+            navbarResizeObserver.observe(navbarRef.current);
+        }
+
         return () => {
             window.removeEventListener('resize', trottledCalculateBlock);
             window.removeEventListener('scroll', trottledCalculateBlock);
+            navbarResizeObserver.disconnect();
         };
     }, [trottledCalculateBlock]);
 
