@@ -1,49 +1,42 @@
 'use client';
 
-import { useEffect } from 'react';
+export function useResize() {
+    function resize(
+        element: HTMLElement,
 
-function resize(
-    event: MouseEvent,
+        resizerElement: HTMLElement
+    ) {
+        let startX = 0;
 
-    elementRef: HTMLElement
-) {
-    elementRef.style.width = `${event.clientX - elementRef.offsetLeft}px`;
-}
+        let startWidth = 0;
 
-export function useResize(
-    elementRef: HTMLElement | null,
-    resizerElementRef: HTMLElement | null
-) {
-    useEffect(() => {
-        if (!elementRef || !resizerElementRef) return;
+        function handleMouseDown(event: MouseEvent) {
+            startX = event.clientX;
 
-        function handleResize(event: MouseEvent) {
-            if (!elementRef) return;
+            startWidth = element.offsetWidth;
 
-            resize(event, elementRef);
+            event.preventDefault();
+
+            window.addEventListener('mousemove', handleMouseMove);
+
+            window.addEventListener('mouseup', handleMouseUp);
         }
 
-        function handleMouseDown() {
-            if (!resizerElementRef) return;
-
-            resizerElementRef.addEventListener('mousemove', handleResize);
-            resizerElementRef.addEventListener('mouseup', handleMouseUp);
+        function handleMouseMove(event: MouseEvent) {
+            element.style.width = `${startWidth + (event.clientX - startX)}px`;
         }
 
         function handleMouseUp() {
-            if (!resizerElementRef) return;
-
-            resizerElementRef.removeEventListener('mousedown', handleMouseDown);
-            resizerElementRef.removeEventListener('mousemove', handleResize);
-            resizerElementRef.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
         }
 
-        resizerElementRef.addEventListener('mousedown', handleMouseDown);
-
-        resizerElementRef.addEventListener('mouseup', handleMouseUp);
+        resizerElement.addEventListener('mousedown', handleMouseDown);
 
         return () => {
-            handleMouseUp();
+            resizerElement.removeEventListener('mousedown', handleMouseDown);
         };
-    }, []);
+    }
+
+    return resize;
 }

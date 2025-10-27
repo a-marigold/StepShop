@@ -1,22 +1,29 @@
 @use '@styles/mixins.scss' as *;
 
 .navbar {
+    position: relative;
+
     @include flex-column;
 
     gap: 1em;
 
-    flex: 1;
-
-    max-width: 220px;
-
-    // max-height: fit-content;
-    // height: 100%;
+    min-width: 220px;
+    max-width: 600px;
 
     background-color: var(--foreground-color);
     border-right: 1px var(--border-color) solid;
     border-bottom-left-radius: var(--page-border-radius);
 
     padding: 1.25em;
+}
+.resizer {
+    position: absolute;
+    right: 0;
+
+    width: 10px;
+    height: 100%;
+
+    cursor: ew-resize;
 }
 
 .operation {

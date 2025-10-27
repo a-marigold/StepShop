@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useRef, useLayoutEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { useThrottle } from '@/hooks/useThrottle';
+import { useThrottle, useResize } from '@/hooks';
 
 import { operationsList } from '../../adminOperations';
 import type { OperationType } from '../../adminOperations';
@@ -63,11 +63,11 @@ export default function Navbar() {
         100
     );
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         trottledCalculateBlock();
     }, [activeOperation, trottledCalculateBlock]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         window.addEventListener('resize', trottledCalculateBlock);
         window.addEventListener('scroll', trottledCalculateBlock);
 
@@ -77,8 +77,19 @@ export default function Navbar() {
         };
     }, [trottledCalculateBlock]);
 
+    const navbarRef = useRef<HTMLElement>(null);
+    const resizerRef = useRef<HTMLDivElement>(null);
+
+    const resize = useResize();
+
+    useEffect(() => {
+        if (navbarRef.current && resizerRef.current) {
+            return resize(navbarRef.current, resizerRef.current);
+        }
+    }, []);
+
     return (
-        <nav className={navStyles['navbar']}>
+        <nav ref={navbarRef} className={navStyles['navbar']}>
             {operationsList.map((operation, index) => (
                 <Link
                     key={index}
@@ -97,7 +108,10 @@ export default function Navbar() {
                     {operation.title}
                 </Link>
             ))}
+
             <div ref={activeBlockRef} className={navStyles['active-block']} />
+
+            <div ref={resizerRef} className={navStyles['resizer']} />
         </nav>
     );
 }
