@@ -1,40 +1,41 @@
-import { z } from 'zod';
+import {
+    union,
+    literal,
+    object,
+    string,
+    number,
+    array,
+    infer as zinfer,
+} from 'zod';
 
-export const CurrencySymbolSchema = z.union([
-    z.literal('₸'),
-    z.literal('₽'),
-    z.literal('$'),
+export const CurrencySymbolSchema = union([
+    literal('₸'),
+    literal('₽'),
+    literal('$'),
 ]);
 
-export const ProductSchema = z
-    .object({
-        image: z.string(),
+export const ProductSchema = object({
+    image: string(),
 
-        title: z.string(),
-        description: z.string().nullable(),
+    title: string(),
+    description: string().nullable(),
 
-        price: z.number(),
-        quantity: z.number(),
+    price: number(),
+    quantity: number(),
 
-        id: z.number(),
-    })
-    .strict();
+    id: number(),
+}).strict();
 
-export const ProductListSchema = z.array(ProductSchema);
+export const ProductListSchema = array(ProductSchema);
 
-export type CurrencySymbol = z.infer<typeof CurrencySymbolSchema>;
+export type CurrencySymbol = zinfer<typeof CurrencySymbolSchema>;
 
-export type ProductType = z.infer<typeof ProductSchema>;
+export type ProductType = zinfer<typeof ProductSchema>;
 
-// export type CurrencySymbol = '₸' | '₽' | '$';
+export const categorySchema = object({ id: string(), name: string() });
 
-// export interface ProductType {
-//     image: string;
+export const categoryListSchema = array(categorySchema);
 
-//     title: string;
-//     description?: string;
+export type CategoryType = zinfer<typeof categorySchema>;
 
-//     price: number;
-//     currencySymbol: CurrencySymbol;
-//     quantity: number;
-// }
+export type CategoryListType = zinfer<typeof categoryListSchema>;

@@ -1,20 +1,30 @@
-import { z } from 'zod';
-export declare const CurrencySymbolSchema: z.ZodUnion<readonly [z.ZodLiteral<"₸">, z.ZodLiteral<"₽">, z.ZodLiteral<"$">]>;
-export declare const ProductSchema: z.ZodObject<{
-    image: z.ZodString;
-    title: z.ZodString;
-    description: z.ZodNullable<z.ZodString>;
-    price: z.ZodNumber;
-    quantity: z.ZodNumber;
-    id: z.ZodNumber;
-}, z.core.$strict>;
-export declare const ProductListSchema: z.ZodArray<z.ZodObject<{
-    image: z.ZodString;
-    title: z.ZodString;
-    description: z.ZodNullable<z.ZodString>;
-    price: z.ZodNumber;
-    quantity: z.ZodNumber;
-    id: z.ZodNumber;
-}, z.core.$strict>>;
-export type CurrencySymbol = z.infer<typeof CurrencySymbolSchema>;
-export type ProductType = z.infer<typeof ProductSchema>;
+import { infer as zinfer } from 'zod';
+export declare const CurrencySymbolSchema: import("zod").ZodUnion<readonly [import("zod").ZodLiteral<"₸">, import("zod").ZodLiteral<"₽">, import("zod").ZodLiteral<"$">]>;
+export declare const ProductSchema: import("zod").ZodObject<{
+    image: import("zod").ZodString;
+    title: import("zod").ZodString;
+    description: import("zod").ZodNullable<import("zod").ZodString>;
+    price: import("zod").ZodNumber;
+    quantity: import("zod").ZodNumber;
+    id: import("zod").ZodNumber;
+}, import("zod/v4/core").$strict>;
+export declare const ProductListSchema: import("zod").ZodArray<import("zod").ZodObject<{
+    image: import("zod").ZodString;
+    title: import("zod").ZodString;
+    description: import("zod").ZodNullable<import("zod").ZodString>;
+    price: import("zod").ZodNumber;
+    quantity: import("zod").ZodNumber;
+    id: import("zod").ZodNumber;
+}, import("zod/v4/core").$strict>>;
+export type CurrencySymbol = zinfer<typeof CurrencySymbolSchema>;
+export type ProductType = zinfer<typeof ProductSchema>;
+export declare const categorySchema: import("zod").ZodObject<{
+    id: import("zod").ZodString;
+    name: import("zod").ZodString;
+}, import("zod/v4/core").$strip>;
+export declare const categoryListSchema: import("zod").ZodArray<import("zod").ZodObject<{
+    id: import("zod").ZodString;
+    name: import("zod").ZodString;
+}, import("zod/v4/core").$strip>>;
+export type CategoryType = zinfer<typeof categorySchema>;
+export type CategoryListType = zinfer<typeof categoryListSchema>;

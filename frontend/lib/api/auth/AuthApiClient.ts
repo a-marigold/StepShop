@@ -91,10 +91,12 @@ export async function clientGetUserData() {
 export async function serverGetUserData(token: string, error: Error) {
     const response = await fetch(`${apiOrigin}/auth/me`, {
         method: 'GET',
+
         headers: {
             Cookie: `token=${token}`,
         },
         credentials: 'include',
+
         cache: 'no-store',
     });
 

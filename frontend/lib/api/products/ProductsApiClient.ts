@@ -5,7 +5,11 @@ import type { ApiResponseType } from '@shared/types/ApiResponseType';
 import { apiOrigin } from '@/utils/getApiOrigin';
 import { websiteOrigin } from '@/utils/getWebsiteOrigin';
 
-import type { ProductType } from '@shared/types/ProductTypes';
+import type {
+    ProductType,
+    CategoryType,
+    CategoryListType,
+} from '@shared/types/ProductTypes';
 
 export async function serverGetProducts() {
     const response = await fetch(`${apiOrigin}/products`, {
@@ -136,6 +140,7 @@ export async function clientRevalidateTag(tag: string) {
             body: JSON.stringify({ tag: tag }),
         }
     );
+
     const revalidateProductsData =
         (await revalidateProductsResponse.json()) as ApiResponseType;
 
@@ -148,4 +153,70 @@ export async function clientRevalidateTag(tag: string) {
     }
 
     return revalidateProductsData;
+}
+
+//* Categories
+export async function getCategories() {
+    const response = await fetch(`${apiOrigin}/products/categories`, {
+        headers: {
+            X_API_KEY: process.env.NEXT_PUBLIC_X_API_KEY ?? '',
+        },
+    });
+
+    if (!response.ok) {
+        const responseError: ApiResponseType = await response.json();
+
+        throw new ApiError(responseError.message);
+    }
+
+    const categories: CategoryListType = await response.json();
+
+    return categories;
+}
+
+export async function postCategory(
+    id: CategoryType['id'],
+
+    name: CategoryType['name']
+) {
+    const newCategory = { id, name };
+
+    const response = await fetch(`${apiOrigin}/products/categories`, {
+        method: 'POST',
+        headers: {
+            X_API_KEY: process.env.NEXT_PUBLIC_X_API_KEY ?? '',
+        },
+        body: JSON.stringify(newCategory),
+
+        cache: 'no-cache',
+    });
+
+    if (!response.ok) {
+        const responseError: ApiResponseType = await response.json();
+
+        throw new ApiError(responseError.message);
+    }
+
+    const data: ApiResponseType = await response.json();
+
+    return data;
+}
+
+export async function deleteCategory(id: CategoryType['id']) {
+    const response = await fetch(`${apiOrigin}/products/categories/${id}`, {
+        method: 'DELETE',
+
+        headers: {
+            X_API_KEY: process.env.NEXT_PUBLI_X_API_KEY ?? '',
+        },
+    });
+
+    if (!response.ok) {
+        const responseError: ApiResponseType = await response.json();
+        throw new ApiError(responseError.message);
+    }
+
+    const data: ApiResponseType = await response.json();
+
+    return data;
 }

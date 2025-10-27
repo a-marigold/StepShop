@@ -1,29 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductListSchema = exports.ProductSchema = exports.CurrencySymbolSchema = void 0;
+exports.categoryListSchema = exports.categorySchema = exports.ProductListSchema = exports.ProductSchema = exports.CurrencySymbolSchema = void 0;
 var zod_1 = require("zod");
-exports.CurrencySymbolSchema = zod_1.z.union([
-    zod_1.z.literal('₸'),
-    zod_1.z.literal('₽'),
-    zod_1.z.literal('$'),
+exports.CurrencySymbolSchema = (0, zod_1.union)([
+    (0, zod_1.literal)('₸'),
+    (0, zod_1.literal)('₽'),
+    (0, zod_1.literal)('$'),
 ]);
-exports.ProductSchema = zod_1.z
-    .object({
-    image: zod_1.z.string(),
-    title: zod_1.z.string(),
-    description: zod_1.z.string().nullable(),
-    price: zod_1.z.number(),
-    quantity: zod_1.z.number(),
-    id: zod_1.z.number(),
-})
-    .strict();
-exports.ProductListSchema = zod_1.z.array(exports.ProductSchema);
-// export type CurrencySymbol = '₸' | '₽' | '$';
-// export interface ProductType {
-//     image: string;
-//     title: string;
-//     description?: string;
-//     price: number;
-//     currencySymbol: CurrencySymbol;
-//     quantity: number;
-// }
+exports.ProductSchema = (0, zod_1.object)({
+    image: (0, zod_1.string)(),
+    title: (0, zod_1.string)(),
+    description: (0, zod_1.string)().nullable(),
+    price: (0, zod_1.number)(),
+    quantity: (0, zod_1.number)(),
+    id: (0, zod_1.number)(),
+}).strict();
+exports.ProductListSchema = (0, zod_1.array)(exports.ProductSchema);
+exports.categorySchema = (0, zod_1.object)({ id: (0, zod_1.string)(), name: (0, zod_1.string)() });
+exports.categoryListSchema = (0, zod_1.array)(exports.categorySchema);

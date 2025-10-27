@@ -82,14 +82,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
             params: ProductSchema.pick({ id: true }).extend({
                 id: coerce.number(),
             }),
-            // body: ProductSchema.pick({
-            //     title: true,
-            //     description: true,
-            //     price: true,
-            //     quantity: true,
-            // })
-            //     .extend({ imageFile: file() })
-            //     .partial(),
+
             response: {
                 201: ApiResponseSchema,
             },
@@ -99,14 +92,16 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
 
     app.route({
         method: 'GET',
-        url: '/categories',
+        url: '/products/categories',
         schema: { response: { 200: categoryListSchema } },
+
         handler: getAllCategories,
     });
 
     app.route({
         method: 'POST',
-        url: '/categories',
+        url: '/products/categories',
+
         schema: {
             body: categorySchema,
         },
