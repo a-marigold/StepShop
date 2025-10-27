@@ -1,0 +1,23 @@
+@use '@/styles/mixins.scss' as *;
+
+.loading-spinner {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    border-color: var(--accent-color);
+
+    border-width: 5px;
+
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
