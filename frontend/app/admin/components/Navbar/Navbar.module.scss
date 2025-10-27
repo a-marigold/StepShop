@@ -18,12 +18,19 @@
 }
 .resizer {
     position: absolute;
+    top: 0;
     right: 0;
 
     width: 10px;
     height: 100%;
 
     cursor: ew-resize;
+
+    transition: border 0.1s ease;
+
+    &:active {
+        border-right: 2px var(--accent-color) solid;
+    }
 }
 
 .operation {

@@ -17,9 +17,10 @@ export function useResize() {
 
             event.preventDefault();
 
-            document.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('pointermove', handleMouseMove);
 
-            window.addEventListener('mouseup', handleMouseUp);
+            window.addEventListener('pointerup', handleMouseUp);
+            window.addEventListener('pointercancel', handleMouseUp);
         }
 
         function handleMouseMove(event: MouseEvent) {
@@ -27,15 +28,15 @@ export function useResize() {
         }
 
         function handleMouseUp() {
-            document.removeEventListener('mousemove', handleMouseMove);
-
-            document.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('pointermove', handleMouseMove);
+            window.removeEventListener('pointerup', handleMouseUp);
+            window.removeEventListener('pointercancel', handleMouseUp);
         }
 
-        resizerElement.addEventListener('mousedown', handleMouseDown);
+        resizerElement.addEventListener('pointerdown', handleMouseDown);
 
         return () => {
-            resizerElement.removeEventListener('mousedown', handleMouseDown);
+            resizerElement.removeEventListener('pointerdown', handleMouseDown);
         };
     }
 

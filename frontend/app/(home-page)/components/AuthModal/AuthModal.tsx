@@ -1,5 +1,3 @@
-// TODO (8): Add authorization logic
-
 // TODO (5): Add zod scheme
 
 'use client';
