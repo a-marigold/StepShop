@@ -9,11 +9,10 @@ import type {
     CategoryListType,
 } from '@shared/types/ProductTypes';
 
-//* Categories
 export async function getCategories() {
     const response = await fetch(`${apiOrigin}/products/categories`, {
         headers: {
-            X_API_KEY: process.env.NEXT_PUBLIC_X_API_KEY ?? '',
+            x_api_key: process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
     });
 
@@ -35,15 +34,19 @@ export async function postCategory(
 ) {
     const newCategory = { id, name };
 
+    console.log(process.env.NEXT_PUBLIC_X_API_KEY);
+
     const response = await fetch(`${apiOrigin}/products/categories`, {
         method: 'POST',
         headers: {
-            X_API_KEY: process.env.NEXT_PUBLIC_X_API_KEY ?? '',
+            'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? 'abc',
         },
         body: JSON.stringify(newCategory),
 
         cache: 'no-cache',
     });
+
+    console.log(process.env.NEXT_PUBLIC_X_API_KEY);
 
     if (!response.ok) {
         const responseError: ApiResponseType = await response.json();
@@ -61,7 +64,7 @@ export async function deleteCategory(id: CategoryType['id']) {
         method: 'DELETE',
 
         headers: {
-            X_API_KEY: process.env.NEXT_PUBLI_X_API_KEY ?? '',
+            'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
     });
 

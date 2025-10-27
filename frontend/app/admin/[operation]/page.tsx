@@ -33,7 +33,7 @@ export async function generateMetadata({
         deleteCategory: 'Удаление категории',
     };
 
-    const operation = await params.operation;
+    const { operation } = await params;
 
     return {
         title: pageTitles[operation],
@@ -54,7 +54,7 @@ const operationComponentList: Record<OperationType, ReactNode> = {
 };
 
 export default async function OperationPage({ params }: OperationPageProps) {
-    const operation = await params.operation;
+    const { operation } = await params;
 
     return (
         <main className={operationStyles['operation-page']}>

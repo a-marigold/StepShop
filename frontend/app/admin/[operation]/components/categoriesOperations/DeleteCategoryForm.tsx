@@ -57,7 +57,7 @@ export function DeleteCategoryForm() {
 
     return (
         <OperationForm
-            title='Удалить товар'
+            title='Удалить категорию'
             submitAction={handleSubmit(submit)}
         >
             {deleteInputsList.map((input, index) => (

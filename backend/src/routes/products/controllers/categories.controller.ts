@@ -44,15 +44,20 @@ export async function deleteCategory(
 
     reply: FastifyReply
 ) {
-    const { id } = request.params;
+    const params = request.params;
+    const { id } = params;
+
+    const checkCategory = await request.server.prisma.category.findUnique({
+        where: { id: id },
+    });
+
+    if (!checkCategory) {
+        return reply.code(404).send({ message: 'Category was not found' });
+    }
 
     const deleteCategory = await request.server.prisma.category.delete({
         where: { id: id },
     });
-
-    if (!deleteCategory) {
-        return reply.code(404).send({ message: 'Category was not found' });
-    }
 
     return reply.code(200).send(deleteCategory);
 }
