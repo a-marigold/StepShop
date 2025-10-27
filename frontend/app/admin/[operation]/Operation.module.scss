@@ -4,6 +4,10 @@
     @include flex-x-center;
 
     flex: 1;
+    padding-top: 1em;
+    padding-bottom: 6em;
+
+    box-sizing: border-box;
 }
 
 .operation-form {
