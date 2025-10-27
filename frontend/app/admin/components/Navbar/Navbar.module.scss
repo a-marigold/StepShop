@@ -53,9 +53,8 @@
     background-color: var(--main-bg-color);
     border-radius: 10px;
 
-    transition: transform 0.16s ease, width 0.16s ease;
+    transition: transform 0.16s ease, width 0.1s ease;
 }
-
 @media (max-width: 600px) {
     .navbar {
         max-width: initial;
