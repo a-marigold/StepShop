@@ -18,13 +18,13 @@ export declare const ProductListSchema: import("zod").ZodArray<import("zod").Zod
 }, import("zod/v4/core").$strict>>;
 export type CurrencySymbol = zinfer<typeof CurrencySymbolSchema>;
 export type ProductType = zinfer<typeof ProductSchema>;
-export declare const categorySchema: import("zod").ZodObject<{
+export declare const CategorySchema: import("zod").ZodObject<{
     id: import("zod").ZodString;
     name: import("zod").ZodString;
 }, import("zod/v4/core").$strip>;
-export declare const categoryListSchema: import("zod").ZodArray<import("zod").ZodObject<{
+export declare const CategoryListSchema: import("zod").ZodArray<import("zod").ZodObject<{
     id: import("zod").ZodString;
     name: import("zod").ZodString;
 }, import("zod/v4/core").$strip>>;
-export type CategoryType = zinfer<typeof categorySchema>;
-export type CategoryListType = zinfer<typeof categoryListSchema>;
+export type CategoryType = zinfer<typeof CategorySchema>;
+export type CategoryListType = zinfer<typeof CategoryListSchema>;

@@ -197,7 +197,7 @@ export async function postCategory(
         throw new ApiError(responseError.message);
     }
 
-    const data: ApiResponseType = await response.json();
+    const data: CategoryType = await response.json();
 
     return data;
 }
@@ -216,7 +216,7 @@ export async function deleteCategory(id: CategoryType['id']) {
         throw new ApiError(responseError.message);
     }
 
-    const data: ApiResponseType = await response.json();
+    const data: CategoryType = await response.json();
 
     return data;
 }

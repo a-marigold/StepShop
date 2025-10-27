@@ -11,6 +11,7 @@ import {
 import {
     getAllCategories,
     createCategory,
+    deleteCategory,
 } from './controllers/categories.controller';
 
 import { checkProductsApiKey } from './products.middlewares';
@@ -18,11 +19,10 @@ import { checkProductsApiKey } from './products.middlewares';
 import {
     ProductListSchema,
     ProductSchema,
+    CategorySchema,
+    CategoryListSchema,
 } from '@step-shop/shared/types/ProductTypes';
 import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
-
-const categorySchema = object({ id: string(), name: string() });
-const categoryListSchema = array(categorySchema); // TODO: Add external schema
 
 export default async function productsRoutes(app: ProvideredAppInstance) {
     app.addHook('preHandler', checkProductsApiKey);
@@ -47,9 +47,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
 
         schema: {
             consumes: ['multipart/form-data'],
-            // body: ProductSchema.omit({ id: true }).extend({
-            //     imageFile: file(),
-            // }),
+
             response: {
                 201: ApiResponseSchema,
             },
@@ -93,18 +91,30 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
     app.route({
         method: 'GET',
         url: '/products/categories',
-        schema: { response: { 200: categoryListSchema } },
+        schema: { response: { 200: CategoryListSchema } },
 
         handler: getAllCategories,
     });
 
     app.route({
         method: 'POST',
+
         url: '/products/categories',
 
         schema: {
-            body: categorySchema,
+            body: CategorySchema,
         },
         handler: createCategory,
+    });
+
+    app.route({
+        method: 'DELETE',
+
+        url: '/products/categories/:id',
+
+        schema: {
+            params: CategorySchema.pick({ id: true }),
+        },
+        handler: deleteCategory,
     });
 }

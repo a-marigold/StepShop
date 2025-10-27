@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.categoryListSchema = exports.categorySchema = exports.ProductListSchema = exports.ProductSchema = exports.CurrencySymbolSchema = void 0;
+exports.CategoryListSchema = exports.CategorySchema = exports.ProductListSchema = exports.ProductSchema = exports.CurrencySymbolSchema = void 0;
 var zod_1 = require("zod");
 exports.CurrencySymbolSchema = (0, zod_1.union)([
     (0, zod_1.literal)('₸'),
@@ -16,5 +16,6 @@ exports.ProductSchema = (0, zod_1.object)({
     id: (0, zod_1.number)(),
 }).strict();
 exports.ProductListSchema = (0, zod_1.array)(exports.ProductSchema);
-exports.categorySchema = (0, zod_1.object)({ id: (0, zod_1.string)(), name: (0, zod_1.string)() });
-exports.categoryListSchema = (0, zod_1.array)(exports.categorySchema);
+//* Categories
+exports.CategorySchema = (0, zod_1.object)({ id: (0, zod_1.string)(), name: (0, zod_1.string)() });
+exports.CategoryListSchema = (0, zod_1.array)(exports.CategorySchema);

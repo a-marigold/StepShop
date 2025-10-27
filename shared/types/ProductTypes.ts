@@ -29,13 +29,11 @@ export const ProductSchema = object({
 export const ProductListSchema = array(ProductSchema);
 
 export type CurrencySymbol = zinfer<typeof CurrencySymbolSchema>;
-
 export type ProductType = zinfer<typeof ProductSchema>;
 
-export const categorySchema = object({ id: string(), name: string() });
+//* Categories
+export const CategorySchema = object({ id: string(), name: string() });
+export const CategoryListSchema = array(CategorySchema);
 
-export const categoryListSchema = array(categorySchema);
-
-export type CategoryType = zinfer<typeof categorySchema>;
-
-export type CategoryListType = zinfer<typeof categoryListSchema>;
+export type CategoryType = zinfer<typeof CategorySchema>;
+export type CategoryListType = zinfer<typeof CategoryListSchema>;

@@ -1,5 +1,7 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
+import type { CategoryType } from '@step-shop/shared/types/ProductTypes';
+
 export async function getAllCategories(
     request: FastifyRequest,
 
@@ -23,6 +25,7 @@ export async function createCategory(
     if (!!checkCategory) {
         return reply
             .code(409)
+
             .send({ message: 'Category with this id already exists' });
     }
 
@@ -34,4 +37,22 @@ export async function createCategory(
     });
 
     return reply.code(201).send(createCategory);
+}
+
+export async function deleteCategory(
+    request: FastifyRequest<{ Params: Pick<CategoryType, 'id'> }>,
+
+    reply: FastifyReply
+) {
+    const { id } = request.params;
+
+    const deleteCategory = await request.server.prisma.category.delete({
+        where: { id: id },
+    });
+
+    if (!deleteCategory) {
+        return reply.code(404).send({ message: 'Category was not found' });
+    }
+
+    return reply.code(200).send(deleteCategory);
 }
