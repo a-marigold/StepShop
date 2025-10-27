@@ -15,8 +15,10 @@ import type { OperationInput } from '../OperationInput';
 
 import OperationForm from '../OperationForm';
 
-import operationStyles from '../../Operation.module.scss';
 import PrimaryInput from '@/UI/PrimaryInput';
+import FileInput from '@/UI/FileInput';
+
+import operationStyles from '../../Operation.module.scss';
 
 const createInputsList: OperationInput[] = [
     {
@@ -125,12 +127,19 @@ export function CreateProductForm() {
                 control={control}
                 rules={{ required: 'Изображение товара обязательно' }}
                 render={({ field, fieldState }) => (
-                    <input
-                        type='file'
-                        accept='.png, .webp'
-                        onChange={(event) =>
-                            field.onChange(event.target.files?.[0])
-                        }
+                    // <input
+                    //     type='file'
+                    //     accept='.png, .webp'
+                    //     onChange={(event) =>
+                    //         field.onChange(event.target.files?.[0])
+                    //     }
+                    // />
+
+                    <FileInput
+                        title='Изображение товара'
+                        htmlId='product-image-input'
+                        isValid={!fieldState.error}
+                        errorLabelTitle='Это поле обязательно'
                     />
                 )}
             />

@@ -17,7 +17,7 @@ export function useResize() {
 
             event.preventDefault();
 
-            window.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mousemove', handleMouseMove);
 
             window.addEventListener('mouseup', handleMouseUp);
         }
@@ -27,8 +27,9 @@ export function useResize() {
         }
 
         function handleMouseUp() {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
+            document.removeEventListener('mousemove', handleMouseMove);
+
+            document.removeEventListener('mouseup', handleMouseUp);
         }
 
         resizerElement.addEventListener('mousedown', handleMouseDown);
