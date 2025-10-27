@@ -35,6 +35,11 @@
         background-color: var(--accent-color);
         color: var(--foreground-color);
     }
+
+    &:focus-visible {
+        outline-color: var(--outline-color);
+        outline-width: 2px;
+    }
 }
 
 .title-label {

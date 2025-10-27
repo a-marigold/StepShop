@@ -16,6 +16,8 @@ import type { OperationInput } from '../OperationInput';
 import OperationForm from '../OperationForm';
 
 import PrimaryInput from '@/UI/PrimaryInput';
+import FileInput from '@UI/FileInput';
+
 import operationStyles from '../../Operation.module.scss';
 
 const updateInputsList: OperationInput[] = [
@@ -88,7 +90,10 @@ export function UpdateProductForm() {
     }
 
     return (
-        <OperationForm title='Обновить товар' submitAction={submit}>
+        <OperationForm
+            title='Обновить товар'
+            submitAction={handleSubmit(submit)}
+        >
             {updateInputsList.map((input, index) => (
                 <Controller
                     key={index}
@@ -115,6 +120,24 @@ export function UpdateProductForm() {
                     )}
                 />
             ))}
+
+            <Controller
+                control={control}
+                name='imageFile'
+                rules={{ required: 'Изображение товара обязательно' }}
+                render={({ field, fieldState }) => (
+                    <FileInput
+                        title='Изображение товара'
+                        accept='.png, .webp'
+                        htmlId='image-file-input'
+                        errorLabelTitle='Изображение товара обязательно'
+                        inputAction={(event) => {
+                            field.onChange(event.target.files?.[0]);
+                        }}
+                        isValid={!fieldState.error}
+                    />
+                )}
+            />
         </OperationForm>
     );
 }

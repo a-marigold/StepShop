@@ -39,8 +39,10 @@ export async function createProduct(
             } else {
                 return reply.code(400).send();
             }
-        } else {
+        } else if (part.type === 'file') {
             file = part;
+        } else {
+            continue;
         }
     }
 

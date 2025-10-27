@@ -14,6 +14,8 @@ interface PrimaryInputProps {
     title?: string;
     errorLabelTitle?: string;
 
+    accept: string;
+
     className?: string;
 
     inputAction?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -27,6 +29,7 @@ export default function FileInput({
     title,
 
     errorLabelTitle,
+    accept,
 
     className,
 
@@ -43,11 +46,14 @@ export default function FileInput({
             <input
                 id={htmlId}
                 type='file'
+                accept={accept}
                 className={inputStyles['file-input']}
                 aria-labelledby={`${htmlId}-label`}
                 aria-invalid={!isValid}
                 onChange={(event) => {
-                    if (inputAction) inputAction(event);
+                    if (!!inputAction) {
+                        inputAction(event);
+                    }
                     setFileName(event.target.files?.[0].name);
                 }}
             />
