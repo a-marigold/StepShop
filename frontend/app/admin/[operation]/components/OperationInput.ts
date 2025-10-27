@@ -21,5 +21,7 @@ export type CategoryOperationInput = {
 
     isRequired: boolean;
 
+    placeholder?: string;
+
     errorMessage?: string;
 };

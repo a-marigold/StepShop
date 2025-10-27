@@ -7,75 +7,47 @@ import type { AppDispatch } from '@/redux/store';
 
 import { addSuccessNotice, addErrorNotice } from '@/utils/noticeGlobalState';
 
-import { postProduct } from '@/lib/api/products';
+import { postCategory } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
-import type { ProductType } from '@shared/types/ProductTypes';
-import type { OperationInput } from '../OperationInput';
+import type { CategoryType } from '@shared/types/ProductTypes';
+import type { CategoryOperationInput } from '../OperationInput';
 
 import OperationForm from '../OperationForm';
 
 import operationStyles from '../../Operation.module.scss';
 import PrimaryInput from '@/UI/PrimaryInput';
 
-const createInputsList: OperationInput[] = [
+const createInputsList: CategoryOperationInput[] = [
     {
-        name: 'Название товара',
-        htmlId: 'title',
-        propertyName: 'title',
+        name: 'ID категории',
+        htmlId: 'category-id',
+        propertyName: 'id',
+        placeholder: 'sneakers',
         isRequired: true,
     },
 
     {
-        name: 'Описание товара',
-        htmlId: 'description',
-        propertyName: 'description',
-        isRequired: false,
-    },
-
-    {
-        name: 'Цена товара',
-        htmlId: 'price',
-
-        propertyName: 'price',
-
-        errorMessage: 'Цена товара обязательна',
-        isRequired: true,
-    },
-
-    {
-        name: 'Количество',
-        htmlId: 'quantity',
-        propertyName: 'quantity',
+        name: 'Название категории',
+        htmlId: 'category-name',
+        propertyName: 'name',
+        placeholder: 'Кроссовки',
         isRequired: true,
     },
 ];
 
 export function CreateCategoryForm() {
-    const { control, handleSubmit } = useForm<
-        ProductType & { imageFile: File }
-    >();
+    const { control, handleSubmit } = useForm<CategoryType>();
 
     const dispatch = useDispatch<AppDispatch>();
 
-    async function submit(data: ProductType & { imageFile: File }) {
-        const { imageFile, ...productData } = data;
-
-        const newProduct: ProductType = {
-            ...productData,
-            price: Number(productData.price),
-            quantity: Number(productData.quantity),
-        };
+    async function submit(data: CategoryType) {
+        const { id, name } = data;
 
         try {
-            const postProductData = await postProduct(newProduct, imageFile);
+            await postCategory(id, name);
 
-            addSuccessNotice(
-                `Changes saved`,
-                postProductData.message,
-                10,
-                dispatch
-            );
+            addSuccessNotice(`Changes saved`, '', 10, dispatch);
         } catch (error) {
             if (error instanceof ApiError) {
                 addErrorNotice(
@@ -90,7 +62,7 @@ export function CreateCategoryForm() {
 
     return (
         <OperationForm
-            title='Создать товар'
+            title='Создать категорию'
             submitAction={handleSubmit(submit)}
         >
             {createInputsList.map((input, index) => (
@@ -115,25 +87,11 @@ export function CreateCategoryForm() {
                             inputAction={field.onChange}
                             isValid={!fieldState.error}
                             errorLabelTitle={fieldState.error?.message}
+                            placeholder={input.placeholder}
                         />
                     )}
                 />
             ))}
-
-            <Controller
-                name='imageFile'
-                control={control}
-                rules={{ required: 'Изображение товара обязательно' }}
-                render={({ field, fieldState }) => (
-                    <input
-                        type='file'
-                        accept='.png, .webp'
-                        onChange={(event) =>
-                            field.onChange(event.target.files?.[0])
-                        }
-                    />
-                )}
-            />
         </OperationForm>
     );
 }

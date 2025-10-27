@@ -39,6 +39,7 @@ export async function postCategory(
     const response = await fetch(`${apiOrigin}/products/categories`, {
         method: 'POST',
         headers: {
+            'Content-Type': 'application/json',
             'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? 'abc',
         },
         body: JSON.stringify(newCategory),
@@ -64,6 +65,7 @@ export async function deleteCategory(id: CategoryType['id']) {
         method: 'DELETE',
 
         headers: {
+            'Content-Type': 'application/json',
             'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
     });
