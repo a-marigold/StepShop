@@ -38,6 +38,8 @@
 }
 
 .categories-block {
+    position: relative;
+
     @include flex-center;
     gap: 0.35em;
 
@@ -111,6 +113,12 @@
 
 .sort-type {
     color: var(--accent-color);
+}
+
+.loading-block {
+    @include flex-center;
+
+    width: 320px;
 }
 
 @media (max-width: 900px) {

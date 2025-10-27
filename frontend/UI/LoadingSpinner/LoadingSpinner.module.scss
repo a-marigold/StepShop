@@ -9,6 +9,8 @@
     border-color: var(--accent-color);
 
     border-width: 5px;
+    border-style: solid;
+    border-bottom-color: transparent;
 
     animation: rotation 1s linear infinite;
 }

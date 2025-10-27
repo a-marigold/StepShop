@@ -2,14 +2,19 @@ import clsx from 'clsx';
 import spinnerStyles from './LoadingSpinner.module.scss';
 
 interface LoadingSpinnerProps {
-    sizePX: number;
-    color: string;
+    size?: string;
 
-    className: string;
+    borderWidth?: string;
+
+    color?: string;
+
+    className?: string;
 }
 
 export default function LoadingSpinner({
-    sizePX,
+    size,
+    borderWidth,
+
     color,
     className,
 }: LoadingSpinnerProps) {
@@ -17,9 +22,10 @@ export default function LoadingSpinner({
         <div
             className={clsx(spinnerStyles['loading-spinner'], className)}
             style={{
-                width: `${sizePX}px`,
-                height: `${sizePX}px`,
+                width: size,
+                height: size,
                 borderColor: color,
+                borderWidth,
             }}
         />
     );
