@@ -12,7 +12,7 @@ import type {
 export async function getCategories() {
     const response = await fetch(`${apiOrigin}/products/categories`, {
         headers: {
-            x_api_key: process.env.NEXT_PUBLIC_X_API_KEY ?? '',
+            'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
     });
 

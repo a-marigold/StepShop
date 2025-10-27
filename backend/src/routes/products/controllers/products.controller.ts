@@ -1,9 +1,6 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
-import fs from 'fs';
-import path from 'path';
-
-import { uploadImage } from '../services/cloudinary.service';
+import { uploadImage, destroyImage } from '../services/cloudinary.service';
 
 import { getFileExtension } from 'src/utils/getFileExtension';
 import { publicDirPath } from 'src/utils/getPublicDirPath';
@@ -117,9 +114,13 @@ export async function deleteProduct(
         },
     });
 
-    const imageUrl = new URL(deleteProduct.image);
-    const imagePath = path.join(process.cwd(), imageUrl.pathname);
-    await fs.promises.unlink(imagePath);
+    const productImage = deleteProduct.image;
+
+    const deleteImage = await request.server.prisma.image.delete({
+        where: { url: productImage },
+    });
+
+    destroyImage(deleteImage.id);
 
     reply.code(200).send({
         statusCode: 200,

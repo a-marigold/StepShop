@@ -24,7 +24,7 @@
 
     @include flex-y-center;
     justify-content: space-between;
-
+    flex-wrap: wrap;
     gap: 1em;
 
     background: var(--main-bg-color);
@@ -121,8 +121,8 @@
     width: 320px;
 }
 
-@media (max-width: 900px) {
-    .categories-block {
-        display: none;
-    }
-}
+// @media (max-width: 900px) {
+//     .categories-block {
+//         display: none;
+//     }
+// }

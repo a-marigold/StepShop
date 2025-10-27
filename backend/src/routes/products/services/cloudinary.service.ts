@@ -16,10 +16,19 @@ export async function uploadImage(
                 else resolve(result);
             }
         );
+
         file.file.on('error', (error) => {
             reject(error);
         });
 
         file.file.pipe(stream);
     });
+}
+
+export async function destroyImage(imageId: string) {
+    try {
+        cloudinary.uploader.destroy(imageId);
+    } catch (error) {
+        throw new Error(error.message);
+    }
 }

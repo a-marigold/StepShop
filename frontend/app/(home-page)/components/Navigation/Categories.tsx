@@ -29,7 +29,6 @@ export default function Categories() {
             setCurrentCategory(categories[0].id);
         } catch {
             setError('Внутренняя ошибка сервера');
-
             setCategories([]);
         } finally {
             setIsLoading(false);
@@ -55,6 +54,7 @@ export default function Categories() {
         if (!categoryRef || !blockRef) return;
 
         blockRef.style.transform = `translateX(${categoryRef.offsetLeft}px)`;
+
         blockRef.style.width = `${categoryRef.offsetWidth}px`;
     }
 
@@ -90,7 +90,7 @@ export default function Categories() {
                         }}
                         className={clsx(
                             navStyles['category-button'],
-                            category.name === currentCategory &&
+                            category.id === currentCategory &&
                                 navStyles['active-button']
                         )}
                         aria-label={`Переключиться к ${category.name}`}
