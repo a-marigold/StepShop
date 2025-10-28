@@ -1,0 +1,37 @@
+@use '@styles/mixins.scss' as *;
+
+.aside {
+    position: relative;
+
+    @include flex-column;
+
+    min-width: 360px;
+
+    background-color: var(--foreground-color);
+
+    border-left: 1px var(--border-color) solid;
+    border-bottom-right-radius: var(--page-border-radius);
+
+    padding: 1em;
+
+    box-sizing: border-box;
+}
+.title {
+    @include text-wo-margin(1.5rem);
+    font-weight: 700;
+}
+
+.resizer {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 5px;
+    height: 100%;
+
+    cursor: ew-resize;
+
+    &:active {
+        border-left: 2px var(--accent-color) solid;
+    }
+}
