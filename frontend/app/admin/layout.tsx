@@ -7,8 +7,8 @@ import type { ReactNode } from 'react';
 import { clientGetUserData } from '@/lib/api/auth';
 
 import Header from './components/Header';
-
 import Navbar from './components/Navbar';
+import Aside from './components/Aside';
 
 import clsx from 'clsx';
 import adminStyles from './Admin.module.scss';
@@ -60,6 +60,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 <Navbar />
 
                 {children}
+
+                <Aside />
             </div>
         </>
     );
