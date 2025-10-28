@@ -6,7 +6,7 @@ export function useResize() {
 
         resizerElement: HTMLElement,
 
-        growDireaction: 'left' | 'right' = 'right'
+        growDirection: 'left' | 'right' = 'right'
     ) {
         let startX = 0;
 
@@ -28,10 +28,10 @@ export function useResize() {
         function handleMouseMove(event: MouseEvent) {
             const deltaClientX = event.clientX - startX;
 
-            if (growDireaction === 'right') {
+            if (growDirection === 'right') {
                 element.style.width = `${startWidth + deltaClientX}px`;
             } else {
-                element.style.width = `${startWidth + deltaClientX}px`;
+                element.style.width = `${startWidth - deltaClientX}px`;
             }
         }
 
