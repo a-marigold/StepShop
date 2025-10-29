@@ -189,6 +189,7 @@ export async function updateProduct(
 
     const updateImageRecord = await request.server.prisma.image.update({
         where: { url: prevProduct.image },
+
         data: {
             url: uploadNewImage.secure_url,
             id: uploadNewImage.public_id,
@@ -199,6 +200,7 @@ export async function updateProduct(
         where: {
             id: id,
         },
+
         data: {
             image: updateImageRecord.url,
             title: newTitle ?? prevProduct.title,
@@ -211,8 +213,9 @@ export async function updateProduct(
 
     return reply.code(201).send({
         statusCode: 201,
+
         message: `Old product: 
-${JSON.stringify(prevProduct)}; 
+${JSON.stringify(prevProduct)};
 
 New product: 
 ${JSON.stringify(updateProduct)}`,
@@ -223,8 +226,8 @@ export async function getProductsStream(
     request: FastifyRequest,
     reply: FastifyReply
 ) {
-    reply.raw.setHeader('Acces-Control-Allow-Origin', request.headers.origin);
-    reply.raw.setHeader('Acces-Control-Allow-Credentials', 'true');
+    reply.raw.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+    reply.raw.setHeader('Access-Control-Allow-Credentials', 'true');
 
     reply.raw.setHeader('Content-Type', 'text/event-stream');
     reply.raw.setHeader('Cache-Control', 'no-cache');
@@ -232,8 +235,12 @@ export async function getProductsStream(
 
     reply.raw.flushHeaders();
 
+    reply.raw.write('event: connected\n');
+    reply.raw.write('data: ok\n\n');
+
     const pingInterval = setInterval(() => {
-        reply.raw.write(JSON.stringify({ id: Date.now(), event: 'ping' }));
+        reply.raw.write('event: ping\n');
+        reply.raw.write(`id: ${Date.now()}\n\n`);
     }, 1000 * 30);
 
     request.server.eventEmmiter.on('updateProducts', async () => {
