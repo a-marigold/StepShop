@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import { useResize } from '@/hooks';
 
-import ProductsStream from './ProductsStream';
+import StreamWrapper from './components/StreamWrapper';
 
 import asideStyles from './Aside.module.scss';
 
@@ -24,7 +24,7 @@ export default function Aside() {
         <aside ref={asideRef} className={asideStyles['aside']}>
             <div ref={resizerRef} className={asideStyles['resizer']} />
 
-            <ProductsStream />
+            <StreamWrapper />
         </aside>
     );
 }

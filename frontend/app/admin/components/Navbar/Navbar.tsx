@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useThrottle, useResize } from '@/hooks';
 
 import { operationsList } from '../../adminOperations';
-import type { OperationType } from '../../adminOperations';
+import type { OperationPath, OperationType } from '../../adminOperations';
 
 import Link from 'next/link';
 
@@ -15,31 +15,32 @@ import clsx from 'clsx';
 import navStyles from './Navbar.module.scss';
 
 export default function Navbar() {
-    const pathname = usePathname();
+    const pathname = usePathname() as OperationPath;
 
-    function getInitialOperation(): OperationType | undefined {
-        const splitPathName = pathname.split('/') as OperationType[];
+    // function getInitialOperation(): OperationPath | undefined {
+    //     const splitPathName = pathname.split('/') as OperationType[];
 
-        const _operations: OperationType[] = [
-            'createProduct',
-            'deleteProduct',
-            'updateProduct',
-            'createCategory',
-            'deleteCategory',
-        ];
-        const initialOperation = _operations.find((controller) =>
-            splitPathName.includes(controller)
-        );
+    //     const _operations: OperationPath[] = [
+    //         '/admin/products/create',
+    //         '/admin/products/delete',
+    //         '/admin/products/update',
+    //         '/admin/categories/create',
+    //         '/admin/categories/delete',
+    //     ];
 
-        return initialOperation;
-    }
+    //     const initialOperation = _operations.find((operations) =>
+    //         splitPathName.includes(operations)
+    //     );
+
+    //     return initialOperation;
+    // }
 
     const [activeOperation, setActiveOperation] = useState<
-        OperationType | undefined
-    >(getInitialOperation);
+        OperationPath | undefined
+    >(pathname);
 
     const controllersRef = useRef<
-        Partial<Record<OperationType, HTMLAnchorElement | null>>
+        Partial<Record<OperationPath, HTMLAnchorElement | null>>
     >({});
 
     const activeBlockRef = useRef<HTMLDivElement>(null);
@@ -57,7 +58,6 @@ export default function Navbar() {
         const operationRect = currentOperationRef.getBoundingClientRect();
         const navbarRect = navbarRef.current.getBoundingClientRect();
 
-        // activeBlockRef.current.style.width = `${operationRect.width}px`;
         activeBlockRef.current.style.height = `${operationRect.height}px`;
         activeBlockRef.current.style.transform = `translate(${
             operationRect.left - navbarRect.left
@@ -113,10 +113,10 @@ export default function Navbar() {
                             navStyles['active-operation']
                     )}
                     ref={(element) => {
-                        controllersRef.current[operation.type] = element;
+                        controllersRef.current[operation.path] = element;
                     }}
                     prefetch
-                    onClick={() => setActiveOperation(operation.type)}
+                    onClick={() => setActiveOperation(operation.path)}
                 >
                     {operation.title}
                 </Link>

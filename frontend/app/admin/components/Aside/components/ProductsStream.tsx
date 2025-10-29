@@ -7,11 +7,15 @@ import type { ProductType } from '@shared/types/ProductTypes';
 import { apiOrigin } from '@/utils/getApiOrigin';
 
 import LoadingSpinner from '@/UI/LoadingSpinner';
+
 import JSONCodeBlock from '@/UI/JSONCodeBlock';
 
-import asideStyles from './Aside.module.scss';
+import asideStyles from '../Aside.module.scss';
 
-export default function ProductsStream() {
+interface ProductsStreamProps {
+    products: ProductType[];
+}
+export default function ProductsStream({ products: p }: ProductsStreamProps) {
     const [products, setProducts] = useState<ProductType[]>();
 
     useEffect(() => {
@@ -27,8 +31,6 @@ export default function ProductsStream() {
             productsStream.close();
         };
     }, []);
-
-    console.log(products);
 
     return (
         <div>
