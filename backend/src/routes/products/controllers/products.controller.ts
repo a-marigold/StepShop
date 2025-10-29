@@ -226,10 +226,6 @@ export async function getProductsStream(
     reply.raw.setHeader('Content-Type', 'text/event-stream');
     reply.raw.setHeader('Cache-Control', 'no-cache');
     reply.raw.setHeader('Connection', 'keep-alive');
-    reply.raw.setHeader('Access-Control-Allow-Origin', [
-        'https://step-shop.vercel.app',
-        'http://localhost:3000',
-    ]);
 
     reply.raw.flushHeaders();
 

@@ -30,7 +30,19 @@ export async function buildApp() {
     app.register(fastifyCookie, { hook: 'onRequest' });
 
     app.register(cors, {
-        origin: ['https://step-shop.vercel.app', 'http://localhost:3000'],
+        // origin: ['https://step-shop.vercel.app', 'http://localhost:3000'],
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
+
+            if (
+                origin === 'https://step-shop.vercel.app' ||
+                origin === 'http://localhost:3000'
+            ) {
+                return callback(null, true);
+            } else {
+                return callback(new Error('Origin is not allowed'), false);
+            }
+        },
 
         methods: ['GET', 'POST', 'PATCH', 'DELETE'],
         credentials: true,
