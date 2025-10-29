@@ -6,8 +6,8 @@
     @include flex-column;
 
     min-width: 360px;
-
-    max-width: 600px;
+    width: 400px;
+    max-width: 560px;
 
     background-color: var(--foreground-color);
 
@@ -15,7 +15,6 @@
     border-bottom-right-radius: var(--page-border-radius);
 
     padding: 1em;
-
     box-sizing: border-box;
 }
 .title {
