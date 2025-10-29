@@ -7,7 +7,9 @@ import {
     createProduct,
     deleteProduct,
     updateProduct,
+    getProductsStream,
 } from './controllers/products.controller';
+
 import {
     getAllCategories,
     createCategory,
@@ -116,5 +118,17 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
             params: CategorySchema.pick({ id: true }),
         },
         handler: deleteCategory,
+    });
+
+    app.route({
+        method: 'GET',
+        url: '/products/stream',
+        schema: {
+            // body: _,
+            // response: {
+            //     200: _RESPONSE__SCHEMA_,
+            // },
+        },
+        handler: getProductsStream,
     });
 }

@@ -1,28 +1,25 @@
-import clsx from 'clsx';
-
-import codeStyles from './JSONCodeBlock.module.scss';
-
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface JSONCodeBlockProps {
-    jsonString: string;
-
-    className?: string;
+    json: string | Record<string, any>[] | Record<string, any>;
 }
 
-export default function JSONCodeBlock({
-    jsonString,
+export default function JSONCodeBlock({ json }: JSONCodeBlockProps) {
+    let formattedJson: string = '';
 
-    className,
-}: JSONCodeBlockProps) {
-    const jsonData = JSON.parse(jsonString);
+    if (typeof json === 'string') {
+        const jsonData = JSON.parse(json);
 
-    const formattedJsonString = JSON.stringify(jsonData, null, 4);
+        formattedJson = JSON.stringify(jsonData, null, 4);
+    } else {
+        formattedJson = JSON.stringify(json, null, 4);
+    }
 
     return (
-        <SyntaxHighlighter language='json' style={dracula}>
-            {formattedJsonString}
+        <SyntaxHighlighter language='json' style={oneLight}>
+            {formattedJson + '{"key": "value"}'}
         </SyntaxHighlighter>
     );
 }

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import { useResize } from '@/hooks';
 
-import JSONCodeBlock from '@/UI/JSONCodeBlock';
+import ProductsStream from './ProductsStream';
 
 import asideStyles from './Aside.module.scss';
 
@@ -24,9 +24,7 @@ export default function Aside() {
         <aside ref={asideRef} className={asideStyles['aside']}>
             <div ref={resizerRef} className={asideStyles['resizer']} />
 
-            <p className={asideStyles['title']}>Товары</p>
-
-            <JSONCodeBlock jsonString='[ { "hello": "world", "description": null, "expensive": false, "number": 1230000 } ]' />
+            <ProductsStream />
         </aside>
     );
 }

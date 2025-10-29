@@ -213,3 +213,15 @@ New product:
 ${JSON.stringify(updateProduct)}`,
     });
 }
+
+export async function getProductsStream(
+    request: FastifyRequest,
+    reply: FastifyReply
+) {
+    reply.raw.setHeader('Content-Type', 'text/event-stream');
+    reply.raw.setHeader('Cache-Control', 'no-cache');
+    reply.raw.setHeader('Connection', 'keep-alive');
+    reply.raw.flushHeaders();
+
+    reply.raw.write(JSON.stringify({ title: 'It works!' }));
+}
