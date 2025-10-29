@@ -225,7 +225,7 @@ export async function getProductsStream(
 
     let products: ProductType[] = [];
 
-    const timeout = setTimeout(async () => {
+    const sendInterval = setInterval(async () => {
         products = await request.server.prisma.product.findMany();
 
         reply.raw.write(
@@ -236,6 +236,6 @@ export async function getProductsStream(
     reply.raw.write(JSON.stringify({ data: { title: 'hello' } }));
 
     reply.raw.on('close', () => {
-        clearTimeout(timeout);
+        clearInterval(sendInterval);
     });
 }
