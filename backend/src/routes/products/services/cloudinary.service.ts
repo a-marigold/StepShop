@@ -6,6 +6,8 @@ import type { MultipartFile } from '@fastify/multipart';
 export async function uploadImage(
     file: MultipartFile
 ): Promise<UploadApiResponse> {
+    const fileBuffer = await file.toBuffer();
+
     return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
             {
@@ -17,11 +19,11 @@ export async function uploadImage(
             }
         );
 
-        file.file.on('error', (error) => {
-            reject(error);
-        });
+        // file.file.on('error', (error) => {
+        //     reject(error);
+        // });
 
-        file.file.pipe(stream);
+        stream.end(fileBuffer);
     });
 }
 
@@ -42,6 +44,8 @@ export async function updateImage(
     imageId: string,
     file: MultipartFile
 ): Promise<UploadApiResponse> {
+    const fileBuffer = await file.toBuffer();
+
     return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
             {
@@ -55,10 +59,7 @@ export async function updateImage(
                 else resolve(result);
             }
         );
-        file.file.on('error', (error) => {
-            reject(error);
-        });
 
-        file.file.pipe(stream);
+        stream.end(fileBuffer);
     });
 }

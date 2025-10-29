@@ -19,7 +19,7 @@ export default function JSONCodeBlock({ json }: JSONCodeBlockProps) {
 
     return (
         <SyntaxHighlighter language='json' style={oneLight}>
-            {formattedJson + '{"key": "value"}'}
+            {formattedJson}
         </SyntaxHighlighter>
     );
 }
