@@ -15,23 +15,7 @@ import asideStyles from '../Aside.module.scss';
 interface ProductsStreamProps {
     products: ProductType[];
 }
-export default function ProductsStream({ products: p }: ProductsStreamProps) {
-    const [products, setProducts] = useState<ProductType[]>();
-
-    useEffect(() => {
-        const productsStream = new EventSource(`${apiOrigin}/products/stream`);
-
-        productsStream.addEventListener('message', (event) => {
-            setProducts(event.data);
-
-            console.log(event);
-        });
-
-        return () => {
-            productsStream.close();
-        };
-    }, []);
-
+export default function ProductsStream({ products }: ProductsStreamProps) {
     return (
         <div>
             <p className={asideStyles['title']}>Товары</p>

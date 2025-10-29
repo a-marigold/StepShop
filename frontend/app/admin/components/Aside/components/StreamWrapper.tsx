@@ -3,15 +3,31 @@ import type { ReactNode } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import { apiOrigin } from '@/utils/getApiOrigin';
+
 import type { ProductType, CategoryListType } from '@shared/types/ProductTypes';
 import type { OperationPath } from '@/app/admin/adminOperations';
 
 import ProductsStream from './ProductsStream';
 import CategoriesStream from './CategoriesStream';
 
-import asideStyles from '../Aside.module.scss';
-
 export default function StreamWrapper() {
+    const [products, setProducts] = useState<ProductType[]>([]);
+    const [categories, setCategories] = useState<CategoryListType>();
+
+    // TODO: Add error handling
+    useEffect(() => {
+        const stream = new EventSource(`${apiOrigin}/products/stream`);
+
+        stream.addEventListener('updateProducts', (event) => {
+            setProducts(event.data);
+        });
+
+        return () => {
+            stream.close();
+        };
+    }, []);
+
     const splitPathname = usePathname().split('/') as OperationRoot[];
 
     type OperationRoot = 'products' | 'categories';

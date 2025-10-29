@@ -252,7 +252,7 @@ export async function getProductsStream(
     request.server.eventEmmiter.on('updateProducts', async () => {
         const products = await request.server.prisma.product.findMany();
 
-        reply.raw.write('event: message\n');
+        reply.raw.write('event: updateProducts\n');
         reply.raw.write(`id: ${Date.now()}\n`);
         reply.raw.write(`data: ${JSON.stringify(products)}\n\n`);
     });
