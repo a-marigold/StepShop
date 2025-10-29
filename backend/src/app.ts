@@ -30,7 +30,6 @@ export async function buildApp() {
     app.register(fastifyCookie, { hook: 'onRequest' });
 
     app.register(cors, {
-        // origin: ['https://step-shop.vercel.app', 'http://localhost:3000'],
         origin: (origin, callback) => {
             if (!origin) return callback(null, true);
 

@@ -223,6 +223,9 @@ export async function getProductsStream(
     request: FastifyRequest,
     reply: FastifyReply
 ) {
+    reply.raw.setHeader('Acces-Control-Allow-Origin', request.headers.origin);
+    reply.raw.setHeader('Acces-Control-Allow-Credentials', 'true');
+
     reply.raw.setHeader('Content-Type', 'text/event-stream');
     reply.raw.setHeader('Cache-Control', 'no-cache');
     reply.raw.setHeader('Connection', 'keep-alive');
@@ -236,12 +239,10 @@ export async function getProductsStream(
     request.server.eventEmmiter.on('updateProducts', async () => {
         const products = await request.server.prisma.product.findMany();
 
-        reply.raw.write(
-            JSON.stringify({ id: Date.now(), event: 'message', data: products })
-        );
+        reply.raw.write('event: message\n');
+        reply.raw.write(`id: ${Date.now()}\n`);
+        reply.raw.write(`data: ${JSON.stringify(products)}\n\n`);
     });
-
-    reply.raw.write(JSON.stringify({ data: { title: 'hello' } }));
 
     reply.raw.on('close', () => {
         clearInterval(pingInterval);
