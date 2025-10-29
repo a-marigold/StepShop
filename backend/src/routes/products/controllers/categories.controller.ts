@@ -36,6 +36,8 @@ export async function createCategory(
         },
     });
 
+    request.server.eventEmmiter.emit('updateCategories');
+
     return reply.code(201).send(createCategory);
 }
 
@@ -58,6 +60,8 @@ export async function deleteCategory(
     const deleteCategory = await request.server.prisma.category.delete({
         where: { id: id },
     });
+
+    request.server.eventEmmiter.emit('updateCategories');
 
     return reply.code(200).send(deleteCategory);
 }

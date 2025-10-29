@@ -257,6 +257,14 @@ export async function getProductsStream(
         reply.raw.write(`data: ${JSON.stringify(products)}\n\n`);
     });
 
+    request.server.eventEmmiter.on('updateCategories', async () => {
+        const categories = await request.server.prisma.category.findMany();
+
+        reply.raw.write('event: updateCategories\n');
+        reply.raw.write(`id: ${Date.now()}\n`);
+        reply.raw.write(`data: ${JSON.stringify(categories)}\n\n`);
+    });
+
     reply.raw.on('close', () => {
         clearInterval(pingInterval);
     });
