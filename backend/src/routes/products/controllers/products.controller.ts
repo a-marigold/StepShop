@@ -234,4 +234,8 @@ export async function getProductsStream(
     }, 1000 * 60);
 
     reply.raw.write(JSON.stringify({ data: { title: 'hello' } }));
+
+    reply.raw.on('close', () => {
+        clearTimeout(timeout);
+    });
 }

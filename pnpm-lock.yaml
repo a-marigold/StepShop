@@ -104,9 +104,6 @@ importers:
       next:
         specifier: 15.5.3
         version: 15.5.3(@babel/core@7.28.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.93.2)
-      prismjs:
-        specifier: ^1.30.0
-        version: 1.30.0
       react:
         specifier: 19.1.0
         version: 19.1.0
