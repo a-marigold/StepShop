@@ -5,6 +5,7 @@
 
     flex: 1;
 
+    width: 100%;
     max-width: 610px;
 
     background: #1e1e1e;
@@ -13,37 +14,6 @@
 
     font-family: monospace !important;
 
-    white-space: pre;
-}
-
-.fbracket,
-.sbracket {
-    color: #9cdcfe;
-}
-
-.comma,
-.colon {
-    color: #808080;
-}
-
-.key {
-    color: #4fc1ff;
-}
-
-.string {
-    color: #ce9178;
-}
-
-.null {
-    color: #569cd6;
-    font-style: italic;
-}
-
-.boolean {
-    color: #b5cea8;
-    font-style: italic;
-}
-
-.number {
-    color: #b5cea8;
+    white-space: pre-wrap;
+    word-break: break-all;
 }

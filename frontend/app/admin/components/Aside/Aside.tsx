@@ -24,9 +24,9 @@ export default function Aside() {
         <aside ref={asideRef} className={asideStyles['aside']}>
             <div ref={resizerRef} className={asideStyles['resizer']} />
 
-            <JSONCodeBlock jsonString='[ { "hello": "world", "description": null, "expensive": false, "number": 1230000 } ]' />
-
             <p className={asideStyles['title']}>Товары</p>
+
+            <JSONCodeBlock jsonString='[ { "hello": "world", "description": null, "expensive": false, "number": 1230000 } ]' />
         </aside>
     );
 }

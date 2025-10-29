@@ -2,8 +2,8 @@ import clsx from 'clsx';
 
 import codeStyles from './JSONCodeBlock.module.scss';
 
-import { tokenizer } from './tokenizer';
-import { highlighter } from './highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface JSONCodeBlockProps {
     jsonString: string;
@@ -16,18 +16,13 @@ export default function JSONCodeBlock({
 
     className,
 }: JSONCodeBlockProps) {
-    console.log(tokenizer(jsonString));
+    const jsonData = JSON.parse(jsonString);
 
-    console.log(highlighter(tokenizer(jsonString)));
+    const formattedJsonString = JSON.stringify(jsonData, null, 4);
 
     return (
-        <pre className={clsx(codeStyles['code-block'], className)}>
-            <code
-                className={codeStyles['']}
-                dangerouslySetInnerHTML={{
-                    __html: highlighter(tokenizer(jsonString)),
-                }}
-            ></code>
-        </pre>
+        <SyntaxHighlighter language='json' style={dracula}>
+            {formattedJsonString}
+        </SyntaxHighlighter>
     );
 }
