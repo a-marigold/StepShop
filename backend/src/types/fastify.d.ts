@@ -5,8 +5,8 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 import type { VerifyPayloadType } from '@fastify/jwt';
 
 import type { PrismaClient } from '@prisma/client';
-
 import type Redis from 'ioredis';
+import type EventEmitter from 'events';
 
 export {};
 
@@ -17,6 +17,8 @@ declare module 'fastify' {
         redis: Redis;
 
         auth(request: FastifyRequest, reply: FastifyReply): Promise<void>;
+
+        eventEmmiter: EventEmitter;
     }
     interface FastifyRequest {
         cookies: {

@@ -7,7 +7,6 @@ import {
 } from '../services/cloudinary.service';
 
 import { getFileExtension } from 'src/utils/getFileExtension';
-import { apiOrigin } from 'src/utils/getApiOrigin';
 
 import type { MultipartFile } from '@fastify/multipart';
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
@@ -88,6 +87,8 @@ export async function createProduct(
         },
     });
 
+    request.server.eventEmmiter.emit('updateProducts');
+
     return reply.code(201).send({
         statusCode: 201,
         message: `Product has been created: Title - ${createProduct.title}; Id - ${createProduct.id}`,
@@ -126,6 +127,8 @@ export async function deleteProduct(
     });
 
     await destroyImage(deleteImage.id);
+
+    request.server.eventEmmiter.emit('updateProducts');
 
     reply.code(200).send({
         statusCode: 200,
@@ -204,6 +207,8 @@ export async function updateProduct(
         },
     });
 
+    request.server.eventEmmiter.emit('updateProducts');
+
     return reply.code(201).send({
         statusCode: 201,
         message: `Old product: 
@@ -225,21 +230,24 @@ export async function getProductsStream(
         'https://step-shop.vercel.app',
         'http://localhost:3000',
     ]);
+
     reply.raw.flushHeaders();
 
-    let products: ProductType[] = [];
+    const pingInterval = setInterval(() => {
+        reply.raw.write(JSON.stringify({ id: Date.now(), event: 'ping' }));
+    }, 1000 * 30);
 
-    const sendInterval = setInterval(async () => {
-        products = await request.server.prisma.product.findMany();
+    request.server.eventEmmiter.on('updateProducts', async () => {
+        const products = await request.server.prisma.product.findMany();
 
         reply.raw.write(
             JSON.stringify({ id: Date.now(), event: 'message', data: products })
         );
-    }, 1000 * 60);
+    });
 
     reply.raw.write(JSON.stringify({ data: { title: 'hello' } }));
 
     reply.raw.on('close', () => {
-        clearInterval(sendInterval);
+        clearInterval(pingInterval);
     });
 }
