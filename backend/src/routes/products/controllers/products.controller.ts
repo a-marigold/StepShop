@@ -223,5 +223,15 @@ export async function getProductsStream(
     reply.raw.setHeader('Connection', 'keep-alive');
     reply.raw.flushHeaders();
 
-    reply.raw.write(JSON.stringify({ title: 'It works!' }));
+    let products: ProductType[] = [];
+
+    const timeout = setTimeout(async () => {
+        products = await request.server.prisma.product.findMany();
+
+        reply.raw.write(
+            JSON.stringify({ id: Date.now(), event: 'message', data: products })
+        );
+    }, 1000 * 60);
+
+    reply.raw.write(JSON.stringify({ data: { title: 'hello' } }));
 }
