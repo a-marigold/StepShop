@@ -28,11 +28,13 @@ export default function ProductsStream() {
         };
     }, []);
 
+    console.log(products);
+
     return (
         <div>
             <p className={asideStyles['title']}>Товары</p>
 
-            {products ? (
+            {products?.length ? (
                 <JSONCodeBlock json={products} />
             ) : (
                 <div className={asideStyles['loading-block']}>

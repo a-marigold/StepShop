@@ -215,6 +215,7 @@ export async function updateProduct(
         statusCode: 201,
 
         message: `Old product: 
+
 ${JSON.stringify(prevProduct)};
 
 New product: 
@@ -224,6 +225,7 @@ ${JSON.stringify(updateProduct)}`,
 
 export async function getProductsStream(
     request: FastifyRequest,
+
     reply: FastifyReply
 ) {
     reply.raw.setHeader('Access-Control-Allow-Origin', request.headers.origin);
@@ -235,11 +237,15 @@ export async function getProductsStream(
 
     reply.raw.flushHeaders();
 
-    reply.raw.write('event: connected\n');
-    reply.raw.write('data: ok\n\n');
+    const products = await request.server.prisma.product.findMany();
+
+    reply.raw.write('event: message\n');
+    reply.raw.write(`id: ${Date.now()}\n`);
+    reply.raw.write(`data: ${JSON.stringify(products)}\n\n`);
 
     const pingInterval = setInterval(() => {
         reply.raw.write('event: ping\n');
+
         reply.raw.write(`id: ${Date.now()}\n\n`);
     }, 1000 * 30);
 
