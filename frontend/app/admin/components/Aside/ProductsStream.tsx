@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 
-import JSONCodeBlock from '@/UI/JSONCodeBlock';
-
 import type { ProductType } from '@shared/types/ProductTypes';
 
 import { apiOrigin } from '@/utils/getApiOrigin';
+
+import LoadingSpinner from '@/UI/LoadingSpinner';
+import JSONCodeBlock from '@/UI/JSONCodeBlock';
 
 import asideStyles from './Aside.module.scss';
 
@@ -31,7 +32,13 @@ export default function ProductsStream() {
         <div>
             <p className={asideStyles['title']}>Товары</p>
 
-            {products ? <JSONCodeBlock json={products} /> : ''}
+            {products ? (
+                <JSONCodeBlock json={products} />
+            ) : (
+                <div className={asideStyles['loading-block']}>
+                    <LoadingSpinner borderWidth='3px' size='32px' />
+                </div>
+            )}
         </div>
     );
 }

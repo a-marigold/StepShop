@@ -35,3 +35,10 @@
         border-left: 2px var(--accent-color) solid;
     }
 }
+
+.loading-block {
+    @include flex-center;
+
+    width: 320px;
+    height: 320px;
+}
