@@ -23,6 +23,14 @@ declare module 'fastify' {
             token?: string;
         };
     }
+
+    interface FastifyRouteConfig {
+        skipProductsApiKey: boolean;
+    }
+
+    interface FastifyContextConfig {
+        skipProductsApiKey: boolean;
+    }
 }
 
 declare module '@fastify/jwt' {

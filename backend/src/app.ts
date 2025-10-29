@@ -16,6 +16,7 @@ import fastifyMultipart from '@fastify/multipart';
 import prisma from './plugins/prisma';
 import redis from './plugins/redis';
 import auth from './plugins/auth';
+import eventEmmiter from './plugins/eventEmmiter';
 
 import { routes } from './routes';
 const app = Fastify({
@@ -42,6 +43,7 @@ export async function buildApp() {
     });
 
     app.register(fastifyMultipart);
+    app.register(eventEmmiter);
 
     app.register(prisma);
     app.register(redis);

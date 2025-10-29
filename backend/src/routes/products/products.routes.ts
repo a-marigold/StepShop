@@ -129,6 +129,7 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
             //     200: _RESPONSE__SCHEMA_,
             // },
         },
+        config: { skipProductsApiKey: true },
         handler: getProductsStream,
     });
 }

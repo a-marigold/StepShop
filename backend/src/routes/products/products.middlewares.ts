@@ -5,6 +5,8 @@ export async function checkProductsApiKey(
 
     reply: FastifyReply
 ) {
+    if (request.routeOptions.config.skipProductsApiKey) return;
+
     const headers = request.headers;
 
     const XApiKey = headers['x-api-key'];
