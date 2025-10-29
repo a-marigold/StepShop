@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import codeStyles from './JSONCodeBlock.module.scss';
 
 import { tokenizer } from './tokenizer';
+import { highlighter } from './highlighter';
 
 interface JSONCodeBlockProps {
     jsonString: string;
@@ -15,9 +16,18 @@ export default function JSONCodeBlock({
 
     className,
 }: JSONCodeBlockProps) {
+    console.log(tokenizer(jsonString));
+
+    console.log(highlighter(tokenizer(jsonString)));
+
     return (
         <pre className={clsx(codeStyles['code-block'], className)}>
-            <code className={codeStyles['']}>{tokenizer(jsonString)}</code>
+            <code
+                className={codeStyles['']}
+                dangerouslySetInnerHTML={{
+                    __html: highlighter(tokenizer(jsonString)),
+                }}
+            ></code>
         </pre>
     );
 }

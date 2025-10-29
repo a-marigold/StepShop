@@ -4,9 +4,46 @@
     @include flex-column;
 
     flex: 1;
+
     max-width: 610px;
 
-    background-color: var(--font-color);
+    background: #1e1e1e;
 
-    color: var(--secondary-border-color);
+    color: #d4d4d4;
+
+    font-family: monospace !important;
+
+    white-space: pre;
+}
+
+.fbracket,
+.sbracket {
+    color: #9cdcfe;
+}
+
+.comma,
+.colon {
+    color: #808080;
+}
+
+.key {
+    color: #4fc1ff;
+}
+
+.string {
+    color: #ce9178;
+}
+
+.null {
+    color: #569cd6;
+    font-style: italic;
+}
+
+.boolean {
+    color: #b5cea8;
+    font-style: italic;
+}
+
+.number {
+    color: #b5cea8;
 }

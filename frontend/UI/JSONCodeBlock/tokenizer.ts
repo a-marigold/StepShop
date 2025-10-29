@@ -29,7 +29,7 @@ export function tokenizer(jsonString: string) {
         } else if (jsonString[i] === 'n') {
             if (jsonString[i - 1] === '"') continue;
 
-            while (jsonString[i] !== ',') {
+            while (currentToken !== 'null') {
                 currentToken += jsonString[i];
                 i++;
             }
@@ -42,10 +42,11 @@ export function tokenizer(jsonString: string) {
         ) {
             if (jsonString[i - 1] === '"') continue;
 
-            while (jsonString[i] !== ',') {
+            while (currentToken !== 'true') {
                 currentToken += jsonString[i];
                 i++;
             }
+
             tokens.push(currentToken);
             currentToken = '';
         } else if (
@@ -53,6 +54,15 @@ export function tokenizer(jsonString: string) {
             jsonString[i] !== '}' &&
             jsonString[i] !== ']'
         ) {
+            if (jsonString[i - 1] === '"') continue;
+
+            while (currentToken !== 'false') {
+                currentToken += jsonString[i];
+                i++;
+            }
+            tokens.push(currentToken);
+            currentToken = '';
+        } else if (/^\d+$/.test(jsonString[i])) {
             if (jsonString[i - 1] === '"') continue;
 
             while (
@@ -64,10 +74,11 @@ export function tokenizer(jsonString: string) {
                 currentToken += jsonString[i];
                 i++;
             }
+
             tokens.push(currentToken);
             currentToken = '';
         }
     }
 
-    return tokens.join();
+    return tokens;
 }
