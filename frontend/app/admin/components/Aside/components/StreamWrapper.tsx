@@ -26,20 +26,24 @@ export default function StreamWrapper() {
 
         stream.addEventListener('updateProducts', (event) => {
             try {
-                ProductListSchema.parse(event.data);
+                const productsData = JSON.parse(event.data);
 
-                console.log(event.data);
-                setProducts(event.data);
-            } catch (error) {
+                ProductListSchema.parse(productsData);
+
+                setProducts(productsData);
+            } catch {
                 setProducts([]);
             }
         });
 
         stream.addEventListener('updateCategories', (event) => {
             try {
-                CategoryListSchema.parse(event.data);
-                setCategories(event.data);
-            } catch (error) {
+                const categoriesData = JSON.parse(event.data);
+
+                CategoryListSchema.parse(categoriesData);
+
+                setCategories(categoriesData);
+            } catch {
                 setCategories([]);
             }
         });
