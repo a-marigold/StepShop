@@ -144,7 +144,10 @@ export async function updateProduct(
     reply: FastifyReply
 ) {
     let file: MultipartFile | undefined = undefined;
+
     let productData: Record<keyof ProductType, string>;
+
+    console.log(request.parts());
 
     for await (const part of request.parts()) {
         if (part.type === 'field' && typeof part.value === 'string') {
