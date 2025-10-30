@@ -150,6 +150,7 @@ export async function updateProduct(
     console.log(request.parts());
 
     for await (const part of request.parts()) {
+        console.log(part);
         if (part.type === 'field' && typeof part.value === 'string') {
             console.log(part.value);
 
