@@ -5,8 +5,13 @@ import { usePathname } from 'next/navigation';
 
 import { apiOrigin } from '@/utils/getApiOrigin';
 
-import type { ProductType, CategoryListType } from '@shared/types/ProductTypes';
-import type { OperationPath } from '@/app/admin/adminOperations';
+import {
+    ProductType,
+    CategoryListType,
+    ProductListSchema,
+    CategoryListSchema,
+} from '@shared/types/ProductTypes';
+import type { OperationRoot } from '@/app/admin/adminOperations';
 
 import ProductsStream from './ProductsStream';
 import CategoriesStream from './CategoriesStream';
@@ -20,11 +25,23 @@ export default function StreamWrapper() {
         const stream = new EventSource(`${apiOrigin}/products/stream`);
 
         stream.addEventListener('updateProducts', (event) => {
-            setProducts(event.data);
+            try {
+                ProductListSchema.parse(event.data);
+
+                console.log(event.data);
+                setProducts(event.data);
+            } catch (error) {
+                setProducts([]);
+            }
         });
 
         stream.addEventListener('updateCategories', (event) => {
-            setCategories(event.data);
+            try {
+                CategoryListSchema.parse(event.data);
+                setCategories(event.data);
+            } catch (error) {
+                setCategories([]);
+            }
         });
 
         return () => {
@@ -34,7 +51,6 @@ export default function StreamWrapper() {
 
     const splitPathname = usePathname().split('/') as OperationRoot[];
 
-    type OperationRoot = 'products' | 'categories';
     const operationRoots: OperationRoot[] = ['products', 'categories'];
 
     const currentOperationRoot = splitPathname.find((name) =>

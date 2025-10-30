@@ -1,3 +1,5 @@
+export type OperationRoot = 'products' | 'categories';
+
 export type OperationPath =
     | '/admin/products/create'
     | '/admin/products/delete'

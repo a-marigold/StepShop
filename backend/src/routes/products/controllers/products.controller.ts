@@ -238,10 +238,15 @@ export async function getProductsStream(
     reply.raw.flushHeaders();
 
     const products = await request.server.prisma.product.findMany();
+    const categories = await request.server.prisma.category.findMany();
 
-    reply.raw.write('event: message\n');
+    reply.raw.write('event: updateProducts\n');
     reply.raw.write(`id: ${Date.now()}\n`);
     reply.raw.write(`data: ${JSON.stringify(products)}\n\n`);
+
+    reply.raw.write('event: updateCategories\n');
+    reply.raw.write(`id: ${Date.now()}\n`);
+    reply.raw.write(`data: ${JSON.stringify(categories)}\n\n`);
 
     const pingInterval = setInterval(() => {
         reply.raw.write('event: ping\n');
