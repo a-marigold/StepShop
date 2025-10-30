@@ -13,7 +13,7 @@ import CategoriesStream from './CategoriesStream';
 
 export default function StreamWrapper() {
     const [products, setProducts] = useState<ProductType[]>([]);
-    const [categories, setCategories] = useState<CategoryListType>();
+    const [categories, setCategories] = useState<CategoryListType>([]);
 
     // TODO: Add error handling
     useEffect(() => {
@@ -21,6 +21,10 @@ export default function StreamWrapper() {
 
         stream.addEventListener('updateProducts', (event) => {
             setProducts(event.data);
+        });
+
+        stream.addEventListener('updateCategories', (event) => {
+            setCategories(event.data);
         });
 
         return () => {
@@ -38,8 +42,8 @@ export default function StreamWrapper() {
     );
 
     const streamComponents: { [key in string]: ReactNode } = {
-        products: <ProductsStream products={[]} />,
-        categories: <CategoriesStream categories={[]} />,
+        products: <ProductsStream products={products} />,
+        categories: <CategoriesStream categories={categories} />,
     };
 
     return (
