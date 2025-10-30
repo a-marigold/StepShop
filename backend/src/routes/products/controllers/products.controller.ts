@@ -140,31 +140,34 @@ export async function updateProduct(
     request: FastifyRequest<{
         Params: Pick<ProductType, 'id'>;
     }>,
+
     reply: FastifyReply
 ) {
-    const id = request.params.id;
-
-    const file = await request.file();
-
-    let fileExtension: string;
-    try {
-        fileExtension = getFileExtension(file.filename);
-    } catch (error) {
-        if (error instanceof Error) {
-            return reply.code(400).send({ message: error.message });
-        }
-    }
-
+    let file: MultipartFile | undefined = undefined;
     let productData: Record<keyof ProductType, string>;
 
     for await (const part of request.parts()) {
         if (part.type === 'field' && typeof part.value === 'string') {
             productData = JSON.parse(part.value);
+        } else if (part.type === 'file') {
+            file = part;
         } else {
             return reply.code(400).send();
         }
     }
 
+    let fileExtension: string | undefined = undefined;
+    if (file) {
+        try {
+            fileExtension = getFileExtension(file.filename);
+        } catch (error) {
+            if (error instanceof Error) {
+                return reply.code(400).send({ message: error.message });
+            }
+        }
+    }
+
+    const id = request.params.id;
     const {
         title: newTitle,
         description: newDescription,
@@ -185,16 +188,21 @@ export async function updateProduct(
         where: { url: prevProduct.image },
     });
 
-    const uploadNewImage = await updateImage(prevImageId, file);
+    let newImageUrl: string | undefined = undefined;
+    if (file) {
+        const uploadNewImage = await updateImage(prevImageId, file);
 
-    const updateImageRecord = await request.server.prisma.image.update({
-        where: { url: prevProduct.image },
+        const updateImageRecord = await request.server.prisma.image.update({
+            where: { url: prevProduct.image },
 
-        data: {
-            url: uploadNewImage.secure_url,
-            id: uploadNewImage.public_id,
-        },
-    });
+            data: {
+                url: uploadNewImage.secure_url,
+                id: uploadNewImage.public_id,
+            },
+        });
+
+        newImageUrl = updateImageRecord.url;
+    }
 
     const updateProduct = await request.server.prisma.product.update({
         where: {
@@ -202,7 +210,7 @@ export async function updateProduct(
         },
 
         data: {
-            image: updateImageRecord.url,
+            image: newImageUrl ?? prevProduct.image,
             title: newTitle ?? prevProduct.title,
             description: newDescription ?? prevProduct.description,
             price: Number(newPrice) ?? prevProduct.price,
@@ -234,6 +242,7 @@ export async function getProductsStream(
 
     reply.raw.setHeader('Content-Type', 'text/event-stream');
     reply.raw.setHeader('Cache-Control', 'no-cache');
+
     reply.raw.setHeader('Connection', 'keep-alive');
 
     reply.raw.flushHeaders();

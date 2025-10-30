@@ -19,16 +19,13 @@ export default function ProductsStream({ products }: ProductsStreamProps) {
     return (
         <div>
             <p className={asideStyles['title']}>Товары</p>
-            {/* 
             {products.length ? (
                 <JSONCodeBlock json={products} />
             ) : (
                 <div className={asideStyles['loading-block']}>
                     <LoadingSpinner borderWidth='3px' size='32px' />
                 </div>
-            )} */}
-
-            <JSONCodeBlock json={products} />
+            )}
         </div>
     );
 }

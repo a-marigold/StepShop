@@ -124,7 +124,6 @@ export function UpdateProductForm() {
             <Controller
                 control={control}
                 name='imageFile'
-                rules={{ required: 'Изображение товара обязательно' }}
                 render={({ field, fieldState }) => (
                     <FileInput
                         title='Изображение товара'
