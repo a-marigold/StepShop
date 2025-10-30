@@ -109,6 +109,9 @@ export async function patchProduct(newProduct: ProductType, imageFile: File) {
     formData.append('imageFile', imageFile);
     formData.append('product', JSON.stringify(newProduct));
 
+    console.log(imageFile);
+    console.log(JSON.stringify(newProduct));
+
     const response = await fetch(`${apiOrigin}/products/${newProduct.id}`, {
         method: 'PATCH',
         headers: {

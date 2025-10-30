@@ -148,6 +148,8 @@ export async function updateProduct(
 
     for await (const part of request.parts()) {
         if (part.type === 'field' && typeof part.value === 'string') {
+            console.log(part.value);
+
             productData = JSON.parse(part.value);
         } else if (part.type === 'file') {
             file = part;

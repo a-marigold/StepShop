@@ -25,6 +25,7 @@ const updateInputsList: OperationInput[] = [
         name: 'ID товара',
         propertyName: 'id',
         htmlId: 'new-product-id-input',
+        errorMessage: 'ID товара обязателен',
         isRequired: true,
     },
 
@@ -32,7 +33,7 @@ const updateInputsList: OperationInput[] = [
         name: 'Новое название товара',
         htmlId: 'new-product-title-input',
         propertyName: 'title',
-        isRequired: true,
+        isRequired: false,
     },
 
     {
@@ -49,7 +50,7 @@ const updateInputsList: OperationInput[] = [
         propertyName: 'price',
 
         errorMessage: 'Цена товара обязательна',
-        isRequired: true,
+        isRequired: false,
     },
 ];
 

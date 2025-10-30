@@ -18,11 +18,7 @@ export default function JSONCodeBlock({ json }: JSONCodeBlockProps) {
     }
 
     return (
-        <SyntaxHighlighter
-            language='json'
-            style={oneLight}
-            customStyle={{ width: '' }}
-        >
+        <SyntaxHighlighter language='json' style={oneLight}>
             {formattedJson}
         </SyntaxHighlighter>
     );

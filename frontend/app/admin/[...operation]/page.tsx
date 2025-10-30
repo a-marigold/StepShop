@@ -33,7 +33,7 @@ export async function generateMetadata({
         '/admin/categories/delete': 'Удаление категории',
     };
 
-    const operation = await params.operation;
+    const { operation } = await params;
 
     const path = `/admin/${operation.join('/')}` as OperationPath;
 
@@ -56,7 +56,7 @@ const operationComponentList: Record<OperationPath, ReactNode> = {
 };
 
 export default async function OperationPage({ params }: OperationPageProps) {
-    const operation = await params.operation;
+    const { operation } = await params;
 
     const path = `/admin/${operation.join('/')}` as OperationPath;
 
