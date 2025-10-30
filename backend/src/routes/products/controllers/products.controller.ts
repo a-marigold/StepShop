@@ -59,7 +59,7 @@ export async function createProduct(
     }
 
     const { title, price, quantity, description } = productData;
-    if (!title || !price || !quantity || !description) {
+    if (!title || !price || !quantity) {
         return reply
             .code(400)
             .send({ message: 'All product`s properties are required' });
@@ -147,14 +147,14 @@ export async function updateProduct(
 
     let productData: Record<keyof ProductType, string>;
 
-    console.log(request.parts());
-
     for await (const part of request.parts()) {
-        console.log(part);
-        if (part.type === 'field' && typeof part.value === 'string') {
-            console.log(part.value);
-
-            productData = JSON.parse(part.value);
+        if (part.type === 'field') {
+            if (
+                part.fieldname === 'product' &&
+                typeof part.value === 'string'
+            ) {
+                productData = JSON.parse(part.value);
+            }
         } else if (part.type === 'file') {
             file = part;
         } else {
