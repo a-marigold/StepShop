@@ -205,6 +205,7 @@ export async function updateProduct(
 
             data: {
                 url: uploadNewImage.secure_url,
+
                 id: uploadNewImage.public_id,
             },
         });
@@ -219,8 +220,8 @@ export async function updateProduct(
 
         data: {
             image: newImageUrl ?? prevProduct.image,
-            title: newTitle.length ? newTitle : prevProduct.title,
-            description: newDescription.length
+            title: !!newTitle ? newTitle : prevProduct.title,
+            description: !!newDescription
                 ? newDescription
                 : prevProduct.description,
             price: !!Number(newPrice) ? Number(newPrice) : prevProduct.price,
