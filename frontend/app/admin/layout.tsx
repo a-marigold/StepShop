@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+import { usePathname } from 'next/navigation';
+
 import type { ReactNode } from 'react';
 
 import { clientGetUserData } from '@/lib/api/auth';
@@ -43,6 +45,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         throw error;
     }
 
+    const pathname = usePathname();
+
     return isLoading ? (
         <div
             className={clsx(
@@ -61,7 +65,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
                 {children}
 
-                <Aside />
+                {pathname.split('/').length > 1 ? <Aside /> : null}
             </div>
         </>
     );

@@ -29,6 +29,7 @@ export async function createProduct(
     let productData: Record<keyof ProductType, string>;
 
     for await (const part of request.parts()) {
+        console.log(part);
         if (part.type === 'field') {
             if (
                 part.fieldname === 'product' &&
@@ -58,6 +59,7 @@ export async function createProduct(
         }
     }
 
+    console.log(productData);
     const { title, price, quantity, description } = productData;
     if (!title || !price || !quantity) {
         return reply
@@ -217,8 +219,10 @@ export async function updateProduct(
 
         data: {
             image: newImageUrl ?? prevProduct.image,
-            title: newTitle ?? prevProduct.title,
-            description: newDescription ?? prevProduct.description,
+            title: newTitle.length ? newTitle : prevProduct.title,
+            description: newDescription.length
+                ? newDescription
+                : prevProduct.description,
             price: !!Number(newPrice) ? Number(newPrice) : prevProduct.price,
         },
     });

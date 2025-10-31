@@ -53,10 +53,6 @@ export async function postProduct(newProduct: ProductType, imageFile: File) {
 
     formData.append('product', JSON.stringify(newProduct));
 
-    for (const [key, value] of formData.entries()) {
-        console.log(key, value);
-    }
-
     const response = await fetch(`${apiOrigin}/products`, {
         method: 'POST',
         headers: {
@@ -109,9 +105,6 @@ export async function patchProduct(newProduct: ProductType, imageFile: File) {
     formData.append('imageFile', imageFile);
     formData.append('product', JSON.stringify(newProduct));
 
-    console.log(imageFile);
-    console.log(JSON.stringify(newProduct));
-
     const response = await fetch(`${apiOrigin}/products/${newProduct.id}`, {
         method: 'PATCH',
         headers: {
@@ -119,6 +112,7 @@ export async function patchProduct(newProduct: ProductType, imageFile: File) {
         },
         body: formData,
     });
+
     const updateProduct: ApiResponseType = await response.json();
 
     if (!response.ok) {
@@ -129,7 +123,7 @@ export async function patchProduct(newProduct: ProductType, imageFile: File) {
         throw new ApiError(updateProduct.message);
     }
 
-    const revalidateProductsTag = await clientRevalidateTag('products');
+    await clientRevalidateTag('products');
 
     return updateProduct;
 }

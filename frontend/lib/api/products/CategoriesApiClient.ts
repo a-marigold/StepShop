@@ -65,7 +65,6 @@ export async function deleteCategory(id: CategoryType['id']) {
         method: 'DELETE',
 
         headers: {
-            'Content-Type': 'application/json',
             'x-api-key': process.env.NEXT_PUBLIC_X_API_KEY ?? '',
         },
     });

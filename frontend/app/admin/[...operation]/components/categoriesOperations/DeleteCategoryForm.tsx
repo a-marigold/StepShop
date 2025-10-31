@@ -38,7 +38,7 @@ export function DeleteCategoryForm() {
             const deleteProductData = await deleteCategory(data.id);
 
             addSuccessNotice(
-                `Product has been deleted`,
+                `Category has been deleted`,
                 `Category '${deleteProductData.name}' was deleted`,
                 10,
                 dispatch
