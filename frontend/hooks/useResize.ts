@@ -6,10 +6,13 @@ export function useResize() {
 
         resizerElement: HTMLElement,
 
-        growDirection: 'left' | 'right' = 'right'
-    ) {
-        let startX = 0;
+        growDirection: 'left' | 'right' = 'right',
 
+        enabled: boolean = true
+    ) {
+        if (!enabled) return;
+
+        let startX = 0;
         let startWidth = 0;
 
         function handleMouseDown(event: MouseEvent) {

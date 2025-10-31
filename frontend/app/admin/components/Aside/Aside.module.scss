@@ -5,7 +5,7 @@
 
     @include flex-column;
 
-    min-width: 320px;
+    min-width: 220px;
     width: 400px;
     max-width: 700px;
 
@@ -50,6 +50,11 @@
 
 @media (max-width: 600px) {
     .aside {
+        width: 100%;
         min-width: initial;
+    }
+
+    .resizer {
+        display: none;
     }
 }

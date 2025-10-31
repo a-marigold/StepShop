@@ -90,16 +90,36 @@ export default function Navbar() {
         };
     }, [trottledCalculateBlock]);
 
+    const [resizeEnabled, setResizeEnabled] = useState(true);
+
     const navbarRef = useRef<HTMLElement>(null);
     const resizerRef = useRef<HTMLDivElement>(null);
 
     const resize = useResize();
-
     useEffect(() => {
-        if (navbarRef.current && resizerRef.current) {
-            return resize(navbarRef.current, resizerRef.current);
+        const widthQuery = window.matchMedia('(max-width: 600px)');
+
+        if (widthQuery.matches) {
+            setResizeEnabled(false);
         }
-    }, []);
+
+        widthQuery.addEventListener('change', () => {
+            setResizeEnabled((prev) => !prev);
+
+            if (navbarRef.current && !resizeEnabled) {
+                navbarRef.current.style.width = '';
+            }
+        });
+
+        if (navbarRef.current && resizerRef.current) {
+            return resize(
+                navbarRef.current,
+                resizerRef.current,
+                'right',
+                resizeEnabled
+            );
+        }
+    }, [resizeEnabled]);
 
     return (
         <nav ref={navbarRef} className={navStyles['navbar']}>
