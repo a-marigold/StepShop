@@ -15,12 +15,10 @@ import navStyles from './Navigation.module.scss';
 
 export default function Categories() {
     const [categories, setCategories] = useState<CategoryListType>();
-    const [isLoading, setIsLoading] = useState(true);
+
     const [error, setError] = useState<string | null>(null);
 
     async function fetchCategories() {
-        setIsLoading(true);
-
         try {
             const categories = await getCategories();
 
@@ -30,8 +28,6 @@ export default function Categories() {
         } catch {
             setError('Внутренняя ошибка сервера');
             setCategories([]);
-        } finally {
-            setIsLoading(false);
         }
     }
 
@@ -42,13 +38,13 @@ export default function Categories() {
     const [currentCategory, setCurrentCategory] = useState<string>();
 
     const categoriesRef = useRef<
-        Partial<Record<string, HTMLButtonElement | null>>
+        Partial<Record<string, HTMLAnchorElement | null>>
     >({});
 
     const activeBlockRef = useRef<HTMLDivElement>(null);
 
     function changeCategory(
-        categoryRef: HTMLButtonElement | null,
+        categoryRef: HTMLAnchorElement | null,
         blockRef: HTMLDivElement | null
     ) {
         if (!categoryRef || !blockRef) return;
@@ -83,8 +79,9 @@ export default function Categories() {
 
             {!!categories?.length ? (
                 categories.map((category) => (
-                    <button
+                    <a
                         key={category.id}
+                        href={`#${category.name}`}
                         ref={(element) => {
                             categoriesRef.current[category.id] = element;
                         }}
@@ -97,7 +94,7 @@ export default function Categories() {
                         onClick={() => setCurrentCategory(category.id)}
                     >
                         {category.name}
-                    </button>
+                    </a>
                 ))
             ) : (
                 <div className={navStyles['loading-block']}>

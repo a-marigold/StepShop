@@ -14,6 +14,7 @@ exports.ProductSchema = (0, zod_1.object)({
     price: (0, zod_1.number)(),
     quantity: (0, zod_1.number)(),
     id: (0, zod_1.number)(),
+    category: (0, zod_1.string)(),
 }).strict();
 exports.ProductListSchema = (0, zod_1.array)(exports.ProductSchema);
 //* Categories

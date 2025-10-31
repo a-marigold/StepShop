@@ -13,7 +13,6 @@ import ModalBackdrop from '@/UI/ModalBackdrop';
 import AccessButton from '@UI/AccessButton';
 import SizePicker from '@UI/SizePicker';
 import CloseModalCross from '@/UI/CloseModalCross';
-
 import modalStyles from './ProductModal.module.scss';
 
 interface ProductModalProps extends ClientProductType {

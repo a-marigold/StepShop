@@ -24,6 +24,8 @@ export const ProductSchema = object({
     quantity: number(),
 
     id: number(),
+
+    category: string(),
 }).strict();
 
 export const ProductListSchema = array(ProductSchema);

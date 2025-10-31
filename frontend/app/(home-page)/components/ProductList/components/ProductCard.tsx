@@ -15,6 +15,7 @@ import productStyles from '../ProductList.module.scss';
 
 export default function ProductCard({
     id,
+    category,
     image,
     title,
     description,
@@ -38,6 +39,7 @@ export default function ProductCard({
                 className={productStyles['product-card']}
                 onClick={() => setShowModal(true)}
                 aria-label={`Добавить ${title} в корзину`}
+                id={category}
             >
                 <div className={productStyles['image-block']}>
                     <Image

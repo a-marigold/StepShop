@@ -23,6 +23,8 @@ model Product {
 
   price Int
   quantity Int 
+
+  category String @default("all")
 }
 
 model Image {

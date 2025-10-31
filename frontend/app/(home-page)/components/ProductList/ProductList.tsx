@@ -2,11 +2,13 @@ import { serverGetProducts } from '@/lib/api/products';
 import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@step-shop/shared/types/ProductTypes';
+
 import type { SearchParamsProp } from '@/types/SearchParamsProp';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 import ProductCard from './components/ProductCard';
+
 import NotFoundProductList from './components/NotFoundProductList';
 
 import productStyles from './ProductList.module.scss';
@@ -45,6 +47,7 @@ export default async function ProductList({ searchParams }: SearchParamsProp) {
                 filteredProducts.map((product) => (
                     <ProductCard
                         key={product.id}
+                        category={product.category}
                         id={product.id}
                         title={product.title}
                         image={product.image}

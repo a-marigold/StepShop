@@ -7,6 +7,7 @@ export declare const ProductSchema: import("zod").ZodObject<{
     price: import("zod").ZodNumber;
     quantity: import("zod").ZodNumber;
     id: import("zod").ZodNumber;
+    category: import("zod").ZodString;
 }, import("zod/v4/core").$strict>;
 export declare const ProductListSchema: import("zod").ZodArray<import("zod").ZodObject<{
     image: import("zod").ZodString;
@@ -15,6 +16,7 @@ export declare const ProductListSchema: import("zod").ZodArray<import("zod").Zod
     price: import("zod").ZodNumber;
     quantity: import("zod").ZodNumber;
     id: import("zod").ZodNumber;
+    category: import("zod").ZodString;
 }, import("zod/v4/core").$strict>>;
 export type CurrencySymbol = zinfer<typeof CurrencySymbolSchema>;
 export type ProductType = zinfer<typeof ProductSchema>;
