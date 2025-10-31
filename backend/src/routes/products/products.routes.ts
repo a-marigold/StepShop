@@ -1,6 +1,6 @@
 import type { ProvideredAppInstance } from 'src/app';
 
-import { object, string, array, coerce } from 'zod';
+import { coerce } from 'zod';
 
 import {
     getAllProducts,
@@ -16,6 +16,12 @@ import {
     deleteCategory,
 } from './controllers/categories.controller';
 
+import {
+    getAllOptions,
+    createOption,
+    deleteOption,
+} from './controllers/options.controller';
+
 import { checkProductsApiKey } from './products.middlewares';
 
 import {
@@ -23,6 +29,8 @@ import {
     ProductSchema,
     CategorySchema,
     CategoryListSchema,
+    OptionSchema,
+    OptionListSchema,
 } from '@step-shop/shared/types/ProductTypes';
 import { ApiResponseSchema } from '@step-shop/shared/types/ApiResponseType';
 
@@ -131,5 +139,40 @@ export default async function productsRoutes(app: ProvideredAppInstance) {
         },
         config: { skipProductsApiKey: true },
         handler: getProductsStream,
+    });
+
+    app.route({
+        method: 'GET',
+        url: '/products/options',
+
+        schema: {
+            response: {
+                200: OptionListSchema,
+            },
+        },
+
+        handler: getAllOptions,
+    });
+
+    app.route({
+        method: 'POST',
+        url: '/products/options',
+
+        schema: {
+            body: OptionSchema,
+        },
+
+        handler: createOption,
+    });
+
+    app.route({
+        method: 'DELETE',
+        url: '/products/options/:id',
+
+        schema: {
+            params: OptionSchema.pick({ id: true }),
+        },
+
+        handler: deleteOption,
     });
 }

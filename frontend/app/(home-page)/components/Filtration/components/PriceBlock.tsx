@@ -2,13 +2,13 @@
 
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
-import { setMinPrice, setMaxPrice } from './redux/filtrationSlice';
+import { setMinPrice, setMaxPrice } from '../redux/filtrationSlice';
 
 import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 import PriceInput from '@UI/PriceInput';
 
-import filterStyles from './Filtration.module.scss';
+import filterStyles from '../Filtration.module.scss';
 
 export default function PriceBlock() {
     const dispatch = useDispatch<AppDispatch>();

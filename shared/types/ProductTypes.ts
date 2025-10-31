@@ -35,7 +35,17 @@ export type ProductType = zinfer<typeof ProductSchema>;
 
 //* Categories
 export const CategorySchema = object({ id: string(), name: string() });
+
 export const CategoryListSchema = array(CategorySchema);
 
 export type CategoryType = zinfer<typeof CategorySchema>;
+
 export type CategoryListType = zinfer<typeof CategoryListSchema>;
+
+//* Options
+export const OptionSchema = object({ id: string(), name: string() });
+
+export const OptionListSchema = array(CategorySchema);
+
+export type OptionType = zinfer<typeof OptionSchema>;
+export type OptionListType = zinfer<typeof OptionListSchema>;

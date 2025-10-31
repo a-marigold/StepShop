@@ -30,3 +30,13 @@ export declare const CategoryListSchema: import("zod").ZodArray<import("zod").Zo
 }, import("zod/v4/core").$strip>>;
 export type CategoryType = zinfer<typeof CategorySchema>;
 export type CategoryListType = zinfer<typeof CategoryListSchema>;
+export declare const OptionSchema: import("zod").ZodObject<{
+    id: import("zod").ZodString;
+    name: import("zod").ZodString;
+}, import("zod/v4/core").$strip>;
+export declare const OptionListSchema: import("zod").ZodArray<import("zod").ZodObject<{
+    id: import("zod").ZodString;
+    name: import("zod").ZodString;
+}, import("zod/v4/core").$strip>>;
+export type OptionType = zinfer<typeof OptionSchema>;
+export type OptionListType = zinfer<typeof OptionListSchema>;

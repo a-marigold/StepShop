@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import type { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 
-import CheckBoxesBlock from './CheckBoxesBlock';
-import PriceBlock from './PriceBlock';
+import ProductOptions from './components/ProductOptions';
+import PriceBlock from './components/PriceBlock';
 import AccessButton from '@/UI/AccessButton';
 
 import filterStyles from './Filtration.module.scss';
@@ -36,7 +36,7 @@ export default function Filtration() {
             <h2 className={filterStyles['title']}>Фильтрация</h2>
 
             <div className={filterStyles['filters-list']}>
-                <CheckBoxesBlock propertiesList={['option 1', 'option 2']} />
+                <ProductOptions />
 
                 <PriceBlock />
             </div>

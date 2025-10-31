@@ -27,16 +27,22 @@ model Product {
   category String @default("all")
 }
 
-model Image {
-  url String @unique
-  id String @unique
-}
+
 
 model Category {
   id String @unique
   name String
 }
 
+model Option {
+  id String @unique
+  name String
+}
+
+model Image {
+  url String @unique
+  id String @unique
+}
 
 model User {
   id String @id @unique @default(cuid())

@@ -1,20 +1,22 @@
 'use client';
 
+import { memo } from 'react';
+
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/redux/store';
 
-import { addOption, deleteOption } from './redux/filtrationSlice';
+import { addOption, deleteOption } from '../redux/filtrationSlice';
 
 import CheckBox from '@UI/Checkbox';
 
-import filterStyles from './Filtration.module.scss';
+import filterStyles from '../Filtration.module.scss';
 
 interface CheckBoxesBlockProps {
     title?: string;
     propertiesList: string[];
 }
 
-export default function CheckBoxesBlock({
+export default memo(function CheckBoxesBlock({
     title,
     propertiesList,
 }: CheckBoxesBlockProps) {
@@ -41,4 +43,4 @@ export default function CheckBoxesBlock({
             ))}
         </div>
     );
-}
+});
