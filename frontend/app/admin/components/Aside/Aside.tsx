@@ -13,32 +13,27 @@ export default function Aside() {
 
     const resizerRef = useRef<HTMLDivElement>(null);
 
-    const [resizeEnabled, setResizeEnabled] = useState(true);
-
     const resizer = useResize();
+
+    function resetAsideWidth(event: MediaQueryListEvent) {
+        if (asideRef.current && event.matches) {
+            asideRef.current.style.width = '';
+        }
+    }
+
     useEffect(() => {
         const widthQuery = window.matchMedia('(max-width: 600px)');
 
-        if (widthQuery.matches) {
-            setResizeEnabled(false);
-        }
-
-        widthQuery.addEventListener('change', () => {
-            setResizeEnabled((prev) => !prev);
-            if (asideRef.current && !resizeEnabled) {
-                asideRef.current.style.width = '';
-            }
-        });
+        widthQuery.addEventListener('change', resetAsideWidth);
 
         if (asideRef.current && resizerRef.current) {
-            return resizer(
-                asideRef.current,
-                resizerRef.current,
-                'left',
-                resizeEnabled
-            );
+            return resizer(asideRef.current, resizerRef.current, 'left');
         }
-    }, [resizeEnabled]);
+
+        return () => {
+            widthQuery.removeEventListener('change', resetAsideWidth);
+        };
+    }, []);
 
     return (
         <aside ref={asideRef} className={asideStyles['aside']}>

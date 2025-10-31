@@ -219,7 +219,7 @@ export async function updateProduct(
             image: newImageUrl ?? prevProduct.image,
             title: newTitle ?? prevProduct.title,
             description: newDescription ?? prevProduct.description,
-            price: Number(newPrice) && prevProduct.price,
+            price: !!Number(newPrice) ? Number(newPrice) : prevProduct.price,
         },
     });
 

@@ -86,40 +86,36 @@ export default function Navbar() {
         return () => {
             window.removeEventListener('resize', trottledCalculateBlock);
             window.removeEventListener('scroll', trottledCalculateBlock);
+
             navbarResizeObserver.disconnect();
         };
     }, [trottledCalculateBlock]);
 
-    const [resizeEnabled, setResizeEnabled] = useState(true);
-
     const navbarRef = useRef<HTMLElement>(null);
+
     const resizerRef = useRef<HTMLDivElement>(null);
 
     const resize = useResize();
+
+    function resetNavbarWidth(event: MediaQueryListEvent) {
+        if (navbarRef.current && event.matches) {
+            navbarRef.current.style.width = '';
+        }
+    }
+
     useEffect(() => {
         const widthQuery = window.matchMedia('(max-width: 600px)');
 
-        if (widthQuery.matches) {
-            setResizeEnabled(false);
-        }
-
-        widthQuery.addEventListener('change', () => {
-            setResizeEnabled((prev) => !prev);
-
-            if (navbarRef.current && !resizeEnabled) {
-                navbarRef.current.style.width = '';
-            }
-        });
+        widthQuery.addEventListener('change', resetNavbarWidth);
 
         if (navbarRef.current && resizerRef.current) {
-            return resize(
-                navbarRef.current,
-                resizerRef.current,
-                'right',
-                resizeEnabled
-            );
+            return resize(navbarRef.current, resizerRef.current, 'right');
         }
-    }, [resizeEnabled]);
+
+        return () => {
+            widthQuery.removeEventListener('change', resetNavbarWidth);
+        };
+    }, []);
 
     return (
         <nav ref={navbarRef} className={navStyles['navbar']}>
