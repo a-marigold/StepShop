@@ -40,12 +40,14 @@
     position: absolute;
     left: 50%;
     top: 50%;
+
     transform: translate(-50%, -50%);
 
     @include flex-center;
 
-    width: 320px;
-    height: 320px;
+    max-width: 320px;
+
+    max-height: 320px;
 }
 
 @media (max-width: 600px) {

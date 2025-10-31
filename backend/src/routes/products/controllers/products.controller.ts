@@ -60,8 +60,8 @@ export async function createProduct(
     }
 
     console.log(productData);
-    const { title, price, quantity, description } = productData;
-    if (!title || !price || !quantity) {
+    const { title, price, quantity, description, category } = productData;
+    if (!title || !price || !quantity || !category) {
         return reply
             .code(400)
             .send({ message: 'All product`s properties are required' });
@@ -86,6 +86,8 @@ export async function createProduct(
             price: Number(price),
 
             quantity: Number(quantity),
+
+            category: category,
         },
     });
 
@@ -180,6 +182,7 @@ export async function updateProduct(
         title: newTitle,
         description: newDescription,
         price: newPrice,
+        category: newCategory,
     } = productData;
 
     const prevProduct = await request.server.prisma.product.findUnique({
@@ -225,6 +228,7 @@ export async function updateProduct(
                 ? newDescription
                 : prevProduct.description,
             price: !!Number(newPrice) ? Number(newPrice) : prevProduct.price,
+            category: !!newCategory ? newCategory : prevProduct.category,
         },
     });
 

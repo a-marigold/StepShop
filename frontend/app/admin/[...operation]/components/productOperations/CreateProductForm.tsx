@@ -22,21 +22,21 @@ import operationStyles from '../../Operation.module.scss';
 
 const createInputsList: OperationInput[] = [
     {
-        name: 'Название товара',
+        name: 'Название',
         htmlId: 'title',
         propertyName: 'title',
         isRequired: true,
     },
 
     {
-        name: 'Описание товара',
+        name: 'Описание',
         htmlId: 'description',
         propertyName: 'description',
         isRequired: false,
     },
 
     {
-        name: 'Цена товара',
+        name: 'Цена',
         htmlId: 'price',
 
         propertyName: 'price',
@@ -49,6 +49,13 @@ const createInputsList: OperationInput[] = [
         name: 'Количество',
         htmlId: 'quantity',
         propertyName: 'quantity',
+        isRequired: true,
+    },
+
+    {
+        name: 'Категория',
+        htmlId: 'category',
+        propertyName: 'category',
         isRequired: true,
     },
 ];

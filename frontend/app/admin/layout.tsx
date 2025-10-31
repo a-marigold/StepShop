@@ -65,7 +65,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
                 {children}
 
-                {pathname.split('/').length > 1 ? <Aside /> : null}
+                {pathname.split('/').filter(Boolean).length > 1 ? (
+                    <Aside />
+                ) : null}
             </div>
         </>
     );

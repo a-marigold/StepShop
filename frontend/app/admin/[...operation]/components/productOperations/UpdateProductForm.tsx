@@ -30,26 +30,36 @@ const updateInputsList: OperationInput[] = [
     },
 
     {
-        name: 'Новое название товара',
+        name: 'Новое название`',
         htmlId: 'new-product-title-input',
         propertyName: 'title',
         isRequired: false,
     },
 
     {
-        name: 'Новое описание товара',
+        name: 'Новое описание',
         htmlId: 'new-product-description-input',
         propertyName: 'description',
         isRequired: false,
     },
 
     {
-        name: 'Новая цена товара',
+        name: 'Новая цена',
         htmlId: 'new-product-price-input',
 
         propertyName: 'price',
 
         errorMessage: 'Цена товара обязательна',
+        isRequired: false,
+    },
+
+    {
+        name: 'Новая категория',
+        htmlId: 'new-product-category-input',
+
+        propertyName: 'category',
+
+        errorMessage: 'Это поле обязательно',
         isRequired: false,
     },
 ];
