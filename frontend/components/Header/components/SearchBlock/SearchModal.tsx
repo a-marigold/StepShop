@@ -11,12 +11,14 @@ import ApiError from '@/utils/errors/ApiError';
 
 import type { ProductType } from '@shared/types/ProductTypes';
 
+import { CURRENCY_SYMBOL } from '@/constants/currency';
+import { TEMPORARY_PRODUCTS } from '@/constants/TEMPORARY_PRODUCTS';
+
 import Image from 'next/image';
 
 import ModalBackdrop from '@UI/ModalBackdrop';
 
 import modalStyles from './SearchModal.module.scss';
-import { CURRENCY_SYMBOL } from '@/constants/currency';
 
 type SearchProductType = Pick<ProductType, 'id' | 'image' | 'title' | 'price'>;
 
@@ -56,11 +58,21 @@ export default function SearchModal({
 
     const debouncedQuery = useDebounce(searchQuery, 100);
 
+    // TODO: Temporarily here are TEMPORARY_PRODUCTS, because database with products died
+
+    // const filteredProducts = useMemo(() => {
+    //     return products.filter((product) =>
+    //         product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
+    //     );
+    // }, [debouncedQuery, products]);
+
     const filteredProducts = useMemo(() => {
-        return products.filter((product) =>
+        return TEMPORARY_PRODUCTS.filter((product) =>
             product.title.toLowerCase().includes(debouncedQuery.toLowerCase())
         );
-    }, [debouncedQuery, products]);
+    }, [debouncedQuery]);
+
+    console.log(debouncedQuery);
 
     return (
         <ModalBackdrop setShowModal={setShowModal}>

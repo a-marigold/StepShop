@@ -7,11 +7,9 @@ export function useDebounce<T>(value: T, delay: number = 600): T {
     const timeoutRef = useRef<NodeJS.Timeout>(null);
 
     useEffect(() => {
-        if (!timeoutRef.current) {
-            timeoutRef.current = setTimeout(() => {
-                setDebounceValue(value);
-            }, delay);
-        }
+        timeoutRef.current = setTimeout(() => {
+            setDebounceValue(value);
+        }, delay);
 
         return () => {
             if (timeoutRef.current) {

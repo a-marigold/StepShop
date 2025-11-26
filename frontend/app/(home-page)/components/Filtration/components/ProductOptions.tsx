@@ -17,37 +17,46 @@ export default function ProductOptions() {
 
     const [optionsList, setOptionsList] = useState<OptionListType>([]);
 
-    async function loadOptions() {
-        setIsLoading(true);
-
-        try {
-            const options = await getOptions();
-
-            setOptionsList(options);
-
-            setIsLoading(false);
-        } catch {
-            setOptionsList([]);
-        }
-    }
-
     useEffect(() => {
+        async function loadOptions() {
+            setIsLoading(true);
+
+            try {
+                const options = await getOptions();
+
+                setOptionsList(options);
+
+                setIsLoading(false);
+            } catch {
+                setOptionsList([]);
+            }
+        }
+
         loadOptions();
     }, []);
 
-    const prepareOptionsList = optionsList.map((option) => {
-        return option.name;
-    });
+    // TODO: Database with product options died. Migrate on new database to enable the options fetch. Options are in hard code temporarily
+    // const prepareOptionsList = optionsList.map((option) => {
+    //     return option.name;
+    // });
+
+    //! Temporarily:
+    const { 0: prepareOptionsList } = useState<string[]>([
+        'Спортивные',
+        'Повседневные',
+    ]);
 
     return (
-        <>
-            {isLoading ? (
-                <div className={filterStyles['loading-block']}>
-                    <LoadingSpinner size='26px' borderWidth='3px' />
-                </div>
-            ) : (
-                <CheckBoxesBlock propertiesList={prepareOptionsList} />
-            )}
-        </>
+        // <>
+        //     {isLoading ? (
+        //         <div className={filterStyles['loading-block']}>
+        //             <LoadingSpinner size='26px' borderWidth='3px' />
+        //         </div>
+        //     ) : (
+        //         <CheckBoxesBlock propertiesList={prepareOptionsList} />
+        //     )}
+        // </>
+
+        <CheckBoxesBlock propertiesList={prepareOptionsList} />
     );
 }

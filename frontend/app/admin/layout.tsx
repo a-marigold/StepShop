@@ -47,16 +47,33 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
     const pathname = usePathname();
 
-    return isLoading ? (
-        <div
-            className={clsx(
-                adminStyles['loading-modal'],
-                !isLoading && adminStyles['hidden']
-            )}
-        >
-            <div className={adminStyles['spinner']} />
-        </div>
-    ) : (
+    // return isLoading ? (
+    //     <div
+    //         className={clsx(
+    //             adminStyles['loading-modal'],
+    //             !isLoading && adminStyles['hidden']
+    //         )}
+    //     >
+    //         <div className={adminStyles['spinner']} />
+    //     </div>
+    // ) : (
+    //     <>
+    //         <Header />
+
+    //         <div className={adminStyles['main-content']}>
+    //             <Navbar />
+
+    //             {children}
+
+    //             {pathname.split('/').filter(Boolean).length > 1 ? (
+    //                 <Aside />
+    //             ) : null}
+    //         </div>
+    //     </>
+    // );
+    // TODO: Turn on the load user check. It is off because the database with users died
+
+    return (
         <>
             <Header />
 
